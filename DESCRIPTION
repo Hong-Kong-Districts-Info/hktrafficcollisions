@@ -24,6 +24,7 @@ License: MIT + file LICENSE
 Imports: 
     renv
 Suggests: 
+    covr,
     precommit
 Encoding: UTF-8
 LazyData: true
