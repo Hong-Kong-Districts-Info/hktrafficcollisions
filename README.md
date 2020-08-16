@@ -11,7 +11,51 @@ The Shiny app is deployed onto shinyapps.io in the links below:
 ***
 
 ## Project organisation
+    ├── LICENSE                                 <- Sharing agreement
+    │
+    ├── README.md                               <- Introduces project
+    │
+    ├── DESCRIPTION                             <- Store important metadata about project
+    │
+    ├── CODE_OF_CONDUCT.md                      <- Guide to define community standards
+    │
+    ├── CONTRIBUTING.md                         <- Guide to how contributors can help
+    │
+    ├── NAMESPACE                               <- Prevent conflict in package names
+    │
+    ├── .gitignore                              <- Files and folders to be ignored by git
+    │
+    ├── inst/
+    │   ├── app.R                               <- App script calling sub-scripts
+    │   └── app/               
+    |       ├── extdata/                        <- Data for app
+    |       ├── R/                              <- Functions for app
+    |       ├── www/                            <- Logo files for app
+    |       ├── helpfiles/                      <- Markdown of shinyhelper tips
+    |       ├── google-analytics.html           <- Link app with Google Analytics
+    |       ├── global.R                        <- Static objects for app
+    |       ├── server.R                        <- Reactive objects for app
+    |       └── ui.R                            <- User-interface for app
+    │
+    ├── .github/                         
+    │   ├── pull_request_template.md            <- Pull request template
+    |   └── ISSUE_TEMPLATE/
+    |       ├── bug_report.md                   <- Issue template for bugs
+    |       └── feature_report.md               <- Issue template for features
+    |   └── workflows/
+    |       └── rcmd_build.yml                  <- Instructions for R CMD checks
+    │
+    ├── renv/                                   <- Config to use renv package
+    │
+    ├── renv.lock                               <- Package versions used for project
+    │
+    ├── travis.yml                              <- Instructions for travis.ci checks
+    │
+    ├── codecov.yml                             <- Instructions for codecov.io checks
+    │
+    └── hktrafficcollisions.Rproj               <- Config to establish Rproject
 
+***
 ## Installation
 
 ## Data source
