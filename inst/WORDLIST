@@ -1,6 +1,12 @@
+CMD
 covr
+deps
+devtools
 HK
 hktrafficcollisions
 LazyData
+macOS
+pkgs
 precommit
 renv
+Rscript
