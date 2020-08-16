@@ -1,12 +1,17 @@
 CMD
+Codecov
 covr
 deps
 devtools
 HK
+hkdistrictcouncillors
 hktrafficcollisions
+io
 LazyData
 macOS
+organisation
 pkgs
 precommit
 renv
 Rscript
+shinyapps
