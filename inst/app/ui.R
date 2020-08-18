@@ -9,7 +9,7 @@ ui <- dashboardPage(
 
   # Title and Skin
   title = "Traffic Collisions",
-  skin = "green",
+  skin = "yellow",
 
   # Header
   header = dashboardHeader(
