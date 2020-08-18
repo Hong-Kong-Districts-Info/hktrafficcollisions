@@ -28,7 +28,9 @@ Imports:
 Suggests: 
     covr,
     docopt,
+    lintr,
     precommit,
-    spelling
+    spelling,
+    styler
 Encoding: UTF-8
 LazyData: true
