@@ -8,6 +8,10 @@
 
 The Shiny app is deployed onto shinyapps.io in the links below:
 
+- Production:
+- Pre-production: https://hkdistricts-info.shinyapps.io/trafficcollisions-preprod/
+- Development: https://hkdistricts-info.shinyapps.io/trafficcollisions-dev/
+
 ***
 
 ## Project organisation
