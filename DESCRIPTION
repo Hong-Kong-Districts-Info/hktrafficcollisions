@@ -22,9 +22,13 @@ Description: Creates a Shiny Dashboard using traffic collisions
     data from Hong Kong.
 License: MIT + file LICENSE
 Imports: 
-    renv
+    renv,
+    shiny,
+    shinydashboard
 Suggests: 
     covr,
-    precommit
+    docopt,
+    precommit,
+    spelling
 Encoding: UTF-8
 LazyData: true
