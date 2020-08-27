@@ -50,12 +50,48 @@ ui <- dashboardPage(
     sidebarMenu(
       id = "menu",
 
-      # Overview
+      # Collision Location Map
       menuItem(
-        text = "Overview",
-        icon = icon(name = "user"),
-        tabName = "tab_overview"
+        text = "Collision Location Map",
+        icon = icon(name = "map"),
+        tabName = "tab_collision_location_map"
+      ),
+
+      # Dashboard
+      menuItem(
+        text = "Dashboard",
+        icon = icon(name = "tachometer-alt"),
+        tabName = "tab_dashboard"
+      ),
+
+      # Hotspots and Worst Roads
+      menuItem(
+        text = "Hotspots and Worst Roads",
+        icon = icon(name = "exclamation-triangle"),
+        tabName = "tab_hotspots_and_worst_roads"
+      ),
+
+      # Key Facts
+      menuItem(
+        text = "Key Facts",
+        icon = icon(name = "file-alt"),
+        tabName = "tab_key_facts"
+      ),
+
+      # Data Download
+      menuItem(
+        text = "Data Download",
+        icon = icon(name = "file-download"),
+        tabName = "tab_data_download"
+      ),
+
+      # Project Info
+      menuItem(
+        text = "Project Info",
+        icon = icon(name = "info"),
+        tabName = "tab_project_info"
       )
+
     ) # sidebarMenu
   ), # dashboardSidebar
 
