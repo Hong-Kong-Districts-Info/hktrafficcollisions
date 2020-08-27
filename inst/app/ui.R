@@ -387,7 +387,68 @@ ui <- dashboardPage(
               "Insert worst road rank list here"
           )
         )
+      ),
 
+      # Menu item: Key Facts ---------------------------------------------------
+
+      tabItem(
+        tabName = "tab_key_facts",
+        fluidRow(
+          box(
+            width = 12,
+            title = "Key Facts about Hong Kong Traffic Injury Collisions"
+          ),
+          box(
+            width = 12,
+            title = "Concept Explainer",
+            HTML("- Definition of each casualty severity
+                 <br>
+                 - Why emphasises KSI Collision?
+                 <br>
+                 - ...")
+          )
+        )
+      ),
+
+      # Menu item: Data Download -----------------------------------------------
+
+      tabItem(
+        tabName = "tab_data_download",
+          box(
+            width = 12,
+            title = "Data Source",
+            "Download Url"
+          )
+      ),
+
+      # Menu item: Project Info ------------------------------------------------
+
+      tabItem(
+        tabName = "tab_project_info",
+        box(
+          width = 12,
+          title = "About Us",
+        ),
+        box(
+          width = 12,
+          title = "What this is about",
+        ),
+        box(
+          width = 12,
+          title = "How to use this database?",
+        ),
+        box(
+          width = 12,
+          title = "Reference",
+        ),
+        box(
+          width = 12,
+          title = "Useful Urls",
+        ),
+        box(
+          width = 12,
+          title = "Caveats",
+        )
       ) # tabItem
     ) # tabItems
   ) # dashboardBody
