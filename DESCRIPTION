@@ -16,7 +16,7 @@ Author:
            email = "martinchan53@gmail.com"),           
     person(given = "Gabriel",
            family = "Tam",
-           role = "Tam"))
+           role = "aut"))
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Creates a Shiny Dashboard using traffic collisions
     data from Hong Kong.
