@@ -17,7 +17,7 @@ Author:
     person(given = "Gabriel",
            family = "Tam",
            role = "aut"))
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: Avision Ho <a_vision@hotmail.co.uk>
 Description: Creates a Shiny Dashboard using traffic collisions
     data from Hong Kong.
 License: MIT + file LICENSE
