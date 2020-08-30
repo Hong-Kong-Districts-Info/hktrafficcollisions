@@ -2,7 +2,21 @@ Type: Package
 Package: hktrafficcollisions
 Title: HK Traffic Collisions
 Version: 0.1.0
-Author: Who wrote it
+Author: 
+      c(person(given = "Avision",
+           family = "Ho",
+           role = c("aut", "cre"),
+           email = "a_vision@hotmail.co.uk"),
+    person(given = "Justin",
+           family = "Yim",
+           role = "aut"),
+    person(given = "Martin",
+           family = "Chan",
+           role = "aut",
+           email = "martinchan53@gmail.com"),           
+    person(given = "Gabriel",
+           family = "Tam",
+           role = "Tam"))
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Creates a Shiny Dashboard using traffic collisions
     data from Hong Kong.
