@@ -1,13 +1,29 @@
-Package: hktrafficcollisions
 Type: Package
-Title: What the Package Does (Title Case)
+Package: hktrafficcollisions
+Title: HK Traffic Collisions
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: 
+      c(person(given = "Avision",
+           family = "Ho",
+           role = c("aut", "cre"),
+           email = "a_vision@hotmail.co.uk"),
+    person(given = "Justin",
+           family = "Yim",
+           role = "aut"),
+    person(given = "Martin",
+           family = "Chan",
+           role = "aut",
+           email = "martinchan53@gmail.com"),           
+    person(given = "Gabriel",
+           family = "Tam",
+           role = "aut"))
+Maintainer: Avision Ho <a_vision@hotmail.co.uk>
+Description: Creates a Shiny Dashboard using traffic collisions
+    data from Hong Kong.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
 Imports: 
     renv
+Suggests: 
+    precommit
+Encoding: UTF-8
+LazyData: true
