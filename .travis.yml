@@ -18,6 +18,11 @@ cache:
   - $HOME/.local/share/renv
   - $TRAVIS_BUILD_DIR/renv/library
 
+# turn off checking of packages in DESCRIPTION suggests
+env:
+ global:
+   - _R_CHECK_FORCE_SUGGESTS_: false
+
 install:
   - Rscript -e "if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')"
   - Rscript -e "renv::restore()"
