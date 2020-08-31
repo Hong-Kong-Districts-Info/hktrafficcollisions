@@ -8,7 +8,7 @@ r_packages:
   - covr
 
 sudo: required
-dist: trusty
+#dist: trusty
 
 # using renv with travis.ci
 # https://rstudio.github.io/renv/articles/ci.html
