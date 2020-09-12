@@ -8,6 +8,10 @@
 
 The Shiny app is deployed onto shinyapps.io in the links below:
 
+- Production:
+- Pre-production: https://hkdistricts-info.shinyapps.io/trafficcollisions-preprod/
+- Development: https://hkdistricts-info.shinyapps.io/trafficcollisions-dev/
+
 ***
 
 ## Project organisation
@@ -120,7 +124,7 @@ If all hooks pass, the commit is made. You can also [temporarily disable
 hooks](https://pre-commit.com/#temporarily-disabling-hooks). If you
 succeed, it should look like this:
 
-<img src="man/figures/screenshot.png" width="639" />
+<img src="man/figures/precommit.png" width="639" />
 
 See the hooks provided by this repo under `vignette("available-hooks")`.
 You can also add other hooks from other repos, by extending the
