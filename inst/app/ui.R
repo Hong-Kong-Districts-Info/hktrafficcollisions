@@ -111,11 +111,7 @@ ui <- dashboardPage(
           )
         ),
         fluidRow(
-          box(
-            width = 8,
-            title = "Map",
-            "Insert map here"
-          ),
+          plotlyOutput(outputId = "plotly_testvisual"),
           box(
             width = 4,
             title = "Stats & Info",

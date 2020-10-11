@@ -9,7 +9,18 @@
 # Packages ----------------------------------------------------------------
 
 ## data wrangling
+library(dplyr)
+library(tidyr)
+library(hkdatasets)
 
 ## shiny-related
 library(shiny)
 library(shinydashboard)
+library(ggplot2)
+library(plotly)
+
+
+# Data import -------------------------------------------------------------
+
+## Take data from {hkdatasets}
+hk_accidents <- hkdatasets::hk_accidents

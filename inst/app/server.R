@@ -10,4 +10,31 @@
 
 server <- function(input, output, session) {
 
+  # ----- REACTIVES ----- #
+
+
+  # ----- OBSERVE EVENTS ----- #
+
+
+  # ----- TAB: Collision Location Map ----- #
+
+
+  # RenderPlot: Districts ---------------------------------------------------
+  source(file = "modules/plotly_testvisual.R", local = TRUE)
+
+
+  # ----- TAB: Dashboard ----- #
+
+
+  # ----- TAB: Hotspots and Worst Roads ----- #
+
+
+  # ----- TAB: Key Facts ----- #
+
+
+  # ----- TAB: Data Download ----- #
+
+
+  # ----- TAB: Project Info ----- #
+
 }
