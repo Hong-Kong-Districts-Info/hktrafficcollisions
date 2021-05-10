@@ -14,6 +14,9 @@ output$main_map <- renderLeaflet({
     setView(114.2, 22.3, zoom = 12)
 })
 
+output$nrow_filtered <- reactive(nrow(filter_collision_data()))
+
+
 filter_collision_data <- reactive({
 
   data_filtered = dplyr::filter(hk_accidents_valid_sf, Date >= input$date_filter[1] & Date <= input$date_filter[2])

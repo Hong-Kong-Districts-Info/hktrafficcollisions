@@ -116,6 +116,8 @@ ui <- dashboardPage(
 
               h2("Filter Panel"),
 
+              p("Number of rows: ", textOutput("nrow_filtered", inline = TRUE)),
+
               dateRangeInput(
                 "date_filter", "Date range:",
                 start = "2016-05-01",
