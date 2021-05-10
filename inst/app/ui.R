@@ -107,7 +107,49 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
-            leafletOutput("main_map", height = 800)
+            leafletOutput("main_map", height = 800),
+
+            absolutePanel(
+              id = "controls", class = "panel panel-default", fixed = TRUE,
+              draggable = TRUE, top = 100, left = "auto", right = 50, bottom = "auto",
+              width = 330, height = "auto",
+
+              "Filter Panel",
+
+              dateRangeInput(
+                "date_filter", "Date range:",
+                start = "2016-05-01",
+                end   = "2016-06-30",
+                format = "d MM yyyy"
+              ),
+
+              sliderInput(
+                "n_causality_filter", "No. of casualties",
+                min(hk_accidents$No__of_Casualties_Injured),
+                max(hk_accidents$No__of_Casualties_Injured),
+                value = range(hk_accidents$No__of_Casualties_Injured),
+                step = 1
+              ),
+
+              pickerInput(
+                "collision_type_filter", "Collision Type",
+                choices = unique(hk_accidents$Type_of_Collision),
+                selected = unique(hk_accidents$Type_of_Collision),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select Collision type(s)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} collison types choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
+              )
+
+            )
           )
         ),
 
