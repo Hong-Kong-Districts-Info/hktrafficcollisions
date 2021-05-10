@@ -33,5 +33,8 @@ observe({
   leafletProxy("main_map", data = filter_collision_data()) %>%
     # proportional symbols
     clearMarkers() %>%
-    addCircleMarkers()
+    addCircleMarkers(radius = ~ sqrt(No__of_Casualties_Injured) * 2.5,
+                     color = "#FFFFFF", weight = 1, opacity = .75,
+                     fillColor = "#f0a3a3", fillOpacity = .75,
+                     popup = ~ paste("Accident date: ", Date, "<br>", "Number of casualties: ", No__of_Casualties_Injured))
 })
