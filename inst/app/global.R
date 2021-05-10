@@ -19,6 +19,10 @@ library(shinydashboard)
 library(ggplot2)
 library(plotly)
 
+## interactive map
+library(sf)
+library(leaflet)
+
 
 # Data import -------------------------------------------------------------
 

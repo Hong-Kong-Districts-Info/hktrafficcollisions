@@ -103,6 +103,14 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_collision_location_map",
+
+        fluidRow(
+          box(
+            width = 12,
+            leafletOutput("main_map", height = 800)
+          )
+        ),
+
         fluidRow(
           box(
             width = 4,
