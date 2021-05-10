@@ -114,7 +114,7 @@ ui <- dashboardPage(
               draggable = TRUE, top = 100, left = "auto", right = 50, bottom = "auto",
               width = 330, height = "auto",
 
-              "Filter Panel",
+              h2("Filter Panel"),
 
               dateRangeInput(
                 "date_filter", "Date range:",
