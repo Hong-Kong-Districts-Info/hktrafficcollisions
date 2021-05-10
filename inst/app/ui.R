@@ -97,6 +97,12 @@ ui <- dashboardPage(
 
   # Body
   body = dashboardBody(
+
+    # add custom css style for the data filter panel
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+    ),
+
     tabItems(
 
       # Menu item: Collision Location Map --------------------------------------
