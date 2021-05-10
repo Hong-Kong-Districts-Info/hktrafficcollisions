@@ -1,5 +1,8 @@
 
 hk_accidents_valid <- dplyr::filter(hk_accidents, !is.na(latitude) & !is.na(longitude))
+
+# Leaflet default expect WGS84 (crs 4326), need custom CRS for HK1980 Grid (crs 2326)
+# https://rstudio.github.io/leaflet/projections.html
 hk_accidents_valid_sf <- st_as_sf(hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
 
 # Need to convert to POSIXct again, otherwise reactive filtering does not work
@@ -16,7 +19,7 @@ output$main_map <- renderLeaflet({
 
 output$nrow_filtered <- reactive(nrow(filter_collision_data()))
 
-
+# Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
   data_filtered = dplyr::filter(hk_accidents_valid_sf, Date >= input$date_filter[1] & Date <= input$date_filter[2])
@@ -33,8 +36,10 @@ observe({
   leafletProxy("main_map", data = filter_collision_data()) %>%
     # proportional symbols
     clearMarkers() %>%
-    addCircleMarkers(radius = ~ sqrt(No__of_Casualties_Injured) * 2.5,
-                     color = "#FFFFFF", weight = 1, opacity = .75,
-                     fillColor = "#f0a3a3", fillOpacity = .75,
-                     popup = ~ paste("Accident date: ", Date, "<br>", "Number of casualties: ", No__of_Casualties_Injured))
+    addCircleMarkers(
+      # sqrt for proportional **area** of circles
+      radius = ~ sqrt(No__of_Casualties_Injured) * 2.5,
+      color = "#FFFFFF", weight = 1, opacity = .75,
+      fillColor = "#f0a3a3", fillOpacity = .75,
+      popup = ~ paste("Accident date: ", Date, "<br>", "Number of casualties: ", No__of_Casualties_Injured))
 })
