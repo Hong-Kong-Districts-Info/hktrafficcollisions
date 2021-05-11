@@ -32,6 +32,9 @@ filter_collision_data <- reactive({
   data_filtered
 })
 
+# Fill color palette according to the severity of the accident
+fill_palette <- colorFactor(c("#230B4C", "#C03A51", "#F1701E"), domain = c("Fatal", "Serious", "Slight"))
+
 observe({
   leafletProxy("main_map", data = filter_collision_data()) %>%
     # proportional symbols
@@ -40,6 +43,7 @@ observe({
       # sqrt for proportional **area** of circles
       radius = ~ sqrt(No__of_Casualties_Injured) * 2.5,
       color = "#FFFFFF", weight = 1, opacity = .75,
-      fillColor = "#f0a3a3", fillOpacity = .75,
+      # fillColor = "#f0a3a3", fillOpacity = .75,
+      fillColor = ~ fill_palette(Severity), fillOpacity = .75,
       popup = ~ paste("Accident date: ", Date, "<br>", "Number of casualties: ", No__of_Casualties_Injured))
 })
