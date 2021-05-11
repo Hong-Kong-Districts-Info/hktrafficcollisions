@@ -155,6 +155,24 @@ ui <- dashboardPage(
                 choicesOpt = NULL,
                 width = NULL,
                 inline = FALSE
+              ),
+
+              pickerInput(
+                "severity_filter", "Accident Severity",
+                choices = unique(hk_accidents$Severity),
+                selected = unique(hk_accidents$Severity),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select Severity type(s)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} severity types choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
               )
 
             )
