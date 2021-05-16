@@ -45,7 +45,6 @@ observe({
       # sqrt for proportional **area** of circles
       radius = ~ sqrt(No__of_Casualties_Injured) * 2.5,
       color = "#FFFFFF", weight = 1, opacity = .75,
-      # fillColor = "#f0a3a3", fillOpacity = .75,
       fillColor = ~ fill_palette(Severity), fillOpacity = .75,
       popup = ~ paste("Accident date: ", Date, "<br>", "Number of casualties: ", No__of_Casualties_Injured))
 })
