@@ -1,5 +1,5 @@
 
-hk_accidents_valid <- dplyr::filter(hk_accidents, !is.na(latitude) & !is.na(longitude))
+hk_accidents_valid <- filter(hk_accidents, !is.na(latitude) & !is.na(longitude))
 
 # Leaflet default expect WGS84 (crs 4326), need custom CRS for HK1980 Grid (crs 2326)
 # https://rstudio.github.io/leaflet/projections.html
@@ -22,9 +22,9 @@ output$nrow_filtered <- reactive(nrow(filter_collision_data()))
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  data_filtered = dplyr::filter(hk_accidents_valid_sf, Date >= input$date_filter[1] & Date <= input$date_filter[2])
+  data_filtered = filter(hk_accidents_valid_sf, Date >= input$date_filter[1] & Date <= input$date_filter[2])
 
-  data_filtered = dplyr::filter(data_filtered,
+  data_filtered = filter(data_filtered,
                                 No__of_Casualties_Injured >= input$n_causality_filter[1] & No__of_Casualties_Injured <= input$n_causality_filter[2])
 
   data_filtered = filter(data_filtered, Type_of_Collision %in% input$collision_type_filter)
