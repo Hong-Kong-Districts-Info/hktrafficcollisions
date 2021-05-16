@@ -113,7 +113,7 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
-            leafletOutput("main_map", height = 800),
+            leafletOutput(outputId = "main_map", height = 800),
 
             absolutePanel(
               id = "controls", class = "panel panel-default", fixed = TRUE,
@@ -125,22 +125,22 @@ ui <- dashboardPage(
               p("Number of rows: ", textOutput("nrow_filtered", inline = TRUE)),
 
               dateRangeInput(
-                "date_filter", "Date range:",
+                inputId = "date_filter", label = "Date range:",
                 start = "2016-05-01",
                 end   = "2016-06-30",
                 format = "d MM yyyy"
               ),
 
               sliderInput(
-                "n_causality_filter", "No. of casualties",
-                min(hk_accidents$No__of_Casualties_Injured),
-                max(hk_accidents$No__of_Casualties_Injured),
+                inputId = "n_causality_filter", label = "No. of casualties",
+                min = min(hk_accidents$No__of_Casualties_Injured),
+                max = max(hk_accidents$No__of_Casualties_Injured),
                 value = range(hk_accidents$No__of_Casualties_Injured),
                 step = 1
               ),
 
               pickerInput(
-                "collision_type_filter", "Collision Type",
+                inputId = "collision_type_filter", label = "Collision Type",
                 choices = unique(hk_accidents$Type_of_Collision),
                 selected = unique(hk_accidents$Type_of_Collision),
                 multiple = TRUE,
@@ -158,7 +158,7 @@ ui <- dashboardPage(
               ),
 
               pickerInput(
-                "severity_filter", "Accident Severity",
+                inputId = "severity_filter", label = "Accident Severity",
                 choices = unique(hk_accidents$Severity),
                 selected = unique(hk_accidents$Severity),
                 multiple = TRUE,

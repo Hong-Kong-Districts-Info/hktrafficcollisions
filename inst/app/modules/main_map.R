@@ -3,7 +3,7 @@ hk_accidents_valid <- dplyr::filter(hk_accidents, !is.na(latitude) & !is.na(long
 
 # Leaflet default expect WGS84 (crs 4326), need custom CRS for HK1980 Grid (crs 2326)
 # https://rstudio.github.io/leaflet/projections.html
-hk_accidents_valid_sf <- st_as_sf(hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
+hk_accidents_valid_sf <- st_as_sf(x = hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
 
 # Need to convert to POSIXct again, otherwise reactive filtering does not work
 # TODO: investigate why
@@ -14,7 +14,7 @@ CARTODB_POSITRON_TILE_URL <- "https://cartodb-basemaps-{s}.global.ssl.fastly.net
 output$main_map <- renderLeaflet({
   leaflet() %>%
     addTiles(urlTemplate = CARTODB_POSITRON_TILE_URL) %>%
-    setView(114.2, 22.3, zoom = 12)
+    setView(lng = 114.2, lat = 22.3, zoom = 12)
 })
 
 output$nrow_filtered <- reactive(nrow(filter_collision_data()))
@@ -35,10 +35,10 @@ filter_collision_data <- reactive({
 })
 
 # Fill color palette according to the severity of the accident
-fill_palette <- colorFactor(c("#230B4C", "#C03A51", "#F1701E"), domain = c("Fatal", "Serious", "Slight"))
+fill_palette <- colorFactor(palette = c("#230B4C", "#C03A51", "#F1701E"), domain = c("Fatal", "Serious", "Slight"))
 
 observe({
-  leafletProxy("main_map", data = filter_collision_data()) %>%
+  leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
     # proportional symbols
     clearMarkers() %>%
     addCircleMarkers(
