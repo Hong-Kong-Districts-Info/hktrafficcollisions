@@ -23,6 +23,7 @@ library(plotly)
 ## interactive map
 library(sf)
 library(leaflet)
+library(leaflet.extras)
 
 
 # Data import -------------------------------------------------------------

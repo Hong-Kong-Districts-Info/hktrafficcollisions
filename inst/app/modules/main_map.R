@@ -24,7 +24,9 @@ CARTODB_POSITRON_TILE_URL <- "https://cartodb-basemaps-{s}.global.ssl.fastly.net
 output$main_map <- renderLeaflet({
   leaflet() %>%
     addTiles(urlTemplate = CARTODB_POSITRON_TILE_URL) %>%
-    setView(lng = 114.2, lat = 22.3, zoom = 12)
+    setView(lng = 114.2, lat = 22.3, zoom = 12) %>%
+    # Add geocoder map widget
+    addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
 })
 
 output$nrow_filtered <- reactive(nrow(filter_collision_data()))
