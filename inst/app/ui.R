@@ -97,12 +97,88 @@ ui <- dashboardPage(
 
   # Body
   body = dashboardBody(
+
+    # add custom css style for the data filter panel
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+    ),
+
     tabItems(
 
       # Menu item: Collision Location Map --------------------------------------
 
       tabItem(
         tabName = "tab_collision_location_map",
+
+        fluidRow(
+          box(
+            width = 12,
+            leafletOutput(outputId = "main_map", height = 800),
+
+            absolutePanel(
+              id = "controls", class = "panel panel-default", fixed = TRUE,
+              draggable = TRUE, top = 100, left = "auto", right = 50, bottom = "auto",
+              width = 330, height = "auto",
+
+              h2("Filter Panel"),
+
+              p("Number of rows: ", textOutput("nrow_filtered", inline = TRUE)),
+
+              dateRangeInput(
+                inputId = "date_filter", label = "Date range:",
+                start = "2016-05-01",
+                end   = "2016-06-30",
+                format = "d MM yyyy"
+              ),
+
+              sliderInput(
+                inputId = "n_causality_filter", label = "No. of casualties",
+                min = min(hk_accidents$No__of_Casualties_Injured),
+                max = max(hk_accidents$No__of_Casualties_Injured),
+                value = range(hk_accidents$No__of_Casualties_Injured),
+                step = 1
+              ),
+
+              pickerInput(
+                inputId = "collision_type_filter", label = "Collision Type",
+                choices = unique(hk_accidents$Type_of_Collision),
+                selected = unique(hk_accidents$Type_of_Collision),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select Collision type(s)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} collison types choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
+              ),
+
+              pickerInput(
+                inputId = "severity_filter", label = "Accident Severity",
+                choices = unique(hk_accidents$Severity),
+                selected = unique(hk_accidents$Severity),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select Severity type(s)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} severity types choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
+              )
+
+            )
+          )
+        ),
+
         fluidRow(
           box(
             width = 4,

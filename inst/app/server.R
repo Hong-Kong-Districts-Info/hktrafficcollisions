@@ -17,6 +17,7 @@ server <- function(input, output, session) {
 
 
   # ----- TAB: Collision Location Map ----- #
+  source(file = "modules/main_map.R", local = TRUE)
 
 
   # RenderPlot: Districts ---------------------------------------------------

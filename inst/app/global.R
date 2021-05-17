@@ -16,8 +16,13 @@ library(hkdatasets)
 ## shiny-related
 library(shiny)
 library(shinydashboard)
+library(shinyWidgets)
 library(ggplot2)
 library(plotly)
+
+## interactive map
+library(sf)
+library(leaflet)
 
 
 # Data import -------------------------------------------------------------
