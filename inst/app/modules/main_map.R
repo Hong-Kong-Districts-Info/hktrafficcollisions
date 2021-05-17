@@ -47,7 +47,34 @@ filter_collision_data <- reactive({
 # Fill color palette according to the severity of the accident
 fill_palette <- colorFactor(palette = c("#230B4C", "#C03A51", "#F1701E"), domain = c("Fatal", "Serious", "Slight"))
 
+
 observe({
+  # Template for popup, with summary of incidents
+  popup_template = paste(
+
+    # Control size of popups
+    # https://stackoverflow.com/questions/29365749/how-to-control-popups-width-for-leaflet-features-popup-in-r
+    "<style> div.leaflet-popup-content {width:200px !important;}</style>",
+
+    # Square symbol indicating severity level
+    # Use raw htmls since adding reactive expressions into tags$ will result in error
+    "<div style=\"height:20px; width:20px; float:left; margin-right:10px; background-color:", fill_palette(filter_collision_data()$Severity) ,"\";>", "</div>",
+
+    # Collision severity as title
+    "<h3>", filter_collision_data()$Severity, " Collision</h3>",
+
+    # Accident date and time
+    tags$b("Accident date: "), tags$br(), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
+    # Full address of collision location
+    tags$b("Precise location: "), tags$br(), "TODO", tags$br(),
+    # District
+    tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
+    # Number of injuries
+    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
+    # Involved parties
+    tags$b("Involved parties: "), tags$br(), "TODO", tags$br()
+    )
+
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
     clearMarkers() %>%
     addCircleMarkers(
@@ -55,5 +82,6 @@ observe({
       radius = 2.5,
       color = "#FFFFFF", weight = 1, opacity = .75,
       fillColor = ~ fill_palette(Severity), fillOpacity = .75,
-      popup = ~ paste("Accident date: ", Date, "<br>", "Number of casualties: ", No__of_Casualties_Injured))
+      popup = popup_template
+      )
 })
