@@ -65,6 +65,9 @@ observe({
     # Collision severity as title
     "<h3>", filter_collision_data()$Severity, " Collision</h3>",
 
+    # Accident serial number
+    tags$b("Serial number: "), tags$br(), filter_collision_data()$Serial_No_, tags$br(),
+
     # Accident date and time
     tags$b("Accident date: "), tags$br(), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
     # Full address of collision location
