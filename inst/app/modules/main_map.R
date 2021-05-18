@@ -61,6 +61,8 @@ filter_collision_data <- reactive({
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 
+  data_filtered = filter(data_filtered, include_pex %in% input$pedestrian_involved_filter)
+
   data_filtered
 })
 
@@ -96,6 +98,8 @@ observe({
     tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
     # Involved parties
     tags$b("Involved parties: "), tags$br(), "TODO", tags$br()
+    # Involve pedestrians?
+    tags$b("Pedestrians involved? "), tags$br(), filter_collision_data()$include_pex, tags$br(),
     )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
