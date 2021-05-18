@@ -158,6 +158,26 @@ ui <- dashboardPage(
               ),
 
               pickerInput(
+                inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
+                choices = unique(hk_vehicles$Vehicle_Class),
+                selected = unique(hk_vehicles$Vehicle_Class),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select vehicle class(es)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} vehicle classes choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
+              ),
+
+              p("NOTE: Multiple selections mean the accident includes ANY of the selected classes (instead of includes ALL of the selected classes)."),
+
+              pickerInput(
                 inputId = "severity_filter", label = "Accident Severity",
                 choices = unique(hk_accidents$Severity),
                 selected = unique(hk_accidents$Severity),

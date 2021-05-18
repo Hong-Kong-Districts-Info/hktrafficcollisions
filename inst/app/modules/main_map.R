@@ -63,6 +63,15 @@ filter_collision_data <- reactive({
 
   data_filtered = filter(data_filtered, include_pex %in% input$pedestrian_involved_filter)
 
+  # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
+  serial_no_with_selected_vehicle_class = hk_vehicles %>%
+    filter(Vehicle_Class %in% input$vehicle_class_filter) %>%
+    # convert single column data frame to vector
+    pull(Serial_No_) %>%
+    # remove duplicated serial number if there are more than 1 vehicle class
+    unique()
+  data_filtered = filter(data_filtered, Serial_No_ %in% serial_no_with_selected_vehicle_class)
+
   data_filtered
 })
 
@@ -96,10 +105,10 @@ observe({
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
     # Number of injuries
     tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
-    # Involved parties
-    tags$b("Involved parties: "), tags$br(), "TODO", tags$br()
     # Involve pedestrians?
     tags$b("Pedestrians involved? "), tags$br(), filter_collision_data()$include_pex, tags$br(),
+    # Involved vehicle class
+    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br()
     )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
