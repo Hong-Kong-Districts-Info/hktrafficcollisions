@@ -1,5 +1,23 @@
 
-hk_accidents_valid <- filter(hk_accidents, !is.na(latitude) & !is.na(longitude))
+# Get information of all types of vehicles involved in the accidents
+# TODO: prepare following mutated dataset before running shiny to save loading time?
+hk_vehicles_involved = hk_vehicles %>%
+  group_by(Serial_No_) %>%
+  summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
+
+# Get information on whether the accidents involves pedestrian and number of pedestrians
+hk_casualties_pex = hk_casualties %>%
+  group_by(Serial_No_) %>%
+  summarise(
+    include_pex = any(Role_of_Casualty == "Pedestrian"),
+    n_pex_involved = sum(Role_of_Casualty == "Pedestrian")
+  )
+
+hk_accidents_join <- hk_accidents %>%
+  left_join(hk_casualties_pex, by = "Serial_No_") %>%
+  left_join(hk_vehicles_involved, by = "Serial_No_")
+
+hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
 
 # Leaflet default expect WGS84 (crs 4326), need custom CRS for HK1980 Grid (crs 2326)
 # https://rstudio.github.io/leaflet/projections.html
