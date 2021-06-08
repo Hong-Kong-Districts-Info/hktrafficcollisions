@@ -37,14 +37,35 @@ hk_accidents_valid_sf$Date_Time <- as.POSIXct(
     )
   )
 
-CARTODB_POSITRON_TILE_URL <- "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
 
 output$main_map <- renderLeaflet({
-  leaflet() %>%
-    addTiles(urlTemplate = CARTODB_POSITRON_TILE_URL) %>%
+  overview_map <- leaflet() %>%
     setView(lng = 114.2, lat = 22.3, zoom = 12) %>%
     # Add geocoder map widget
     addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
+
+  # Subset basemap providers to be used for the map
+  SELECTED_BASEMAPS <- leaflet::providers[c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap")]
+
+  # Add the basemap tiles in background
+  # http://rstudio.github.io/leaflet/morefeatures.html
+  for (provider in SELECTED_BASEMAPS) {
+    overview_map <- addProviderTiles(overview_map, provider, group = provider)
+  }
+
+  # Add change basemap widget
+  overview_map %>%
+    addLayersControl(baseGroups = names(basemap_providers),
+                     options = layersControlOptions(collapsed = TRUE),
+                     position = "topleft") %>%
+    htmlwidgets::onRender("
+    function(el, x) {
+      var myMap = this;
+      myMap.on('baselayerchange',
+        function (e) {
+          myMap.minimap.changeLayer(L.tileLayer.provider(e.name));
+        })
+    }")
 })
 
 output$nrow_filtered <- reactive(nrow(filter_collision_data()))
@@ -70,6 +91,7 @@ filter_collision_data <- reactive({
     pull(Serial_No_) %>%
     # remove duplicated serial number if there are more than 1 vehicle class
     unique()
+
   data_filtered = filter(data_filtered, Serial_No_ %in% serial_no_with_selected_vehicle_class)
 
   data_filtered
