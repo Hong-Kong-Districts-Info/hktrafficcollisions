@@ -54,10 +54,12 @@ output$main_map <- renderLeaflet({
   }
 
   # Add change basemap widget
-  overview_map %>%
-    addLayersControl(baseGroups = names(basemap_providers),
-                     options = layersControlOptions(collapsed = TRUE),
-                     position = "topleft") %>%
+  addLayersControl(
+    overview_map,
+    baseGroups = names(SELECTED_BASEMAPS),
+    options = layersControlOptions(collapsed = TRUE),
+    position = "topleft"
+    )
 })
 
 output$nrow_filtered <- reactive(nrow(filter_collision_data()))
