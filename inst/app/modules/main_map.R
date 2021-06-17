@@ -58,14 +58,6 @@ output$main_map <- renderLeaflet({
     addLayersControl(baseGroups = names(basemap_providers),
                      options = layersControlOptions(collapsed = TRUE),
                      position = "topleft") %>%
-    htmlwidgets::onRender("
-    function(el, x) {
-      var myMap = this;
-      myMap.on('baselayerchange',
-        function (e) {
-          myMap.minimap.changeLayer(L.tileLayer.provider(e.name));
-        })
-    }")
 })
 
 output$nrow_filtered <- reactive(nrow(filter_collision_data()))
