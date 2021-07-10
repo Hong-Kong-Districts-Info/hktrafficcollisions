@@ -177,23 +177,17 @@ ui <- dashboardPage(
 
               p("NOTE: Multiple selections mean the accident includes ANY of the selected classes (instead of includes ALL of the selected classes)."),
 
-              pickerInput(
+              checkboxGroupButtons(
                 inputId = "severity_filter", label = "Accident Severity",
-                choices = unique(hk_accidents$Severity),
+                choices = c(`Fatal <i style="color:#230B4C;" class="fas fa-skull-crossbones"></i>` = "Fatal",
+                            `Serious <i style="color:#C03A51;"class="fas fa-procedures"></i>` = "Serious",
+                            `Slight <i style="color:#F1701E;" class="fas fa-user-injured"></i>` = "Slight"),
                 selected = unique(hk_accidents$Severity),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select Severity type(s)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} severity types choosed (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
+                direction = "vertical",
+                justified = TRUE,
+                checkIcon = list(yes = icon("ok", lib = "glyphicon"))
               ),
+
 
               # Multiple UI choices available for this filter
               # TODO: select between `checkboxGroupInput` or `checkboxGroupButtons` as UI of this filter
