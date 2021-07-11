@@ -186,9 +186,26 @@ ui <- dashboardPage(
                 direction = "vertical",
                 justified = TRUE,
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"))
+              ),
+
+
+              pickerInput(
+                inputId = "casualty_filter", label = "Casualty Role",
+                choices = unique(hk_casualties$Role_of_Casualty),
+                selected = unique(hk_casualties$Role_of_Casualty),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select Casualty Role(s)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} vehicle classes choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
               )
-
-
             )
           )
         ),
