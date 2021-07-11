@@ -1,11 +1,21 @@
 
-# Get information of all types of vehicles involved in the accidents
+# Get information of all types of vehicles involved in the accidents to show in popup
 # TODO: prepare following mutated dataset before running shiny to save loading time?
 hk_vehicles_involved = hk_vehicles %>%
   group_by(Serial_No_) %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
+# Get casualty role involved in each accident to show in popup
+accidents_cas_type = hk_casualties %>%
+  group_by(Serial_No_) %>%
+  summarise(
+    include_ped = any(Role_of_Casualty == "Pedestrian"),
+    include_pax = any(Role_of_Casualty == "Passenger"),
+    include_dvr = any(Role_of_Casualty == "Driver")
+  )
+
 hk_accidents_join <- hk_accidents %>%
+  left_join(accidents_cas_type, by = "Serial_No_") %>%
   left_join(hk_vehicles_involved, by = "Serial_No_")
 
 hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
