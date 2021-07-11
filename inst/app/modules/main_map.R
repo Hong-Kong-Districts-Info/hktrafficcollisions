@@ -79,14 +79,13 @@ filter_collision_data <- reactive({
   data_filtered = filter(data_filtered, include_pex %in% input$pedestrian_involved_filter)
 
   # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
-  serial_no_with_selected_vehicle_class = hk_vehicles %>%
-    filter(Vehicle_Class %in% input$vehicle_class_filter) %>%
-    # convert single column data frame to vector
-    pull(Serial_No_) %>%
-    # remove duplicated serial number if there are more than 1 vehicle class
-    unique()
+  accient_w_selected_veh = filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
 
-  data_filtered = filter(data_filtered, Serial_No_ %in% serial_no_with_selected_vehicle_class)
+  # convert column to vector
+  # remove duplicated serial number if there are more than 1 vehicle class
+  accient_w_selected_veh_vct = unique(accient_w_selected_veh[["Serial_No_"]])
+
+  data_filtered = filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
 
   data_filtered
 })
