@@ -115,8 +115,6 @@ observe({
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
     # Number of injuries
     tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
-    # Involve pedestrians?
-    tags$b("Pedestrians involved? "), tags$br(), filter_collision_data()$include_pex, tags$br(),
     # Involved vehicle class
     tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br()
     )
