@@ -131,12 +131,15 @@ ui <- dashboardPage(
                 format = "d MM yyyy"
               ),
 
-              sliderInput(
-                inputId = "n_causality_filter", label = "No. of casualties",
-                min = min(hk_accidents$No__of_Casualties_Injured),
-                max = max(hk_accidents$No__of_Casualties_Injured),
-                value = range(hk_accidents$No__of_Casualties_Injured),
-                step = 1
+              checkboxGroupButtons(
+                inputId = "severity_filter", label = "Accident Severity",
+                choices = c(`Fatal <i style="color:#230B4C;" class="fas fa-skull-crossbones"></i>` = "Fatal",
+                            `Serious <i style="color:#C03A51;"class="fas fa-procedures"></i>` = "Serious",
+                            `Slight <i style="color:#F1701E;" class="fas fa-user-injured"></i>` = "Slight"),
+                selected = unique(hk_accidents$Severity),
+                direction = "vertical",
+                justified = TRUE,
+                checkIcon = list(yes = icon("ok", lib = "glyphicon"))
               ),
 
               pickerInput(
@@ -151,6 +154,24 @@ ui <- dashboardPage(
                   `none-selected-text` = "Select Collision type(s)...",
                   `selected-text-format` = "count",
                   `count-selected-text` = "{0} collison types choosed (on a total of {1})"
+                ),
+                choicesOpt = NULL,
+                width = NULL,
+                inline = FALSE
+              ),
+
+              pickerInput(
+                inputId = "casualty_filter", label = "Casualty Role",
+                choices = unique(hk_casualties$Role_of_Casualty),
+                selected = unique(hk_casualties$Role_of_Casualty),
+                multiple = TRUE,
+                options = list(
+                  `actions-box` = TRUE,
+                  `deselect-all-text` = "Unselect All",
+                  `select-all-text` = "Select All",
+                  `none-selected-text` = "Select Casualty Role(s)...",
+                  `selected-text-format` = "count",
+                  `count-selected-text` = "{0} vehicle classes choosed (on a total of {1})"
                 ),
                 choicesOpt = NULL,
                 width = NULL,
@@ -175,36 +196,15 @@ ui <- dashboardPage(
                 inline = FALSE
               ),
 
-              p("NOTE: Multiple selections mean the accident includes ANY of the selected classes (instead of includes ALL of the selected classes)."),
+              p("NOTE: Multiple selections means filtering accidents including ANY selected classes
+                (instead of ALL selected classes)."),
 
-              checkboxGroupButtons(
-                inputId = "severity_filter", label = "Accident Severity",
-                choices = c(`Fatal <i style="color:#230B4C;" class="fas fa-skull-crossbones"></i>` = "Fatal",
-                            `Serious <i style="color:#C03A51;"class="fas fa-procedures"></i>` = "Serious",
-                            `Slight <i style="color:#F1701E;" class="fas fa-user-injured"></i>` = "Slight"),
-                selected = unique(hk_accidents$Severity),
-                direction = "vertical",
-                justified = TRUE,
-                checkIcon = list(yes = icon("ok", lib = "glyphicon"))
-              ),
-
-
-              pickerInput(
-                inputId = "casualty_filter", label = "Casualty Role",
-                choices = unique(hk_casualties$Role_of_Casualty),
-                selected = unique(hk_casualties$Role_of_Casualty),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select Casualty Role(s)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} vehicle classes choosed (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
+              sliderInput(
+                inputId = "n_causality_filter", label = "No. of casualties",
+                min = min(hk_accidents$No__of_Casualties_Injured),
+                max = max(hk_accidents$No__of_Casualties_Injured),
+                value = range(hk_accidents$No__of_Casualties_Injured),
+                step = 1
               )
             )
           )
