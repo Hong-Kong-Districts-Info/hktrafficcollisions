@@ -151,7 +151,7 @@ ui <- dashboardPage(
                   `actions-box` = TRUE,
                   `deselect-all-text` = "Unselect All",
                   `select-all-text` = "Select All",
-                  `none-selected-text` = "Select Collision type(s)...",
+                  `none-selected-text` = "Select collision type(s)...",
                   `selected-text-format` = "count",
                   `count-selected-text` = "{0} collison types choosed (on a total of {1})"
                 ),
@@ -169,9 +169,9 @@ ui <- dashboardPage(
                   `actions-box` = TRUE,
                   `deselect-all-text` = "Unselect All",
                   `select-all-text` = "Select All",
-                  `none-selected-text` = "Select Casualty Role(s)...",
+                  `none-selected-text` = "Select casualty role(s)...",
                   `selected-text-format` = "count",
-                  `count-selected-text` = "{0} vehicle classes choosed (on a total of {1})"
+                  `count-selected-text` = "{0} casualty roles choosed (on a total of {1})"
                 ),
                 choicesOpt = NULL,
                 width = NULL,
