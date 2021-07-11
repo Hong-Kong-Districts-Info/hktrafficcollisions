@@ -186,17 +186,9 @@ ui <- dashboardPage(
                 direction = "vertical",
                 justified = TRUE,
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"))
-              ),
-
-
-              # Multiple UI choices available for this filter
-              # TODO: select between `checkboxGroupInput` or `checkboxGroupButtons` as UI of this filter
-              checkboxGroupButtons(
-                inputId = "pedestrian_involved_filter", label = "Pedestrian Involved in the accident?",
-                choices = list("Yes" = TRUE, "No" = FALSE),
-                selected = list(TRUE, FALSE),
-                justified = TRUE, status = "primary"
               )
+
+
             )
           )
         ),

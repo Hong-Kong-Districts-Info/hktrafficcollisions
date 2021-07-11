@@ -5,16 +5,7 @@ hk_vehicles_involved = hk_vehicles %>%
   group_by(Serial_No_) %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
-# Get information on whether the accidents involves pedestrian and number of pedestrians
-hk_casualties_pex = hk_casualties %>%
-  group_by(Serial_No_) %>%
-  summarise(
-    include_pex = any(Role_of_Casualty == "Pedestrian"),
-    n_pex_involved = sum(Role_of_Casualty == "Pedestrian")
-  )
-
 hk_accidents_join <- hk_accidents %>%
-  left_join(hk_casualties_pex, by = "Serial_No_") %>%
   left_join(hk_vehicles_involved, by = "Serial_No_")
 
 hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
@@ -75,8 +66,6 @@ filter_collision_data <- reactive({
   data_filtered = filter(data_filtered, Type_of_Collision %in% input$collision_type_filter)
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
-
-  data_filtered = filter(data_filtered, include_pex %in% input$pedestrian_involved_filter)
 
   # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
   accient_w_selected_veh = filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
