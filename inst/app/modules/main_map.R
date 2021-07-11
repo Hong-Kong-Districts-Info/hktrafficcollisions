@@ -126,7 +126,12 @@ observe({
     # Number of injuries
     tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
     # Involved vehicle class
-    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br()
+    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
+    # Involved casualty
+    tags$b("Involved casualty role: "), tags$br(),
+    tags$b("Pedestrian: "), filter_collision_data()$include_ped, tags$br(),
+    tags$b("Passenger: "), filter_collision_data()$include_pax, tags$br(),
+    tags$b("Driver: "), filter_collision_data()$include_dvr
     )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
