@@ -171,7 +171,7 @@ ui <- dashboardPage(
                   `select-all-text` = "Select All",
                   `none-selected-text` = "Select casualty role(s)...",
                   `selected-text-format` = "count",
-                  `count-selected-text` = "{0} casualty roles choosed (on a total of {1})"
+                  `count-selected-text` = "{0} casualty roles chosen (on a total of {1})"
                 ),
                 choicesOpt = NULL,
                 width = NULL,
