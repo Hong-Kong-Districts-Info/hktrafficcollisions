@@ -90,7 +90,7 @@ filter_collision_data <- reactive({
   accident_w_selected_cas <- filter(hk_casualties, Role_of_Casualty %in% input$casualty_filter)
   accident_w_selected_cas_vct <- unique(accident_w_selected_cas[["Serial_No_"]])
 
-  data_filtered = filter(data_filtered, Serial_No_ %in% accident_w_selected_cas_vct)
+  data_filtered <- filter(data_filtered, Serial_No_ %in% accident_w_selected_cas_vct)
 
   data_filtered
 })
