@@ -189,7 +189,7 @@ ui <- dashboardPage(
                   `select-all-text` = "Select All",
                   `none-selected-text` = "Select vehicle class(es)...",
                   `selected-text-format` = "count",
-                  `count-selected-text` = "{0} vehicle classes choosed (on a total of {1})"
+                  `count-selected-text` = "{0} vehicle classes chosen (on a total of {1})"
                 ),
                 choicesOpt = NULL,
                 width = NULL,
