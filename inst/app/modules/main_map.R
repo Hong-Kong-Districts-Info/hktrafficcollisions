@@ -1,7 +1,7 @@
 
 # Get information of all types of vehicles involved in the accidents to show in popup
 # TODO: prepare following mutated dataset before running shiny to save loading time?
-hk_vehicles_involved = hk_vehicles %>%
+hk_vehicles_involved <- hk_vehicles %>%
   group_by(Serial_No_) %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
