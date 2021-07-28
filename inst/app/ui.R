@@ -153,7 +153,7 @@ ui <- dashboardPage(
                   `select-all-text` = "Select All",
                   `none-selected-text` = "Select collision type(s)...",
                   `selected-text-format` = "count",
-                  `count-selected-text` = "{0} collison types choosed (on a total of {1})"
+                  `count-selected-text` = "{0} collision types chosen (on a total of {1})"
                 ),
                 choicesOpt = NULL,
                 width = NULL,
