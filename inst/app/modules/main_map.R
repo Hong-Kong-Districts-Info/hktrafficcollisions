@@ -78,17 +78,17 @@ filter_collision_data <- reactive({
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 
   # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
-  accient_w_selected_veh = filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
+  accient_w_selected_veh <- filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
 
   # convert column to vector
   # remove duplicated serial number if there are more than 1 vehicle class
-  accient_w_selected_veh_vct = unique(accient_w_selected_veh[["Serial_No_"]])
+  accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
 
-  data_filtered = filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
+  data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
 
   # --- Casualty filter ---
-  accident_w_selected_cas = filter(hk_casualties, Role_of_Casualty %in% input$casualty_filter)
-  accident_w_selected_cas_vct = unique(accident_w_selected_cas[["Serial_No_"]])
+  accident_w_selected_cas <- filter(hk_casualties, Role_of_Casualty %in% input$casualty_filter)
+  accident_w_selected_cas_vct <- unique(accident_w_selected_cas[["Serial_No_"]])
 
   data_filtered = filter(data_filtered, Serial_No_ %in% accident_w_selected_cas_vct)
 
