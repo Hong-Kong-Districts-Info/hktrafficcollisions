@@ -6,7 +6,7 @@ hk_vehicles_involved = hk_vehicles %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
 # Get casualty role involved in each accident to show in popup
-accidents_cas_type = hk_casualties %>%
+accidents_cas_type <- hk_casualties %>%
   group_by(Serial_No_) %>%
   summarise(
     include_ped = any(Role_of_Casualty == "Pedestrian"),
