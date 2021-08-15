@@ -1,20 +1,21 @@
 
-# Get information of all types of vehicles involved in the accidents
+# Get information of all types of vehicles involved in the accidents to show in popup
 # TODO: prepare following mutated dataset before running shiny to save loading time?
-hk_vehicles_involved = hk_vehicles %>%
+hk_vehicles_involved <- hk_vehicles %>%
   group_by(Serial_No_) %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
-# Get information on whether the accidents involves pedestrian and number of pedestrians
-hk_casualties_pex = hk_casualties %>%
+# Get casualty role involved in each accident to show in popup
+accidents_cas_type <- hk_casualties %>%
   group_by(Serial_No_) %>%
   summarise(
-    include_pex = any(Role_of_Casualty == "Pedestrian"),
-    n_pex_involved = sum(Role_of_Casualty == "Pedestrian")
+    include_ped = any(Role_of_Casualty == "Pedestrian"),
+    include_pax = any(Role_of_Casualty == "Passenger"),
+    include_dvr = any(Role_of_Casualty == "Driver")
   )
 
 hk_accidents_join <- hk_accidents %>%
-  left_join(hk_casualties_pex, by = "Serial_No_") %>%
+  left_join(accidents_cas_type, by = "Serial_No_") %>%
   left_join(hk_vehicles_involved, by = "Serial_No_")
 
 hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
@@ -76,17 +77,20 @@ filter_collision_data <- reactive({
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 
-  data_filtered = filter(data_filtered, include_pex %in% input$pedestrian_involved_filter)
-
   # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
-  serial_no_with_selected_vehicle_class = hk_vehicles %>%
-    filter(Vehicle_Class %in% input$vehicle_class_filter) %>%
-    # convert single column data frame to vector
-    pull(Serial_No_) %>%
-    # remove duplicated serial number if there are more than 1 vehicle class
-    unique()
+  accient_w_selected_veh <- filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
 
-  data_filtered = filter(data_filtered, Serial_No_ %in% serial_no_with_selected_vehicle_class)
+  # convert column to vector
+  # remove duplicated serial number if there are more than 1 vehicle class
+  accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
+
+  data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
+
+  # --- Casualty filter ---
+  accident_w_selected_cas <- filter(hk_casualties, Role_of_Casualty %in% input$casualty_filter)
+  accident_w_selected_cas_vct <- unique(accident_w_selected_cas[["Serial_No_"]])
+
+  data_filtered <- filter(data_filtered, Serial_No_ %in% accident_w_selected_cas_vct)
 
   data_filtered
 })
@@ -121,10 +125,13 @@ observe({
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
     # Number of injuries
     tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
-    # Involve pedestrians?
-    tags$b("Pedestrians involved? "), tags$br(), filter_collision_data()$include_pex, tags$br(),
     # Involved vehicle class
-    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br()
+    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
+    # Involved casualty
+    tags$b("Involved casualty role: "), tags$br(),
+    tags$b("Pedestrian: "), filter_collision_data()$include_ped, tags$br(),
+    tags$b("Passenger: "), filter_collision_data()$include_pax, tags$br(),
+    tags$b("Driver: "), filter_collision_data()$include_dvr
     )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
