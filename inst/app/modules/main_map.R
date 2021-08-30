@@ -24,21 +24,6 @@ hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longit
 # https://rstudio.github.io/leaflet/projections.html
 hk_accidents_valid_sf <- st_as_sf(x = hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
 
-# Need to convert to POSIXct again, otherwise reactive filtering does not work
-# TODO: investigate why
-hk_accidents_valid_sf$Date <- as.Date(hk_accidents_valid_sf$Date, format = "%Y-%m-%d")
-
-# Combine date and time together as a complete POSIXct class time column
-# Easier for formatting
-hk_accidents_valid_sf$Date_Time <- as.POSIXct(
-  strptime(
-    paste0(hk_accidents_valid_sf$Date, " ", hk_accidents_valid_sf$Time),
-    format = "%Y-%m-%d %H%M",
-    tz = "Asia/Hong_Kong"
-    )
-  )
-
-
 output$main_map <- renderLeaflet({
   overview_map <- leaflet() %>%
     setView(lng = 114.2, lat = 22.3, zoom = 12) %>%
