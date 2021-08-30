@@ -71,7 +71,7 @@ filter_collision_data <- reactive({
   data_filtered = filter(hk_accidents_valid_sf, Date >= input$date_filter[1] & Date <= input$date_filter[2])
 
   data_filtered = filter(data_filtered,
-                                No__of_Casualties_Injured >= input$n_causality_filter[1] & No__of_Casualties_Injured <= input$n_causality_filter[2])
+                                No_of_Casualties_Injured >= input$n_causality_filter[1] & No_of_Casualties_Injured <= input$n_causality_filter[2])
 
   data_filtered = filter(data_filtered, Type_of_Collision %in% input$collision_type_filter)
 
@@ -124,7 +124,7 @@ observe({
     # District
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
     # Number of injuries
-    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
+    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
     # Involved vehicle class
     tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
     # Involved casualty

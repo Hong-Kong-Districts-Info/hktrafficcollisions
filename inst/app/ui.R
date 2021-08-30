@@ -201,9 +201,9 @@ ui <- dashboardPage(
 
               sliderInput(
                 inputId = "n_causality_filter", label = "No. of casualties",
-                min = min(hk_accidents$No__of_Casualties_Injured),
-                max = max(hk_accidents$No__of_Casualties_Injured),
-                value = range(hk_accidents$No__of_Casualties_Injured),
+                min = min(hk_accidents$No_of_Casualties_Injured),
+                max = max(hk_accidents$No_of_Casualties_Injured),
+                value = range(hk_accidents$No_of_Casualties_Injured),
                 step = 1
               )
             )
