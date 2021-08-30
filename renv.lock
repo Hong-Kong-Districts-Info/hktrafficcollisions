@@ -249,10 +249,15 @@
     },
     "hkdatasets": {
       "Package": "hkdatasets",
-      "Version": "0.0.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "9e304aa4090ca6dbf58c6a88902e4baa"
+      "Version": "0.0.5",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "hkdatasets",
+      "RemoteUsername": "Hong-Kong-Districts-Info",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "0893dcaaed17500331d497b5d012cac05c8df5ce",
+      "Hash": "26fabd245e8565b1509c8d74cb133fb4"
     },
     "htmltools": {
       "Package": "htmltools",
