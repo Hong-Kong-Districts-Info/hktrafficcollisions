@@ -237,7 +237,10 @@ ui <- dashboardPage(
           box(
             width = 4,
             title = "Area Filter",
-            "Insert area filter here"
+            selectInput(
+              inputId = "ddsb_district_filter", label = "Select District",
+              choices = unique(hk_accidents$District_Council_District)
+            )
           ),
           box(
             width = 4,
