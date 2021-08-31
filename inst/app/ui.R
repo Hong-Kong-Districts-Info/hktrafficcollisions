@@ -231,6 +231,26 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_dashboard",
+
+        # Filters
+        fluidRow(
+          box(
+            width = 4,
+            title = "Area Filter",
+            "Insert area filter here"
+          ),
+          box(
+            width = 4,
+            title = "Year Filter",
+            "Insert year filter here"
+          ),
+          box(
+            width = 4,
+            title = "All/ KSI Filter",
+            "Insert all/ksi filter here"
+          )
+        ),
+
         tabBox(
           width = 12,
 
@@ -238,24 +258,6 @@ ui <- dashboardPage(
           tabPanel(
             value = "all_vehicle_collision",
             title = "All Vehicle Collision",
-
-            fluidRow(
-              box(
-                width = 4,
-                title = "Area Filter",
-                "Insert area filter here"
-              ),
-              box(
-                width = 4,
-                title = "Year Filter",
-                "Insert year filter here"
-              ),
-              box(
-                width = 4,
-                title = "All/ KSI Filter",
-                "Insert all/ksi filter here"
-              )
-            ),
 
             fluidRow(
               box(
@@ -306,24 +308,6 @@ ui <- dashboardPage(
 
             fluidRow(
               box(
-                width = 4,
-                title = "Area Filter",
-                "Insert area filter here"
-              ),
-              box(
-                width = 4,
-                title = "Year Filter",
-                "Insert year filter here"
-              ),
-              box(
-                width = 4,
-                title = "All/ KSI Filter",
-                "Insert all/ksi filter here"
-              )
-            ),
-
-            fluidRow(
-              box(
                 width = 6,
                 title = "Collision Map",
                 "Insert collison map here"
@@ -369,24 +353,6 @@ ui <- dashboardPage(
           tabPanel(
             value = "vehicle_with_bicycles",
             title = "Vehicle w/ Cycles",
-
-            fluidRow(
-              box(
-                width = 4,
-                title = "Area Filter",
-                "Insert area filter here"
-              ),
-              box(
-                width = 4,
-                title = "Year Filter",
-                "Insert year filter here"
-              ),
-              box(
-                width = 4,
-                title = "All/ KSI Filter",
-                "Insert all/ksi filter here"
-              )
-            ),
 
             fluidRow(
               box(
