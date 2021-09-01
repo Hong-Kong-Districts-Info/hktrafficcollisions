@@ -245,7 +245,13 @@ ui <- dashboardPage(
           box(
             width = 4,
             title = "Year Filter",
-            "Insert year filter here"
+            sliderInput(
+              inputId =  "ddsb_year_filter", label = "Select time period:",
+              min = 2014, max = 2019,
+              value = c(2015, 2019),
+              # Remove thousands separator
+              sep = ""
+            )
           ),
           box(
             width = 4,
