@@ -40,3 +40,7 @@ hk_casualties <- hkdatasets::hk_casualties
 
 tmap_mode("view")
 tmap_options(basemaps = c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap"))
+
+# Color scheme ------------------------------------------------------------
+
+SEVERITY_COLOR = c(Fatal = "#230B4C", Serious = "#C03A51", Slight = "#F1701E")
