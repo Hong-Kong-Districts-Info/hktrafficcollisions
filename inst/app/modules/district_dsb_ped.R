@@ -97,3 +97,26 @@ output$ddsb_ped_collision_heatmap = renderTmap({
 
 })
 
+# Collision number by severity
+output$ddsb_ped_ksi_plot = renderPlotly({
+
+  # count by severity
+  plot_data = count(ddsb_ped_filtered_hk_accidents(), Severity, name = "count")
+
+  plot_by_severity = ggplot(plot_data, aes(x = Severity, y = count, fill = Severity)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    scale_fill_manual(values = SEVERITY_COLOR) +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Collisions by Severity"
+    )
+
+  ggplotly(plot_by_severity)
+})

@@ -338,7 +338,7 @@ ui <- dashboardPage(
                 ),
                 box(width = 6,
                     title = "KSI Stats",
-                    "Insert ksi stats here"
+                    plotlyOutput(outputId = "ddsb_ped_ksi_plot")
                 )
               ),
 
