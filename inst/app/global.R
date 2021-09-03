@@ -25,6 +25,9 @@ library(sf)
 library(leaflet)
 library(leaflet.extras)
 
+## Thematic map
+library(tmap)
+
 
 # Data import -------------------------------------------------------------
 
@@ -32,3 +35,8 @@ library(leaflet.extras)
 hk_accidents <- hkdatasets:::hk_accidents
 hk_vehicles <- hkdatasets::hk_vehicles
 hk_casualties <- hkdatasets::hk_casualties
+
+# interactive thematic map mode option ------------------------------------
+
+tmap_mode("view")
+tmap_options(basemaps = c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap"))
