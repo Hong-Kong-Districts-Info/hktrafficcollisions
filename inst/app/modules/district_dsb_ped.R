@@ -199,3 +199,29 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
 
   ggplotly(plot_by_ped_action)
 })
+
+# Road hierarchy plot
+output$ddsb_ped_road_hierarchy_plot = renderPlotly({
+
+  # count by pedestrian Action
+  plot_data = count(ddsb_ped_filtered_hk_accidents(), Road_Hierarchy, name = "count") %>%
+    # reorder the drawing order from largest category
+    mutate(Road_Hierarchy_order = reorder(Road_Hierarchy, count))
+
+
+  plot_by_road_hierarchy = ggplot(plot_data, aes(x = Road_Hierarchy_order, y = count)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Hierarchy of the road where collision happened"
+    )
+
+  ggplotly(plot_by_road_hierarchy)
+})

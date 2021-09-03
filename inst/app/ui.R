@@ -364,7 +364,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Junction and Road Stats",
-                  "Insert junction and road stats here"
+                  plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
                 )
               ),
 
