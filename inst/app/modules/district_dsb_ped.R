@@ -120,3 +120,30 @@ output$ddsb_ped_ksi_plot = renderPlotly({
 
   ggplotly(plot_by_severity)
 })
+
+# Vehicle Class plot
+output$ddsb_ped_vehicle_class_plot = renderPlotly({
+
+  # count by Vehicle_Class
+  plot_data = count(ddsb_ped_filtered_hk_vehicles(), Vehicle_Class, name = "count") %>%
+    # reorder vehicle class in descending order
+    mutate(Vehicle_Class_order = reorder(Vehicle_Class, count))
+
+
+  plot_by_vehicle_class = ggplot(plot_data, aes(x = Vehicle_Class_order, y = count)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Number of vehicles involved"
+    )
+
+  ggplotly(plot_by_vehicle_class)
+})
+
