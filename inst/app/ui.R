@@ -334,7 +334,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Collision Map",
-                  "Insert collison map here"
+                  tmapOutput(outputId = "ddsb_ped_collision_heatmap")
                 ),
                 box(width = 6,
                     title = "KSI Stats",
