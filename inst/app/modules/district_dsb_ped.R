@@ -131,7 +131,7 @@ output$ddsb_ped_vehicle_class_plot = renderPlotly({
 
 
   plot_by_vehicle_class = ggplot(plot_data, aes(x = Vehicle_Class_order, y = count)) +
-    geom_bar(stat = "identity") +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
     coord_flip() +
     theme_minimal() +
     theme(
@@ -158,7 +158,7 @@ output$ddsb_ped_vehicle_movement_plot = renderPlotly({
 
 
   plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
-    geom_bar(stat = "identity") +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
     coord_flip() +
     theme_minimal() +
     theme(
@@ -184,7 +184,7 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
 
 
   plot_by_ped_action = ggplot(plot_data, aes(x = Ped_Action_order, y = count)) +
-    geom_bar(stat = "identity") +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$casualties) +
     coord_flip() +
     theme_minimal() +
     theme(
@@ -210,7 +210,7 @@ output$ddsb_ped_road_hierarchy_plot = renderPlotly({
 
 
   plot_by_road_hierarchy = ggplot(plot_data, aes(x = Road_Hierarchy_order, y = count)) +
-    geom_bar(stat = "identity") +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
     coord_flip() +
     theme_minimal() +
     theme(
