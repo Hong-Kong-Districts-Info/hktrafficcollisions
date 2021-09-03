@@ -24,3 +24,21 @@ ddsb_filtered_hk_accidents = reactive({
   hk_accidents_filtered
 
 })
+
+# filtered hk_casualties
+ddsb_filtered_hk_casualties = reactive({
+
+  # vector of Serial No. in selected range
+  serial_no_filtered = unique(ddsb_filtered_hk_accidents()[["Serial_No_"]])
+
+  filter(hk_casualties, Serial_No_ %in% serial_no_filtered)
+})
+
+# filtered hk_vehicles
+ddsb_filtered_hk_vehicles = reactive({
+
+  # vector of Serial No. in selected range
+  serial_no_filtered = unique(ddsb_filtered_hk_accidents()[["Serial_No_"]])
+
+  filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
+})
