@@ -344,22 +344,25 @@ ui <- dashboardPage(
 
               fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Class Stats",
                   "Insert vehicle class stats here"
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Movement Stats",
                   "Insert vehicle movement stats here"
-                ),
+                )
+              ),
+
+              fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Pedestrian Action Stats",
                   "Insert padestrian action stats here"
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Junction and Road Stats",
                   "Insert junction and road stats here"
                 )
@@ -392,22 +395,25 @@ ui <- dashboardPage(
 
               fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Class Stats",
                   "Insert vehicle class stats here"
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Movement Stats",
                   "Insert vehicle movement stats here"
-                ),
+                )
+              ),
+
+              fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Cyclist Action Stats",
                   "Insert cyclist action stats here"
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Road Stats",
                   "Insert road stats here"
                 )
