@@ -173,3 +173,29 @@ output$ddsb_ped_vehicle_movement_plot = renderPlotly({
 
   ggplotly(plot_by_vehicle_movement)
 })
+
+# Pedestrian Action plot
+output$ddsb_ped_ped_action_plot = renderPlotly({
+
+  # count by pedestrian Action
+  plot_data = count(ddsb_ped_filtered_hk_casualties(), Ped_Action, name = "count") %>%
+    # reorder the drawing order from largest category
+    mutate(Ped_Action_order = reorder(Ped_Action, count))
+
+
+  plot_by_ped_action = ggplot(plot_data, aes(x = Ped_Action_order, y = count)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Pedestrian action at accident"
+    )
+
+  ggplotly(plot_by_ped_action)
+})

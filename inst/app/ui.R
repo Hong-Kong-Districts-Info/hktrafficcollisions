@@ -359,7 +359,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Pedestrian Action Stats",
-                  "Insert padestrian action stats here"
+                  plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
                 ),
                 box(
                   width = 6,
