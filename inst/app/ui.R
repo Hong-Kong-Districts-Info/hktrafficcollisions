@@ -351,7 +351,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Vehicle Movement Stats",
-                  "Insert vehicle movement stats here"
+                  plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
                 )
               ),
 

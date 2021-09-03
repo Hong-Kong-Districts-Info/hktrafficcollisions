@@ -147,3 +147,29 @@ output$ddsb_ped_vehicle_class_plot = renderPlotly({
   ggplotly(plot_by_vehicle_class)
 })
 
+
+# Vehicle movement plot
+output$ddsb_ped_vehicle_movement_plot = renderPlotly({
+
+  # count by Vehicle_Class
+  plot_data = count(ddsb_ped_filtered_hk_vehicles(), Main_vehicle, name = "count") %>%
+    # reorder vehicle class in descending order
+    mutate(Main_vehicle_order = reorder(Main_vehicle, count))
+
+
+  plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Vehicle movements at accident"
+    )
+
+  ggplotly(plot_by_vehicle_movement)
+})
