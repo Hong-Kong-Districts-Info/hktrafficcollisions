@@ -44,3 +44,4 @@ tmap_options(basemaps = c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap
 # Color scheme ------------------------------------------------------------
 
 SEVERITY_COLOR = c(Fatal = "#230B4C", Serious = "#C03A51", Slight = "#F1701E")
+CATEGORY_COLOR = setNames(as.list(c("#67B7DC", "#A367DC", "#FFAE12")), c("accidents", "casualties", "vehicles"))
