@@ -29,6 +29,6 @@ library(leaflet.extras)
 # Data import -------------------------------------------------------------
 
 ## Take data from {hkdatasets}
-hk_accidents <- hkdatasets::hk_accidents
-hk_vehicles <- hkdatasets::hk_vehicles
-hk_casualties <- hkdatasets::hk_casualties
+hk_accidents <- hkdatasets::download_data("hk_accidents")
+hk_vehicles <- hkdatasets::download_data("hk_vehicles")
+hk_casualties <- hkdatasets::download_data("hk_casualties")
