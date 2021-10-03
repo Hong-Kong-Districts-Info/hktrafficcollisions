@@ -128,6 +128,9 @@ ui <- dashboardPage(
                 inputId = "date_filter", label = "Date range:",
                 start = "2016-05-01",
                 end   = "2016-06-30",
+                # Set limit on selectable date range
+                min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                 format = "d MM yyyy"
               ),
 
