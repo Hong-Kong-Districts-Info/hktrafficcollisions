@@ -58,7 +58,7 @@ filter_collision_data <- reactive({
   data_filtered = filter(data_filtered,
                                 No_of_Casualties_Injured >= input$n_causality_filter[1] & No_of_Casualties_Injured <= input$n_causality_filter[2])
 
-  data_filtered = filter(data_filtered, Type_of_Collision %in% input$collision_type_filter)
+  data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 

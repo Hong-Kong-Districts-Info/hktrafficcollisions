@@ -144,8 +144,8 @@ ui <- dashboardPage(
 
               pickerInput(
                 inputId = "collision_type_filter", label = "Collision Type",
-                choices = unique(hk_accidents$Type_of_Collision),
-                selected = unique(hk_accidents$Type_of_Collision),
+                choices = unique(hk_accidents$Type_of_Collision_with_cycle),
+                selected = unique(hk_accidents$Type_of_Collision_with_cycle),
                 multiple = TRUE,
                 options = list(
                   `actions-box` = TRUE,
