@@ -200,15 +200,7 @@ ui <- dashboardPage(
               ),
 
               p("NOTE: Multiple selections means filtering accidents including ANY selected classes
-                (instead of ALL selected classes)."),
-
-              sliderInput(
-                inputId = "n_causality_filter", label = "No. of casualties",
-                min = min(hk_accidents$No_of_Casualties_Injured),
-                max = max(hk_accidents$No_of_Casualties_Injured),
-                value = range(hk_accidents$No_of_Casualties_Injured),
-                step = 1
-              )
+                (instead of ALL selected classes).")
             )
           )
         ),
