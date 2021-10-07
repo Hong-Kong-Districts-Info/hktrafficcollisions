@@ -164,24 +164,6 @@ ui <- dashboardPage(
               ),
 
               pickerInput(
-                inputId = "casualty_filter", label = "Casualty Role",
-                choices = unique(hk_casualties$Role_of_Casualty),
-                selected = unique(hk_casualties$Role_of_Casualty),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select casualty role(s)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} casualty roles chosen (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
-              ),
-
-              pickerInput(
                 inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
                 choices = unique(hk_vehicles$Vehicle_Class),
                 selected = unique(hk_vehicles$Vehicle_Class),
