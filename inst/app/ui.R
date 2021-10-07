@@ -145,40 +145,16 @@ ui <- dashboardPage(
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"))
               ),
 
-              pickerInput(
+              awesomeCheckboxGroup(
                 inputId = "collision_type_filter", label = "Collision Type",
-                choices = unique(hk_accidents$Type_of_Collision_with_cycle),
-                selected = unique(hk_accidents$Type_of_Collision_with_cycle),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select collision type(s)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} collision types chosen (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
+                choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle)),
+                selected = sort(unique(hk_accidents$Type_of_Collision_with_cycle))
               ),
 
-              pickerInput(
+              awesomeCheckboxGroup(
                 inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
                 choices = unique(hk_vehicles$Vehicle_Class),
-                selected = unique(hk_vehicles$Vehicle_Class),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select vehicle class(es)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} vehicle classes chosen (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
+                selected = unique(hk_vehicles$Vehicle_Class)
               ),
 
               p("NOTE: Multiple selections means filtering accidents including ANY selected classes
