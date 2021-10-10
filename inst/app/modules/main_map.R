@@ -126,6 +126,9 @@ observe({
       radius = 2.5,
       color = "#FFFFFF", weight = 1, opacity = .75,
       fillColor = ~ fill_palette(Severity), fillOpacity = .75,
-      popup = popup_template
+      popup = popup_template,
+      clusterOptions = markerClusterOptions(
+        disableClusteringAtZoom = 16
       )
+    )
 })
