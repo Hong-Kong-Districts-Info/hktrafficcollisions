@@ -57,7 +57,7 @@ output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark 
 filter_collision_data <- reactive({
 
   data_filtered = filter(hk_accidents_valid_sf,
-                         year_month >= floor_date_to_month(input$month_filter[1]) & year_month <= floor_date_to_month(input$month_filter[2]))
+                         year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
 
   message("Min date in filtered data: ", min(data_filtered$Date_Time))
   message("Max date in filtered data: ", max(data_filtered$Date_Time))
