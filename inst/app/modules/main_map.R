@@ -56,6 +56,14 @@ output$nrow_filtered <- reactive(nrow(filter_collision_data()))
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
+  message("Slider input value: ", input$month_filter[1], ", ", input$month_filter[2])
+
+  data_filtered = filter(hk_accidents_valid_sf,
+                         year_month >= floor_date_to_month(input$month_filter[1]) & year_month <= floor_date_to_month(input$month_filter[2]))
+
+  message("Min date in filtered data: ", min(data_filtered$Date_Time))
+  message("Max date in filtered data: ", max(data_filtered$Date_Time))
+
   data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
