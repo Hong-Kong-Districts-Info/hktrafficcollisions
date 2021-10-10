@@ -121,6 +121,7 @@ observe({
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
     clearMarkers() %>%
+    clearMarkerClusters() %>%
     addCircleMarkers(
       # fixed point size symbol
       radius = 7.5,
