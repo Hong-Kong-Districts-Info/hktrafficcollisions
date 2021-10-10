@@ -132,6 +132,26 @@ ui <- dashboardPage(
                 timeFormat = "%b %Y"
               ),
 
+              airDatepickerInput("start_month",
+                                 label = "Start month",
+                                 value = "2016-05-01",
+                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 view = "months",
+                                 minView = "months",
+                                 dateFormat = "MM yyyy"
+              ),
+
+              airDatepickerInput("end_month",
+                                 label = "End month",
+                                 value = "2016-06-01",
+                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 view = "months",
+                                 minView = "months",
+                                 dateFormat = "MM yyyy"
+              ),
+
               checkboxGroupButtons(
                 inputId = "severity_filter", label = "Accident Severity",
                 choices = c(`Fatal <i style="color:#230B4C;" class="fas fa-skull-crossbones"></i>` = "Fatal",
