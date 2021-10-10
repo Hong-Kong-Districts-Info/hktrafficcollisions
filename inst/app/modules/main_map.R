@@ -51,7 +51,7 @@ output$main_map <- renderLeaflet({
     )
 })
 
-output$nrow_filtered <- reactive(nrow(filter_collision_data()))
+output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark = ","))
 
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({

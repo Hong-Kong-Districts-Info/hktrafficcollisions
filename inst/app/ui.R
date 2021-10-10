@@ -122,8 +122,6 @@ ui <- dashboardPage(
 
               h2("Filter Panel"),
 
-              p("Number of rows: ", textOutput("nrow_filtered", inline = TRUE)),
-
               sliderInput(
                 inputId = "month_filter", label = "Date Range",
                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
@@ -178,7 +176,12 @@ ui <- dashboardPage(
               ),
 
               p("NOTE: Multiple selections means filtering accidents including ANY selected classes
-                (instead of ALL selected classes).")
+                (instead of ALL selected classes)."),
+
+              br(),
+
+              p("Total number of collisions: ", textOutput("nrow_filtered", inline = TRUE),
+                style = "font-size: 20px;text-align:center;"),
             )
           )
         ),
