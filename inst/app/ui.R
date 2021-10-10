@@ -145,14 +145,16 @@ ui <- dashboardPage(
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"))
               ),
 
-              awesomeCheckboxGroup(
+              collapsibleAwesomeCheckboxGroupInput(
                 inputId = "collision_type_filter", label = "Collision Type",
+                i = 2,
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle)),
                 selected = sort(unique(hk_accidents$Type_of_Collision_with_cycle))
               ),
 
-              awesomeCheckboxGroup(
+              collapsibleAwesomeCheckboxGroupInput(
                 inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
+                i = 2,
                 choices = unique(hk_vehicles$Vehicle_Class),
                 selected = unique(hk_vehicles$Vehicle_Class)
               ),
