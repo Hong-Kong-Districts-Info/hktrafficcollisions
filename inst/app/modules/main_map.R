@@ -1,4 +1,3 @@
-
 # Get information of all types of vehicles involved in the accidents to show in popup
 # TODO: prepare following mutated dataset before running shiny to save loading time?
 hk_vehicles_involved <- hk_vehicles %>%
@@ -23,21 +22,6 @@ hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longit
 # Leaflet default expect WGS84 (crs 4326), need custom CRS for HK1980 Grid (crs 2326)
 # https://rstudio.github.io/leaflet/projections.html
 hk_accidents_valid_sf <- st_as_sf(x = hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
-
-# Need to convert to POSIXct again, otherwise reactive filtering does not work
-# TODO: investigate why
-hk_accidents_valid_sf$Date <- as.Date(hk_accidents_valid_sf$Date, format = "%Y-%m-%d")
-
-# Combine date and time together as a complete POSIXct class time column
-# Easier for formatting
-hk_accidents_valid_sf$Date_Time <- as.POSIXct(
-  strptime(
-    paste0(hk_accidents_valid_sf$Date, " ", hk_accidents_valid_sf$Time),
-    format = "%Y-%m-%d %H%M",
-    tz = "Asia/Hong_Kong"
-    )
-  )
-
 
 output$main_map <- renderLeaflet({
   overview_map <- leaflet() %>%
@@ -68,10 +52,10 @@ output$nrow_filtered <- reactive(nrow(filter_collision_data()))
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  data_filtered = filter(hk_accidents_valid_sf, Date >= input$date_filter[1] & Date <= input$date_filter[2])
+  data_filtered = filter(hk_accidents_valid_sf, as.Date(Date_Time) >= input$date_filter[1] & as.Date(Date_Time) <= input$date_filter[2])
 
   data_filtered = filter(data_filtered,
-                                No__of_Casualties_Injured >= input$n_causality_filter[1] & No__of_Casualties_Injured <= input$n_causality_filter[2])
+                                No_of_Casualties_Injured >= input$n_causality_filter[1] & No_of_Casualties_Injured <= input$n_causality_filter[2])
 
   data_filtered = filter(data_filtered, Type_of_Collision %in% input$collision_type_filter)
 
@@ -124,7 +108,7 @@ observe({
     # District
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
     # Number of injuries
-    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No__of_Casualties_Injured, tags$br(),
+    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
     # Involved vehicle class
     tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
     # Involved casualty
