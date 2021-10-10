@@ -124,6 +124,13 @@ ui <- dashboardPage(
 
               p("Number of rows: ", textOutput("nrow_filtered", inline = TRUE)),
 
+              sliderInput(
+                inputId = "month_filter", label = "Date Range",
+                min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                value = c(as.Date("2016-05-01"), as.Date("2016-06-01")),
+                timeFormat = "%b %Y"
+              ),
 
               checkboxGroupButtons(
                 inputId = "severity_filter", label = "Accident Severity",
