@@ -168,9 +168,6 @@ ui <- dashboardPage(
                 selected = unique(hk_vehicles$Vehicle_Class)
               ),
 
-              p("NOTE: Multiple selections means filtering accidents including ANY selected classes
-                (instead of ALL selected classes)."),
-
               br(),
 
               p("Total number of collisions: ", textOutput("nrow_filtered", inline = TRUE),
