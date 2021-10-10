@@ -36,6 +36,13 @@ hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 
 # Custom functions --------------------------------------------------------
 
+# Floor date to first day of the month
+floor_date_to_month <- function(x) {
+  x <- as.POSIXlt(x)
+  x$mday <- 1
+  as.Date(x)
+}
+
 # Custom checkbox group with collapsible tick options
 # https://stackoverflow.com/questions/56738392/collapsible-checkboxgroupinput-in-shiny
 collapsibleAwesomeCheckboxGroupInput <-
