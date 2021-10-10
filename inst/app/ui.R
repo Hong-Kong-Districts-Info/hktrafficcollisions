@@ -155,9 +155,10 @@ ui <- dashboardPage(
 
               collapsibleAwesomeCheckboxGroupInput(
                 inputId = "collision_type_filter", label = "Collision Type",
-                i = 2,
-                choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle)),
-                selected = sort(unique(hk_accidents$Type_of_Collision_with_cycle))
+                i = 3,
+                # reverse alphabetical order
+                choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
+                selected = unique(hk_accidents$Type_of_Collision_with_cycle)
               ),
 
               collapsibleAwesomeCheckboxGroupInput(
