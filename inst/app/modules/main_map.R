@@ -14,6 +14,9 @@ accidents_cas_type <- hk_casualties %>%
     include_dvr = any(Role_of_Casualty == "Driver")
   )
 
+# Add date floored to first day of the month for easier month filter handling
+hk_accidents <- mutate(hk_accidents, year_month = floor_date_to_month(Date_Time))
+
 hk_accidents_join <- hk_accidents %>%
   left_join(accidents_cas_type, by = "Serial_No_") %>%
   left_join(hk_vehicles_involved, by = "Serial_No_")
