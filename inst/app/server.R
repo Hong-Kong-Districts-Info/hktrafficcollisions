@@ -11,9 +11,7 @@
 server <- function(input, output, session) {
 
   # ----- GET DATA ----- #
-  hk_accidents <- hkdatasets::download_data(dataset = "hk_accidents")
-  hk_casualties <- hkdatasets::download_data(dataset = "hk_casualties")
-  hk_vehicles <- hkdatasets::download_data(dataset = "hk_vehicles")
+  source(file = "modules/get_data.R", local = TRUE)
 
   # ----- REACTIVES ----- #
 
