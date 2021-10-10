@@ -56,8 +56,6 @@ output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark 
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  message("Slider input value: ", input$month_filter[1], ", ", input$month_filter[2])
-
   data_filtered = filter(hk_accidents_valid_sf,
                          year_month >= floor_date_to_month(input$month_filter[1]) & year_month <= floor_date_to_month(input$month_filter[2]))
 
