@@ -123,7 +123,7 @@ observe({
     clearMarkers() %>%
     addCircleMarkers(
       # fixed point size symbol
-      radius = 2.5,
+      radius = 7.5,
       color = "#FFFFFF", weight = 1, opacity = .75,
       fillColor = ~ fill_palette(Severity), fillOpacity = .75,
       popup = popup_template,
