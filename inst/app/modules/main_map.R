@@ -56,8 +56,6 @@ output$nrow_filtered <- reactive(nrow(filter_collision_data()))
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  data_filtered = filter(hk_accidents_valid_sf, as.Date(Date_Time) >= input$date_filter[1] & as.Date(Date_Time) <= input$date_filter[2])
-
   data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
