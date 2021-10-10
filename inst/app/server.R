@@ -10,9 +10,6 @@
 
 server <- function(input, output, session) {
 
-  # ----- GET DATA ----- #
-  source(file = "modules/get_data.R", local = TRUE)
-
   # ----- REACTIVES ----- #
 
 
