@@ -1,4 +1,3 @@
-
 # Get information of all types of vehicles involved in the accidents to show in popup
 # TODO: prepare following mutated dataset before running shiny to save loading time?
 hk_vehicles_involved <- hk_vehicles %>%
