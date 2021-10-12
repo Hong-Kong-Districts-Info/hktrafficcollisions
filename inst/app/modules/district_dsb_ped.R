@@ -29,10 +29,11 @@ ped_grid_count = reactive({
 
 # Outputs ----------------------------------
 
-output$box_ped_total_collision = renderValueBox({
+output$box_ped_total_collision = renderInfoBox({
   n_collision = nrow(ddsb_ped_filtered_hk_accidents())
 
-  valueBox(
+  infoBox(
+    title = "",
     value = format(n_collision, big.mark=","),
     subtitle = "Number of collisions in selection",
     icon = icon("car-crash"),
@@ -40,10 +41,11 @@ output$box_ped_total_collision = renderValueBox({
   )
 })
 
-output$box_ped_total_casualty = renderValueBox({
+output$box_ped_total_casualty = renderInfoBox({
   n_casualty = nrow(ddsb_ped_filtered_hk_casualties())
 
-  valueBox(
+  infoBox(
+    title = "",
     value = format(n_casualty, big.mark=","),
     subtitle = "Number of casualties in selection",
     icon = icon("user-injured"),
@@ -51,11 +53,12 @@ output$box_ped_total_casualty = renderValueBox({
   )
 })
 
-output$box_ped_serious_stat = renderValueBox({
+output$box_ped_serious_stat = renderInfoBox({
   n_serious = nrow(filter(ddsb_ped_filtered_hk_casualties(), Degree_of_Injury == "Seriously Injured"))
   serious_per = round(n_serious / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
 
-  valueBox(
+  infoBox(
+    title = "",
     value = paste0(n_serious, " (", serious_per, "%)"),
     subtitle = "Serious casualties / % of total",
     icon = icon("procedures"),
@@ -63,19 +66,20 @@ output$box_ped_serious_stat = renderValueBox({
   )
 })
 
-output$box_ped_fatal_stat = renderValueBox({
+output$box_ped_fatal_stat = renderInfoBox({
   n_fatal = nrow(filter(ddsb_ped_filtered_hk_casualties(), Degree_of_Injury == "Killed"))
   fatal_per = round(n_fatal / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
 
-  valueBox(
-    value = paste0(n_fatal, " (", fatal_per, "%)"),
+  infoBox(
+    title = "",
     subtitle = "Fatal casualties / % of total",
-    # Change icon color manually
-    # Default color from shinydashboard.css is rgba(0, 0, 0, 0.15);
-    icon = tags$i(class = "fas fa-skull-crossbones", role = "presentation", style = "color: rgba(240, 240, 240, 0.15);"),
+    value = paste0(n_fatal, " (", fatal_per, "%)"),
+    icon = icon("skull-crossbones"),
     color = "navy"
   )
 })
+
+
 
 # Interactive heatmap
 output$ddsb_ped_collision_heatmap = renderTmap({
