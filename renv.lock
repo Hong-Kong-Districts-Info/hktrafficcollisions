@@ -249,15 +249,10 @@
     },
     "hkdatasets": {
       "Package": "hkdatasets",
-      "Version": "0.0.5",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "hkdatasets",
-      "RemoteUsername": "Hong-Kong-Districts-Info",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "0893dcaaed17500331d497b5d012cac05c8df5ce",
-      "Hash": "26fabd245e8565b1509c8d74cb133fb4"
+      "Version": "0.0.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "9e304aa4090ca6dbf58c6a88902e4baa"
     },
     "htmltools": {
       "Package": "htmltools",
@@ -413,13 +408,6 @@
       "Repository": "CRAN",
       "Hash": "f4dbc5a47fd93d3415249884d31d6791"
     },
-    "packrat": {
-      "Package": "packrat",
-      "Version": "0.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0d6cc4c357e7602bb3eee299f4cfc2a5"
-    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.6.1",
@@ -496,20 +484,6 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "515f341d3affe0de9e4a7f762efb0456"
-    },
-    "rsconnect": {
-      "Package": "rsconnect",
-      "Version": "0.8.24",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5e21fd77eb844fa1ff1d23cb04e1d753"
-    },
-    "rstudioapi": {
-      "Package": "rstudioapi",
-      "Version": "0.13",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "06c85365a03fdaf699966cc1d3cf53ea"
     },
     "s2": {
       "Package": "s2",

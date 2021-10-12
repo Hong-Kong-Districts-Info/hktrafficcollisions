@@ -32,7 +32,7 @@ library(tmap)
 # Data import -------------------------------------------------------------
 
 ## Take data from {hkdatasets}
-hk_accidents <- hkdatasets:::hk_accidents
+hk_accidents <- hkdatasets::hk_accidents
 hk_vehicles <- hkdatasets::hk_vehicles
 hk_casualties <- hkdatasets::hk_casualties
 
