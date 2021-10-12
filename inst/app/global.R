@@ -65,10 +65,12 @@ collapsibleAwesomeCheckboxGroupInput <-
 
     collapsible$children <- checkboxes[(i+1):length(checkboxes)]
 
-    children <- c(checkboxes[1:i], list(btn), list(collapsible))
+    children <- c(checkboxes[1:i], list(collapsible), list(btn))
 
     input[[3]][[2]][[3]][[1]] <- children
 
+
+    # Attach ID of that widget to the script, e.g. "#InputID_btn"
     # Adjust css and text shown in shiny in the script below
     # TODO: Move this to standalone JS script?
     script <- sprintf('$(document).ready(function(){
