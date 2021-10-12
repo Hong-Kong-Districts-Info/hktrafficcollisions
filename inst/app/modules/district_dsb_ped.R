@@ -105,7 +105,7 @@ output$ddsb_ped_collision_heatmap = renderTmap({
 output$ddsb_ped_ksi_plot = renderPlotly({
 
   # count by severity
-  plot_data = count(ddsb_ped_filtered_hk_accidents(), Severity, name = "count")
+  plot_data = count(ddsb_ped_filtered_hk_accidents(), Severity, name = "count", na.rm = TRUE)
 
   plot_by_severity = ggplot(plot_data, aes(x = Severity, y = count, fill = Severity)) +
     geom_bar(stat = "identity") +
@@ -129,7 +129,7 @@ output$ddsb_ped_ksi_plot = renderPlotly({
 output$ddsb_ped_vehicle_class_plot = renderPlotly({
 
   # count by Vehicle_Class
-  plot_data = count(ddsb_ped_filtered_hk_vehicles(), Vehicle_Class, name = "count") %>%
+  plot_data = count(ddsb_ped_filtered_hk_vehicles(), Vehicle_Class, name = "count", na.rm = TRUE) %>%
     # reorder vehicle class in descending order
     mutate(Vehicle_Class_order = reorder(Vehicle_Class, count))
 
@@ -182,7 +182,9 @@ output$ddsb_ped_vehicle_movement_plot = renderPlotly({
 output$ddsb_ped_ped_action_plot = renderPlotly({
 
   # count by pedestrian Action
-  plot_data = count(ddsb_ped_filtered_hk_casualties(), Ped_Action, name = "count") %>%
+  plot_data = ddsb_ped_filtered_hk_casualties() %>%
+    filter(!is.na(Ped_Action)) %>%
+    count(Ped_Action, name = "count") %>%
     # reorder the drawing order from largest category
     mutate(Ped_Action_order = reorder(Ped_Action, count))
 
@@ -208,7 +210,9 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
 output$ddsb_ped_road_hierarchy_plot = renderPlotly({
 
   # count by pedestrian Action
-  plot_data = count(ddsb_ped_filtered_hk_accidents(), Road_Hierarchy, name = "count") %>%
+  plot_data = ddsb_ped_filtered_hk_accidents() %>%
+    filter(!is.na(Road_Hierarchy)) %>%
+    count(Road_Hierarchy, name = "count") %>%
     # reorder the drawing order from largest category
     mutate(Road_Hierarchy_order = reorder(Road_Hierarchy, count))
 
