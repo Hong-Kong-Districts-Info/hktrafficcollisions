@@ -123,6 +123,7 @@ ui <- dashboardPage(
             column(
               # filter panel
               width = 3,
+              id = "controls", class = "panel panel-default",
 
               h2("Filter Panel"),
 
