@@ -117,7 +117,7 @@ ui <- dashboardPage(
             column(
               # mapframe panel
               width = 9,
-              leafletOutput(outputId = "main_map", height = 800)
+              leafletOutput(outputId = "main_map", height = "100vh")
             ),
 
             column(
