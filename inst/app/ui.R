@@ -422,7 +422,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Road Stats",
-                  "Insert road stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
                 )
               ),
 
