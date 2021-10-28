@@ -404,7 +404,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Vehicle Class Stats",
-                  "Insert vehicle class stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
                 ),
                 box(
                   width = 6,
