@@ -382,6 +382,13 @@ ui <- dashboardPage(
               title = "Vehicle w/ Cycles",
 
               fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_fatal_stat")
+              ),
+
+              fluidRow(
                 box(
                   width = 6,
                   title = "Collision Map",
