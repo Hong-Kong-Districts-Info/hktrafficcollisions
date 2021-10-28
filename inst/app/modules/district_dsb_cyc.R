@@ -30,6 +30,10 @@ ddsb_cyc_filtered_hk_vehicles = reactive({
   filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
 })
 
+cyc_grid_count = reactive({
+  count_collisions_in_grid(ddsb_cyc_filtered_hk_accidents())
+})
+
 # Outputs ----------------------------------
 
 output$box_cyc_total_collision = renderInfoBox({
@@ -80,4 +84,25 @@ output$box_cyc_fatal_stat = renderInfoBox({
     icon = icon("skull-crossbones"),
     color = "navy"
   )
+})
+
+
+# Interactive heatmap
+output$ddsb_cyc_collision_heatmap = renderTmap({
+
+  tm_shape(cyc_grid_count()) +
+    tm_fill(
+      col = "n_colli",
+      palette = "YlOrRd",
+      n = 10,
+      style = "cont",
+      title = "Number of collisions",
+      id = "n_colli",
+      showNA = FALSE,
+      alpha = 0.8,
+      # disable popups
+      popup.vars = FALSE,
+    ) +
+    tm_borders(col = "white", lwd = 0.7)
+
 })
