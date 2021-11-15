@@ -375,7 +375,7 @@ ui <- dashboardPage(
                 )
               )
             ),
-
+            
             # Vehicle w/ Cycles tab
             tabPanel(
               value = "vehicle_with_bicycles",
