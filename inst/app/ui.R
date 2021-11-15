@@ -348,14 +348,21 @@ ui <- dashboardPage(
               title = "Vehicle w/ Cycles",
 
               fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_fatal_stat")
+              ),
+
+              fluidRow(
                 box(
                   width = 6,
                   title = "Collision Map",
-                  "Insert collison map here"
+                  tmapOutput(outputId = "ddsb_cyc_collision_heatmap")
                 ),
                 box(width = 6,
                     title = "KSI Stats",
-                    "Insert ksi stats here"
+                    plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
                 )
               ),
 
@@ -363,12 +370,12 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Vehicle Class Stats",
-                  "Insert vehicle class stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
                 ),
                 box(
                   width = 6,
                   title = "Vehicle Movement Stats",
-                  "Insert vehicle movement stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
                 )
               ),
 
@@ -381,7 +388,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Road Stats",
-                  "Insert road stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
                 )
               ),
 
