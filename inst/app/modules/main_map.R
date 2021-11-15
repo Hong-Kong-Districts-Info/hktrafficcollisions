@@ -13,6 +13,9 @@ accidents_cas_type <- hk_casualties %>%
     include_dvr = any(Role_of_Casualty == "Driver")
   )
 
+# Add date floored to first day of the month for easier month filter handling
+hk_accidents <- mutate(hk_accidents, year_month = floor_date_to_month(Date_Time))
+
 hk_accidents_join <- hk_accidents %>%
   left_join(accidents_cas_type, by = "Serial_No_") %>%
   left_join(hk_vehicles_involved, by = "Serial_No_")
@@ -47,17 +50,18 @@ output$main_map <- renderLeaflet({
     )
 })
 
-output$nrow_filtered <- reactive(nrow(filter_collision_data()))
+output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark = ","))
 
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  data_filtered = filter(hk_accidents_valid_sf, as.Date(Date_Time) >= input$date_filter[1] & as.Date(Date_Time) <= input$date_filter[2])
+  data_filtered = filter(hk_accidents_valid_sf,
+                         year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
 
-  data_filtered = filter(data_filtered,
-                                No_of_Casualties_Injured >= input$n_causality_filter[1] & No_of_Casualties_Injured <= input$n_causality_filter[2])
+  message("Min date in filtered data: ", min(data_filtered$Date_Time))
+  message("Max date in filtered data: ", max(data_filtered$Date_Time))
 
-  data_filtered = filter(data_filtered, Type_of_Collision %in% input$collision_type_filter)
+  data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 
@@ -69,12 +73,6 @@ filter_collision_data <- reactive({
   accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
 
   data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
-
-  # --- Casualty filter ---
-  accident_w_selected_cas <- filter(hk_casualties, Role_of_Casualty %in% input$casualty_filter)
-  accident_w_selected_cas_vct <- unique(accident_w_selected_cas[["Serial_No_"]])
-
-  data_filtered <- filter(data_filtered, Serial_No_ %in% accident_w_selected_cas_vct)
 
   data_filtered
 })

@@ -122,17 +122,28 @@ ui <- dashboardPage(
 
               h2("Filter Panel"),
 
-              p("Number of rows: ", textOutput("nrow_filtered", inline = TRUE)),
+              airDatepickerInput("start_month",
+                                 label = "From",
+                                 value = "2016-05-01",
+                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 view = "months",
+                                 minView = "months",
+                                 dateFormat = "MM yyyy"
+              ),
 
-              dateRangeInput(
-                inputId = "date_filter", label = "Date range:",
-                start = "2016-05-01",
-                end   = "2016-06-30",
-                format = "d MM yyyy"
+              airDatepickerInput("end_month",
+                                 label = "To",
+                                 value = "2016-06-01",
+                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                                 view = "months",
+                                 minView = "months",
+                                 dateFormat = "MM yyyy"
               ),
 
               checkboxGroupButtons(
-                inputId = "severity_filter", label = "Accident Severity",
+                inputId = "severity_filter", label = "Collision severity",
                 choices = c(`Fatal <i style="color:#230B4C;" class="fas fa-skull-crossbones"></i>` = "Fatal",
                             `Serious <i style="color:#C03A51;"class="fas fa-procedures"></i>` = "Serious",
                             `Slight <i style="color:#F1701E;" class="fas fa-user-injured"></i>` = "Slight"),
@@ -142,70 +153,25 @@ ui <- dashboardPage(
                 checkIcon = list(yes = icon("ok", lib = "glyphicon"))
               ),
 
-              pickerInput(
-                inputId = "collision_type_filter", label = "Collision Type",
-                choices = unique(hk_accidents$Type_of_Collision),
-                selected = unique(hk_accidents$Type_of_Collision),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select collision type(s)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} collision types chosen (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
+              collapsibleAwesomeCheckboxGroupInput(
+                inputId = "collision_type_filter", label = "Collision type",
+                i = 3,
+                # reverse alphabetical order
+                choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
+                selected = unique(hk_accidents$Type_of_Collision_with_cycle)
               ),
 
-              pickerInput(
-                inputId = "casualty_filter", label = "Casualty Role",
-                choices = unique(hk_casualties$Role_of_Casualty),
-                selected = unique(hk_casualties$Role_of_Casualty),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select casualty role(s)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} casualty roles chosen (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
-              ),
-
-              pickerInput(
+              collapsibleAwesomeCheckboxGroupInput(
                 inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
+                i = 2,
                 choices = unique(hk_vehicles$Vehicle_Class),
-                selected = unique(hk_vehicles$Vehicle_Class),
-                multiple = TRUE,
-                options = list(
-                  `actions-box` = TRUE,
-                  `deselect-all-text` = "Unselect All",
-                  `select-all-text` = "Select All",
-                  `none-selected-text` = "Select vehicle class(es)...",
-                  `selected-text-format` = "count",
-                  `count-selected-text` = "{0} vehicle classes chosen (on a total of {1})"
-                ),
-                choicesOpt = NULL,
-                width = NULL,
-                inline = FALSE
+                selected = unique(hk_vehicles$Vehicle_Class)
               ),
 
-              p("NOTE: Multiple selections means filtering accidents including ANY selected classes
-                (instead of ALL selected classes)."),
+              br(),
 
-              sliderInput(
-                inputId = "n_causality_filter", label = "No. of casualties",
-                min = min(hk_accidents$No_of_Casualties_Injured),
-                max = max(hk_accidents$No_of_Casualties_Injured),
-                value = range(hk_accidents$No_of_Casualties_Injured),
-                step = 1
-              )
+              p("Total number of collisions: ", textOutput("nrow_filtered", inline = TRUE),
+                style = "font-size: 20px;text-align:center;"),
             )
           )
         ),
