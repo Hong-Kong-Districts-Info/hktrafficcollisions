@@ -237,17 +237,29 @@ ui <- dashboardPage(
           box(
             width = 4,
             title = "Area Filter",
-            "Insert area filter here"
+            selectInput(
+              inputId = "ddsb_district_filter", label = "Select District",
+              choices = unique(hk_accidents$District_Council_District)
+            )
           ),
           box(
             width = 4,
             title = "Year Filter",
-            "Insert year filter here"
+            sliderInput(
+              inputId =  "ddsb_year_filter", label = "Select time period:",
+              min = 2014, max = 2019,
+              value = c(2015, 2019),
+              # Remove thousands separator
+              sep = ""
+            )
           ),
           box(
             width = 4,
             title = "All/ KSI Filter",
-            "Insert all/ksi filter here"
+            selectInput(
+              inputId = "ddsb_ksi_filter", label = "Select collision severity category",
+              choices = c("All", "Killed or Seriously Injuries only")
+            )
           )
         ),
 
@@ -312,37 +324,47 @@ ui <- dashboardPage(
               title = "Vehicle w/ Peds",
 
               fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_ped_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_ped_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_ped_fatal_stat")
+              ),
+
+              fluidRow(
                 box(
                   width = 6,
                   title = "Collision Map",
-                  "Insert collison map here"
+                  tmapOutput(outputId = "ddsb_ped_collision_heatmap")
                 ),
                 box(width = 6,
                     title = "KSI Stats",
-                    "Insert ksi stats here"
+                    plotlyOutput(outputId = "ddsb_ped_ksi_plot")
                 )
               ),
 
               fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Class Stats",
-                  "Insert vehicle class stats here"
+                  plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot")
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Movement Stats",
-                  "Insert vehicle movement stats here"
-                ),
+                  plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
+                )
+              ),
+
+              fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Pedestrian Action Stats",
-                  "Insert padestrian action stats here"
+                  plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Junction and Road Stats",
-                  "Insert junction and road stats here"
+                  plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
                 )
               ),
 
@@ -353,7 +375,7 @@ ui <- dashboardPage(
                 )
               )
             ),
-
+            
             # Vehicle w/ Cycles tab
             tabPanel(
               value = "vehicle_with_bicycles",
@@ -373,22 +395,25 @@ ui <- dashboardPage(
 
               fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Class Stats",
                   "Insert vehicle class stats here"
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Vehicle Movement Stats",
                   "Insert vehicle movement stats here"
-                ),
+                )
+              ),
+
+              fluidRow(
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Cyclist Action Stats",
                   "Insert cyclist action stats here"
                 ),
                 box(
-                  width = 3,
+                  width = 6,
                   title = "Road Stats",
                   "Insert road stats here"
                 )
