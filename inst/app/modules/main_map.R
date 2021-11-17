@@ -1,4 +1,3 @@
-
 # Get information of all types of vehicles involved in the accidents to show in popup
 # TODO: prepare following mutated dataset before running shiny to save loading time?
 hk_vehicles_involved <- hk_vehicles %>%
@@ -119,11 +118,15 @@ observe({
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
     clearMarkers() %>%
+    clearMarkerClusters() %>%
     addCircleMarkers(
       # fixed point size symbol
-      radius = 2.5,
+      radius = 7.5,
       color = "#FFFFFF", weight = 1, opacity = .75,
       fillColor = ~ fill_palette(Severity), fillOpacity = .75,
-      popup = popup_template
+      popup = popup_template,
+      clusterOptions = markerClusterOptions(
+        disableClusteringAtZoom = 16
       )
+    )
 })

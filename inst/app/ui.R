@@ -202,202 +202,206 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_dashboard",
+
+        # Filters
+        fluidRow(
+          box(
+            width = 4,
+            title = "Area Filter",
+            selectInput(
+              inputId = "ddsb_district_filter", label = "Select District",
+              choices = unique(hk_accidents$District_Council_District)
+            )
+          ),
+          box(
+            width = 4,
+            title = "Year Filter",
+            sliderInput(
+              inputId =  "ddsb_year_filter", label = "Select time period:",
+              min = 2014, max = 2019,
+              value = c(2015, 2019),
+              # Remove thousands separator
+              sep = ""
+            )
+          ),
+          box(
+            width = 4,
+            title = "All/ KSI Filter",
+            selectInput(
+              inputId = "ddsb_ksi_filter", label = "Select collision severity category",
+              choices = c("All", "Killed or Seriously Injuries only")
+            )
+          )
+        ),
+
         tabBox(
           width = 12,
 
-          # All Vehicle Collision tab
-          tabPanel(
-            value = "all_vehicle_collision",
-            title = "All Vehicle Collision",
+          # Use tabsetPanel to observe which tab user is currently opening
+          # https://stackoverflow.com/questions/23243454/how-to-use-tabpanel-as-input-in-r-shiny
+          tabsetPanel(
+            id = "dashboard_collision_category",
 
-            fluidRow(
-              box(
-                width = 4,
-                title = "Area Filter",
-                "Insert area filter here"
+            # All Vehicle Collision tab
+            tabPanel(
+              value = "all_vehicle_collision",
+              title = "All Vehicle Collision",
+
+              fluidRow(
+                box(
+                    width = 6,
+                    title = "Collision Map",
+                    "Insert collison map here"
+                ),
+                box(width = 6,
+                    title = "KSI Stats",
+                    "Insert ksi stats here"
+                )
               ),
-              box(
-                width = 4,
-                title = "Year Filter",
-                "Insert year filter here"
+
+              fluidRow(
+                box(
+                  width = 4,
+                  title = "Vehicle Class vs Casualty Role Graph",
+                  "Insert vehicle class vs casualty role graph here"
+                ),
+                box(
+                  width = 4,
+                  title = "Junction and Road Stats",
+                  "Insert junction and role stats here"
+                ),
+                box(
+                  width = 4,
+                  title = "Collision Year Line Graph",
+                  "Insert collision year line graph here"
+                )
               ),
-              box(
-                width = 4,
-                title = "All/ KSI Filter",
-                "Insert all/ksi filter here"
+
+              fluidRow(
+                box(width = 6,
+                    title = "Contributory Factors Stats",
+                    "Insert contributory factors stats here"
+                ),
+                box(width = 6,
+                    title = "Accidents by Road Length Stats",
+                    "Insert accidents by road length stats here"
+                )
               )
             ),
 
-            fluidRow(
-              box(
+            # Vehicle w/ Peds tab
+            tabPanel(
+              value = "vehicle_with_pedestrians",
+              title = "Vehicle w/ Peds",
+
+              fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_ped_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_ped_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_ped_fatal_stat")
+              ),
+
+              fluidRow(
+                box(
                   width = 6,
                   title = "Collision Map",
-                  "Insert collison map here"
+                  tmapOutput(outputId = "ddsb_ped_collision_heatmap")
+                ),
+                box(width = 6,
+                    title = "KSI Stats",
+                    plotlyOutput(outputId = "ddsb_ped_ksi_plot")
+                )
               ),
-              box(width = 6,
-                  title = "KSI Stats",
-                  "Insert ksi stats here"
+
+              fluidRow(
+                box(
+                  width = 6,
+                  title = "Vehicle Class Stats",
+                  plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot")
+                ),
+                box(
+                  width = 6,
+                  title = "Vehicle Movement Stats",
+                  plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
+                )
+              ),
+
+              fluidRow(
+                box(
+                  width = 6,
+                  title = "Pedestrian Action Stats",
+                  plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
+                ),
+                box(
+                  width = 6,
+                  title = "Junction and Road Stats",
+                  plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
+                )
+              ),
+
+              fluidRow(
+                box(width = 12,
+                    title = "Contributory Factors Stats",
+                    "Insert contributory factors stats here"
+                )
               )
             ),
+            
+            # Vehicle w/ Cycles tab
+            tabPanel(
+              value = "vehicle_with_bicycles",
+              title = "Vehicle w/ Cycles",
 
-            fluidRow(
-              box(
-                width = 4,
-                title = "Vehicle Class vs Casualty Role Graph",
-                "Insert vehicle class vs casualty role graph here"
+              fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_cyc_fatal_stat")
               ),
-              box(
-                width = 4,
-                title = "Junction and Road Stats",
-                "Insert junction and role stats here"
-              ),
-              box(
-                width = 4,
-                title = "Collision Year Line Graph",
-                "Insert collision year line graph here"
-              )
-            ),
 
-            fluidRow(
-              box(width = 6,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
+              fluidRow(
+                box(
+                  width = 6,
+                  title = "Collision Map",
+                  tmapOutput(outputId = "ddsb_cyc_collision_heatmap")
+                ),
+                box(width = 6,
+                    title = "KSI Stats",
+                    plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
+                )
               ),
-              box(width = 6,
-                  title = "Accidents by Road Length Stats",
-                  "Insert accidents by road length stats here"
-              )
-            )
-          ),
 
-          # Vehicle w/ Peds tab
-          tabPanel(
-            value = "vehicle_with_pedestrians",
-            title = "Vehicle w/ Peds",
+              fluidRow(
+                box(
+                  width = 6,
+                  title = "Vehicle Class Stats",
+                  plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
+                ),
+                box(
+                  width = 6,
+                  title = "Vehicle Movement Stats",
+                  plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
+                )
+              ),
 
-            fluidRow(
-              box(
-                width = 4,
-                title = "Area Filter",
-                "Insert area filter here"
+              fluidRow(
+                box(
+                  width = 6,
+                  title = "Cyclist Action Stats",
+                  "Insert cyclist action stats here"
+                ),
+                box(
+                  width = 6,
+                  title = "Road Stats",
+                  plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
+                )
               ),
-              box(
-                width = 4,
-                title = "Year Filter",
-                "Insert year filter here"
-              ),
-              box(
-                width = 4,
-                title = "All/ KSI Filter",
-                "Insert all/ksi filter here"
-              )
-            ),
 
-            fluidRow(
-              box(
-                width = 6,
-                title = "Collision Map",
-                "Insert collison map here"
-              ),
-              box(width = 6,
-                  title = "KSI Stats",
-                  "Insert ksi stats here"
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 3,
-                title = "Vehicle Class Stats",
-                "Insert vehicle class stats here"
-              ),
-              box(
-                width = 3,
-                title = "Vehicle Movement Stats",
-                "Insert vehicle movement stats here"
-              ),
-              box(
-                width = 3,
-                title = "Pedestrian Action Stats",
-                "Insert padestrian action stats here"
-              ),
-              box(
-                width = 3,
-                title = "Junction and Road Stats",
-                "Insert junction and road stats here"
-              )
-            ),
-
-            fluidRow(
-              box(width = 12,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
-              )
-            )
-          ),
-
-          # Vehicle w/ Cycles tab
-          tabPanel(
-            value = "vehicle_with_bicycles",
-            title = "Vehicle w/ Cycles",
-
-            fluidRow(
-              box(
-                width = 4,
-                title = "Area Filter",
-                "Insert area filter here"
-              ),
-              box(
-                width = 4,
-                title = "Year Filter",
-                "Insert year filter here"
-              ),
-              box(
-                width = 4,
-                title = "All/ KSI Filter",
-                "Insert all/ksi filter here"
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = "Collision Map",
-                "Insert collison map here"
-              ),
-              box(width = 6,
-                  title = "KSI Stats",
-                  "Insert ksi stats here"
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 3,
-                title = "Vehicle Class Stats",
-                "Insert vehicle class stats here"
-              ),
-              box(
-                width = 3,
-                title = "Vehicle Movement Stats",
-                "Insert vehicle movement stats here"
-              ),
-              box(
-                width = 3,
-                title = "Cyclist Action Stats",
-                "Insert cyclist action stats here"
-              ),
-              box(
-                width = 3,
-                title = "Road Stats",
-                "Insert road stats here"
-              )
-            ),
-
-            fluidRow(
-              box(width = 12,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
+              fluidRow(
+                box(width = 12,
+                    title = "Contributory Factors Stats",
+                    "Insert contributory factors stats here"
+                )
               )
             )
           )

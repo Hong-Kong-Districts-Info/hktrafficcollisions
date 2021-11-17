@@ -2,3 +2,32 @@
   height: 100vh;
   overflow: auto;
 }
+
+
+/* Change color of cluster markers on leaflet map */
+/* https://www.mapsmarker.com/kb/user-guide/how-to-change-the-color-of-marker-clusters/ */
+
+.marker-cluster-small {
+	background-color: rgba(170, 170, 170, 0.6) !important;
+}
+
+.marker-cluster-small div {
+	background-color: rgba(170, 170, 170, 0.6) !important;
+}
+
+.marker-cluster-medium {
+	background-color: rgba(170, 170, 170, 0.6) !important;
+}
+
+.marker-cluster-medium div {
+	background-color: rgba(170, 170, 170, 0.6) !important;
+}
+
+.marker-cluster-large {
+	background-color: rgba(170, 170, 170, 0.6) !important;
+}
+
+.marker-cluster-large div {
+	background-color: rgba(170, 170, 170, 0.6) !important;
+}
+
