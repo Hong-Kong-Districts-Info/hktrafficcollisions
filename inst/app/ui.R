@@ -113,12 +113,17 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
-            leafletOutput(outputId = "main_map", height = 800),
 
-            absolutePanel(
-              id = "controls", class = "panel panel-default", fixed = TRUE,
-              draggable = TRUE, top = 100, left = "auto", right = 50, bottom = "auto",
-              width = 330, height = "auto",
+            column(
+              # mapframe panel
+              width = 9,
+              leafletOutput(outputId = "main_map", height = "100vh")
+            ),
+
+            column(
+              # filter panel
+              width = 3,
+              id = "controls", class = "panel panel-default",
 
               h2("Filter Panel"),
 
