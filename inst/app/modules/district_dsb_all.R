@@ -43,6 +43,10 @@ ddsb_filtered_hk_vehicles = reactive({
   filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
 })
 
+all_grid_count = reactive({
+  count_collisions_in_grid(ddsb_filtered_hk_accidents())
+})
+
 # Generate a spatial grid from the bounding box of points (i.e. collisions),
 # then count the number of points within each grid
 #
@@ -64,7 +68,6 @@ count_collisions_in_grid = function(point_data, grid_size = c(150, 150)) {
   # return the grid in sf format
   area_grid_count
 }
-
 
 
 # Outputs ----------------------------------
@@ -117,5 +120,25 @@ output$box_all_fatal_stat = renderInfoBox({
     icon = icon("skull-crossbones"),
     color = "navy"
   )
+})
+
+# Interactive heatmap
+output$ddsb_all_collision_heatmap = renderTmap({
+
+  tm_shape(all_grid_count()) +
+    tm_fill(
+      col = "n_colli",
+      palette = "YlOrRd",
+      n = 10,
+      style = "cont",
+      title = "Number of collisions",
+      id = "n_colli",
+      showNA = FALSE,
+      alpha = 0.8,
+      # disable popups
+      popup.vars = FALSE,
+    ) +
+    tm_borders(col = "white", lwd = 0.7)
+
 })
 
