@@ -261,30 +261,35 @@ ui <- dashboardPage(
 
               fluidRow(
                 box(
-                  width = 4,
-                  title = "Vehicle Class vs Casualty Role Graph",
-                  "Insert vehicle class vs casualty role graph here"
-                ),
-                box(
-                  width = 4,
-                  title = "Junction and Road Stats",
-                  "Insert junction and role stats here"
-                ),
-                box(
-                  width = 4,
+                  width = 12,
                   title = "Collision Year Line Graph",
                   "Insert collision year line graph here"
                 )
               ),
 
               fluidRow(
-                box(width = 6,
-                    title = "Contributory Factors Stats",
-                    "Insert contributory factors stats here"
+                box(
+                  width = 6,
+                  title = "Vehicle Class vs Casualty Role Graph",
+                  "Insert vehicle class vs casualty role graph here"
                 ),
-                box(width = 6,
-                    title = "Accidents by Road Length Stats",
-                    "Insert accidents by road length stats here"
+                box(
+                  width = 6,
+                  title = "Junction and Road Stats",
+                  "Insert junction and role stats here"
+                )
+              ),
+
+              fluidRow(
+                box(
+                  width = 6,
+                  title = "Contributory Factors Stats",
+                  "Insert contributory factors stats here"
+                ),
+                box(
+                  width = 6,
+                  title = "Accidents by Road Length Stats",
+                  "Insert accidents by road length stats here"
                 )
               )
             ),
@@ -346,7 +351,7 @@ ui <- dashboardPage(
                 )
               )
             ),
-            
+
             # Vehicle w/ Cycles tab
             tabPanel(
               value = "vehicle_with_bicycles",
