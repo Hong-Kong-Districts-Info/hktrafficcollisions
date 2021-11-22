@@ -248,6 +248,13 @@ ui <- dashboardPage(
               title = "All Vehicle Collision",
 
               fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
+              ),
+
+              fluidRow(
                 box(
                     width = 6,
                     title = "Collision Map",

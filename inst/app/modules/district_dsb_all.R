@@ -65,3 +65,57 @@ count_collisions_in_grid = function(point_data, grid_size = c(150, 150)) {
   area_grid_count
 }
 
+
+
+# Outputs ----------------------------------
+
+output$box_all_total_collision = renderInfoBox({
+  n_collision = nrow(ddsb_filtered_hk_accidents())
+
+  infoBox(
+    title = "",
+    value = format(n_collision, big.mark=","),
+    subtitle = "Number of collisions in selection",
+    icon = icon("car-crash"),
+    color = "blue"
+  )
+})
+
+output$box_all_total_casualty = renderInfoBox({
+  n_casualty = nrow(ddsb_filtered_hk_casualties())
+
+  infoBox(
+    title = "",
+    value = format(n_casualty, big.mark=","),
+    subtitle = "Number of casualties in selection",
+    icon = icon("user-injured"),
+    color = "blue"
+  )
+})
+
+output$box_all_serious_stat = renderInfoBox({
+  n_serious = nrow(filter(ddsb_filtered_hk_casualties(), Degree_of_Injury == "Seriously Injured"))
+  serious_per = round(n_serious / nrow(ddsb_filtered_hk_casualties()) * 100, digits = 1)
+
+  infoBox(
+    title = "",
+    value = paste0(n_serious, " (", serious_per, "%)"),
+    subtitle = "Serious casualties / % of total",
+    icon = icon("procedures"),
+    color = "red"
+  )
+})
+
+output$box_all_fatal_stat = renderInfoBox({
+  n_fatal = nrow(filter(ddsb_filtered_hk_casualties(), Degree_of_Injury == "Killed"))
+  fatal_per = round(n_fatal / nrow(ddsb_filtered_hk_casualties()) * 100, digits = 1)
+
+  infoBox(
+    title = "",
+    subtitle = "Fatal casualties / % of total",
+    value = paste0(n_fatal, " (", fatal_per, "%)"),
+    icon = icon("skull-crossbones"),
+    color = "navy"
+  )
+})
+
