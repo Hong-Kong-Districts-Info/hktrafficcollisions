@@ -270,7 +270,7 @@ ui <- dashboardPage(
                 box(
                   width = 12,
                   title = "Collision Year Line Graph",
-                  "Insert collision year line graph here"
+                  plotlyOutput(outputId = "ddsb_all_year_plot")
                 )
               ),
 

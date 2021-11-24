@@ -166,3 +166,22 @@ output$ddsb_all_ksi_plot = renderPlotly({
   ggplotly(plot_by_severity)
 })
 
+# Collision by year plot
+output$ddsb_all_year_plot = renderPlotly({
+
+  selected_district_data = filter(hk_accidents, District_Council_District == input$ddsb_district_filter)
+
+  plot_data = count(selected_district_data, Year, name = "count", na.rm = TRUE)
+
+  collision_year_trend_plot = ggplot(plot_data, aes(x = Year, y = count)) +
+    geom_line() +
+    theme_minimal() +
+    scale_y_continuous(limits = c(0, NA)) +
+    labs(
+      x = "Year",
+      title = "Trend of collision in selected district"
+    )
+
+  ggplotly(collision_year_trend_plot)
+
+})
