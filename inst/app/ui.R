@@ -283,7 +283,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Junction and Road Stats",
-                  "Insert junction and role stats here"
+                  plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
                 )
               ),
 
