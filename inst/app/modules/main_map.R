@@ -5,13 +5,16 @@ hk_vehicles_involved <- hk_vehicles %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
 # Get casualty role involved in each accident to show in popup
-accidents_cas_type <- hk_casualties %>%
-  group_by(Serial_No_) %>%
-  summarise(
-    include_ped = any(Role_of_Casualty == "Pedestrian"),
-    include_pax = any(Role_of_Casualty == "Passenger"),
-    include_dvr = any(Role_of_Casualty == "Driver")
-  )
+casualty_role_n = hk_casualties %>% count(Serial_No_, Role_of_Casualty)
+
+accidents_cas_type <- casualty_role_n %>%
+  pivot_wider(
+    id_cols = Serial_No_,
+    names_from = Role_of_Casualty,
+    values_from = n, values_fill = 0
+  ) %>%
+  rename(cas_ped_n = Pedestrian, cas_pax_n = Passenger, cas_dvr_n = Driver)
+
 
 # Add date floored to first day of the month for easier month filter handling
 hk_accidents <- mutate(hk_accidents, year_month = floor_date_to_month(Date_Time))
