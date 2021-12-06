@@ -125,7 +125,11 @@ observe({
     filter_collision_data()$cas_ped_n, " pedestrian(s))",
 
     tags$br(),
-    tags$br()
+    tags$br(),
+
+    tags$b("Within 70 m of junctions? "), filter_collision_data()$Within_70m, tags$br(),
+    tags$b("Road structure: "), filter_collision_data()$Structure_Type, tags$br(),
+    tags$b("Road hierarchy: "), filter_collision_data()$Road_Hierarchy
 
     )
 
