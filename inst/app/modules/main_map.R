@@ -108,8 +108,13 @@ observe({
     tags$b("Precise location: "), tags$br(), "TODO", tags$br(),
     # District
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
+
+    # Number of vehicles involved
+    tags$b("Number of vehicles: "), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
     # Involved vehicle class
-    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
+    tags$b("Involved vehicle classes: "), filter_collision_data()$vehicle_class_involved, tags$br(),
+
+    tags$br(),
 
     # Number of injuries
     tags$b("Number of casualties: "), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
