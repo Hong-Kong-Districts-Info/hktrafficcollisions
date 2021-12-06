@@ -105,7 +105,7 @@ observe({
     # Accident date and time
     tags$b("Accident date: "), tags$br(), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
     # Full address of collision location
-    tags$b("Precise location: "), tags$br(), "TODO", tags$br(),
+    tags$b("Precise location: "), tags$br(), filter_collision_data()$Precise_Location, tags$br(),
     # District
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
 
