@@ -400,7 +400,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Cyclist Action Stats",
-                  "Insert cyclist action stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot")
                 ),
                 box(
                   width = 6,

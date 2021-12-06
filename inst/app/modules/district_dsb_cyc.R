@@ -185,6 +185,36 @@ output$ddsb_cyc_vehicle_movement_plot = renderPlotly({
   ggplotly(plot_by_vehicle_movement)
 })
 
+# Cyclist action plot
+output$ddsb_cyc_cyc_action_plot = renderPlotly({
+
+  # As cyclist are deemed drivers of pedal cycle,
+  # cyclist actions are referenced by vehicle movement in the hk_vehicles dataset
+  plot_data = ddsb_cyc_filtered_hk_vehicles() %>%
+    # only select vehicles that are pedal cycles
+    filter(Pedal_cycle == "Pedal Cycle") %>%
+    count(Main_vehicle, name = "count") %>%
+    # reorder in descending order
+    mutate(Main_vehicle_order = reorder(Main_vehicle, count))
+
+  plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$casualties) +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Cyclist movement at accident"
+    )
+
+  ggplotly(plot_by_vehicle_movement)
+
+})
+
 # Road hierarchy plot
 output$ddsb_cyc_road_hierarchy_plot = renderPlotly({
 
