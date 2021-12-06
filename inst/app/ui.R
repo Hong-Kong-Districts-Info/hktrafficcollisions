@@ -248,43 +248,55 @@ ui <- dashboardPage(
               title = "All Vehicle Collision",
 
               fluidRow(
+                infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
+                infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
+                infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
+                infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
+              ),
+
+              fluidRow(
                 box(
                     width = 6,
                     title = "Collision Map",
-                    "Insert collison map here"
+                    tmapOutput(outputId = "ddsb_all_collision_heatmap")
                 ),
                 box(width = 6,
                     title = "KSI Stats",
-                    "Insert ksi stats here"
+                    plotlyOutput(outputId = "ddsb_all_ksi_plot")
                 )
               ),
 
               fluidRow(
                 box(
-                  width = 4,
+                  width = 12,
+                  title = "Collision Year Line Graph",
+                  plotlyOutput(outputId = "ddsb_all_year_plot")
+                )
+              ),
+
+              fluidRow(
+                box(
+                  width = 6,
                   title = "Vehicle Class vs Casualty Role Graph",
                   "Insert vehicle class vs casualty role graph here"
                 ),
                 box(
-                  width = 4,
+                  width = 6,
                   title = "Junction and Road Stats",
-                  "Insert junction and role stats here"
-                ),
-                box(
-                  width = 4,
-                  title = "Collision Year Line Graph",
-                  "Insert collision year line graph here"
+                  plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
                 )
               ),
 
               fluidRow(
-                box(width = 6,
-                    title = "Contributory Factors Stats",
-                    "Insert contributory factors stats here"
+                box(
+                  width = 6,
+                  title = "Contributory Factors Stats",
+                  "Insert contributory factors stats here"
                 ),
-                box(width = 6,
-                    title = "Accidents by Road Length Stats",
-                    "Insert accidents by road length stats here"
+                box(
+                  width = 6,
+                  title = "Accidents by Road Length Stats",
+                  "Insert accidents by road length stats here"
                 )
               )
             ),
@@ -346,7 +358,7 @@ ui <- dashboardPage(
                 )
               )
             ),
-            
+
             # Vehicle w/ Cycles tab
             tabPanel(
               value = "vehicle_with_bicycles",
