@@ -100,16 +100,26 @@ observe({
     "<h3>", filter_collision_data()$Severity, " Collision</h3>",
 
     # Accident serial number
-    tags$b("Serial number: "), tags$br(), filter_collision_data()$Serial_No_, tags$br(),
+    tags$b("Serial number: "), filter_collision_data()$Serial_No_, tags$br(),
 
     # Accident date and time
-    tags$b("Accident date: "), tags$br(), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
+    tags$b("Accident date: "), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
+
+    tags$br(),
+
+    # District
+    tags$b("District: "), filter_collision_data()$District_Council_District, tags$br(),
     # Street Name
     tags$b("Road name: "), filter_collision_data()$Street_Name, tags$br(),
     # Full address of collision location
     tags$b("Precise location: "), tags$br(), filter_collision_data()$Precise_Location, tags$br(),
-    # District
-    tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
+
+    tags$br(),
+
+    # Collision type
+    tags$b("Collision type: "), tags$br(), filter_collision_data()$Type_of_Collision_with_cycle, tags$br(),
+
+    tags$br(),
 
     # Number of vehicles involved
     tags$b("Number of vehicles: "), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
@@ -133,7 +143,7 @@ observe({
     tags$b("Road structure: "), filter_collision_data()$Structure_Type, tags$br(),
     tags$b("Road hierarchy: "), filter_collision_data()$Road_Hierarchy
 
-    )
+  )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
     clearMarkers() %>%
