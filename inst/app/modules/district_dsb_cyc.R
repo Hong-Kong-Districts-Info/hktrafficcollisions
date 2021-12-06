@@ -188,7 +188,10 @@ output$ddsb_cyc_road_hierarchy_plot = renderPlotly({
 
   # count by road hierarchy
   plot_data = ddsb_cyc_filtered_hk_accidents() %>%
-    filter(!is.na(Road_Hierarchy)) %>%
+    # For cycle-related collisions, Road_Hierarchy == -99 in original data (transformed in NA)
+    # implies the collision happened in cycle track
+    # Most cycle-related collisions with Road_Hierarchy of NA are actually happened in cycle tracks
+    mutate(Road_Hierarchy = ifelse(is.na(Road_Hierarchy), "Cycle Track/Others", Road_Hierarchy)) %>%
     count(Road_Hierarchy, name = "count") %>%
     # reorder the drawing order from largest category
     mutate(Road_Hierarchy_order = reorder(Road_Hierarchy, count))
