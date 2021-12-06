@@ -41,6 +41,11 @@ hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 tmap_mode("view")
 tmap_options(basemaps = c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap"))
 
+# Constants ---------------------------------------------------------------
+
+DISTRICT_ABBR = c("CW", "WCH", "E", "S", "YTM", "SSP", "KC", "WTS", "KT", "TW", "TM", "YL", "N", "TP", "SK", "ST", "KTS", "I")
+DISTRICT_FULL_NAME = hkdatasets::hkdistrict_summary[["District_EN"]]
+
 # Color scheme ------------------------------------------------------------
 
 SEVERITY_COLOR = c(Fatal = "#230B4C", Serious = "#C03A51", Slight = "#F1701E")
