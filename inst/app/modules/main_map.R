@@ -108,15 +108,20 @@ observe({
     tags$b("Precise location: "), tags$br(), "TODO", tags$br(),
     # District
     tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
-    # Number of injuries
-    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
     # Involved vehicle class
     tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
-    # Involved casualty
-    tags$b("Involved casualty role: "), tags$br(),
-    tags$b("Pedestrian: "), filter_collision_data()$include_ped, tags$br(),
-    tags$b("Passenger: "), filter_collision_data()$include_pax, tags$br(),
-    tags$b("Driver: "), filter_collision_data()$include_dvr
+
+    # Number of injuries
+    tags$b("Number of casualties: "), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
+    # Involved casualty breakdown
+    "(",
+    filter_collision_data()$cas_dvr_n, " driver(s), ",
+    filter_collision_data()$cas_pax_n, " passenger(s), ",
+    filter_collision_data()$cas_ped_n, " pedestrian(s))",
+
+    tags$br(),
+    tags$br()
+
     )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
