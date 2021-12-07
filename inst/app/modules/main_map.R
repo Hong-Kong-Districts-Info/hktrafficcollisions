@@ -21,7 +21,10 @@ hk_accidents <- mutate(hk_accidents, year_month = floor_date_to_month(Date_Time)
 
 hk_accidents_join <- hk_accidents %>%
   left_join(accidents_cas_type, by = "Serial_No_") %>%
-  left_join(hk_vehicles_involved, by = "Serial_No_")
+  left_join(hk_vehicles_involved, by = "Serial_No_") %>%
+  # Show full name of district in popup of maps
+  left_join(data.frame(DC_Abbr = DISTRICT_ABBR, DC_full_name = DISTRICT_FULL_NAME),
+            by = c("District_Council_District" = "DC_Abbr"))
 
 hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
 
