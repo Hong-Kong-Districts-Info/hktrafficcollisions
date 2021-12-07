@@ -111,7 +111,7 @@ observe({
     tags$br(),
 
     # District
-    tags$b("District: "), filter_collision_data()$District_Council_District, tags$br(),
+    tags$b("District: "), filter_collision_data()$DC_full_name, tags$br(),
     # Street Name
     tags$b("Road name: "), filter_collision_data()$Street_Name, tags$br(),
     # Full address of collision location
