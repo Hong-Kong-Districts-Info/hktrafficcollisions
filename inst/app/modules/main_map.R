@@ -5,20 +5,26 @@ hk_vehicles_involved <- hk_vehicles %>%
   summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
 
 # Get casualty role involved in each accident to show in popup
-accidents_cas_type <- hk_casualties %>%
-  group_by(Serial_No_) %>%
-  summarise(
-    include_ped = any(Role_of_Casualty == "Pedestrian"),
-    include_pax = any(Role_of_Casualty == "Passenger"),
-    include_dvr = any(Role_of_Casualty == "Driver")
-  )
+casualty_role_n = hk_casualties %>% count(Serial_No_, Role_of_Casualty)
+
+accidents_cas_type <- casualty_role_n %>%
+  pivot_wider(
+    id_cols = Serial_No_,
+    names_from = Role_of_Casualty,
+    values_from = n, values_fill = 0
+  ) %>%
+  rename(cas_ped_n = Pedestrian, cas_pax_n = Passenger, cas_dvr_n = Driver)
+
 
 # Add date floored to first day of the month for easier month filter handling
 hk_accidents <- mutate(hk_accidents, year_month = floor_date_to_month(Date_Time))
 
 hk_accidents_join <- hk_accidents %>%
   left_join(accidents_cas_type, by = "Serial_No_") %>%
-  left_join(hk_vehicles_involved, by = "Serial_No_")
+  left_join(hk_vehicles_involved, by = "Serial_No_") %>%
+  # Show full name of district in popup of maps
+  left_join(data.frame(DC_Abbr = DISTRICT_ABBR, DC_full_name = DISTRICT_FULL_NAME),
+            by = c("District_Council_District" = "DC_Abbr"))
 
 hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
 
@@ -97,24 +103,50 @@ observe({
     "<h3>", filter_collision_data()$Severity, " Collision</h3>",
 
     # Accident serial number
-    tags$b("Serial number: "), tags$br(), filter_collision_data()$Serial_No_, tags$br(),
+    tags$b("Serial number: "), filter_collision_data()$Serial_No_, tags$br(),
 
     # Accident date and time
-    tags$b("Accident date: "), tags$br(), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
-    # Full address of collision location
-    tags$b("Precise location: "), tags$br(), "TODO", tags$br(),
+    tags$b("Accident date: "), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
+
+    tags$br(),
+
     # District
-    tags$b("District: "), tags$br(), filter_collision_data()$District_Council_District, tags$br(),
-    # Number of injuries
-    tags$b("Number of casualties: "), tags$br(), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
+    tags$b("District: "), filter_collision_data()$DC_full_name, tags$br(),
+    # Street Name
+    tags$b("Road name: "), filter_collision_data()$Street_Name, tags$br(),
+    # Full address of collision location
+    tags$b("Precise location: "), tags$br(), filter_collision_data()$Precise_Location, tags$br(),
+
+    tags$br(),
+
+    # Collision type
+    tags$b("Collision type: "), tags$br(), filter_collision_data()$Type_of_Collision_with_cycle, tags$br(),
+
+    tags$br(),
+
+    # Number of vehicles involved
+    tags$b("Number of vehicles: "), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
     # Involved vehicle class
-    tags$b("Involved vehicle classes: "), tags$br(), filter_collision_data()$vehicle_class_involved, tags$br(),
-    # Involved casualty
-    tags$b("Involved casualty role: "), tags$br(),
-    tags$b("Pedestrian: "), filter_collision_data()$include_ped, tags$br(),
-    tags$b("Passenger: "), filter_collision_data()$include_pax, tags$br(),
-    tags$b("Driver: "), filter_collision_data()$include_dvr
-    )
+    tags$b("Involved vehicle classes: "), filter_collision_data()$vehicle_class_involved, tags$br(),
+
+    tags$br(),
+
+    # Number of injuries
+    tags$b("Number of casualties: "), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
+    # Involved casualty breakdown
+    "(",
+    filter_collision_data()$cas_dvr_n, " driver(s), ",
+    filter_collision_data()$cas_pax_n, " passenger(s), ",
+    filter_collision_data()$cas_ped_n, " pedestrian(s))",
+
+    tags$br(),
+    tags$br(),
+
+    tags$b("Within 70 m of junctions? "), ifelse(filter_collision_data()$Within_70m, "Yes", "No"), tags$br(),
+    tags$b("Road structure: "), filter_collision_data()$Structure_Type, tags$br(),
+    tags$b("Road hierarchy: "), filter_collision_data()$Road_Hierarchy
+
+  )
 
   leafletProxy(mapId = "main_map", data = filter_collision_data()) %>%
     clearMarkers() %>%
