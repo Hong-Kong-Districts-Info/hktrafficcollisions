@@ -69,6 +69,32 @@ count_collisions_in_grid = function(point_data, grid_size = c(150, 150)) {
   area_grid_count
 }
 
+# Generate a donut chart of collisions by severity, with input_data in format of hk_accidents
+plot_severity_chart = function(input_data) {
+
+  # count by severity
+  plot_data = count(input_data, Severity, name = "count", na.rm = TRUE)
+
+  # ring chart is not available for ggplotly
+  plot_data %>%
+    plot_ly(
+      labels = ~ Severity, values = ~ count,
+      textinfo = "label+percent",
+      hovertemplate = paste0(
+        "<b>%{label}</b>", "<br><br>",
+        "No. of collisions: %{value:,}", "<br>",
+        "% of total: %{percent}",
+        # Remove `trace 0` text
+        # https://community.plotly.com/t/remove-trace-0-next-to-hover/33731
+        "<extra></extra>"),
+      marker = list(colors = SEVERITY_COLOR_DESAT),
+      # layouts
+      showlegend = F
+    ) %>%
+    add_pie(hole = 0.45) %>%
+    # align title to left
+    layout(title = list(text = "Selected collisions by severity", x = .05))
+}
 
 # Outputs ----------------------------------
 
