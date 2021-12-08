@@ -234,186 +234,182 @@ ui <- dashboardPage(
           )
         ),
 
-        tabBox(
-          width = 12,
+        # Use tabsetPanel to observe which tab user is currently opening
+        # https://stackoverflow.com/questions/23243454/how-to-use-tabpanel-as-input-in-r-shiny
+        tabsetPanel(
+          id = "dashboard_collision_category",
 
-          # Use tabsetPanel to observe which tab user is currently opening
-          # https://stackoverflow.com/questions/23243454/how-to-use-tabpanel-as-input-in-r-shiny
-          tabsetPanel(
-            id = "dashboard_collision_category",
+          # All Vehicle Collision tab
+          tabPanel(
+            value = "all_vehicle_collision",
+            title = "All Vehicle Collision",
 
-            # All Vehicle Collision tab
-            tabPanel(
-              value = "all_vehicle_collision",
-              title = "All Vehicle Collision",
+            fluidRow(
+              infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
+              infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
+              infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
+              infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
+            ),
 
-              fluidRow(
-                infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
-                infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
-                infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
-                infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
-              ),
-
-              fluidRow(
-                box(
-                    width = 6,
-                    title = "Collision Map",
-                    tmapOutput(outputId = "ddsb_all_collision_heatmap")
-                ),
-                box(width = 6,
-                    title = "KSI Stats",
-                    plotlyOutput(outputId = "ddsb_all_ksi_plot")
-                )
-              ),
-
-              fluidRow(
-                box(
-                  width = 12,
-                  title = "Collision Year Line Graph",
-                  plotlyOutput(outputId = "ddsb_all_year_plot")
-                )
-              ),
-
-              fluidRow(
-                box(
+            fluidRow(
+              box(
                   width = 6,
-                  title = "Vehicle Class vs Casualty Role Graph",
-                  "Insert vehicle class vs casualty role graph here"
-                ),
-                box(
-                  width = 6,
-                  title = "Junction and Road Stats",
-                  plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
-                )
+                  title = "Collision Map",
+                  tmapOutput(outputId = "ddsb_all_collision_heatmap")
               ),
+              box(width = 6,
+                  title = "KSI Stats",
+                  plotlyOutput(outputId = "ddsb_all_ksi_plot")
+              )
+            ),
 
-              fluidRow(
-                box(
-                  width = 6,
+            fluidRow(
+              box(
+                width = 12,
+                title = "Collision Year Line Graph",
+                plotlyOutput(outputId = "ddsb_all_year_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Vehicle Class vs Casualty Role Graph",
+                "Insert vehicle class vs casualty role graph here"
+              ),
+              box(
+                width = 6,
+                title = "Junction and Road Stats",
+                plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Contributory Factors Stats",
+                "Insert contributory factors stats here"
+              ),
+              box(
+                width = 6,
+                title = "Accidents by Road Length Stats",
+                "Insert accidents by road length stats here"
+              )
+            )
+          ),
+
+          # Vehicle w/ Peds tab
+          tabPanel(
+            value = "vehicle_with_pedestrians",
+            title = "Vehicle w/ Peds",
+
+            fluidRow(
+              infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
+              infoBoxOutput(width = 3, outputId = "box_ped_total_casualty"),
+              infoBoxOutput(width = 3, outputId = "box_ped_serious_stat"),
+              infoBoxOutput(width = 3, outputId = "box_ped_fatal_stat")
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Collision Map",
+                tmapOutput(outputId = "ddsb_ped_collision_heatmap")
+              ),
+              box(width = 6,
+                  title = "KSI Stats",
+                  plotlyOutput(outputId = "ddsb_ped_ksi_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Vehicle Class Stats",
+                plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot")
+              ),
+              box(
+                width = 6,
+                title = "Vehicle Movement Stats",
+                plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Pedestrian Action Stats",
+                plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
+              ),
+              box(
+                width = 6,
+                title = "Junction and Road Stats",
+                plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
+              )
+            ),
+
+            fluidRow(
+              box(width = 12,
                   title = "Contributory Factors Stats",
                   "Insert contributory factors stats here"
-                ),
-                box(
-                  width = 6,
-                  title = "Accidents by Road Length Stats",
-                  "Insert accidents by road length stats here"
-                )
+              )
+            )
+          ),
+
+          # Vehicle w/ Cycles tab
+          tabPanel(
+            value = "vehicle_with_bicycles",
+            title = "Vehicle w/ Cycles",
+
+            fluidRow(
+              infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
+              infoBoxOutput(width = 3, outputId = "box_cyc_total_casualty"),
+              infoBoxOutput(width = 3, outputId = "box_cyc_serious_stat"),
+              infoBoxOutput(width = 3, outputId = "box_cyc_fatal_stat")
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Collision Map",
+                tmapOutput(outputId = "ddsb_cyc_collision_heatmap")
+              ),
+              box(width = 6,
+                  title = "KSI Stats",
+                  plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
               )
             ),
 
-            # Vehicle w/ Peds tab
-            tabPanel(
-              value = "vehicle_with_pedestrians",
-              title = "Vehicle w/ Peds",
-
-              fluidRow(
-                infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
-                infoBoxOutput(width = 3, outputId = "box_ped_total_casualty"),
-                infoBoxOutput(width = 3, outputId = "box_ped_serious_stat"),
-                infoBoxOutput(width = 3, outputId = "box_ped_fatal_stat")
+            fluidRow(
+              box(
+                width = 6,
+                title = "Vehicle Class Stats",
+                plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
               ),
-
-              fluidRow(
-                box(
-                  width = 6,
-                  title = "Collision Map",
-                  tmapOutput(outputId = "ddsb_ped_collision_heatmap")
-                ),
-                box(width = 6,
-                    title = "KSI Stats",
-                    plotlyOutput(outputId = "ddsb_ped_ksi_plot")
-                )
-              ),
-
-              fluidRow(
-                box(
-                  width = 6,
-                  title = "Vehicle Class Stats",
-                  plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot")
-                ),
-                box(
-                  width = 6,
-                  title = "Vehicle Movement Stats",
-                  plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
-                )
-              ),
-
-              fluidRow(
-                box(
-                  width = 6,
-                  title = "Pedestrian Action Stats",
-                  plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
-                ),
-                box(
-                  width = 6,
-                  title = "Junction and Road Stats",
-                  plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
-                )
-              ),
-
-              fluidRow(
-                box(width = 12,
-                    title = "Contributory Factors Stats",
-                    "Insert contributory factors stats here"
-                )
+              box(
+                width = 6,
+                title = "Vehicle Movement Stats (Excluding pedal cycles)",
+                plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
               )
             ),
 
-            # Vehicle w/ Cycles tab
-            tabPanel(
-              value = "vehicle_with_bicycles",
-              title = "Vehicle w/ Cycles",
-
-              fluidRow(
-                infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
-                infoBoxOutput(width = 3, outputId = "box_cyc_total_casualty"),
-                infoBoxOutput(width = 3, outputId = "box_cyc_serious_stat"),
-                infoBoxOutput(width = 3, outputId = "box_cyc_fatal_stat")
+            fluidRow(
+              box(
+                width = 6,
+                title = "Cyclist Action Stats",
+                plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot")
               ),
+              box(
+                width = 6,
+                title = "Road Stats",
+                plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
+              )
+            ),
 
-              fluidRow(
-                box(
-                  width = 6,
-                  title = "Collision Map",
-                  tmapOutput(outputId = "ddsb_cyc_collision_heatmap")
-                ),
-                box(width = 6,
-                    title = "KSI Stats",
-                    plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
-                )
-              ),
-
-              fluidRow(
-                box(
-                  width = 6,
-                  title = "Vehicle Class Stats",
-                  plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
-                ),
-                box(
-                  width = 6,
-                  title = "Vehicle Movement Stats (Excluding pedal cycles)",
-                  plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
-                )
-              ),
-
-              fluidRow(
-                box(
-                  width = 6,
-                  title = "Cyclist Action Stats",
-                  plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot")
-                ),
-                box(
-                  width = 6,
-                  title = "Road Stats",
-                  plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
-                )
-              ),
-
-              fluidRow(
-                box(width = 12,
-                    title = "Contributory Factors Stats",
-                    "Insert contributory factors stats here"
-                )
+            fluidRow(
+              box(width = 12,
+                  title = "Contributory Factors Stats",
+                  "Insert contributory factors stats here"
               )
             )
           )

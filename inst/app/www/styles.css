@@ -3,6 +3,11 @@
   overflow: auto;
 }
 
+/* For tabsetPanel in district dashboard */
+.tabbable {
+  background: #FFFFFF;
+  padding: 10px;
+}
 
 /* Change color of cluster markers on leaflet map */
 /* https://www.mapsmarker.com/kb/user-guide/how-to-change-the-color-of-marker-clusters/ */
