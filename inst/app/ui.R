@@ -391,7 +391,7 @@ ui <- dashboardPage(
                 ),
                 box(
                   width = 6,
-                  title = "Vehicle Movement Stats",
+                  title = "Vehicle Movement Stats (Excluding pedal cycles)",
                   plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
                 )
               ),
@@ -400,7 +400,7 @@ ui <- dashboardPage(
                 box(
                   width = 6,
                   title = "Cyclist Action Stats",
-                  "Insert cyclist action stats here"
+                  plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot")
                 ),
                 box(
                   width = 6,
