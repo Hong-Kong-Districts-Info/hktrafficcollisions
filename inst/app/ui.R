@@ -210,7 +210,7 @@ ui <- dashboardPage(
             title = "Area Filter",
             selectInput(
               inputId = "ddsb_district_filter", label = "Select District",
-              choices = unique(hk_accidents$District_Council_District)
+              choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME)
             )
           ),
           box(
