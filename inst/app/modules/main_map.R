@@ -83,10 +83,6 @@ filter_collision_data <- reactive({
   data_filtered
 })
 
-# Fill color palette according to the severity of the accident
-fill_palette <- colorFactor(palette = c("#230B4C", "#C03A51", "#F1701E"), domain = c("Fatal", "Serious", "Slight"))
-
-
 observe({
   # Template for popup, with summary of incidents
   popup_template = paste(
