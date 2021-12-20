@@ -149,9 +149,9 @@ observe({
     clearMarkerClusters() %>%
     addCircleMarkers(
       # fixed point size symbol
-      radius = 7.5,
-      color = "#FFFFFF", weight = 1, opacity = .75,
-      fillColor = ~ fill_palette(Severity), fillOpacity = .75,
+      radius = 6,
+      color = "#0d0d0d", weight = 2, opacity = .9,
+      fillColor = ~ fill_palette(Severity), fillOpacity = .9,
       popup = popup_template,
       clusterOptions = markerClusterOptions(
         disableClusteringAtZoom = 16
