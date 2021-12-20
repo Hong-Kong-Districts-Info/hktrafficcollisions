@@ -39,7 +39,7 @@ hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 # interactive thematic map mode option ------------------------------------
 
 tmap_mode("view")
-tmap_options(basemaps = c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap"))
+tmap_options(basemaps = c("Stamen.TonerLite", "CartoDB.Positron", "OpenStreetMap"))
 
 # Constants ---------------------------------------------------------------
 
@@ -48,8 +48,11 @@ DISTRICT_FULL_NAME = hkdatasets::hkdistrict_summary[["District_EN"]]
 
 # Color scheme ------------------------------------------------------------
 
-SEVERITY_COLOR = c(Fatal = "#230B4C", Serious = "#C03A51", Slight = "#F1701E")
+SEVERITY_COLOR = c(Fatal = "#FF4039", Serious = "#FFB43F", Slight = "#FFE91D")
 CATEGORY_COLOR = setNames(as.list(c("#67B7DC", "#A367DC", "#FFAE12")), c("accidents", "casualties", "vehicles"))
+
+# Fill color palette according to the severity of the accident
+fill_palette = leaflet::colorFactor(palette = c("#FF4039", "#FFB43F", "#FFE91D"), domain = c("Fatal", "Serious", "Slight"))
 
 # Custom misc functions ---------------------------------------------------
 

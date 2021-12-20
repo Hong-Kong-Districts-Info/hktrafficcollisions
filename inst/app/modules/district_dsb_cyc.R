@@ -93,7 +93,7 @@ output$ddsb_cyc_collision_heatmap = renderTmap({
   tm_shape(cyc_grid_count()) +
     tm_fill(
       col = "n_colli",
-      palette = "YlOrRd",
+      palette = "Purples",
       n = 10,
       style = "cont",
       title = "Number of collisions",
@@ -103,7 +103,7 @@ output$ddsb_cyc_collision_heatmap = renderTmap({
       # disable popups
       popup.vars = FALSE,
     ) +
-    tm_borders(col = "white", lwd = 0.7)
+    tm_borders(col = "#232323", lwd = 0.7)
 
 })
 

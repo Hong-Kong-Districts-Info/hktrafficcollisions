@@ -39,7 +39,7 @@ output$main_map <- renderLeaflet({
     addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
 
   # Subset basemap providers to be used for the map
-  SELECTED_BASEMAPS <- leaflet::providers[c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap")]
+  SELECTED_BASEMAPS <- leaflet::providers[c("Stamen.TonerLite", "CartoDB.Positron", "OpenStreetMap")]
 
   # Add the basemap tiles in background
   # http://rstudio.github.io/leaflet/morefeatures.html
@@ -82,10 +82,6 @@ filter_collision_data <- reactive({
 
   data_filtered
 })
-
-# Fill color palette according to the severity of the accident
-fill_palette <- colorFactor(palette = c("#230B4C", "#C03A51", "#F1701E"), domain = c("Fatal", "Serious", "Slight"))
-
 
 observe({
   # Template for popup, with summary of incidents
@@ -153,9 +149,9 @@ observe({
     clearMarkerClusters() %>%
     addCircleMarkers(
       # fixed point size symbol
-      radius = 7.5,
-      color = "#FFFFFF", weight = 1, opacity = .75,
-      fillColor = ~ fill_palette(Severity), fillOpacity = .75,
+      radius = 6,
+      color = "#0d0d0d", weight = 2, opacity = .9,
+      fillColor = ~ fill_palette(Severity), fillOpacity = .9,
       popup = popup_template,
       clusterOptions = markerClusterOptions(
         disableClusteringAtZoom = 16

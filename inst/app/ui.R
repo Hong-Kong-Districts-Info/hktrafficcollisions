@@ -149,9 +149,10 @@ ui <- dashboardPage(
 
               checkboxGroupButtons(
                 inputId = "severity_filter", label = "Collision severity",
-                choices = c(`Fatal <i style="color:#230B4C;" class="fas fa-skull-crossbones"></i>` = "Fatal",
-                            `Serious <i style="color:#C03A51;"class="fas fa-procedures"></i>` = "Serious",
-                            `Slight <i style="color:#F1701E;" class="fas fa-user-injured"></i>` = "Slight"),
+                # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
+                choices = c(`Fatal <i style="color:#FF4039;" class="fas fa-skull-crossbones"></i>` = "Fatal",
+                            `Serious <i style="color:#FFB43F;"class="fas fa-procedures"></i>` = "Serious",
+                            `Slight <i style="color:#FFE91D;" class="fas fa-user-injured"></i>` = "Slight"),
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
                 justified = TRUE,
