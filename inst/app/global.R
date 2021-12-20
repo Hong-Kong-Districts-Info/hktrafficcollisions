@@ -39,7 +39,7 @@ hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 # interactive thematic map mode option ------------------------------------
 
 tmap_mode("view")
-tmap_options(basemaps = c("CartoDB.Positron", "Stamen.TonerLite", "OpenStreetMap"))
+tmap_options(basemaps = c("Stamen.TonerLite", "CartoDB.Positron", "OpenStreetMap"))
 
 # Constants ---------------------------------------------------------------
 
