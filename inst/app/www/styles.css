@@ -9,6 +9,54 @@
   padding: 10px;
 }
 
+/* Override default sidebar color scheme */
+
+/* logo */
+.skin-yellow .main-header .logo {
+  background-color: #0d0d0d;
+}
+
+/* logo when hovered */
+.skin-yellow .main-header .logo:hover {
+  background-color: #0d0d0d;
+}
+
+/* navbar (rest of the header) */
+.skin-yellow .main-header .navbar {
+  background-color: #0d0d0d;
+}
+
+/* main sidebar */
+.skin-yellow .main-sidebar {
+  background-color: #ffffff;
+}
+
+/* active selected tab in the sidebarmenu */
+.skin-yellow .main-sidebar .sidebar .sidebar-menu .active a{
+  background-color: #ffffff;
+  border-left-width: 5px;
+  border-left-color: #0d0d0d !important;
+  color: #0d0d0d;
+}
+
+/* other links in the sidebarmenu */
+.skin-yellow .main-sidebar .sidebar .sidebar-menu a{
+  background-color: #ffffff;
+  color: #777777;
+}
+
+/* other links in the sidebarmenu when hovered */
+.skin-yellow .main-sidebar .sidebar .sidebar-menu a:hover{
+  color: #0d0d0d;
+  border-left-color: #ffffff;
+}
+
+/* toggle button when hovered  */
+.skin-yellow .main-header .navbar .sidebar-toggle:hover{
+  background-color: #ffffff;
+}
+
+
 /* Change color of cluster markers on leaflet map */
 /* https://www.mapsmarker.com/kb/user-guide/how-to-change-the-color-of-marker-clusters/ */
 
