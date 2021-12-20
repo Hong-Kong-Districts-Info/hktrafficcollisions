@@ -3,6 +3,12 @@
   overflow: auto;
 }
 
+/* dashboard body, excluding sidebar */
+.content-wrapper, .right-side {
+  background-color: #eeeeee;
+}
+
+
 /* For tabsetPanel in district dashboard */
 .tabbable {
   background: #FFFFFF;
