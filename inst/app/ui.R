@@ -303,7 +303,7 @@ ui <- dashboardPage(
           # Vehicle w/ Peds tab
           tabPanel(
             value = "vehicle_with_pedestrians",
-            title = "Vehicle w/ Peds",
+            title = "Vehicle with Pedestrians",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
@@ -361,7 +361,7 @@ ui <- dashboardPage(
           # Vehicle w/ Cycles tab
           tabPanel(
             value = "vehicle_with_bicycles",
-            title = "Vehicle w/ Cycles",
+            title = "Vehicle with Cycles",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
