@@ -90,3 +90,15 @@
 	background-color: rgba(34, 34, 34, 0.6) !important;
 }
 
+/* Widgets */
+
+/* Hide / Show all button in collapsible group checkbox */
+.bttn-minimal.bttn-primary {
+  color: #0d0d0d;
+}
+
+/* Color of checkboxes */
+.checkbox-primary input[type="checkbox"]:checked+label::before, .checkbox-primary input[type="radio"]:checked+label::before {
+  background-color: #0d0d0d;
+  border-color: #0d0d0d;
+}
