@@ -49,7 +49,7 @@ DISTRICT_FULL_NAME = hkdatasets::hkdistrict_summary[["District_EN"]]
 # Color scheme ------------------------------------------------------------
 
 SEVERITY_COLOR = c(Fatal = "#FF4039", Serious = "#FFB43F", Slight = "#FFE91D")
-CATEGORY_COLOR = setNames(as.list(c("#67B7DC", "#A367DC", "#FFAE12")), c("accidents", "casualties", "vehicles"))
+CATEGORY_COLOR = setNames(as.list(c("#232323", "#232323", "#232323")), c("accidents", "casualties", "vehicles"))
 
 # Fill color palette according to the severity of the accident
 fill_palette = leaflet::colorFactor(palette = c("#FF4039", "#FFB43F", "#FFE91D"), domain = c("Fatal", "Serious", "Slight"))
