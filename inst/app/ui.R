@@ -39,7 +39,7 @@ ui <- dashboardPage(
     ),
     tags$li(a(
       href = "https://hkdistricts-info.shinyapps.io/trafficcollisions/",
-      img(src = "logo.png", title = "Back to Home", height = "46px"),
+      img(src = "logo-bw.png", title = "Back to Home", height = "46px"),
       style = "padding-top:2px; padding-bottom:2px;"
     ),
     class = "dropdown"
