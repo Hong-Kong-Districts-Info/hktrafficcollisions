@@ -13,7 +13,8 @@ ui <- dashboardPage(
 
   # Header
   header = dashboardHeader(
-    title = "HK: Traffic Collisions",
+    title = "Hong Kong Traffic Injury Collision Database",
+    titleWidth = 400,
 
     tags$li(a(
       href = "https://hong-kong-districts-info.github.io/",
