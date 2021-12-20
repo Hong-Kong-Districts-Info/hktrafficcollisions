@@ -102,3 +102,15 @@
   background-color: #0d0d0d;
   border-color: #0d0d0d;
 }
+
+/* colour of the sliders */
+.js-irs-0 .irs-single, .js-irs-0 .irs-bar-edge, .js-irs-0 .irs-bar {
+  background: #0d0d0d;
+  border-top: 1px solid #0d0d0d ;
+  border-bottom: 1px solid #0d0d0d ;
+}
+
+/* colour of the number tags above sliders */
+.irs-from, .irs-to, .irs-single {
+  background-color: #0d0d0d !important;
+}
