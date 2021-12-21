@@ -20,10 +20,6 @@ server <- function(input, output, session) {
   source(file = "modules/main_map.R", local = TRUE)
 
 
-  # RenderPlot: Districts ---------------------------------------------------
-  source(file = "modules/plotly_testvisual.R", local = TRUE)
-
-
   # ----- TAB: Dashboard ----- #
   source(file = "modules/district_dsb_all.R", local = TRUE)
   source(file = "modules/district_dsb_ped.R", local = TRUE)
