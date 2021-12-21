@@ -13,7 +13,8 @@ ui <- dashboardPage(
 
   # Header
   header = dashboardHeader(
-    title = "HK: Traffic Collisions",
+    title = "Hong Kong Traffic Injury Collision Database",
+    titleWidth = 400,
 
     tags$li(a(
       href = "https://hong-kong-districts-info.github.io/",
@@ -38,7 +39,7 @@ ui <- dashboardPage(
     ),
     tags$li(a(
       href = "https://hkdistricts-info.shinyapps.io/trafficcollisions/",
-      img(src = "logo.png", title = "Back to Home", height = "46px"),
+      img(src = "logo-bw.png", title = "Back to Home", height = "46px"),
       style = "padding-top:2px; padding-bottom:2px;"
     ),
     class = "dropdown"
@@ -302,7 +303,7 @@ ui <- dashboardPage(
           # Vehicle w/ Peds tab
           tabPanel(
             value = "vehicle_with_pedestrians",
-            title = "Vehicle w/ Peds",
+            title = "Vehicle with Pedestrians",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
@@ -360,7 +361,7 @@ ui <- dashboardPage(
           # Vehicle w/ Cycles tab
           tabPanel(
             value = "vehicle_with_bicycles",
-            title = "Vehicle w/ Cycles",
+            title = "Vehicle with Cycles",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
