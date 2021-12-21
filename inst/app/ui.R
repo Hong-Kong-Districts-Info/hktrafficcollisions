@@ -181,22 +181,6 @@ ui <- dashboardPage(
                 style = "font-size: 20px;text-align:center;"),
             )
           )
-        ),
-
-        fluidRow(
-          box(
-            width = 4,
-            title = "Location Filter",
-            "Insert location filter here"
-          )
-        ),
-        fluidRow(
-          plotlyOutput(outputId = "plotly_testvisual"),
-          box(
-            width = 4,
-            title = "Stats & Info",
-            "Insert data here"
-          )
         )
       ),
 
