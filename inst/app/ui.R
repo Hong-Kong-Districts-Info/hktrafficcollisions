@@ -43,6 +43,13 @@ ui <- dashboardPage(
       style = "padding-top:2px; padding-bottom:2px;"
     ),
     class = "dropdown"
+    ),
+    tags$li(a(
+      href = "https://bit.ly/StreetresetHK",
+      img(src = "street-reset-logo-bw.png", title = "Street Reset", height = "46px"),
+      style = "padding-top:2px; padding-bottom:2px;"
+    ),
+    class = "dropdown"
     )
   ),
 
