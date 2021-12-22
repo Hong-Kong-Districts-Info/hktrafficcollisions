@@ -38,9 +38,16 @@ ui <- dashboardPage(
     class = "dropdown"
     ),
     tags$li(a(
-      href = "https://hkdistricts-info.shinyapps.io/trafficcollisions/",
-      img(src = "logo-bw.png", title = "Back to Home", height = "46px"),
-      style = "padding-top:2px; padding-bottom:2px;"
+      href = "https://github.com/Hong-Kong-Districts-Info",
+      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "46px"),
+      style = "padding:2px;"
+    ),
+    class = "dropdown"
+    ),
+    tags$li(a(
+      href = "https://bit.ly/StreetresetHK",
+      img(src = "street-reset-logo-bw.png", title = "Street Reset", height = "46px"),
+      style = "padding:2px;"
     ),
     class = "dropdown"
     )
