@@ -33,7 +33,7 @@ hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longit
 hk_accidents_valid_sf <- st_as_sf(x = hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
 
 output$main_map <- renderLeaflet({
-  overview_map <- leaflet() %>%
+  overview_map <- leaflet(options = leafletOptions(minZoom = 11)) %>%
     setView(lng = 114.2, lat = 22.3, zoom = 12) %>%
     # Add geocoder map widget
     addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
