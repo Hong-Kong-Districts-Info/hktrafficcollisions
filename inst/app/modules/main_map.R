@@ -71,6 +71,8 @@ filter_collision_data <- reactive({
 
   data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 
+  data_filtered = filter(data_filtered, District_Council_District %in% input$district_filter)
+
   # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
   accient_w_selected_veh <- filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
 
