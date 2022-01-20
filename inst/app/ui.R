@@ -150,7 +150,8 @@ ui <- dashboardPage(
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
                                  minView = "months",
-                                 dateFormat = "MM yyyy"
+                                 dateFormat = "MM yyyy",
+                                 addon = "none"
               ),
 
               airDatepickerInput("end_month",
@@ -160,7 +161,8 @@ ui <- dashboardPage(
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
                                  minView = "months",
-                                 dateFormat = "MM yyyy"
+                                 dateFormat = "MM yyyy",
+                                 addon = "none"
               ),
 
               checkboxGroupButtons(
