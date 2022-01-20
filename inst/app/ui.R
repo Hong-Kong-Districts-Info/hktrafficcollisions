@@ -135,6 +135,14 @@ ui <- dashboardPage(
 
               h2("Filter Panel"),
 
+              selectizeInput(
+                inputId = "district_filter",
+                label = "District(s):",
+                choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME),
+                selected = "KC",
+                options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
+              ),
+
               airDatepickerInput("start_month",
                                  label = "From",
                                  value = "2016-05-01",
@@ -142,7 +150,8 @@ ui <- dashboardPage(
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
                                  minView = "months",
-                                 dateFormat = "MM yyyy"
+                                 dateFormat = "MM yyyy",
+                                 addon = "none"
               ),
 
               airDatepickerInput("end_month",
@@ -152,7 +161,8 @@ ui <- dashboardPage(
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
                                  minView = "months",
-                                 dateFormat = "MM yyyy"
+                                 dateFormat = "MM yyyy",
+                                 addon = "none"
               ),
 
               checkboxGroupButtons(
