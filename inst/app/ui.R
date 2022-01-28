@@ -419,61 +419,15 @@ ui <- dashboardPage(
         )
       ),
 
-      # Menu item: Dashboard ---------------------------------------------------
+      # Menu item: Hotspots  ---------------------------------------------------
 
       tabItem(
         tabName = "tab_hotspots_and_worst_roads",
         fluidRow(
           box(
-            width = 4,
-            title = "Area Filter",
-            "Insert area filter here"
-          ),
-          box(
-            width = 4,
-            title = "Year Filter",
-            "Insert year filter here"
-          ),
-          box(
-            width = 4,
-            title = "All/ KSI Filter",
-            "Insert all/ksi filter here"
-          )
-        ),
-
-        fluidRow(
-          box(
-            width = 6,
-            title = "Hotspot Map",
-            "Insert hotspot map here"
-          ),
-          box(width = 6,
-              title = "Hotspot Junction Rank List",
-              "Insert hotspot junction rank list here"
-          )
-        ),
-
-        fluidRow(
-          box(
-            width = 6,
-            title = "Hot Zone Map",
-            "Insert hot zone map here"
-          ),
-          box(width = 6,
-              title = "Hot Road Sections Rank List",
-              "Insert hot road sections rank list here"
-          )
-        ),
-
-        fluidRow(
-          box(
-            width = 6,
-            title = "KSI Collision Per km Map",
-            "Insert ksi collision per km map here"
-          ),
-          box(width = 6,
-              title = "Worst Road (KSI Collision/ km)",
-              "Insert worst road rank list here"
+            width = 12,
+            title = "Collision Hotspots",
+            tmapOutput(outputId = "hotspots_map")
           )
         )
       ),
