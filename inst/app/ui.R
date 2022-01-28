@@ -415,6 +415,14 @@ ui <- dashboardPage(
             title = "Collision Hotspots",
             tmapOutput(outputId = "hotspots_map")
           )
+        ),
+        fluidRow(
+          box(
+            width = 12,
+            title = "List of hot spots",
+            dataTableOutput(outputId = "hotspots_table")
+
+          )
         )
       ),
 
