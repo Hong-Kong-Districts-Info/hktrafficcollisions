@@ -28,6 +28,9 @@ library(leaflet.extras)
 ## Thematic map
 library(tmap)
 
+## Interactive tables
+library(DT)
+
 
 # Data import -------------------------------------------------------------
 

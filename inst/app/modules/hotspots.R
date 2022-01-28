@@ -17,3 +17,7 @@ output$hotspots_map = renderTmap({
     )
 
 })
+
+output$hotspots_table = renderDataTable({
+  datatable(st_drop_geometry(hotzone_streets))
+})
