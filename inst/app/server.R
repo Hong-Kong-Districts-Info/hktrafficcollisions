@@ -27,6 +27,7 @@ server <- function(input, output, session) {
 
 
   # ----- TAB: Hotspots and Worst Roads ----- #
+  source(file = "modules/hotspots.R", local = TRUE)
 
 
   # ----- TAB: Key Facts ----- #

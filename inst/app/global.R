@@ -36,6 +36,8 @@ hk_accidents <- fst::read_fst("./data/hk_accidents.fst")
 hk_vehicles <- fst::read_fst("./data/hk_vehicles.fst")
 hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 
+hotzone_streets = read_sf("./data/hotzone_streets.gpkg")
+
 # interactive thematic map mode option ------------------------------------
 
 tmap_mode("view")
