@@ -1,7 +1,7 @@
 
 # Add tile from mapbox style
 # https://docs.mapbox.com/studio-manual/guides/publish-your-style/
-COLLISION_PTS_TILE_URL = "https://api.mapbox.com/styles/v1/khwong12/ckyxixwuc006b14t8gyghov8v/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2h3b25nMTIiLCJhIjoiY2ptMGJqMHh2MGFzZjNsbXl2MjVuMGl1biJ9.N5P5k0byVnsWeBg6iLObww"
+COLLISION_PTS_TILE_URL = "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004415qrmcs9geal/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2h3b25nMTIiLCJhIjoiY2ptMGJqMHh2MGFzZjNsbXl2MjVuMGl1biJ9.N5P5k0byVnsWeBg6iLObww"
 
 # Interactive heatmap
 output$hotspots_map = renderTmap({
