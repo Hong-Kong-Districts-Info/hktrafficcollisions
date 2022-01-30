@@ -10,6 +10,7 @@ output$hotspots_map = renderTmap({
     tm_shape(hotzone_streets) +
     tm_lines(
       group = "Hotzone streets",
+      title.col = "Hotzone Street Rank",
       col = "Area_RK",
       lwd = 2.5,
       palette = "inferno",
