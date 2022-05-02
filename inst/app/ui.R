@@ -285,19 +285,6 @@ ui <- dashboardPage(
                 title = "Junction and Road Stats",
                 plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
               )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = "Contributory Factors Stats",
-                "Insert contributory factors stats here"
-              ),
-              box(
-                width = 6,
-                title = "Accidents by Road Length Stats",
-                "Insert accidents by road length stats here"
-              )
             )
           ),
 
@@ -349,13 +336,6 @@ ui <- dashboardPage(
                 title = "Junction and Road Stats",
                 plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
               )
-            ),
-
-            fluidRow(
-              box(width = 12,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
-              )
             )
           ),
 
@@ -406,13 +386,6 @@ ui <- dashboardPage(
                 width = 6,
                 title = "Road Stats",
                 plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
-              )
-            ),
-
-            fluidRow(
-              box(width = 12,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
               )
             )
           )
