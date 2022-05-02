@@ -72,11 +72,11 @@ ui <- dashboardPage(
         tabName = "tab_dashboard"
       ),
 
-      # Hotspots and Worst Roads
+      # Pedestrian collision hotzones
       menuItem(
-        text = "Hotspots and Worst Roads",
+        text = "Pedestrian collision hotzones",
         icon = icon(name = "exclamation-triangle"),
-        tabName = "tab_hotspots_and_worst_roads"
+        tabName = "tab_pedestrian_collision_hotzones"
       ),
 
       # Key Facts
@@ -277,26 +277,14 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Vehicle Class vs Casualty Role Graph",
-                "Insert vehicle class vs casualty role graph here"
+                title = "Vehicle Class Stats",
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot"),
+                "Insert vehicle class stat graph here"
               ),
               box(
                 width = 6,
                 title = "Junction and Road Stats",
                 plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = "Contributory Factors Stats",
-                "Insert contributory factors stats here"
-              ),
-              box(
-                width = 6,
-                title = "Accidents by Road Length Stats",
-                "Insert accidents by road length stats here"
               )
             )
           ),
@@ -304,7 +292,7 @@ ui <- dashboardPage(
           # Vehicle w/ Peds tab
           tabPanel(
             value = "vehicle_with_pedestrians",
-            title = "Vehicle with Pedestrians",
+            title = "Pedestrian Collision",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
@@ -349,20 +337,13 @@ ui <- dashboardPage(
                 title = "Junction and Road Stats",
                 plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
               )
-            ),
-
-            fluidRow(
-              box(width = 12,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
-              )
             )
           ),
 
           # Vehicle w/ Cycles tab
           tabPanel(
             value = "vehicle_with_bicycles",
-            title = "Vehicle with Cycles",
+            title = "Cyclist Collision",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
@@ -407,22 +388,15 @@ ui <- dashboardPage(
                 title = "Road Stats",
                 plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
               )
-            ),
-
-            fluidRow(
-              box(width = 12,
-                  title = "Contributory Factors Stats",
-                  "Insert contributory factors stats here"
-              )
             )
           )
         )
       ),
 
-      # Menu item: Dashboard ---------------------------------------------------
+      # Menu item: Pedestrian collision hotzones ---------------------------------------
 
       tabItem(
-        tabName = "tab_hotspots_and_worst_roads",
+        tabName = "tab_pedestrian_collision_hotzones",
         fluidRow(
           box(
             width = 4,
