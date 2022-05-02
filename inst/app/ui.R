@@ -72,11 +72,11 @@ ui <- dashboardPage(
         tabName = "tab_dashboard"
       ),
 
-      # Hotspots and Worst Roads
+      # Pedestrian collision hotzones
       menuItem(
-        text = "Hotspots and Worst Roads",
+        text = "Pedestrian collision hotzones",
         icon = icon(name = "exclamation-triangle"),
-        tabName = "tab_hotspots_and_worst_roads"
+        tabName = "tab_pedestrian_collision_hotzones"
       ),
 
       # Key Facts
@@ -292,7 +292,7 @@ ui <- dashboardPage(
           # Vehicle w/ Peds tab
           tabPanel(
             value = "vehicle_with_pedestrians",
-            title = "Vehicle with Pedestrians",
+            title = "Pedestrian Collision",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
@@ -343,7 +343,7 @@ ui <- dashboardPage(
           # Vehicle w/ Cycles tab
           tabPanel(
             value = "vehicle_with_bicycles",
-            title = "Vehicle with Cycles",
+            title = "Cyclist Collision",
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
@@ -393,10 +393,10 @@ ui <- dashboardPage(
         )
       ),
 
-      # Menu item: Dashboard ---------------------------------------------------
+      # Menu item: Pedestrian collision hotzones ---------------------------------------
 
       tabItem(
-        tabName = "tab_hotspots_and_worst_roads",
+        tabName = "tab_pedestrian_collision_hotzones",
         fluidRow(
           box(
             width = 4,
