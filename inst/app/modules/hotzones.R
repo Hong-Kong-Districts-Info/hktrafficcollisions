@@ -6,9 +6,11 @@ COLLISION_PTS_TILE_URL = "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004
 # Interactive heatmap
 output$hotspots_map = renderTmap({
 
-  tm_tiles(COLLISION_PTS_TILE_URL, group = "Labels") +
+  tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries") +
     tm_shape(hotzone_streets) +
     tm_lines(
+      group = "Hotzone streets",
+      title.col = "Hotzone Street Rank",
       col = "Area_RK",
       lwd = 2.5,
       palette = "inferno",
