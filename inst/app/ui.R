@@ -268,9 +268,14 @@ ui <- dashboardPage(
 
             fluidRow(
               box(
-                width = 12,
+                width = 6,
                 title = "Collision Year Line Graph",
                 plotlyOutput(outputId = "ddsb_all_year_plot")
+              ),
+              box(
+                width = 6,
+                title = "Collision Type",
+                plotlyOutput(outputId = "ddsb_all_collision_type_plot")
               )
             ),
 
@@ -278,8 +283,7 @@ ui <- dashboardPage(
               box(
                 width = 6,
                 title = "Vehicle Class Stats",
-                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot"),
-                "Insert vehicle class stat graph here"
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot")
               ),
               box(
                 width = 6,
@@ -367,12 +371,20 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Vehicle Class Stats",
+                title = "Collision Type",
+                plotlyOutput(outputId = "ddsb_cyc_collision_type_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = "Vehicle Class Stats (Only include collisions which vehicle collied with pedal cycle)",
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
               ),
               box(
                 width = 6,
-                title = "Vehicle Movement Stats (Excluding pedal cycles)",
+                title = "Vehicle Movement Stats (Only include collisions which vehicle collied with pedal cycle)",
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
               )
             ),

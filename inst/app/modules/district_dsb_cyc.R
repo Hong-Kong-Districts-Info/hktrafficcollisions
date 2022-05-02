@@ -30,6 +30,18 @@ ddsb_cyc_filtered_hk_vehicles = reactive({
   filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
 })
 
+# Cycle-related vehicle collision, yet exclude cycle in vehicles
+ddsb_cyc_filtered_hk_vehicles_wo_cycle = reactive({
+
+  serial_no_filtered = ddsb_cyc_filtered_hk_accidents() %>%
+    filter(Type_of_Collision_with_cycle == "Vehicle collision with Pedal Cycle") %>%
+    pull(Serial_No_)
+
+  # exclude cycle when counting vehicle class
+  filter(hk_vehicles, Serial_No_ %in% serial_no_filtered & Vehicle_Class != "Bicycle")
+})
+
+
 cyc_grid_count = reactive({
   count_collisions_in_grid(ddsb_cyc_filtered_hk_accidents())
 })
@@ -131,11 +143,38 @@ output$ddsb_cyc_ksi_plot = renderPlotly({
   ggplotly(plot_by_severity)
 })
 
+# Collision type plot
+output$ddsb_cyc_collision_type_plot = renderPlotly({
+
+  # count by pedestrian Action
+  plot_data = ddsb_cyc_filtered_hk_accidents() %>%
+    count(Type_of_Collision_with_cycle, name = "count") %>%
+    # reorder the drawing order from largest category
+    mutate(Collision_Type_order = reorder(Type_of_Collision_with_cycle, count))
+
+  plot_by_collision_type = ggplot(plot_data, aes(x = Collision_Type_order, y = count)) +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none",
+      plot.title.position = 'plot'
+    ) +
+    labs(
+      x = "",
+      title = "Collision type"
+    )
+
+  ggplotly(plot_by_collision_type)
+})
+
 # Vehicle Class plot
 output$ddsb_cyc_vehicle_class_plot = renderPlotly({
 
   # count by Vehicle_Class
-  plot_data = count(ddsb_cyc_filtered_hk_vehicles(), Vehicle_Class, name = "count", na.rm = TRUE) %>%
+  plot_data = count(ddsb_cyc_filtered_hk_vehicles_wo_cycle(), Vehicle_Class, name = "count", na.rm = TRUE) %>%
     # reorder vehicle class in descending order
     mutate(Vehicle_Class_order = reorder(Vehicle_Class, count))
 
@@ -161,11 +200,7 @@ output$ddsb_cyc_vehicle_class_plot = renderPlotly({
 output$ddsb_cyc_vehicle_movement_plot = renderPlotly({
 
   # count by vehicle movement
-  plot_data = ddsb_cyc_filtered_hk_vehicles() %>%
-    # remove vehicles that are pedal cycles
-    filter(Pedal_cycle != "Pedal Cycle") %>%
-    count(Main_vehicle, name = "count") %>%
-    # reorder vehicle class in descending order
+  plot_data = count(ddsb_cyc_filtered_hk_vehicles_wo_cycle(), Main_vehicle, name = "count", na.rm = TRUE) %>%
     mutate(Main_vehicle_order = reorder(Main_vehicle, count))
 
   plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +

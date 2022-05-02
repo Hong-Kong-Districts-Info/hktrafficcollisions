@@ -181,6 +181,9 @@ output$ddsb_all_year_plot = renderPlotly({
     annotate("rect", xmin = year_min, xmax = year_max, ymin = 0, ymax = max(plot_data$count), alpha = .2, fill = "red") +
     geom_line() +
     theme_minimal() +
+    theme(
+      panel.grid.major.x = element_blank()
+    ) +
     scale_y_continuous(limits = c(0, NA)) +
     labs(
       x = "Year",
@@ -196,6 +199,61 @@ output$ddsb_all_year_plot = renderPlotly({
   out_plot
 
 })
+
+# Collision type plot
+output$ddsb_all_collision_type_plot = renderPlotly({
+
+  # count by pedestrian Action
+  plot_data = ddsb_filtered_hk_accidents() %>%
+    count(Type_of_Collision_with_cycle, name = "count") %>%
+    # reorder the drawing order from largest category
+    mutate(Collision_Type_order = reorder(Type_of_Collision_with_cycle, count))
+
+  plot_by_collision_type = ggplot(plot_data, aes(x = Collision_Type_order, y = count)) +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none",
+      plot.title.position = 'plot'
+    ) +
+    labs(
+      x = "",
+      title = "Collision type"
+    )
+
+  ggplotly(plot_by_collision_type)
+})
+
+# Vehicle Class plot
+output$ddsb_all_vehicle_class_plot = renderPlotly({
+
+  # count by Vehicle_Class
+  plot_data = count(ddsb_filtered_hk_vehicles(), Vehicle_Class, name = "count", na.rm = TRUE) %>%
+    # reorder vehicle class in descending order
+    mutate(Vehicle_Class_order = reorder(Vehicle_Class, count))
+
+
+  plot_by_vehicle_class = ggplot(plot_data, aes(x = Vehicle_Class_order, y = count)) +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none"
+    ) +
+    labs(
+      x = "",
+      title = "Number of vehicles involved"
+    )
+
+  ggplotly(plot_by_vehicle_class)
+})
+
+
 
 # Road hierarchy plot
 output$ddsb_all_road_hierarchy_plot = renderPlotly({
