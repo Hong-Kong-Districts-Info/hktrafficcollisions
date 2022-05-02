@@ -26,7 +26,8 @@ server <- function(input, output, session) {
   source(file = "modules/district_dsb_cyc.R", local = TRUE)
 
 
-  # ----- TAB: Hotspots and Worst Roads ----- #
+  # ----- TAB: Pedestrian collision hotzones ----- #
+  source(file = "modules/hotzones.R", local = TRUE)
 
 
   # ----- TAB: Key Facts ----- #
