@@ -268,9 +268,14 @@ ui <- dashboardPage(
 
             fluidRow(
               box(
-                width = 12,
+                width = 6,
                 title = "Collision Year Line Graph",
                 plotlyOutput(outputId = "ddsb_all_year_plot")
+              ),
+              box(
+                width = 6,
+                title = "Collision Type",
+                plotlyOutput(outputId = "ddsb_all_collision_type_plot")
               )
             ),
 

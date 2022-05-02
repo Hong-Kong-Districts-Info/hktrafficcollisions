@@ -200,6 +200,33 @@ output$ddsb_all_year_plot = renderPlotly({
 
 })
 
+# Collision type plot
+output$ddsb_all_collision_type_plot = renderPlotly({
+
+  # count by pedestrian Action
+  plot_data = ddsb_filtered_hk_accidents() %>%
+    count(Type_of_Collision_with_cycle, name = "count") %>%
+    # reorder the drawing order from largest category
+    mutate(Collision_Type_order = reorder(Type_of_Collision_with_cycle, count))
+
+  plot_by_collision_type = ggplot(plot_data, aes(x = Collision_Type_order, y = count)) +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none",
+      plot.title.position = 'plot'
+    ) +
+    labs(
+      x = "",
+      title = "Collision type"
+    )
+
+  ggplotly(plot_by_collision_type)
+})
+
 # Road hierarchy plot
 output$ddsb_all_road_hierarchy_plot = renderPlotly({
 
