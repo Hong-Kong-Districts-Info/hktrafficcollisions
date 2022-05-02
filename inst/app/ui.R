@@ -277,8 +277,9 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Vehicle Class vs Casualty Role Graph",
-                "Insert vehicle class vs casualty role graph here"
+                title = "Vehicle Class Stats",
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot"),
+                "Insert vehicle class stat graph here"
               ),
               box(
                 width = 6,
