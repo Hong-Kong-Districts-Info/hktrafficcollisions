@@ -181,6 +181,9 @@ output$ddsb_all_year_plot = renderPlotly({
     annotate("rect", xmin = year_min, xmax = year_max, ymin = 0, ymax = max(plot_data$count), alpha = .2, fill = "red") +
     geom_line() +
     theme_minimal() +
+    theme(
+      panel.grid.major.x = element_blank()
+    ) +
     scale_y_continuous(limits = c(0, NA)) +
     labs(
       x = "Year",
