@@ -283,8 +283,7 @@ ui <- dashboardPage(
               box(
                 width = 6,
                 title = "Vehicle Class Stats",
-                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot"),
-                "Insert vehicle class stat graph here"
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot")
               ),
               box(
                 width = 6,
