@@ -372,6 +372,14 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
+                title = "Collision Type",
+                plotlyOutput(outputId = "ddsb_cyc_collision_type_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
                 title = "Vehicle Class Stats (Only include collisions which vehicle collied with pedal cycle)",
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
               ),
