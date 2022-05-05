@@ -40,6 +40,21 @@ output$hotspots_map = renderTmap({
 
 })
 
+hotzone_out_df = hotzone_streets %>%
+  st_centroid() %>%
+  st_transform(crs = st_crs(4326)) %>%
+  mutate(lng = sf::st_coordinates(.)[,1], lat = sf::st_coordinates(.)[,2]) %>%
+  # create the required data zooming into the feature with gomap.js
+  mutate(zoom_in_map_link =
+           paste('<a class="go-map" href=""',
+                 'data-lat="', lat, '" data-lng="', lng,
+                 '"><i class="fas fa-search-plus"></i></a>',
+                 sep="")
+         ) %>%
+  st_set_geometry(NULL) %>%
+  dplyr::select(-c(lat, lng)) %>%
+  dplyr::relocate(Area_RK, zoom_in_map_link)
+
 output$hotspots_table = renderDataTable({
   datatable(
     st_drop_geometry(hotzone_streets),
