@@ -20,17 +20,22 @@ output$hotspots_map = renderTmap({
     tm_shape(hotzone_streets) +
     tm_lines(
       group = "Hotzone streets",
-      title.col = "Hotzone Street Rank",
+      title.col = "Hotzone Rank",
+      id = "Name",
       col = "Area_RK",
       lwd = 2.5,
       palette = "inferno",
-      # n = max(hotzone_streets[["Area_RK"]]),
+      # Use only first half of inferno palette as the light color part does not show well on grey basemap
+      contrast = c(0, .5),
+      n = max(hotzone_streets[["Area_RK"]]),
       style = "cont",
-      alpha = 0.8,
-      # disable popups
-      popup.vars = NA,
-      # remove legend
-      legend.show = FALSE
+      alpha = 1,
+      popup.vars = c(
+        "Rank: " = "Area_RK",
+        "Collision Density (collisions/km): " = "Colli_Density",
+        "Collisions between 2015 to 2019: " = "N_Colli",
+        "Segement Length (m): " = "Road_Length"
+        )
     )
 
 })
