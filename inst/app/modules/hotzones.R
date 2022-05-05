@@ -40,6 +40,21 @@ output$hotspots_map = renderTmap({
 
 })
 
+observe({
+  # escape initialise state
+  if (is.null(input$goto)) return()
+
+  isolate({
+    map = leafletProxy("hotspots_map")
+
+    lat = input$goto$lat
+    lng = input$goto$lng
+
+    setView(map, lng, lat, zoom = 17)
+  })
+})
+
+
 hotzone_out_df = hotzone_streets %>%
   st_centroid() %>%
   st_transform(crs = st_crs(4326)) %>%
@@ -56,10 +71,17 @@ hotzone_out_df = hotzone_streets %>%
   dplyr::relocate(Area_RK, zoom_in_map_link)
 
 output$hotspots_table = renderDataTable({
+
+  # `rownames` needs to be consistent with `DT::datatable` option
+  action = DT::dataTableAjax(session, hotzone_out_df, rownames = FALSE)
+
   datatable(
-    st_drop_geometry(hotzone_streets),
+    hotzone_out_df,
     colnames = TABLE_COLUMN_NAMES,
-    rownames = FALSE
+    rownames = FALSE,
+    options = list(ajax = list(url = action)),
+    # Render HTML tags inside table (e.g. fontawesome icons in <i> tags)
+    escape = FALSE
     ) %>%
     # Add in-cell bar chart for collision density
     formatStyle(

@@ -108,7 +108,8 @@ ui <- dashboardPage(
 
     # add custom css style for the data filter panel
     tags$head(
-      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+      includeScript("./modules/gomap.js")
     ),
 
     tabItems(
