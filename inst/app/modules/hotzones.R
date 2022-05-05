@@ -45,5 +45,15 @@ output$hotspots_table = renderDataTable({
     st_drop_geometry(hotzone_streets),
     colnames = TABLE_COLUMN_NAMES,
     rownames = FALSE
+    ) %>%
+    # Add in-cell bar chart for collision density
+    formatStyle(
+      "Collision Density (No. of collisions per km of road)",
+      # start the bar from left
+      background = styleColorBar(c(0, max(hotzone_streets[["Colli_Density"]])), 'steelblue', angle = -90),
+      # fix vertical length to avoid differences in the height of the bar when row height varies
+      backgroundSize = '100% 2rem',
+      backgroundRepeat = 'no-repeat',
+      backgroundPosition = 'right'
     )
 })
