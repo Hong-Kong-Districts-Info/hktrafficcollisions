@@ -9,7 +9,8 @@ TABLE_COLUMN_NAMES = c(
   "Rank" = "Area_RK",
   "Section Length (m)" = "Road_Length",
   "No. of collisions between 2015 - 2019" = "N_Colli",
-  "Collision Density (No. of collisions per km of road)" = "Colli_Density"
+  "Collision Density (No. of collisions per km of road)" = "Colli_Density",
+  "Zoom to the Zone" = "zoom_in_map_link"
 )
 
 
