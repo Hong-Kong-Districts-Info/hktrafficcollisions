@@ -17,6 +17,22 @@
       "Hash": "030aaec5bc6553f35347cbb1e70b1a17",
       "Requirements": []
     },
+    "DT": {
+      "Package": "DT",
+      "Version": "0.22",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fc53164de9ee32692eef6fdd14115381",
+      "Requirements": [
+        "crosstalk",
+        "htmltools",
+        "htmlwidgets",
+        "jquerylib",
+        "jsonlite",
+        "magrittr",
+        "promises"
+      ]
+    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-20",
