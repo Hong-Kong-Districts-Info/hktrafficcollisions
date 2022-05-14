@@ -9,7 +9,8 @@ TABLE_COLUMN_NAMES = c(
   "Rank" = "Area_RK",
   "Section Length (m)" = "Road_Length",
   "No. of collisions between 2015 - 2019" = "N_Colli",
-  "Collision Density (No. of collisions per km of road)" = "Colli_Density"
+  "Collision Density (No. of collisions per km of road)" = "Colli_Density",
+  "Zoom to the Zone" = "zoom_in_map_link"
 )
 
 
@@ -40,11 +41,48 @@ output$hotspots_map = renderTmap({
 
 })
 
+observe({
+  # escape initialise state
+  if (is.null(input$goto)) return()
+
+  isolate({
+    map = leafletProxy("hotspots_map")
+
+    lat = input$goto$lat
+    lng = input$goto$lng
+
+    setView(map, lng, lat, zoom = 17)
+  })
+})
+
+
+hotzone_out_df = hotzone_streets %>%
+  st_centroid() %>%
+  st_transform(crs = st_crs(4326)) %>%
+  mutate(lng = sf::st_coordinates(.)[,1], lat = sf::st_coordinates(.)[,2]) %>%
+  # create the required data zooming into the feature with gomap.js
+  mutate(zoom_in_map_link =
+           paste('<a class="go-map" href=""',
+                 'data-lat="', lat, '" data-lng="', lng,
+                 '"><i class="fas fa-search-plus"></i></a>',
+                 sep="")
+         ) %>%
+  st_set_geometry(NULL) %>%
+  dplyr::select(-c(lat, lng)) %>%
+  dplyr::relocate(Area_RK, zoom_in_map_link)
+
 output$hotspots_table = renderDataTable({
+
+  # `rownames` needs to be consistent with `DT::datatable` option
+  action = DT::dataTableAjax(session, hotzone_out_df, rownames = FALSE)
+
   datatable(
-    st_drop_geometry(hotzone_streets),
+    hotzone_out_df,
     colnames = TABLE_COLUMN_NAMES,
-    rownames = FALSE
+    rownames = FALSE,
+    options = list(ajax = list(url = action)),
+    # Render HTML tags inside table (e.g. fontawesome icons in <i> tags)
+    escape = FALSE
     ) %>%
     # Add in-cell bar chart for collision density
     formatStyle(
