@@ -11,6 +11,28 @@ floor_date_to_month <- function(x) {
   as.Date(x)
 }
 
+# Generate a spatial grid from the bounding box of points (i.e. collisions),
+# then count the number of points within each grid
+#
+# returns a sf class spatial grid with a count column named "n_colli"
+count_collisions_in_grid = function(point_data, grid_size = c(150, 150)) {
+  area_grid <- st_make_grid(point_data, grid_size, what = "polygons", square = TRUE)
+
+  # To sf and add grid ID
+  area_grid_count <- st_sf(area_grid) %>%
+    mutate(grid_id = 1:length(lengths(area_grid)))
+
+  # count number of points in each grid
+  # https://gis.stackexchange.com/questions/323698/counting-points-in-polygons-with-sf-package-of-r
+  area_grid_count$n_colli = lengths(st_intersects(area_grid_count, point_data))
+
+  # remove grid without accidents
+  area_grid_count = filter(area_grid_count, n_colli > 0)
+
+  # return the grid in sf format
+  area_grid_count
+}
+
 # Custom checkbox group with collapsible tick options
 # https://stackoverflow.com/questions/56738392/collapsible-checkboxgroupinput-in-shiny
 collapsibleAwesomeCheckboxGroupInput <-
