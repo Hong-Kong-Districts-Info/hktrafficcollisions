@@ -11,7 +11,7 @@
 server <- function(input, output, session) {
 
   # ----- DATA MANIPULATION ----- #
-  source(file = "modules/data_manipulation.R", local = TRUE)
+  source(file = "modules/manipulate_data.R", local = TRUE)
 
   # ----- REACTIVES ----- #
 
