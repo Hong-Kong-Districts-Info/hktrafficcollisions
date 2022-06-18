@@ -13,7 +13,7 @@ ui <- dashboardPage(
 
   # Header
   header = dashboardHeader(
-    title = "Hong Kong Traffic Injury Collision Database",
+    title = i18n$t("Hong Kong Traffic Injury Collision Database"),
     titleWidth = 400,
 
     tags$li(a(
@@ -183,7 +183,7 @@ ui <- dashboardPage(
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-                selected = unique(hk_accidents$Type_of_Collision_with_cycle)
+                selected = i18n$t(unique(hk_accidents$Type_of_Collision_with_cycle))
               ),
 
               collapsibleAwesomeCheckboxGroupInput(
@@ -465,7 +465,15 @@ ui <- dashboardPage(
         tabName = "tab_project_info",
         box(
           width = 12,
-          title = "About Us",
+          title = i18n$t("About Us"),
+          shiny.i18n::usei18n(i18n),
+          div(style = "float: right;",
+              selectInput('selected_language',
+                          i18n$t("Change language"),
+                          choices = i18n$get_languages(),
+                          selected = i18n$get_key_translation())
+          ),
+          i18n$t("About Us")
         ),
         box(
           width = 12,
