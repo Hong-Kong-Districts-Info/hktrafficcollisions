@@ -20,6 +20,7 @@ library(shinyWidgets)
 library(shinyhelper)
 library(ggplot2)
 library(plotly, warn.conflicts = FALSE)
+library(shiny.i18n)
 
 ## interactive map
 library(sf)
