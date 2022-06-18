@@ -11,6 +11,18 @@ floor_date_to_month <- function(x) {
   as.Date(x)
 }
 
+get_last_modified_date = function(directory) {
+  paths = dir(directory, full.names=TRUE, recursive = TRUE)
+
+  # column of last status change time
+  last_modified_time = max(file.info(paths)[["ctime"]])
+
+  # return in YYYY.MM.DD
+  format(last_modified_time, "%Y.%m.%d")
+
+}
+
+
 # Generate a spatial grid from the bounding box of points (i.e. collisions),
 # then count the number of points within each grid
 #
