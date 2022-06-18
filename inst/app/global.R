@@ -19,6 +19,7 @@ library(shinydashboard)
 library(shinyWidgets)
 library(ggplot2)
 library(plotly)
+library(shiny.i18n)
 
 ## interactive map
 library(sf)
