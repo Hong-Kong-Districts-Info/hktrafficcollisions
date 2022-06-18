@@ -32,6 +32,14 @@ library(tmap)
 ## Interactive tables
 library(DT)
 
+## Translation
+
+# file with translations
+i18n = Translator$new(translation_csvs_path = "./translation")
+
+# change this to en
+i18n$set_translation_language("en")
+
 
 # Data import -------------------------------------------------------------
 
