@@ -486,6 +486,10 @@ ui <- dashboardPage(
         box(
           width = 12,
           title = "Caveats",
+          hr(),
+          paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
+          br(),
+          paste("hkdatasets ver.", utils::packageVersion("hkdatasets")),
         )
       ) # tabItem
     ) # tabItems
