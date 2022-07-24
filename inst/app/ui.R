@@ -39,8 +39,8 @@ ui <- dashboardPage(
     ),
     tags$li(a(
       href = "https://github.com/Hong-Kong-Districts-Info",
-      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "46px"),
-      style = "padding:2px;"
+      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "30px"),
+      style = "padding:10px;"
     ),
     class = "dropdown"
     ),
