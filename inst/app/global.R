@@ -41,6 +41,11 @@ hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 
 hotzone_streets = read_sf("./data/hotzone_streets.gpkg")
 
+## Manipulated data, generated from `modules/manipulate_data.R`
+
+hk_accidents_valid_sf = read_sf("./data/data-manipulated/hk_accidents_valid_sf.gpkg")
+hotzone_out_df = fst::read_fst("./data/data-manipulated/hotzone_out_df.fst")
+
 # interactive thematic map mode option ------------------------------------
 
 tmap_mode("view")
