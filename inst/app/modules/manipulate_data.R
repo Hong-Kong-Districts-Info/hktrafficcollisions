@@ -54,7 +54,7 @@ hotzone_out_df = hotzone_streets %>%
                  '"><i class="fas fa-search-plus"></i></a>',
                  sep="")
   ) %>%
-  st_set_geometry(NULL) %>%
+  st_drop_geometry() %>%
   dplyr::select(-c(lat, lng)) %>%
   dplyr::relocate(Area_RK, zoom_in_map_link)
 
