@@ -1,6 +1,8 @@
-# Mutated data for use in various parts of the dashboard
-# TODO: prepare following mutated dataset before running shiny to reduce loading time
+# NOT USED IN DEPLOYMENT
+# Steps below are performed in advance, the output data are stored in `data/data-manipulated/`
+# Retained temporarily for reference (for future updates to the data)
 
+# Mutated data for use in various parts of the dashboard
 
 ## ------- Core manipulated datasets (vehicles & collision) with joint attributes ---------
 
