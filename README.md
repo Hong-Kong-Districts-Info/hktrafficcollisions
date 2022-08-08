@@ -1,4 +1,6 @@
-# Dashboard: Hong Kong Traffic Collisions <img src="https://raw.githubusercontent.com/avisionh/dashboard-hkdistrictcouncillors/master/inst/app/www/logo.png" align="right" height="140" />
+# Hong Kong Traffic Injury Collision Database
+
+<img src="https://user-images.githubusercontent.com/29334677/180681488-53b69199-d57b-4ff7-af1d-d090e24b132c.png" align="right" height="140"/><img src="https://user-images.githubusercontent.com/29334677/180681494-c693e520-9eab-4f95-a4ad-0b5837d8b246.png" align="right" height="140"/>
 
 <!-- badges: start -->
 [![Travis build Status](https://travis-ci.org/Hong-Kong-Districts-Info/hktrafficcollisions.svg?branch=main)](https://travis-ci.org/Hong-Kong-Districts-Info/hktrafficcollisions) [![R build status](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/workflows/R-CMD-check/badge.svg)](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/actions) [![Codecov test coverage](https://codecov.io/gh/Hong-Kong-Districts-Info/hktrafficcollisions/branch/master/graph/badge.svg)](https://codecov.io/gh/Hong-Kong-Districts-Info/hktrafficcollisions?branch=master) [![CodeFactor](https://www.codefactor.io/repository/github/hong-kong-districts-info/hktrafficcollisions/badge)](https://www.codefactor.io/repository/github/hong-kong-districts-info/hktrafficcollisions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
