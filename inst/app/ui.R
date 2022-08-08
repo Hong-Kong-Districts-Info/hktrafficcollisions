@@ -8,7 +8,7 @@
 ui <- dashboardPage(
 
   # Title and Skin
-  title = "Traffic Collisions",
+  title = "Hong Kong Traffic Injury Collision Database",
   skin = "yellow",
 
   # Header
