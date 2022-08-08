@@ -3,10 +3,19 @@
 <img src="https://user-images.githubusercontent.com/29334677/180681488-53b69199-d57b-4ff7-af1d-d090e24b132c.png" align="right" height="140"/><img src="https://user-images.githubusercontent.com/29334677/180681494-c693e520-9eab-4f95-a4ad-0b5837d8b246.png" align="right" height="140"/>
 
 <!-- badges: start -->
+
 [![Travis build Status](https://travis-ci.org/Hong-Kong-Districts-Info/hktrafficcollisions.svg?branch=main)](https://travis-ci.org/Hong-Kong-Districts-Info/hktrafficcollisions) [![R build status](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/workflows/R-CMD-check/badge.svg)](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/actions) [![Codecov test coverage](https://codecov.io/gh/Hong-Kong-Districts-Info/hktrafficcollisions/branch/master/graph/badge.svg)](https://codecov.io/gh/Hong-Kong-Districts-Info/hktrafficcollisions?branch=master) [![CodeFactor](https://www.codefactor.io/repository/github/hong-kong-districts-info/hktrafficcollisions/badge)](https://www.codefactor.io/repository/github/hong-kong-districts-info/hktrafficcollisions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 <!-- badges: end -->
 
-> *To provide a convenient site for information on traffic collisions that result in injury in Hong Kong.*
+[![](man/figures/website-preview.png)](https://hkdistricts-info.shinyapps.io/trafficcollisions/)
+
+[Hong Kong Traffic Injury Collision Database](https://hkdistricts-info.shinyapps.io/trafficcollisions/) is a project co-developed by Street Reset and Hong Kong District Info, which aims to visualise Hong Kong traffic collision data with interactive mapping. Our objective is three-fold:
+
+-   To alert the public on the current severity of traffic collisions in Hong Kong, with particular dire implications for pedestrians and cyclists,
+-   To draw attention to how street design has contributed to the current situation, and what systemic remedies should be made to enhance the safety of vulnerable road users, and
+-   To provide journalists, district councillors, and government departments with insights and map-based data evidence to understand this issue.
+
 ------------------------------------------------------------------------
 
 ## Development
@@ -85,3 +94,4 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 ## Project Team website
 
 To find out more about our project team and other projects by us, please visit our [website](https://hong-kong-districts-info.github.io/).
+
