@@ -7,16 +7,19 @@
 <!-- badges: end -->
 
 > *To provide a convenient site for information on traffic collisions that result in injury in Hong Kong.*
+------------------------------------------------------------------------
+
+## Development
 
 The Shiny app is deployed onto shinyapps.io in the links below:
 
-- Production:
-- Pre-production: https://hkdistricts-info.shinyapps.io/trafficcollisions-preprod/
-- Development: https://hkdistricts-info.shinyapps.io/trafficcollisions-dev/
+-   Production: <https://hkdistricts-info.shinyapps.io/trafficcollisions/>
+-   Development: <https://hkdistricts-info.shinyapps.io/trafficcollisions-dev/>
 
-***
+------------------------------------------------------------------------
 
 ## Project organisation
+
     ├── LICENSE                                 <- Sharing agreement
     │
     ├── README.md                               <- Introduces project
@@ -65,15 +68,20 @@ The Shiny app is deployed onto shinyapps.io in the links below:
 
 ## Installation
 
+TODO
+
 ## Data source
+
+TODO
 
 ## Getting help
 
+TODO
+
 ## Code of Conduct
 
-Please note that the hkdistrictcouncillors project is released with a [Contributor Code of Conduct](https://github.com/avisionh/hktrafficcollisions/blob/document/community-standards/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/blob/main/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
 ## Project Team website
-To find out more about our project team and other projects by us, please visit our [website](https://hong-kong-districts-info.github.io/).
 
-You can find out about our current backlog of work on our public Trello [Doing board](https://trello.com/b/n5l7DMS5/doing).
+To find out more about our project team and other projects by us, please visit our [website](https://hong-kong-districts-info.github.io/).
