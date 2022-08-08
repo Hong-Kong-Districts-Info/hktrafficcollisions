@@ -32,6 +32,17 @@ library(tmap)
 library(DT)
 
 
+# Metadata -------------------------------------------------------------
+
+# opengraph properties
+OPENGRAPH_PROPS = list(
+  title = "Hong Kong Traffic Injury Collision Database",
+  url = "https://hkdistricts-info.shinyapps.io/trafficcollisions/",
+  image = "https://user-images.githubusercontent.com/29334677/183444210-1b983c91-476c-4534-8425-10999051f132.jpg",
+  description = "Visualise Hong Kong traffic collision data with interactive mapping"
+)
+
+
 # Data import -------------------------------------------------------------
 
 ## Take data from {hkdatasets}
@@ -67,3 +78,5 @@ fill_palette = leaflet::colorFactor(palette = c("#FF4039", "#FFB43F", "#FFE91D")
 # Custom misc functions ---------------------------------------------------
 
 source(file = "modules/utils.R", local = TRUE)
+
+
