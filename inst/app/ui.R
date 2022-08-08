@@ -106,6 +106,27 @@ ui <- dashboardPage(
   # Body
   body = dashboardBody(
 
+    # OpenGraph
+    # `OPENGRAPH_PROPS` constant is defined in global.R
+
+    tags$head(
+
+      # Facebook OpenGraph tags
+      tags$meta(property = "og:title", content = OPENGRAPH_PROPS[["title"]]),
+      tags$meta(property = "og:type", content = "website"),
+      tags$meta(property = "og:url", content = OPENGRAPH_PROPS[["url"]]),
+      tags$meta(property = "og:image", content = OPENGRAPH_PROPS[["image"]]),
+      tags$meta(property = "og:description", content = OPENGRAPH_PROPS[["description"]]),
+
+      # Twitter summary cards
+      tags$meta(name = "twitter:card", content = "summary"),
+      tags$meta(name = "twitter:title", content = OPENGRAPH_PROPS[["title"]]),
+      tags$meta(name = "twitter:description", content = OPENGRAPH_PROPS[["description"]]),
+      tags$meta(name = "twitter:image", content = OPENGRAPH_PROPS[["image"]]),
+
+    ),
+
+
     # add custom css style for the data filter panel
     tags$head(
       tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
