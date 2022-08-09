@@ -452,20 +452,10 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_key_facts",
-        fluidRow(
-          box(
-            width = 12,
-            title = "Key Facts about Hong Kong Traffic Injury Collisions"
-          ),
-          box(
-            width = 12,
-            title = "Concept Explainer",
-            HTML("- Definition of each casualty severity
-                 <br>
-                 - Why emphasises KSI Collision?
-                 <br>
-                 - ...")
-          )
+        box(
+          width = 12,
+          title = "Key Facts about Hong Kong Traffic Injury Collisions",
+          "TENTATIVE: infographics, summary and link to the full report"
         )
       ),
 
@@ -476,7 +466,7 @@ ui <- dashboardPage(
           box(
             width = 12,
             title = "Data Source",
-            "Download Url"
+            "If you are interested in getting the traffic collision data, please contact us."
           )
       ),
 
