@@ -484,6 +484,15 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
+            title = "Glossary of Terms",
+            p("The following terms are used in this website."),
+            dataTableOutput(outputId = "terminology_table")
+          )
+        ),
+
+        fluidRow(
+          box(
+            width = 12,
             hr(),
             paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
             br(),

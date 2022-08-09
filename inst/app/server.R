@@ -41,5 +41,6 @@ server <- function(input, output, session) {
 
 
   # ----- TAB: Project Info ----- #
+  source(file = "modules/project_info.R", local = TRUE)
 
 }
