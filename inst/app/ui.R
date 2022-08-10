@@ -466,7 +466,11 @@ ui <- dashboardPage(
           box(
             width = 12,
             title = "Data Source",
-            "If you are interested in getting the traffic collision data, please contact us."
+            icon(name = "wrench"),
+            "We are currently finding ways to host the data for download.",
+            icon(name = "hammer"),
+            hr(),
+            p("If you are interested in getting the traffic collision data, please contact us."),
           )
       ),
 
