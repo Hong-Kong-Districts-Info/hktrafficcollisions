@@ -452,20 +452,10 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_key_facts",
-        fluidRow(
-          box(
-            width = 12,
-            title = "Key Facts about Hong Kong Traffic Injury Collisions"
-          ),
-          box(
-            width = 12,
-            title = "Concept Explainer",
-            HTML("- Definition of each casualty severity
-                 <br>
-                 - Why emphasises KSI Collision?
-                 <br>
-                 - ...")
-          )
+        box(
+          width = 12,
+          title = "Key Facts about Hong Kong Traffic Injury Collisions",
+          "TENTATIVE: infographics, summary and link to the full report"
         )
       ),
 
@@ -476,7 +466,11 @@ ui <- dashboardPage(
           box(
             width = 12,
             title = "Data Source",
-            "Download Url"
+            icon(name = "wrench"),
+            "We are currently finding ways to host the data for download.",
+            icon(name = "hammer"),
+            hr(),
+            p("If you are interested in getting the traffic collision data, please contact us."),
           )
       ),
 
@@ -484,33 +478,21 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_project_info",
-        box(
-          width = 12,
-          title = "About Us",
+        fluidRow(
+          box(
+            width = 12,
+            includeMarkdown("desc/information.md")
+          )
         ),
-        box(
-          width = 12,
-          title = "What this is about",
-        ),
-        box(
-          width = 12,
-          title = "How to use this database?",
-        ),
-        box(
-          width = 12,
-          title = "Reference",
-        ),
-        box(
-          width = 12,
-          title = "Useful Urls",
-        ),
-        box(
-          width = 12,
-          title = "Caveats",
-          hr(),
-          paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
-          br(),
-          paste("hkdatasets ver.", utils::packageVersion("hkdatasets")),
+
+        fluidRow(
+          box(
+            width = 12,
+            hr(),
+            paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
+            br(),
+            paste("hkdatasets ver.", utils::packageVersion("hkdatasets")),
+          )
         )
       ) # tabItem
     ) # tabItems
