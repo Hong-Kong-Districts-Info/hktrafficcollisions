@@ -484,7 +484,9 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
-            title = "Glossary of Terms",
+            # Add icon inside heading
+            # https://community.rstudio.com/t/how-to-add-an-icon-in-shinydashboard-box-title/20650
+            title = span(icon("th-list"), "Glossary of Terms"),
             p("The following terms are used in this website."),
             dataTableOutput(outputId = "terminology_table")
           )
