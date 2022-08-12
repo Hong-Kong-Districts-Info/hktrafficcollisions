@@ -1,7 +1,10 @@
 
 # Add tile from mapbox style
 # https://docs.mapbox.com/studio-manual/guides/publish-your-style/
-COLLISION_PTS_TILE_URL = "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004415qrmcs9geal/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2h3b25nMTIiLCJhIjoiY2ptMGJqMHh2MGFzZjNsbXl2MjVuMGl1biJ9.N5P5k0byVnsWeBg6iLObww"
+COLLISION_PTS_TILE_URL = paste0(
+  "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004415qrmcs9geal/tiles/256/{z}/{x}/{y}?access_token=",
+  Sys.getenv("MAPBOX_PUBLIC_TOKEN")
+  )
 
 TABLE_COLUMN_NAMES = c(
   "Hot Zone Name" = "Name",
