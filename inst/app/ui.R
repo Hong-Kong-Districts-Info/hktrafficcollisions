@@ -190,11 +190,16 @@ ui <- dashboardPage(
               checkboxGroupButtons(
                 inputId = "severity_filter", label = "Collision severity",
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
-                choices = c(
-                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>` = "Fatal",
-                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>` = "Serious",
-                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>` = "Slight"
-                ),
+                choiceNames = c(
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>',
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>'
+                  ),
+                choiceValues = c(
+                  "Fatal",
+                  "Serious",
+                  "Slight"
+                  ),
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
                 justified = TRUE
