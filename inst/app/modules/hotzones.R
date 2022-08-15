@@ -18,7 +18,7 @@ TABLE_COLUMN_NAMES = c(
 
 
 # Interactive heatmap
-output$hotspots_map = renderTmap({
+output$hotzones_map = renderTmap({
 
   tm_shape(hotzone_streets) +
     tm_lines(
@@ -49,7 +49,7 @@ observe({
   if (is.null(input$goto)) return()
 
   isolate({
-    map = leafletProxy("hotspots_map")
+    map = leafletProxy("hotzones_map")
 
     lat = input$goto$lat
     lng = input$goto$lng
@@ -58,7 +58,7 @@ observe({
   })
 })
 
-output$hotspots_table = renderDataTable({
+output$hotzones_table = renderDataTable({
 
   # `rownames` needs to be consistent with `DT::datatable` option
   action = DT::dataTableAjax(session, hotzone_out_df, rownames = FALSE)
