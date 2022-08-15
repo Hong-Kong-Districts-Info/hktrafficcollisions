@@ -191,9 +191,9 @@ ui <- dashboardPage(
                 inputId = "severity_filter", label = "Collision severity",
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
                 choices = c(
-                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="dot" style="height: 14px;width: 14px;background-color: #FF4039;border-radius: 50%;border: 1.5px solid #0d0d0d;"></span><span style="color:black;padding-left:10px;"> Fatal</span></div>` = "Fatal",
-                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="dot" style="height: 14px;width: 14px;background-color: #FFB43F;border-radius: 50%;border: 1.5px solid #0d0d0d;"></span><span style="color:black;padding-left:10px;"> Serious</span></div>` = "Serious",
-                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="dot" style="height: 14px;width: 14px;background-color: #FFE91D;border-radius: 50%;border: 1.5px solid #0d0d0d;"></span><span style="color:black;padding-left:10px;"> Slight</span></div>` = "Slight"
+                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>` = "Fatal",
+                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>` = "Serious",
+                  `<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>` = "Slight"
                 ),
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",

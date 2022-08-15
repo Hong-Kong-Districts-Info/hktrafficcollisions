@@ -96,7 +96,24 @@
 	background-color: rgba(34, 34, 34, 0.6) !important;
 }
 
-/* Widgets */
+
+
+
+/*
+  Widgets
+*/
+
+.filter__circle-marker {
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #0d0d0d;
+}
+
+.filter__text {
+  color:black;
+  padding-left:10px;
+}
 
 /* Hide / Show all button in collapsible group checkbox */
 .bttn-minimal.bttn-primary {
