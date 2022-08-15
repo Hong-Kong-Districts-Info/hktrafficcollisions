@@ -190,13 +190,19 @@ ui <- dashboardPage(
               checkboxGroupButtons(
                 inputId = "severity_filter", label = "Collision severity",
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
-                choices = c(`Fatal <i style="color:#FF4039;" class="fas fa-skull-crossbones"></i>` = "Fatal",
-                            `Serious <i style="color:#FFB43F;"class="fas fa-procedures"></i>` = "Serious",
-                            `Slight <i style="color:#FFE91D;" class="fas fa-user-injured"></i>` = "Slight"),
+                choiceNames = c(
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>',
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>'
+                  ),
+                choiceValues = c(
+                  "Fatal",
+                  "Serious",
+                  "Slight"
+                  ),
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
-                justified = TRUE,
-                checkIcon = list(yes = icon("ok", lib = "glyphicon"))
+                justified = TRUE
               ),
 
               collapsibleAwesomeCheckboxGroupInput(
