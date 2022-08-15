@@ -5,7 +5,7 @@ output$main_map <- renderLeaflet({
     addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
 
   # Subset basemap providers to be used for the map
-  SELECTED_BASEMAPS <- leaflet::providers[c("Stamen.TonerLite", "CartoDB.Positron", "OpenStreetMap")]
+  SELECTED_BASEMAPS <- leaflet::providers[c("CartoDB.Positron", "OpenStreetMap", "Stamen.TonerLite")]
 
   # Add the basemap tiles in background
   # http://rstudio.github.io/leaflet/morefeatures.html

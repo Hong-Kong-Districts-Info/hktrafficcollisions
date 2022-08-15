@@ -62,7 +62,7 @@ hotzone_out_df = fst::read_fst("./data/data-manipulated/hotzone_out_df.fst")
 # interactive thematic map mode option ------------------------------------
 
 tmap_mode("view")
-tmap_options(basemaps = c("Stamen.TonerLite", "CartoDB.Positron", "OpenStreetMap"))
+tmap_options(basemaps = c("CartoDB.Positron", "OpenStreetMap", "Stamen.TonerLite"))
 
 # Constants ---------------------------------------------------------------
 
