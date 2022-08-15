@@ -20,8 +20,7 @@ TABLE_COLUMN_NAMES = c(
 # Interactive heatmap
 output$hotspots_map = renderTmap({
 
-  tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries") +
-    tm_shape(hotzone_streets) +
+  tm_shape(hotzone_streets) +
     tm_lines(
       group = "Hotzone streets",
       title.col = "Hotzone Rank",
@@ -40,7 +39,8 @@ output$hotspots_map = renderTmap({
         "Collisions between 2015 to 2019: " = "N_Colli",
         "Segement Length (m): " = "Road_Length"
         )
-    )
+    ) +
+    tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries")
 
 })
 
