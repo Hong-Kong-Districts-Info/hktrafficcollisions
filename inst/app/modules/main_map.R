@@ -4,19 +4,19 @@ output$main_map <- renderLeaflet({
     # Add geocoder map widget
     addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
 
-  # Subset basemap providers to be used for the map
-  SELECTED_BASEMAPS <- leaflet::providers[c("CartoDB.Positron", "OpenStreetMap", "Stamen.TonerLite")]
+  # addLayersControl and addProviderTiles needs to refer to the leaflet::providers list instead of vector
+  SELECTED_BASEMAPS_LIST <- leaflet::providers[SELECTED_BASEMAPS]
 
   # Add the basemap tiles in background
   # http://rstudio.github.io/leaflet/morefeatures.html
-  for (provider in SELECTED_BASEMAPS) {
+  for (provider in SELECTED_BASEMAPS_LIST) {
     overview_map <- addProviderTiles(overview_map, provider, group = provider)
   }
 
   # Add change basemap widget
   addLayersControl(
     overview_map,
-    baseGroups = names(SELECTED_BASEMAPS),
+    baseGroups = names(SELECTED_BASEMAPS_LIST),
     options = layersControlOptions(collapsed = TRUE),
     position = "topleft"
     )
