@@ -197,8 +197,7 @@ ui <- dashboardPage(
                 ),
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
-                justified = TRUE,
-                checkIcon = list(yes = icon("ok", lib = "glyphicon"))
+                justified = TRUE
               ),
 
               collapsibleAwesomeCheckboxGroupInput(
