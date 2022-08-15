@@ -26,7 +26,7 @@ output$hotspots_map = renderTmap({
       title.col = "Hotzone Rank",
       id = "Name",
       col = "Area_RK",
-      lwd = 2.5,
+      lwd = 7.5,
       palette = "inferno",
       # Use only first half of inferno palette as the light color part does not show well on grey basemap
       contrast = c(0, .5),
