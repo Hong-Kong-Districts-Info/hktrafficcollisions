@@ -161,13 +161,14 @@ ui <- dashboardPage(
                 inputId = "district_filter",
                 label = "District(s):",
                 choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME),
-                selected = "KC",
+                multiple = TRUE,
+                selected = c("KC", "YTM", "SSP"),
                 options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
               ),
 
               airDatepickerInput("start_month",
                                  label = "From",
-                                 value = "2016-05-01",
+                                 value = "2016-01-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
@@ -178,7 +179,7 @@ ui <- dashboardPage(
 
               airDatepickerInput("end_month",
                                  label = "To",
-                                 value = "2016-06-01",
+                                 value = "2016-12-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
@@ -210,7 +211,7 @@ ui <- dashboardPage(
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-                selected = unique(hk_accidents$Type_of_Collision_with_cycle)
+                selected = c("Vehicle collision with Pedestrian", "Pedal Cycle collision with Pedestrian")
               ),
 
               collapsibleAwesomeCheckboxGroupInput(
