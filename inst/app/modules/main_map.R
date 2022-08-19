@@ -1,6 +1,7 @@
 output$main_map <- renderLeaflet({
   overview_map <- leaflet(options = leafletOptions(minZoom = 11, preferCanvas = TRUE)) %>%
-    setView(lng = 114.2, lat = 22.3, zoom = 12) %>%
+    # Set default location to Mong Kok
+    setView(lng = 114.17, lat = 22.31, zoom = 16) %>%
     # Add geocoder map widget
     addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
 
