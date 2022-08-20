@@ -179,7 +179,11 @@ ui <- dashboardPage(
                                  minView = "months",
                                  dateFormat = "MM yyyy",
                                  addon = "none"
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "date_filter"
+                ),
 
               airDatepickerInput("end_month",
                                  label = "To",
