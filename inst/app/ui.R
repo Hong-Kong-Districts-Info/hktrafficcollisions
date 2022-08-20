@@ -223,7 +223,7 @@ ui <- dashboardPage(
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-                selected = c("Vehicle collision with Pedestrian", "Pedal Cycle collision with Pedestrian")
+                selected = c("Vehicle collision with Pedestrian")
               ) %>%
                 shinyhelper::helper(
                   type = "markdown", colour = "#0d0d0d",
