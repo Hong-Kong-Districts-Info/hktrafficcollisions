@@ -164,7 +164,11 @@ ui <- dashboardPage(
                 multiple = TRUE,
                 selected = c("KC", "YTM", "SSP"),
                 options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "district_filter"
+                ),
 
               airDatepickerInput("start_month",
                                  label = "From",
