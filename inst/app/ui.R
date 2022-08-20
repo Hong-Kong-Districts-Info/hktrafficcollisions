@@ -224,7 +224,11 @@ ui <- dashboardPage(
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
                 selected = c("Vehicle collision with Pedestrian", "Pedal Cycle collision with Pedestrian")
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "collision_type_filter"
+                ),
 
               collapsibleAwesomeCheckboxGroupInput(
                 inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
