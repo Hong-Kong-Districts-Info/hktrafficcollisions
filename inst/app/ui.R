@@ -155,7 +155,7 @@ ui <- dashboardPage(
               width = 3,
               id = "controls", class = "panel panel-default",
 
-              h2("Filter Panel"),
+              h3(span(icon("filter")), " Filters"),
 
               selectizeInput(
                 inputId = "district_filter",
