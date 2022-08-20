@@ -204,7 +204,11 @@ ui <- dashboardPage(
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
                 justified = TRUE
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "severity_filter"
+                  ),
 
               collapsibleAwesomeCheckboxGroupInput(
                 inputId = "collision_type_filter", label = "Collision type",
