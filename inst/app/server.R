@@ -10,6 +10,8 @@
 
 server <- function(input, output, session) {
 
+  shinyhelper::observe_helpers(help_dir = "desc")
+
   # ----- DATA MANIPULATION ----- #
   # Manipulation steps are conducted in "modules/manipulate_data.R", with
   # data exported to "data/data-manipulated/"

@@ -17,6 +17,7 @@ library(hkdatasets)
 library(shiny)
 library(shinydashboard)
 library(shinyWidgets)
+library(shinyhelper)
 library(ggplot2)
 library(plotly)
 
