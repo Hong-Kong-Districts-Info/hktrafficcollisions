@@ -9,9 +9,13 @@ Hong Kong Traffic Injury Collision Database is a project co-developed by Street 
 -   To draw attention to how street design has contributed to the current situation, and what systemic remedies should be made to enhance the safety of vulnerable road users, and
 -   To provide journalists, district councillors, and government departments with insights and map-based data evidence to understand this issue.
 
-<!-- ### How to use this database? -->
+<br>
+
+**Please note that the data and information on this website are for informational purposes only. While we seek to provide accurate information, please note that errors may be present and information presented may not be complete. Accordingly, we make no representation with the respect to the suitability for any purposes. We also disclaim any liability for omissions or errors that may be contained therein.**
 
 <br>
+
+<!-- ### How to use this database? -->
 
 #### <i class="fas fa-book"></i> Reference
 
