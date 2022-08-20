@@ -243,7 +243,7 @@ ui <- dashboardPage(
 
               br(),
 
-              p("Total number of collisions: ", textOutput("nrow_filtered", inline = TRUE),
+              p("Number of collisions in current filter settings: ", textOutput("nrow_filtered", inline = TRUE),
                 style = "font-size: 20px;text-align:center;"),
             )
           )
