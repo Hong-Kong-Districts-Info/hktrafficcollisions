@@ -164,7 +164,11 @@ ui <- dashboardPage(
                 multiple = TRUE,
                 selected = c("KC", "YTM", "SSP"),
                 options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "district_filter"
+                ),
 
               airDatepickerInput("start_month",
                                  label = "From",
@@ -175,7 +179,11 @@ ui <- dashboardPage(
                                  minView = "months",
                                  dateFormat = "MM yyyy",
                                  addon = "none"
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "date_filter"
+                ),
 
               airDatepickerInput("end_month",
                                  label = "To",
@@ -204,7 +212,11 @@ ui <- dashboardPage(
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
                 justified = TRUE
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "severity_filter"
+                  ),
 
               collapsibleAwesomeCheckboxGroupInput(
                 inputId = "collision_type_filter", label = "Collision type",
@@ -212,14 +224,22 @@ ui <- dashboardPage(
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
                 selected = c("Vehicle collision with Pedestrian", "Pedal Cycle collision with Pedestrian")
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "collision_type_filter"
+                ),
 
               collapsibleAwesomeCheckboxGroupInput(
-                inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
+                inputId = "vehicle_class_filter", label = "Vehicle classes involved",
                 i = 2,
                 choices = unique(hk_vehicles$Vehicle_Class),
                 selected = unique(hk_vehicles$Vehicle_Class)
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "vehicle_class_filter"
+                ),
 
               br(),
 
