@@ -155,7 +155,7 @@ ui <- dashboardPage(
               width = 3,
               id = "controls", class = "panel panel-default",
 
-              h2("Filter Panel"),
+              h3(span(icon("filter")), " Filters"),
 
               selectizeInput(
                 inputId = "district_filter",
@@ -223,7 +223,7 @@ ui <- dashboardPage(
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-                selected = c("Vehicle collision with Pedestrian", "Pedal Cycle collision with Pedestrian")
+                selected = c("Vehicle collision with Pedestrian")
               ) %>%
                 shinyhelper::helper(
                   type = "markdown", colour = "#0d0d0d",
@@ -243,7 +243,7 @@ ui <- dashboardPage(
 
               br(),
 
-              p("Total number of collisions: ", textOutput("nrow_filtered", inline = TRUE),
+              p("Number of collisions in current filter settings: ", textOutput("nrow_filtered", inline = TRUE),
                 style = "font-size: 20px;text-align:center;"),
             )
           )
