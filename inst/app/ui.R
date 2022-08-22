@@ -98,6 +98,13 @@ ui <- dashboardPage(
         text = "Project Info",
         icon = icon(name = "info"),
         tabName = "tab_project_info"
+      ),
+
+      # User Survey
+      menuItem(
+        text = "User Survey",
+        icon = icon(name = "list"),
+        tabName = "tab_user_survey"
       )
 
     ) # sidebarMenu
@@ -530,6 +537,23 @@ ui <- dashboardPage(
             paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
             br(),
             paste("hkdatasets ver.", utils::packageVersion("hkdatasets")),
+          )
+        )
+      ),
+
+      # Menu item: User Survey ---------------------------------------------------
+
+      tabItem(
+        tabName = "tab_user_survey",
+        fluidRow(
+          tags$iframe(
+            src = "https://docs.google.com/forms/d/e/1FAIpQLSd7mD-MiIn3T9wp3KREqut4BfzVFVXD-UfkWEf_-04Kg4kRVA/viewform?embedded=true",
+            width = "100%",
+            # TODO: Auto adjust height when form is updated; make the height responsive to users' device width
+            height = "3600px",
+            frameBorder= 0,
+            marginheight = 0,
+            marginwidth = 0
           )
         )
       ) # tabItem
