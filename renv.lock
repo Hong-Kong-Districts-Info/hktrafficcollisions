@@ -1025,6 +1025,17 @@
         "shiny"
       ]
     },
+    "shinyhelper": {
+      "Package": "shinyhelper",
+      "Version": "0.3.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "baef117734d5bd59373a561a15168679",
+      "Requirements": [
+        "markdown",
+        "shiny"
+      ]
+    },
     "sourcetools": {
       "Package": "sourcetools",
       "Version": "0.1.7",
