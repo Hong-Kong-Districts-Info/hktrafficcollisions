@@ -486,10 +486,15 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_key_facts",
-        box(
-          width = 12,
-          title = "Key Facts about Hong Kong Traffic Injury Collisions",
-          "TENTATIVE: infographics, summary and link to the full report"
+        fluidRow(
+
+          box(
+            width = 12,
+
+            title = span(icon("file-alt"), "Key facts about pedestrian-related collisions"),
+            includeMarkdown("desc/key_facts.md")
+
+          )
         )
       ),
 
