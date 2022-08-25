@@ -503,6 +503,10 @@ ui <- dashboardPage(
               img(src = "summary-chi.jpg", height = "100%", width = "100%")
             ),
 
+            # Workaround to add line spacing between the top two images (Chi version) and bottom two images (Eng version)
+            # FIXME: Investigate how to formally add line breaks between `column` objects
+            p(" ", style = "white-space: pre-wrap"),
+
             column(
               width = 6,
               img(src = "report-cover-eng.jpg", height = "100%", width = "100%")
