@@ -492,8 +492,25 @@ ui <- dashboardPage(
             width = 12,
 
             title = span(icon("file-alt"), "Key facts about pedestrian-related collisions"),
-            includeMarkdown("desc/key_facts.md")
+            includeMarkdown("desc/key_facts.md"),
 
+            column(
+              width = 6,
+              img(src = "report-cover-chi.jpg", height = "100%", width = "100%")
+            ),
+            column(
+              width = 6,
+              img(src = "summary-chi.jpg", height = "100%", width = "100%")
+            ),
+
+            column(
+              width = 6,
+              img(src = "report-cover-eng.jpg", height = "100%", width = "100%")
+            ),
+            column(
+              width = 6,
+              img(src = "summary-eng.jpg", height = "100%", width = "100%")
+            )
           )
         )
       ),
