@@ -60,7 +60,7 @@ ui <- dashboardPage(
 
       # Collision Location Map
       menuItem(
-        text = "Collision Location Map",
+        text = i18n$t("Collision Location Map"),
         icon = icon(name = "map"),
         tabName = "tab_collision_location_map"
       ),
@@ -147,6 +147,17 @@ ui <- dashboardPage(
       tabItem(
         tabName = "tab_collision_location_map",
 
+        box(
+          shiny.i18n::usei18n(i18n),
+          div(style = "float: right;",
+              selectInput('selected_language',
+                          "Change language",
+                          choices = i18n$get_languages(),
+                          selected = i18n$get_key_translation())
+          ),
+          i18n$t("About Us")
+        ),
+
         fluidRow(
           box(
             width = 12,
@@ -166,7 +177,7 @@ ui <- dashboardPage(
 
               selectizeInput(
                 inputId = "district_filter",
-                label = "District(s):",
+                label = i18n$t("District(s):"),
                 choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME),
                 multiple = TRUE,
                 selected = c("KC", "YTM", "SSP"),
@@ -178,7 +189,7 @@ ui <- dashboardPage(
                 ),
 
               airDatepickerInput("start_month",
-                                 label = "From",
+                                 label = i18n$t("From"),
                                  value = "2016-01-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
@@ -193,7 +204,7 @@ ui <- dashboardPage(
                 ),
 
               airDatepickerInput("end_month",
-                                 label = "To",
+                                 label = i18n$t("To"),
                                  value = "2016-12-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
@@ -204,7 +215,7 @@ ui <- dashboardPage(
               ),
 
               checkboxGroupButtons(
-                inputId = "severity_filter", label = "Collision severity",
+                inputId = "severity_filter", label = i18n$t("Collision severity"),
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
                 choiceNames = c(
                   '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
@@ -226,7 +237,7 @@ ui <- dashboardPage(
                   ),
 
               collapsibleAwesomeCheckboxGroupInput(
-                inputId = "collision_type_filter", label = "Collision type",
+                inputId = "collision_type_filter", label = i18n$t("Collision type"),
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
@@ -238,7 +249,7 @@ ui <- dashboardPage(
                 ),
 
               collapsibleAwesomeCheckboxGroupInput(
-                inputId = "vehicle_class_filter", label = "Vehicle classes involved",
+                inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
                 i = 2,
                 choices = unique(hk_vehicles$Vehicle_Class),
                 selected = unique(hk_vehicles$Vehicle_Class)
@@ -540,15 +551,7 @@ ui <- dashboardPage(
         tabName = "tab_project_info",
         box(
           width = 12,
-          title = i18n$t("About Us"),
-          shiny.i18n::usei18n(i18n),
-          div(style = "float: right;",
-              selectInput('selected_language',
-                          i18n$t("Change language"),
-                          choices = i18n$get_languages(),
-                          selected = i18n$get_key_translation())
-          ),
-          i18n$t("About Us")
+          title = i18n$t("About Us")
         ),
 
         fluidRow(
