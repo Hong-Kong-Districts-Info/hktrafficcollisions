@@ -8,11 +8,11 @@
 ui <- dashboardPage(
 
   # Title and Skin
-  title = "Hong Kong Traffic Injury Collision Database",
   skin = "yellow",
 
   # Header
   header = dashboardHeader(
+
     title = i18n$t("Hong Kong Traffic Injury Collision Database"),
     titleWidth = 400,
 
@@ -140,6 +140,8 @@ ui <- dashboardPage(
       includeScript("./modules/gomap.js")
     ),
 
+    shiny.i18n::usei18n(i18n),
+
     tabItems(
 
       # Menu item: Collision Location Map --------------------------------------
@@ -148,7 +150,6 @@ ui <- dashboardPage(
         tabName = "tab_collision_location_map",
 
         box(
-          shiny.i18n::usei18n(i18n),
           div(style = "float: right;",
               selectInput('selected_language',
                           "Change language",
