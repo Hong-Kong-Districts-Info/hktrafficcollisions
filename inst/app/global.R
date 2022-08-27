@@ -17,6 +17,7 @@ library(hkdatasets)
 library(shiny)
 library(shinydashboard)
 library(shinyWidgets)
+library(shinyhelper)
 library(ggplot2)
 library(plotly)
 library(shiny.i18n)
@@ -41,6 +42,17 @@ i18n = Translator$new(translation_csvs_path = "./translation")
 i18n$set_translation_language("en")
 
 
+# Metadata -------------------------------------------------------------
+
+# opengraph properties
+OPENGRAPH_PROPS = list(
+  title = "Hong Kong Traffic Injury Collision Database",
+  url = "https://hkdistricts-info.shinyapps.io/trafficcollisions/",
+  image = "https://user-images.githubusercontent.com/29334677/183444210-1b983c91-476c-4534-8425-10999051f132.jpg",
+  description = "Visualise Hong Kong traffic collision data with interactive mapping"
+)
+
+
 # Data import -------------------------------------------------------------
 
 ## Take data from {hkdatasets}
@@ -50,10 +62,20 @@ hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 
 hotzone_streets = read_sf("./data/hotzone_streets.gpkg")
 
+## Project info data
+terminology = read.csv("./data/terminology.csv")
+
+## Manipulated data, generated from `modules/manipulate_data.R`
+hk_accidents_valid_sf = read_sf("./data/data-manipulated/hk_accidents_valid_sf.gpkg")
+hotzone_out_df = fst::read_fst("./data/data-manipulated/hotzone_out_df.fst")
+
 # interactive thematic map mode option ------------------------------------
 
+# Subset basemap providers to be used for interactive maps
+SELECTED_BASEMAPS = c("CartoDB.Positron", "OpenStreetMap", "Stamen.TonerLite")
+
 tmap_mode("view")
-tmap_options(basemaps = c("Stamen.TonerLite", "CartoDB.Positron", "OpenStreetMap"))
+tmap_options(basemaps = SELECTED_BASEMAPS)
 
 # Constants ---------------------------------------------------------------
 
@@ -71,3 +93,5 @@ fill_palette = leaflet::colorFactor(palette = c("#FF4039", "#FFB43F", "#FFE91D")
 # Custom misc functions ---------------------------------------------------
 
 source(file = "modules/utils.R", local = TRUE)
+
+

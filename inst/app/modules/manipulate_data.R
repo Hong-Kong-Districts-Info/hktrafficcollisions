@@ -1,6 +1,8 @@
-# Mutated data for use in various parts of the dashboard
-# TODO: prepare following mutated dataset before running shiny to reduce loading time
+# NOT USED IN DEPLOYMENT
+# Steps below are performed in advance, the output data are stored in `data/data-manipulated/`
+# Retained temporarily for reference (for future updates to the data)
 
+# Mutated data for use in various parts of the dashboard
 
 ## ------- Core manipulated datasets (vehicles & collision) with joint attributes ---------
 
@@ -54,7 +56,7 @@ hotzone_out_df = hotzone_streets %>%
                  '"><i class="fas fa-search-plus"></i></a>',
                  sep="")
   ) %>%
-  st_set_geometry(NULL) %>%
+  st_drop_geometry() %>%
   dplyr::select(-c(lat, lng)) %>%
   dplyr::relocate(Area_RK, zoom_in_map_link)
 

@@ -96,7 +96,27 @@
 	background-color: rgba(34, 34, 34, 0.6) !important;
 }
 
-/* Widgets */
+
+
+
+/*
+  Widgets
+*/
+
+.filter__circle-marker {
+  /* Align the circle marker to left together with the flex-grow prop of .filter__text */
+  flex-grow: 0;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #0d0d0d;
+}
+
+.filter__text {
+  /* Align the text to center together with the flex-grow prop of .filter__circle-marker */
+  flex-grow: 1;
+  color:black;
+}
 
 /* Hide / Show all button in collapsible group checkbox */
 .bttn-minimal.bttn-primary {

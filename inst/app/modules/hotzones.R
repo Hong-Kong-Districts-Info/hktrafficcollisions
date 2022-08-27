@@ -1,7 +1,10 @@
 
 # Add tile from mapbox style
 # https://docs.mapbox.com/studio-manual/guides/publish-your-style/
-COLLISION_PTS_TILE_URL = "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004415qrmcs9geal/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoia2h3b25nMTIiLCJhIjoiY2ptMGJqMHh2MGFzZjNsbXl2MjVuMGl1biJ9.N5P5k0byVnsWeBg6iLObww"
+COLLISION_PTS_TILE_URL = paste0(
+  "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004415qrmcs9geal/tiles/256/{z}/{x}/{y}?access_token=",
+  Sys.getenv("MAPBOX_PUBLIC_TOKEN")
+  )
 
 TABLE_COLUMN_NAMES = c(
   "Hot Zone Name" = "Name",
@@ -15,16 +18,15 @@ TABLE_COLUMN_NAMES = c(
 
 
 # Interactive heatmap
-output$hotspots_map = renderTmap({
+output$hotzones_map = renderTmap({
 
-  tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries") +
-    tm_shape(hotzone_streets) +
+  tm_shape(hotzone_streets) +
     tm_lines(
       group = "Hotzone streets",
       title.col = "Hotzone Rank",
       id = "Name",
       col = "Area_RK",
-      lwd = 2.5,
+      lwd = 7.5,
       palette = "inferno",
       # Use only first half of inferno palette as the light color part does not show well on grey basemap
       contrast = c(0, .5),
@@ -37,7 +39,8 @@ output$hotspots_map = renderTmap({
         "Collisions between 2015 to 2019: " = "N_Colli",
         "Segement Length (m): " = "Road_Length"
         )
-    )
+    ) +
+    tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries")
 
 })
 
@@ -46,7 +49,7 @@ observe({
   if (is.null(input$goto)) return()
 
   isolate({
-    map = leafletProxy("hotspots_map")
+    map = leafletProxy("hotzones_map")
 
     lat = input$goto$lat
     lng = input$goto$lng
@@ -55,7 +58,7 @@ observe({
   })
 })
 
-output$hotspots_table = renderDataTable({
+output$hotzones_table = renderDataTable({
 
   # `rownames` needs to be consistent with `DT::datatable` option
   action = DT::dataTableAjax(session, hotzone_out_df, rownames = FALSE)

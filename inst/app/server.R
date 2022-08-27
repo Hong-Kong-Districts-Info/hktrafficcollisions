@@ -17,8 +17,11 @@ server <- function(input, output, session) {
     shiny.i18n::update_lang(session, input$selected_language)
   })
 
+  shinyhelper::observe_helpers(help_dir = "desc")
+
   # ----- DATA MANIPULATION ----- #
-  source(file = "modules/manipulate_data.R", local = TRUE)
+  # Manipulation steps are conducted in "modules/manipulate_data.R", with
+  # data exported to "data/data-manipulated/"
 
   # ----- REACTIVES ----- #
 
@@ -47,5 +50,6 @@ server <- function(input, output, session) {
 
 
   # ----- TAB: Project Info ----- #
+  source(file = "modules/project_info.R", local = TRUE)
 
 }

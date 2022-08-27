@@ -8,7 +8,7 @@
 ui <- dashboardPage(
 
   # Title and Skin
-  title = "Traffic Collisions",
+  title = "Hong Kong Traffic Injury Collision Database",
   skin = "yellow",
 
   # Header
@@ -39,8 +39,8 @@ ui <- dashboardPage(
     ),
     tags$li(a(
       href = "https://github.com/Hong-Kong-Districts-Info",
-      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "46px"),
-      style = "padding:2px;"
+      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "30px"),
+      style = "padding:10px;"
     ),
     class = "dropdown"
     ),
@@ -98,6 +98,13 @@ ui <- dashboardPage(
         text = "Project Info",
         icon = icon(name = "info"),
         tabName = "tab_project_info"
+      ),
+
+      # User Survey
+      menuItem(
+        text = "User Survey",
+        icon = icon(name = "list"),
+        tabName = "tab_user_survey"
       )
 
     ) # sidebarMenu
@@ -105,6 +112,27 @@ ui <- dashboardPage(
 
   # Body
   body = dashboardBody(
+
+    # OpenGraph
+    # `OPENGRAPH_PROPS` constant is defined in global.R
+
+    tags$head(
+
+      # Facebook OpenGraph tags
+      tags$meta(property = "og:title", content = OPENGRAPH_PROPS[["title"]]),
+      tags$meta(property = "og:type", content = "website"),
+      tags$meta(property = "og:url", content = OPENGRAPH_PROPS[["url"]]),
+      tags$meta(property = "og:image", content = OPENGRAPH_PROPS[["image"]]),
+      tags$meta(property = "og:description", content = OPENGRAPH_PROPS[["description"]]),
+
+      # Twitter summary cards
+      tags$meta(name = "twitter:card", content = "summary"),
+      tags$meta(name = "twitter:title", content = OPENGRAPH_PROPS[["title"]]),
+      tags$meta(name = "twitter:description", content = OPENGRAPH_PROPS[["description"]]),
+      tags$meta(name = "twitter:image", content = OPENGRAPH_PROPS[["image"]]),
+
+    ),
+
 
     # add custom css style for the data filter panel
     tags$head(
@@ -134,30 +162,39 @@ ui <- dashboardPage(
               width = 3,
               id = "controls", class = "panel panel-default",
 
-              h2("Filter Panel"),
+              h3(span(icon("filter")), " Filters"),
 
               selectizeInput(
                 inputId = "district_filter",
                 label = "District(s):",
                 choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME),
-                selected = "KC",
+                multiple = TRUE,
+                selected = c("KC", "YTM", "SSP"),
                 options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "district_filter"
+                ),
 
               airDatepickerInput("start_month",
                                  label = "From",
-                                 value = "2016-05-01",
+                                 value = "2016-01-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
                                  minView = "months",
                                  dateFormat = "MM yyyy",
                                  addon = "none"
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "date_filter"
+                ),
 
               airDatepickerInput("end_month",
                                  label = "To",
-                                 value = "2016-06-01",
+                                 value = "2016-12-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  view = "months",
@@ -169,33 +206,51 @@ ui <- dashboardPage(
               checkboxGroupButtons(
                 inputId = "severity_filter", label = "Collision severity",
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
-                choices = c(`Fatal <i style="color:#FF4039;" class="fas fa-skull-crossbones"></i>` = "Fatal",
-                            `Serious <i style="color:#FFB43F;"class="fas fa-procedures"></i>` = "Serious",
-                            `Slight <i style="color:#FFE91D;" class="fas fa-user-injured"></i>` = "Slight"),
+                choiceNames = c(
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>',
+                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>'
+                  ),
+                choiceValues = c(
+                  "Fatal",
+                  "Serious",
+                  "Slight"
+                  ),
                 selected = unique(hk_accidents$Severity),
                 direction = "vertical",
-                justified = TRUE,
-                checkIcon = list(yes = icon("ok", lib = "glyphicon"))
-              ),
+                justified = TRUE
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "severity_filter"
+                  ),
 
               collapsibleAwesomeCheckboxGroupInput(
                 inputId = "collision_type_filter", label = "Collision type",
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-                selected = i18n$t(unique(hk_accidents$Type_of_Collision_with_cycle))
-              ),
+                selected = c("Vehicle collision with Pedestrian")
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "collision_type_filter"
+                ),
 
               collapsibleAwesomeCheckboxGroupInput(
-                inputId = "vehicle_class_filter", label = "Vehicle classes involved in the collision",
+                inputId = "vehicle_class_filter", label = "Vehicle classes involved",
                 i = 2,
                 choices = unique(hk_vehicles$Vehicle_Class),
                 selected = unique(hk_vehicles$Vehicle_Class)
-              ),
+              ) %>%
+                shinyhelper::helper(
+                  type = "markdown", colour = "#0d0d0d",
+                  content = "vehicle_class_filter"
+                ),
 
               br(),
 
-              p("Total number of collisions: ", textOutput("nrow_filtered", inline = TRUE),
+              p("Number of collisions in current filter settings: ", textOutput("nrow_filtered", inline = TRUE),
                 style = "font-size: 20px;text-align:center;"),
             )
           )
@@ -414,14 +469,14 @@ ui <- dashboardPage(
           box(
             width = 12,
             title = "Pedestrian Collision Hot Zones",
-            tmapOutput(outputId = "hotspots_map")
+            tmapOutput(outputId = "hotzones_map")
           )
         ),
         fluidRow(
           box(
             width = 12,
             title = "Hot Zones Table",
-            dataTableOutput(outputId = "hotspots_table")
+            dataTableOutput(outputId = "hotzones_table")
 
           )
         )
@@ -432,18 +487,34 @@ ui <- dashboardPage(
       tabItem(
         tabName = "tab_key_facts",
         fluidRow(
+
           box(
             width = 12,
-            title = "Key Facts about Hong Kong Traffic Injury Collisions"
-          ),
-          box(
-            width = 12,
-            title = "Concept Explainer",
-            HTML("- Definition of each casualty severity
-                 <br>
-                 - Why emphasises KSI Collision?
-                 <br>
-                 - ...")
+
+            title = span(icon("file-alt"), "Key facts about pedestrian-related collisions"),
+            includeMarkdown("desc/key_facts.md"),
+
+            column(
+              width = 6,
+              img(src = "report-cover-chi.jpg", height = "100%", width = "100%")
+            ),
+            column(
+              width = 6,
+              img(src = "summary-chi.jpg", height = "100%", width = "100%")
+            ),
+
+            # Workaround to add line spacing between the top two images (Chi version) and bottom two images (Eng version)
+            # FIXME: Investigate how to formally add line breaks between `column` objects
+            p(" ", style = "white-space: pre-wrap"),
+
+            column(
+              width = 6,
+              img(src = "report-cover-eng.jpg", height = "100%", width = "100%")
+            ),
+            column(
+              width = 6,
+              img(src = "summary-eng.jpg", height = "100%", width = "100%")
+            )
           )
         )
       ),
@@ -455,7 +526,11 @@ ui <- dashboardPage(
           box(
             width = 12,
             title = "Data Source",
-            "Download Url"
+            icon(name = "wrench"),
+            "We are currently finding ways to host the data for download.",
+            icon(name = "hammer"),
+            hr(),
+            p("If you are interested in getting the traffic collision data, please contact us."),
           )
       ),
 
@@ -475,25 +550,43 @@ ui <- dashboardPage(
           ),
           i18n$t("About Us")
         ),
-        box(
-          width = 12,
-          title = "What this is about",
+
+        fluidRow(
+          box(
+            width = 12,
+            # Add icon inside heading
+            # https://community.rstudio.com/t/how-to-add-an-icon-in-shinydashboard-box-title/20650
+            title = span(icon("th-list"), "Glossary of Terms"),
+            p("The following terms are used in this website."),
+            dataTableOutput(outputId = "terminology_table")
+          )
         ),
-        box(
-          width = 12,
-          title = "How to use this database?",
-        ),
-        box(
-          width = 12,
-          title = "Reference",
-        ),
-        box(
-          width = 12,
-          title = "Useful Urls",
-        ),
-        box(
-          width = 12,
-          title = "Caveats",
+
+        fluidRow(
+          box(
+            width = 12,
+            hr(),
+            paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
+            br(),
+            paste("hkdatasets ver.", utils::packageVersion("hkdatasets")),
+          )
+        )
+      ),
+
+      # Menu item: User Survey ---------------------------------------------------
+
+      tabItem(
+        tabName = "tab_user_survey",
+        fluidRow(
+          tags$iframe(
+            src = "https://docs.google.com/forms/d/e/1FAIpQLSd7mD-MiIn3T9wp3KREqut4BfzVFVXD-UfkWEf_-04Kg4kRVA/viewform?embedded=true",
+            width = "100%",
+            # TODO: Auto adjust height when form is updated; make the height responsive to users' device width
+            height = "3600px",
+            frameBorder= 0,
+            marginheight = 0,
+            marginwidth = 0
+          )
         )
       ) # tabItem
     ) # tabItems
