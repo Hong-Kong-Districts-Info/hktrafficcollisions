@@ -12,7 +12,7 @@ output$collision_type_filter_ui = renderUI({
       c(
         i18n$t("Vehicle collision with Vehicle"),
         i18n$t("Vehicle collision with Pedestrian"),
-        i18n$t("Vehicle collision with Pedestrian"),
+        i18n$t("Vehicle collision with Pedal Cycle"),
         i18n$t("Vehicle collision with Object"),
         i18n$t("Vehicle collision with Nothing"),
         i18n$t("Pedal Cycle collision with Pedestrian"),
