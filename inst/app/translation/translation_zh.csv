@@ -15,3 +15,16 @@ Collision severity,車禍嚴重程度
 Collision type,車禍類別
 Vehicle classes involved,涉事車輛類別
 Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
+Private car,私家車
+Public franchised bus,公共專營巴士
+Taxi,的士
+Motorcycle,電單車
+Light goods vehicle,輕型貨車
+Bicycle,單車
+Heavy goods vehicle,重型貨車
+Medium goods vehicle,中型貨車
+Tram,電車
+Public light bus,公共小巴
+Others (incl. unknown),其他（包括類別不詳車輛）
+Public non-franchised bus,公共非專營巴士
+Light rail vehicle,輕鐵車輛

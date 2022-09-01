@@ -1,3 +1,42 @@
+#############
+## Filter UI
+#############
+
+output$vehicle_class_filter_ui = renderUI({
+  collapsibleAwesomeCheckboxGroupInput(
+    inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
+    i = 2,
+    choices = stats::setNames(
+      unique(hk_vehicles$Vehicle_Class),
+      c(
+        i18n$t("Private car"),
+        i18n$t("Public franchised bus"),
+        i18n$t("Taxi"),
+        i18n$t("Motorcycle"),
+        i18n$t("Light goods vehicle"),
+        i18n$t("Bicycle"),
+        i18n$t("Heavy goods vehicle"),
+        i18n$t("Medium goods vehicle"),
+        i18n$t("Tram"),
+        i18n$t("Public light bus"),
+        i18n$t("Others (incl. unknown)"),
+        i18n$t("Public non-franchised bus"),
+        i18n$t("Light rail vehicle")
+      )
+    )
+    ,
+    selected = unique(hk_vehicles$Vehicle_Class)
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "vehicle_class_filter"
+    )
+})
+
+#############
+## Main Map
+#############
+
 output$main_map <- renderLeaflet({
   overview_map <- leaflet(options = leafletOptions(minZoom = 11, preferCanvas = TRUE)) %>%
     # Set default location to Mong Kok
