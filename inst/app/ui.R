@@ -16,6 +16,19 @@ ui <- dashboardPage(
     title = i18n$t("Hong Kong Traffic Injury Collision Database"),
     titleWidth = 400,
 
+    tags$li(class = "dropdown",
+            div(
+              radioGroupButtons(
+                inputId = "selected_language",
+                label = NULL,
+                choices = setNames(i18n$get_languages(), c("EN", "中")),
+                selected = i18n$get_key_translation(),
+                status = "success",
+                size = "xs"
+              )
+            ),
+            style = "padding-top:10px;"),
+
     tags$li(a(
       href = "https://hong-kong-districts-info.github.io/",
       icon(name = "globe-asia"),
@@ -148,16 +161,6 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_collision_location_map",
-
-        box(
-          div(style = "float: right;",
-              selectInput('selected_language',
-                          "Change language",
-                          choices = i18n$get_languages(),
-                          selected = i18n$get_key_translation())
-          ),
-          i18n$t("About Us")
-        ),
 
         fluidRow(
           box(
