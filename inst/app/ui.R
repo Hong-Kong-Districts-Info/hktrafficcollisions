@@ -194,31 +194,9 @@ ui <- dashboardPage(
                   content = "district_filter"
                 ),
 
-              airDatepickerInput("start_month",
-                                 label = i18n$t("From"),
-                                 value = "2016-01-01",
-                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 view = "months",
-                                 minView = "months",
-                                 dateFormat = "MM yyyy",
-                                 addon = "none"
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "date_filter"
-                ),
+              uiOutput("start_month_ui"),
 
-              airDatepickerInput("end_month",
-                                 label = i18n$t("To"),
-                                 value = "2016-12-01",
-                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 view = "months",
-                                 minView = "months",
-                                 dateFormat = "MM yyyy",
-                                 addon = "none"
-              ),
+              uiOutput("end_month_ui"),
 
               checkboxGroupButtons(
                 inputId = "severity_filter", label = i18n$t("Collision severity"),
