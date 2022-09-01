@@ -224,9 +224,9 @@ ui <- dashboardPage(
                 inputId = "severity_filter", label = i18n$t("Collision severity"),
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
                 choiceNames = c(
-                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
-                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>',
-                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>'
+                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">', i18n$t("Fatal"), '</span></div>'),
+                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">', i18n$t("Serious"), '</span></div>'),
+                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">', i18n$t("Slight"), '</span></div>')
                   ),
                 choiceValues = c(
                   "Fatal",
