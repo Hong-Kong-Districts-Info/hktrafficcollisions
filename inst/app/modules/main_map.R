@@ -2,6 +2,33 @@
 ## Filter UI
 #############
 
+output$collision_type_filter_ui = renderUI({
+  collapsibleAwesomeCheckboxGroupInput(
+    inputId = "collision_type_filter", label = i18n$t("Collision type"),
+    i = 3,
+    # reverse alphabetical order
+    choices = stats::setNames(
+      sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
+      c(
+        i18n$t("Vehicle collision with Vehicle"),
+        i18n$t("Vehicle collision with Pedestrian"),
+        i18n$t("Vehicle collision with Pedal Cycle"),
+        i18n$t("Vehicle collision with Object"),
+        i18n$t("Vehicle collision with Nothing"),
+        i18n$t("Pedal Cycle collision with Pedestrian"),
+        i18n$t("Pedal Cycle collision with Pedal Cycle"),
+        i18n$t("Pedal Cycle collision with Object"),
+        i18n$t("Pedal Cycle collision with Nothing")
+      )
+    ),
+    selected = c("Vehicle collision with Pedestrian")
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "collision_type_filter"
+    )
+})
+
 output$vehicle_class_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
     inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
@@ -32,6 +59,9 @@ output$vehicle_class_filter_ui = renderUI({
       content = "vehicle_class_filter"
     )
 })
+
+
+
 
 #############
 ## Main Map
