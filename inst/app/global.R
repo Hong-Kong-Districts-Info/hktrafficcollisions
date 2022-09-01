@@ -40,6 +40,7 @@ i18n = Translator$new(translation_csvs_path = "./translation")
 
 # change this to en
 i18n$set_translation_language("en")
+i18n$use_js()
 
 
 # Metadata -------------------------------------------------------------
