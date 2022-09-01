@@ -130,8 +130,18 @@ output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark 
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  data_filtered = filter(hk_accidents_valid_sf,
-                         year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
+  # Test for checking initialise value of date, will return TRUE when render airDatepickerInput in server side
+  # message("is.null(input$end_month): ", is.null(input$end_month))
+
+  # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
+  if (is.null(input$end_month)) {
+    data_filtered = filter(hk_accidents_valid_sf,
+                           year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
+  } else {
+    data_filtered = filter(hk_accidents_valid_sf,
+                           year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
+  }
+
 
   message("Min date in filtered data: ", min(data_filtered$Date_Time))
   message("Max date in filtered data: ", max(data_filtered$Date_Time))
