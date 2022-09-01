@@ -252,16 +252,7 @@ ui <- dashboardPage(
                   content = "collision_type_filter"
                 ),
 
-              collapsibleAwesomeCheckboxGroupInput(
-                inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
-                i = 2,
-                choices = unique(hk_vehicles$Vehicle_Class),
-                selected = unique(hk_vehicles$Vehicle_Class)
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "vehicle_class_filter"
-                ),
+              uiOutput("vehicle_class_filter_ui"),
 
               br(),
 
