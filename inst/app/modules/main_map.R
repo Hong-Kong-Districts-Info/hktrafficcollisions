@@ -211,9 +211,9 @@ observe({
     tags$b(i18n$t("Number of casualties: ")), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
     # Involved casualty breakdown
     "(",
-    filter_collision_data()$cas_dvr_n, " driver(s), ",
-    filter_collision_data()$cas_pax_n, " passenger(s), ",
-    filter_collision_data()$cas_ped_n, " pedestrian(s))",
+    filter_collision_data()$cas_dvr_n, i18n$t(" driver(s)"), ", ",
+    filter_collision_data()$cas_pax_n, i18n$t(" passenger(s)"), ", ",
+    filter_collision_data()$cas_ped_n, i18n$t(" pedestrian(s)"), ")",
 
     tags$br(),
     tags$br(),
