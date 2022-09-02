@@ -9,17 +9,17 @@
 # Packages ----------------------------------------------------------------
 
 ## data wrangling
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 library(tidyr)
 library(hkdatasets)
 
 ## shiny-related
 library(shiny)
-library(shinydashboard)
+library(shinydashboard, warn.conflicts = FALSE)
 library(shinyWidgets)
 library(shinyhelper)
 library(ggplot2)
-library(plotly)
+library(plotly, warn.conflicts = FALSE)
 library(shiny.i18n)
 
 ## interactive map
@@ -31,7 +31,7 @@ library(leaflet.extras)
 library(tmap)
 
 ## Interactive tables
-library(DT)
+library(DT, warn.conflicts = FALSE)
 
 ## Translation
 
