@@ -177,7 +177,7 @@ ui <- dashboardPage(
               width = 3,
               id = "controls", class = "panel panel-default",
 
-              h3(span(icon("filter")), " Filters"),
+              h3(span(icon("filter")), " ", i18n$t("Filters")),
 
               uiOutput("district_filter_ui"),
 
@@ -213,7 +213,7 @@ ui <- dashboardPage(
 
               br(),
 
-              p("Number of collisions in current filter settings: ", textOutput("nrow_filtered", inline = TRUE),
+              p(i18n$t("Number of collisions in current filter settings: "), textOutput("nrow_filtered", inline = TRUE),
                 style = "font-size: 20px;text-align:center;"),
             )
           )
