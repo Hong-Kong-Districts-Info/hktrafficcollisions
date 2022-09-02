@@ -74,3 +74,8 @@ Number of casualties: ,傷亡人數：
  driver(s),名司機
  passenger(s),名乘客
  pedestrian(s),名行人
+Road hierarchy: ,道路等級：
+Expressway,快速公路
+Main Road,主要道路
+Secondary Road,次要道路（內街／支路）
+Other Minor Road,小路（鄉村道路／行人徑）

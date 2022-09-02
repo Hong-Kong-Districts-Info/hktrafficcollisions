@@ -220,7 +220,7 @@ observe({
 
     tags$b("Within 70 m of junctions? "), ifelse(filter_collision_data()$Within_70m, "Yes", "No"), tags$br(),
     tags$b("Road structure: "), filter_collision_data()$Structure_Type, tags$br(),
-    tags$b("Road hierarchy: "), filter_collision_data()$Road_Hierarchy
+    tags$b(i18n$t("Road hierarchy: ")), i18n$t(filter_collision_data()$Road_Hierarchy)
 
   )
 
