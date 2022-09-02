@@ -23,11 +23,12 @@ ui <- dashboardPage(
                 label = NULL,
                 choices = setNames(i18n$get_languages(), c("EN", "中")),
                 selected = i18n$get_key_translation(),
-                status = "success",
+                status = "dark",
                 size = "xs"
               )
             ),
-            style = "padding-top:10px;"),
+            # Align vertically to center and add spacing to the icons below
+            style = "margin-top: 12.5px;margin-right: 20px;"),
 
     tags$li(a(
       href = "https://hong-kong-districts-info.github.io/",
