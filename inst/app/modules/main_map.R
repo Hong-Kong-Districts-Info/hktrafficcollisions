@@ -8,26 +8,7 @@ output$district_filter_ui = renderUI({
     label = i18n$t("District(s):"),
     choices = stats::setNames(
       DISTRICT_ABBR,
-      c(
-        i18n$t("Central and Western"),
-        i18n$t("Wan Chai"),
-        i18n$t("Eastern"),
-        i18n$t("Southern"),
-        i18n$t("Yau Tsim Mong"),
-        i18n$t("Sham Shui Po"),
-        i18n$t("Kowloon City"),
-        i18n$t("Wong Tai Sin"),
-        i18n$t("Kwun Tong"),
-        i18n$t("Tsuen Wan"),
-        i18n$t("Tuen Mun"),
-        i18n$t("Yuen Long"),
-        i18n$t("North"),
-        i18n$t("Tai Po"),
-        i18n$t("Sai Kung"),
-        i18n$t("Sha Tin"),
-        i18n$t("Kwai Tsing"),
-        i18n$t("Islands")
-      )
+      lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
     ),
     multiple = TRUE,
     selected = c("KC", "YTM", "SSP"),
@@ -73,24 +54,16 @@ output$end_month_ui = renderUI({
 
 })
 
+collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
+
 output$collision_type_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
     inputId = "collision_type_filter", label = i18n$t("Collision type"),
     i = 3,
     # reverse alphabetical order
     choices = stats::setNames(
-      sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-      c(
-        i18n$t("Vehicle collision with Vehicle"),
-        i18n$t("Vehicle collision with Pedestrian"),
-        i18n$t("Vehicle collision with Pedal Cycle"),
-        i18n$t("Vehicle collision with Object"),
-        i18n$t("Vehicle collision with Nothing"),
-        i18n$t("Pedal Cycle collision with Pedestrian"),
-        i18n$t("Pedal Cycle collision with Pedal Cycle"),
-        i18n$t("Pedal Cycle collision with Object"),
-        i18n$t("Pedal Cycle collision with Nothing")
-      )
+      collision_type_choices,
+      lapply(collision_type_choices, function(x) {i18n$t(x)})
     ),
     selected = c("Vehicle collision with Pedestrian")
   ) %>%
@@ -100,27 +73,15 @@ output$collision_type_filter_ui = renderUI({
     )
 })
 
+vehicle_class_choices = unique(hk_vehicles$Vehicle_Class)
+
 output$vehicle_class_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
     inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
     i = 2,
     choices = stats::setNames(
-      unique(hk_vehicles$Vehicle_Class),
-      c(
-        i18n$t("Private car"),
-        i18n$t("Public franchised bus"),
-        i18n$t("Taxi"),
-        i18n$t("Motorcycle"),
-        i18n$t("Light goods vehicle"),
-        i18n$t("Bicycle"),
-        i18n$t("Heavy goods vehicle"),
-        i18n$t("Medium goods vehicle"),
-        i18n$t("Tram"),
-        i18n$t("Public light bus"),
-        i18n$t("Others (incl. unknown)"),
-        i18n$t("Public non-franchised bus"),
-        i18n$t("Light rail vehicle")
-      )
+      vehicle_class_choices,
+      lapply(vehicle_class_choices, function(x) {i18n$t(x)})
     )
     ,
     selected = unique(hk_vehicles$Vehicle_Class)
