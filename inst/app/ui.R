@@ -501,10 +501,13 @@ ui <- dashboardPage(
 
       tabItem(
         tabName = "tab_project_info",
-        box(
-          width = 12,
-          title = i18n$t("About Us")
+        fluidRow(
+          box(
+            width = 12,
+            includeMarkdown("desc/information.md")
+          )
         ),
+
 
         fluidRow(
           box(
