@@ -79,3 +79,11 @@ Expressway,快速公路
 Main Road,主要道路
 Secondary Road,次要道路（內街／支路）
 Other Minor Road,小路（鄉村道路／行人徑）
+Road structure: ,道路結構：
+At grade road,地面道路
+Tunnel,行車隧道
+Flyover,天橋
+Pedestrian Way,行人路
+Bridge,橋
+Cycle Track,單車徑
+Underground road,地下道路
