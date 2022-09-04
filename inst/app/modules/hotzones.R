@@ -48,8 +48,8 @@ output$hotzones_map = renderTmap({
 
   tm_shape(hotzone_streets) +
     tm_lines(
-      group = "Hotzone streets",
-      title.col = "Hotzone Rank",
+      group = i18n$t("Hotzone streets"),
+      title.col = i18n$t("Hotzone Rank"),
       id = if(input$selected_language == "en") {"Name"} else {"Name_zh"},
       col = "Area_RK",
       lwd = 7.5,
@@ -61,7 +61,7 @@ output$hotzones_map = renderTmap({
       alpha = 1,
       popup.vars = if(input$selected_language == "en") {POPUP_COLUMN_NAMES_EN} else {POP_COLUMN_NAMES_ZH}
     ) +
-    tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries")
+    tm_tiles(COLLISION_PTS_TILE_URL, group = i18n$t("Collisions with pedestrian injuries"))
 
 })
 
