@@ -15,6 +15,24 @@ Collision severity,車禍嚴重程度
 Collision type,車禍類別
 Vehicle classes involved,涉事車輛類別
 Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
+Central and Western,中西區
+Wan Chai,灣仔區
+Eastern,東區
+Southern,南區
+Yau Tsim Mong,油尖旺區
+Sham Shui Po,深水埗區
+Kowloon City,九龍城區
+Wong Tai Sin,黃大仙區
+Kwun Tong,觀塘區
+Tsuen Wan,荃灣區
+Tuen Mun,屯門區
+Yuen Long,元朗區
+North,北區
+Tai Po,大埔區
+Sai Kung,西貢區
+Sha Tin,沙田區
+Kwai Tsing,葵青區
+Islands,離島區
 Fatal,致命
 Serious,嚴重
 Slight,輕微

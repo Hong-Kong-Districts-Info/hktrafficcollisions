@@ -1,6 +1,42 @@
 #############
 ## Filter UI
 #############
+output$district_filter_ui = renderUI({
+  selectizeInput(
+    inputId = "district_filter",
+    label = i18n$t("District(s)"),
+    choices = stats::setNames(
+      DISTRICT_ABBR,
+      c(
+        i18n$t("Central and Western"),
+        i18n$t("Wan Chai"),
+        i18n$t("Eastern"),
+        i18n$t("Southern"),
+        i18n$t("Yau Tsim Mong"),
+        i18n$t("Sham Shui Po"),
+        i18n$t("Kowloon City"),
+        i18n$t("Wong Tai Sin"),
+        i18n$t("Kwun Tong"),
+        i18n$t("Tsuen Wan"),
+        i18n$t("Tuen Mun"),
+        i18n$t("Yuen Long"),
+        i18n$t("North"),
+        i18n$t("Tai Po"),
+        i18n$t("Sai Kung"),
+        i18n$t("Sha Tin"),
+        i18n$t("Kwai Tsing"),
+        i18n$t("Islands")
+      )
+    ),
+    multiple = TRUE,
+    selected = c("KC", "YTM", "SSP"),
+    options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "district_filter"
+    )
+})
 
 output$start_month_ui = renderUI({
   airDatepickerInput("start_month",
