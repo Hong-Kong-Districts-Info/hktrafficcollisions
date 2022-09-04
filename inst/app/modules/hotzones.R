@@ -81,11 +81,18 @@ observe({
 
 output$hotzones_table = renderDataTable({
 
+  # Get the columns to show according to users' selected language
+  if(input$selected_language == "en") {
+    hotzone_dt_table = hotzone_out_df[,TABLE_COLUMN_NAMES_EN]
+  } else {
+    hotzone_dt_table = hotzone_out_df[,TABLE_COLUMN_NAMES_ZH]
+  }
+
   # `rownames` needs to be consistent with `DT::datatable` option
-  action = DT::dataTableAjax(session, hotzone_out_df, rownames = FALSE)
+  action = DT::dataTableAjax(session, hotzone_dt_table, rownames = FALSE)
 
   datatable(
-    hotzone_out_df,
+    hotzone_dt_table,
     colnames = if(input$selected_language == "en") {TABLE_COLUMN_NAMES_EN} else {TABLE_COLUMN_NAMES_ZH},
     rownames = FALSE,
     options = list(ajax = list(url = action)),
