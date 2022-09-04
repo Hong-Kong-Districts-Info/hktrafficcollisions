@@ -7,24 +7,25 @@ COLLISION_PTS_TILE_URL = paste0(
   )
 
 # Cannot directly use i18n$t() inside names of the value, thus need to create two separate vectors to store the names
+# Order of vector is also used to decide the order of columns to be shown in the hotzone interactive table
 TABLE_COLUMN_NAMES_EN = c(
-  "Hot Zone Name" = "Name",
-  "District" = "District",
   "Rank" = "Area_RK",
+  "Zoom to the Zone" = "zoom_in_map_link",
   "Section Length (m)" = "Road_Length",
   "No. of collisions between 2015 - 2019" = "N_Colli",
   "Collision Density (No. of collisions per km of road)" = "Colli_Density",
-  "Zoom to the Zone" = "zoom_in_map_link"
+  "Hot Zone Name" = "Name",
+  "District" = "District"
 )
 
 TABLE_COLUMN_NAMES_ZH = c(
-  "車禍熱區路段" = "Name",
-  "地區" = "District",
   "排名" = "Area_RK",
+  "於互動地圖顯示此路段" = "zoom_in_map_link",
   "重災區路段長度（米）" = "Road_Length",
   "2015 至 2019 年期間該路段發生之行人相關車禍總數" = "N_Colli",
   "推算每公里車禍總數" = "Colli_Density",
-  "於互動地圖顯示此路段" = "zoom_in_map_link"
+  "車禍熱區路段" = "Name_zh",
+  "地區" = "District_zh"
 )
 
 POPUP_COLUMN_NAMES_EN = c(
