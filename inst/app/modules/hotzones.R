@@ -27,6 +27,21 @@ TABLE_COLUMN_NAMES_ZH = c(
   "於互動地圖顯示此路段" = "zoom_in_map_link"
 )
 
+POPUP_COLUMN_NAMES_EN = c(
+  "Rank: " = "Area_RK",
+  "Collision Density (collisions/km): " = "Colli_Density",
+  "Collisions between 2015 to 2019: " = "N_Colli",
+  "Segement Length (m): " = "Road_Length"
+)
+
+POP_COLUMN_NAMES_ZH = c(
+  "排名：" = "Area_RK",
+  "推算每公里車禍總數：" = "Colli_Density",
+  "2015 至 2019 年期間該路段發生之行人相關車禍總數：" = "N_Colli",
+  "重災區路段長度（米）：" = "Road_Length"
+)
+
+
 # Interactive heatmap
 output$hotzones_map = renderTmap({
 
@@ -43,12 +58,7 @@ output$hotzones_map = renderTmap({
       n = max(hotzone_streets[["Area_RK"]]),
       style = "cont",
       alpha = 1,
-      popup.vars = c(
-        "Rank: " = "Area_RK",
-        "Collision Density (collisions/km): " = "Colli_Density",
-        "Collisions between 2015 to 2019: " = "N_Colli",
-        "Segement Length (m): " = "Road_Length"
-        )
+      popup.vars = if(input$selected_language == "en") {POPUP_COLUMN_NAMES_EN} else {POP_COLUMN_NAMES_ZH}
     ) +
     tm_tiles(COLLISION_PTS_TILE_URL, group = "Collisions with pedestrian injuries")
 
