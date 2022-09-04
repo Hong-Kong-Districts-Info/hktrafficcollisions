@@ -12,6 +12,13 @@ server <- function(input, output, session) {
 
   shinyhelper::observe_helpers(help_dir = "desc")
 
+  # Live language translation
+  observeEvent(input$selected_language, {
+    print(paste("Language change!", input$selected_language))
+    # Update language in session
+    shiny.i18n::update_lang(session, input$selected_language)
+  })
+
   # ----- DATA MANIPULATION ----- #
   # Manipulation steps are conducted in "modules/manipulate_data.R", with
   # data exported to "data/data-manipulated/"
