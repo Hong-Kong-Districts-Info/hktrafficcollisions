@@ -140,6 +140,9 @@ ui <- dashboardPage(
       includeScript("./modules/gomap.js")
     ),
 
+    # Monitor the state of the UI for live language translations
+    shiny.i18n::usei18n(i18n),
+
     tabItems(
 
       # Menu item: Collision Location Map --------------------------------------
