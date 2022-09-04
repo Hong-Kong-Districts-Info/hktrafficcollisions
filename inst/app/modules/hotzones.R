@@ -95,7 +95,19 @@ output$hotzones_table = renderDataTable({
     hotzone_dt_table,
     colnames = if(input$selected_language == "en") {TABLE_COLUMN_NAMES_EN} else {TABLE_COLUMN_NAMES_ZH},
     rownames = FALSE,
-    options = list(ajax = list(url = action)),
+    options = list(
+      # Change interface language according to user selected language
+      # See https://rstudio.github.io/DT/004-i18n.html & https://datatables.net/plug-ins/i18n/
+      language = list(
+        url =
+          if(input$selected_language == "en") {
+            "https://cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json"
+          } else {
+            "https://cdn.datatables.net/plug-ins/1.12.1/i18n/zh-HANT.json"
+          }),
+      # Set up AJAX
+      ajax = list(url = action)
+    ),
     # Render HTML tags inside table (e.g. fontawesome icons in <i> tags)
     escape = FALSE
     ) %>%
