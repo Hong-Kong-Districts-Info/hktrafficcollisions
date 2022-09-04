@@ -179,54 +179,21 @@ ui <- dashboardPage(
               width = 3,
               id = "controls", class = "panel panel-default",
 
-              h3(span(icon("filter")), " Filters"),
+              h3(span(icon("filter")), " ", i18n$t("Filters")),
 
-              selectizeInput(
-                inputId = "district_filter",
-                label = "District(s):",
-                choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME),
-                multiple = TRUE,
-                selected = c("KC", "YTM", "SSP"),
-                options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "district_filter"
-                ),
+              uiOutput("district_filter_ui"),
 
-              airDatepickerInput("start_month",
-                                 label = "From",
-                                 value = "2016-01-01",
-                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 view = "months",
-                                 minView = "months",
-                                 dateFormat = "MM yyyy",
-                                 addon = "none"
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "date_filter"
-                ),
+              uiOutput("start_month_ui"),
 
-              airDatepickerInput("end_month",
-                                 label = "To",
-                                 value = "2016-12-01",
-                                 min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                                 view = "months",
-                                 minView = "months",
-                                 dateFormat = "MM yyyy",
-                                 addon = "none"
-              ),
+              uiOutput("end_month_ui"),
 
               checkboxGroupButtons(
-                inputId = "severity_filter", label = "Collision severity",
+                inputId = "severity_filter", label = i18n$t("Collision severity"),
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
                 choiceNames = c(
-                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
-                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">Serious</span></div>',
-                  '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">Slight</span></div>'
+                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">', i18n$t("Fatal"), '</span></div>'),
+                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">', i18n$t("Serious"), '</span></div>'),
+                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">', i18n$t("Slight"), '</span></div>')
                   ),
                 choiceValues = c(
                   "Fatal",
@@ -242,32 +209,13 @@ ui <- dashboardPage(
                   content = "severity_filter"
                   ),
 
-              collapsibleAwesomeCheckboxGroupInput(
-                inputId = "collision_type_filter", label = "Collision type",
-                i = 3,
-                # reverse alphabetical order
-                choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
-                selected = c("Vehicle collision with Pedestrian")
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "collision_type_filter"
-                ),
+              uiOutput("collision_type_filter_ui"),
 
-              collapsibleAwesomeCheckboxGroupInput(
-                inputId = "vehicle_class_filter", label = "Vehicle classes involved",
-                i = 2,
-                choices = unique(hk_vehicles$Vehicle_Class),
-                selected = unique(hk_vehicles$Vehicle_Class)
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "vehicle_class_filter"
-                ),
+              uiOutput("vehicle_class_filter_ui"),
 
               br(),
 
-              p("Number of collisions in current filter settings: ", textOutput("nrow_filtered", inline = TRUE),
+              p(i18n$t("Number of collisions in current filter settings: "), textOutput("nrow_filtered", inline = TRUE),
                 style = "font-size: 20px;text-align:center;"),
             )
           )

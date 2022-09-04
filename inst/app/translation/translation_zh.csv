@@ -7,3 +7,54 @@ Key Facts,行人車禍概要
 Data Download,數據下載
 Project Info,闗於此專案
 User Survey,用戶問卷調查
+Filters,篩選分類
+District(s),地區
+From,由（年月）
+To,至（年月）
+Collision severity,車禍嚴重程度
+Collision type,車禍類別
+Vehicle classes involved,涉事車輛類別
+Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
+Central and Western,中西區
+Wan Chai,灣仔區
+Eastern,東區
+Southern,南區
+Yau Tsim Mong,油尖旺區
+Sham Shui Po,深水埗區
+Kowloon City,九龍城區
+Wong Tai Sin,黃大仙區
+Kwun Tong,觀塘區
+Tsuen Wan,荃灣區
+Tuen Mun,屯門區
+Yuen Long,元朗區
+North,北區
+Tai Po,大埔區
+Sai Kung,西貢區
+Sha Tin,沙田區
+Kwai Tsing,葵青區
+Islands,離島區
+Fatal,致命
+Serious,嚴重
+Slight,輕微
+Vehicle collision with Object,車撞物
+Vehicle collision with Nothing,車輛沒有踫撞
+Vehicle collision with Vehicle,車撞車
+Pedal Cycle collision with Nothing,單車沒有踫撞
+Vehicle collision with Pedestrian,車撞行人
+Pedal Cycle collision with Pedestrian,單車撞行人
+Vehicle collision with Pedal Cycle,車撞單車
+Pedal Cycle collision with Object,單車撞物
+Pedal Cycle collision with Pedal Cycle,單車撞單車
+Private car,私家車
+Public franchised bus,公共專營巴士
+Taxi,的士
+Motorcycle,電單車
+Light goods vehicle,輕型貨車
+Bicycle,單車
+Heavy goods vehicle,重型貨車
+Medium goods vehicle,中型貨車
+Tram,電車
+Public light bus,公共小巴
+Others (incl. unknown),其他（包括類別不詳車輛）
+Public non-franchised bus,公共非專營巴士
+Light rail vehicle,輕鐵車輛

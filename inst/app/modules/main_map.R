@@ -1,3 +1,102 @@
+#############
+## Filter UI
+#############
+output$district_filter_ui = renderUI({
+  selectizeInput(
+    inputId = "district_filter",
+    label = i18n$t("District(s)"),
+    choices = stats::setNames(
+      DISTRICT_ABBR,
+      lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
+    ),
+    multiple = TRUE,
+    selected = c("KC", "YTM", "SSP"),
+    options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "district_filter"
+    )
+})
+
+output$start_month_ui = renderUI({
+  airDatepickerInput("start_month",
+                     label = i18n$t("From"),
+                     value = "2016-01-01",
+                     min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                     max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                     view = "months",
+                     minView = "months",
+                     dateFormat = "MM yyyy",
+                     language = input$selected_language,
+                     addon = "none"
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "date_filter"
+    )
+})
+
+output$end_month_ui = renderUI({
+  airDatepickerInput("end_month",
+                     label = i18n$t("To"),
+                     value = "2016-12-01",
+                     min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                     max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                     view = "months",
+                     minView = "months",
+                     dateFormat = "MM yyyy",
+                     language = input$selected_language,
+                     addon = "none"
+  )
+
+})
+
+collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
+
+output$collision_type_filter_ui = renderUI({
+  collapsibleAwesomeCheckboxGroupInput(
+    inputId = "collision_type_filter", label = i18n$t("Collision type"),
+    i = 3,
+    # reverse alphabetical order
+    choices = stats::setNames(
+      collision_type_choices,
+      lapply(collision_type_choices, function(x) {i18n$t(x)})
+    ),
+    selected = c("Vehicle collision with Pedestrian")
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "collision_type_filter"
+    )
+})
+
+vehicle_class_choices = unique(hk_vehicles$Vehicle_Class)
+
+output$vehicle_class_filter_ui = renderUI({
+  collapsibleAwesomeCheckboxGroupInput(
+    inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
+    i = 2,
+    choices = stats::setNames(
+      vehicle_class_choices,
+      lapply(vehicle_class_choices, function(x) {i18n$t(x)})
+    )
+    ,
+    selected = unique(hk_vehicles$Vehicle_Class)
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "vehicle_class_filter"
+    )
+})
+
+
+
+
+#############
+## Main Map
+#############
+
 output$main_map <- renderLeaflet({
   overview_map <- leaflet(options = leafletOptions(minZoom = 11, preferCanvas = TRUE)) %>%
     # Set default location to Mong Kok
@@ -28,8 +127,18 @@ output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark 
 # Filter the collision data according to users' input
 filter_collision_data <- reactive({
 
-  data_filtered = filter(hk_accidents_valid_sf,
-                         year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
+  # Test for checking initialise value of date, will return TRUE when render airDatepickerInput in server side
+  # message("is.null(input$end_month): ", is.null(input$end_month))
+
+  # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
+  if (is.null(input$end_month)) {
+    data_filtered = filter(hk_accidents_valid_sf,
+                           year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
+  } else {
+    data_filtered = filter(hk_accidents_valid_sf,
+                           year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
+  }
+
 
   message("Min date in filtered data: ", min(data_filtered$Date_Time))
   message("Max date in filtered data: ", max(data_filtered$Date_Time))

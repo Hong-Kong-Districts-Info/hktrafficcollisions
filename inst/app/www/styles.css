@@ -120,13 +120,13 @@
 
 /* Hide / Show all button in collapsible group checkbox */
 .bttn-minimal.bttn-primary {
-  color: #0d0d0d;
+  color: #0d0d0d !important;
 }
 
 /* Color of checkboxes */
 .checkbox-primary input[type="checkbox"]:checked+label::before, .checkbox-primary input[type="radio"]:checked+label::before {
-  background-color: #0d0d0d;
-  border-color: #0d0d0d;
+  background-color: #0d0d0d !important;
+  border-color: #0d0d0d !important;
 }
 
 /* colour of the sliders */
