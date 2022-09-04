@@ -179,11 +179,11 @@ ui <- dashboardPage(
               width = 3,
               id = "controls", class = "panel panel-default",
 
-              h3(span(icon("filter")), " Filters"),
+              h3(span(icon("filter")), " ", i18n$t("Filters")),
 
               selectizeInput(
                 inputId = "district_filter",
-                label = "District(s):",
+                label = i18n$t("District(s)"),
                 choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME),
                 multiple = TRUE,
                 selected = c("KC", "YTM", "SSP"),
@@ -195,7 +195,7 @@ ui <- dashboardPage(
                 ),
 
               airDatepickerInput("start_month",
-                                 label = "From",
+                                 label = i18n$t("From"),
                                  value = "2016-01-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
@@ -210,7 +210,7 @@ ui <- dashboardPage(
                 ),
 
               airDatepickerInput("end_month",
-                                 label = "To",
+                                 label = i18n$t("To"),
                                  value = "2016-12-01",
                                  min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                                  max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
@@ -221,7 +221,7 @@ ui <- dashboardPage(
               ),
 
               checkboxGroupButtons(
-                inputId = "severity_filter", label = "Collision severity",
+                inputId = "severity_filter", label = i18n$t("Collision severity"),
                 # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
                 choiceNames = c(
                   '<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">Fatal</span></div>',
@@ -243,7 +243,7 @@ ui <- dashboardPage(
                   ),
 
               collapsibleAwesomeCheckboxGroupInput(
-                inputId = "collision_type_filter", label = "Collision type",
+                inputId = "collision_type_filter", label = i18n$t("Collision type"),
                 i = 3,
                 # reverse alphabetical order
                 choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE),
@@ -255,7 +255,7 @@ ui <- dashboardPage(
                 ),
 
               collapsibleAwesomeCheckboxGroupInput(
-                inputId = "vehicle_class_filter", label = "Vehicle classes involved",
+                inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
                 i = 2,
                 choices = unique(hk_vehicles$Vehicle_Class),
                 selected = unique(hk_vehicles$Vehicle_Class)
@@ -267,7 +267,7 @@ ui <- dashboardPage(
 
               br(),
 
-              p("Number of collisions in current filter settings: ", textOutput("nrow_filtered", inline = TRUE),
+              p(i18n$t("Number of collisions in current filter settings: "), textOutput("nrow_filtered", inline = TRUE),
                 style = "font-size: 20px;text-align:center;"),
             )
           )
