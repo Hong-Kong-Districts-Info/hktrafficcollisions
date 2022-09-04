@@ -13,8 +13,22 @@ ui <- dashboardPage(
 
   # Header
   header = dashboardHeader(
-    title = "Hong Kong Traffic Injury Collision Database",
+    title = i18n$t("Hong Kong Traffic Injury Collision Database"),
     titleWidth = 400,
+
+    tags$li(class = "dropdown",
+            div(
+              radioGroupButtons(
+                inputId = "selected_language",
+                label = NULL,
+                choices = setNames(i18n$get_languages(), c("EN", "中")),
+                selected = i18n$get_key_translation(),
+                status = "dark",
+                size = "xs"
+              )
+            ),
+            # Align vertically to center and add spacing to the icons below
+            style = "margin-top: 12.5px;margin-right: 20px;"),
 
     tags$li(a(
       href = "https://hong-kong-districts-info.github.io/",
@@ -60,49 +74,49 @@ ui <- dashboardPage(
 
       # Collision Location Map
       menuItem(
-        text = "Collision Location Map",
+        text = i18n$t("Collision Location Map"),
         icon = icon(name = "map"),
         tabName = "tab_collision_location_map"
       ),
 
       # Dashboard
       menuItem(
-        text = "Dashboard",
+        text = i18n$t("Dashboard"),
         icon = icon(name = "tachometer-alt"),
         tabName = "tab_dashboard"
       ),
 
       # Pedestrian collision hotzones
       menuItem(
-        text = "Pedestrian collision hotzones",
+        text = i18n$t("Pedestrian collision hotzones"),
         icon = icon(name = "exclamation-triangle"),
         tabName = "tab_pedestrian_collision_hotzones"
       ),
 
       # Key Facts
       menuItem(
-        text = "Key Facts",
+        text = i18n$t("Key Facts"),
         icon = icon(name = "file-alt"),
         tabName = "tab_key_facts"
       ),
 
       # Data Download
       menuItem(
-        text = "Data Download",
+        text = i18n$t("Data Download"),
         icon = icon(name = "file-download"),
         tabName = "tab_data_download"
       ),
 
       # Project Info
       menuItem(
-        text = "Project Info",
+        text = i18n$t("Project Info"),
         icon = icon(name = "info"),
         tabName = "tab_project_info"
       ),
 
       # User Survey
       menuItem(
-        text = "User Survey",
+        text = i18n$t("User Survey"),
         icon = icon(name = "list"),
         tabName = "tab_user_survey"
       )
@@ -139,6 +153,9 @@ ui <- dashboardPage(
       tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
       includeScript("./modules/gomap.js")
     ),
+
+    # Monitor the state of the UI for live language translations
+    shiny.i18n::usei18n(i18n),
 
     tabItems(
 

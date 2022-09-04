@@ -20,6 +20,7 @@ library(shinyWidgets)
 library(shinyhelper)
 library(ggplot2)
 library(plotly, warn.conflicts = FALSE)
+library(shiny.i18n)
 
 ## interactive map
 library(sf)
@@ -42,6 +43,15 @@ OPENGRAPH_PROPS = list(
   image = "https://user-images.githubusercontent.com/29334677/183444210-1b983c91-476c-4534-8425-10999051f132.jpg",
   description = "Visualise Hong Kong traffic collision data with interactive mapping"
 )
+
+## Translation
+
+# file with translations
+i18n = Translator$new(translation_csvs_path = "./translation")
+
+# change this to en
+i18n$set_translation_language("en")
+i18n$use_js()
 
 
 # Data import -------------------------------------------------------------

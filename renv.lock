@@ -998,6 +998,22 @@
         "xtable"
       ]
     },
+    "shiny.i18n": {
+      "Package": "shiny.i18n",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3a90f99b8b5c2e9d2d17e841ba98c83f",
+      "Requirements": [
+        "R6",
+        "glue",
+        "jsonlite",
+        "rstudioapi",
+        "shiny",
+        "stringr",
+        "yaml"
+      ]
+    },
     "shinyWidgets": {
       "Package": "shinyWidgets",
       "Version": "0.7.0",
