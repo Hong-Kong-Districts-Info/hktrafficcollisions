@@ -50,7 +50,7 @@ output$hotzones_map = renderTmap({
     tm_lines(
       group = "Hotzone streets",
       title.col = "Hotzone Rank",
-      id = "Name",
+      id = if(input$selected_language == "en") {"Name"} else {"Name_zh"},
       col = "Area_RK",
       lwd = 7.5,
       palette = "inferno",
