@@ -6,7 +6,8 @@ COLLISION_PTS_TILE_URL = paste0(
   Sys.getenv("MAPBOX_PUBLIC_TOKEN")
   )
 
-TABLE_COLUMN_NAMES = c(
+# Cannot directly use i18n$t() inside names of the value, thus need to create two separate vectors to store the names
+TABLE_COLUMN_NAMES_EN = c(
   "Hot Zone Name" = "Name",
   "District" = "District",
   "Rank" = "Area_RK",
@@ -16,6 +17,15 @@ TABLE_COLUMN_NAMES = c(
   "Zoom to the Zone" = "zoom_in_map_link"
 )
 
+TABLE_COLUMN_NAMES_ZH = c(
+  "車禍熱區路段" = "Name",
+  "地區" = "District",
+  "排名" = "Area_RK",
+  "重災區路段長度（米）" = "Road_Length",
+  "2015 至 2019 年期間該路段發生之行人相關車禍總數" = "N_Colli",
+  "推算每公里車禍總數" = "Colli_Density",
+  "於互動地圖顯示此路段" = "zoom_in_map_link"
+)
 
 # Interactive heatmap
 output$hotzones_map = renderTmap({
@@ -65,7 +75,7 @@ output$hotzones_table = renderDataTable({
 
   datatable(
     hotzone_out_df,
-    colnames = TABLE_COLUMN_NAMES,
+    colnames = if(input$selected_language == "en") {TABLE_COLUMN_NAMES_EN} else {TABLE_COLUMN_NAMES_ZH},
     rownames = FALSE,
     options = list(ajax = list(url = action)),
     # Render HTML tags inside table (e.g. fontawesome icons in <i> tags)
@@ -73,7 +83,12 @@ output$hotzones_table = renderDataTable({
     ) %>%
     # Add in-cell bar chart for collision density
     formatStyle(
-      "Collision Density (No. of collisions per km of road)",
+      columns =
+        if(input$selected_language == "en") {
+          names(TABLE_COLUMN_NAMES_EN)[TABLE_COLUMN_NAMES_EN == "Colli_Density"]
+          } else {
+          names(TABLE_COLUMN_NAMES_ZH)[TABLE_COLUMN_NAMES_ZH == "Colli_Density"]
+          },
       # start the bar from left
       background = styleColorBar(c(0, max(hotzone_streets[["Colli_Density"]])), 'steelblue', angle = -90),
       # fix vertical length to avoid differences in the height of the bar when row height varies
