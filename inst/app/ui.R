@@ -16,6 +16,20 @@ ui <- dashboardPage(
     title = "Hong Kong Traffic Injury Collision Database",
     titleWidth = 400,
 
+    tags$li(class = "dropdown",
+            div(
+              radioGroupButtons(
+                inputId = "selected_language",
+                label = NULL,
+                choices = setNames(i18n$get_languages(), c("EN", "中")),
+                selected = i18n$get_key_translation(),
+                status = "dark",
+                size = "xs"
+              )
+            ),
+            # Align vertically to center and add spacing to the icons below
+            style = "margin-top: 12.5px;margin-right: 20px;"),
+
     tags$li(a(
       href = "https://hong-kong-districts-info.github.io/",
       icon(name = "globe-asia"),
