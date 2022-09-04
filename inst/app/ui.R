@@ -13,7 +13,7 @@ ui <- dashboardPage(
 
   # Header
   header = dashboardHeader(
-    title = "Hong Kong Traffic Injury Collision Database",
+    title = i18n$t("Hong Kong Traffic Injury Collision Database"),
     titleWidth = 400,
 
     tags$li(class = "dropdown",
