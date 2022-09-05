@@ -4,7 +4,7 @@
 output$district_filter_ui = renderUI({
   selectizeInput(
     inputId = "district_filter",
-    label = i18n$t("District(s):"),
+    label = i18n$t("District(s)"),
     choices = stats::setNames(
       DISTRICT_ABBR,
       lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
