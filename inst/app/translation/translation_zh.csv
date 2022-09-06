@@ -13,6 +13,7 @@ From,由（年月）
 To,至（年月）
 Collision severity,車禍嚴重程度
 Collision type,車禍類別
+Collision,車禍
 Vehicle classes involved,涉事車輛類別
 Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
 Central and Western,中西區
@@ -58,3 +59,34 @@ Public light bus,公共小巴
 Others (incl. unknown),其他（包括類別不詳車輛）
 Public non-franchised bus,公共非專營巴士
 Light rail vehicle,輕鐵車輛
+Fatal Collision,致命車禍
+Serious Collision,嚴重車禍
+Slight Collision,輕微車禍
+Serial number: ,序列號：
+Collision date: ,車禍發生日期：
+District: ,地區：
+Road name: ,道路名稱：
+Precise location: ,準確位置：
+Collision type: ,車禍類別：
+Number of vehicles: ,涉事車輛數目：
+Involved vehicle classes: ,涉事車輛種類：
+Number of casualties: ,傷亡人數：
+ driver(s),名司機
+ passenger(s),名乘客
+ pedestrian(s),名行人
+Road hierarchy: ,道路等級：
+Expressway,快速公路
+Main Road,主要道路
+Secondary Road,次要道路（內街／支路）
+Other Minor Road,小路（鄉村道路／行人徑）
+Road structure: ,道路結構：
+At grade road,地面道路
+Tunnel,行車隧道
+Flyover,天橋
+Pedestrian Way,行人路
+Bridge,橋
+Cycle Track,單車徑
+Underground road,地下道路
+Within 70 m of junctions? ,位處路口 70 米內？
+Yes,是
+No,否
