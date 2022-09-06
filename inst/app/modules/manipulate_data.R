@@ -60,3 +60,6 @@ hotzone_out_df = hotzone_streets %>%
   dplyr::select(-c(lat, lng)) %>%
   dplyr::relocate(Area_RK, zoom_in_map_link)
 
+# Write the output once updated
+# write_fst(hotzone_out_df, "./inst/app/data/data-manipulated/hotzone_out_df.fst")
+
