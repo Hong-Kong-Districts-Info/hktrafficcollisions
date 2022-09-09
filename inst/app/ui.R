@@ -88,7 +88,7 @@ ui <- dashboardPage(
 
       # Pedestrian collision hotzones
       menuItem(
-        text = i18n$t("Pedestrian collision hotzones"),
+        text = i18n$t("Pedestrian Collision Hotzones"),
         icon = icon(name = "exclamation-triangle"),
         tabName = "tab_pedestrian_collision_hotzones"
       ),
