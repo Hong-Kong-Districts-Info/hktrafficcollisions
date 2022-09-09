@@ -24,7 +24,7 @@ TABLE_COLUMN_NAMES_ZH = c(
   "重災區路段長度（米）" = "Road_Length",
   "2015 至 2019 年期間該路段發生之行人相關車禍總數" = "N_Colli",
   "車禍密度（每公里車禍總數）" = "Colli_Density",
-  "車禍熱區路段" = "Name_zh",
+  "車禍重災區路段" = "Name_zh",
   "地區" = "District_zh"
 )
 
