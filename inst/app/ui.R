@@ -440,6 +440,8 @@ ui <- dashboardPage(
           box(
             width = 12,
             title = i18n$t("Pedestrian Collision Hotzones"),
+            includeMarkdown("desc/hotzone.md"),
+
             tmapOutput(outputId = "hotzones_map")
           )
         ),
