@@ -181,6 +181,12 @@ ui <- dashboardPage(
 
               h3(span(icon("filter")), " ", i18n$t("Filters")),
 
+              p(
+                i18n$t("Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings."),
+                # add spacing to the first widget
+                style = "margin-bottom: 10px"
+                ),
+
               uiOutput("district_filter_ui"),
 
               uiOutput("start_month_ui"),
