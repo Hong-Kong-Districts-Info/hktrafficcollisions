@@ -22,7 +22,7 @@ ui <- dashboardPage(
                 inputId = "selected_language",
                 label = NULL,
                 choices = setNames(i18n$get_languages(), c("EN", "中")),
-                selected = i18n$get_key_translation(),
+                selected = "zh",
                 status = "dark",
                 size = "xs"
               )
