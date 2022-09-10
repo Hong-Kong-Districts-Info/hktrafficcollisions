@@ -502,8 +502,13 @@ ui <- dashboardPage(
             icon(name = "wrench"),
             "We are currently finding ways to host the data for download.",
             icon(name = "hammer"),
+            br(),
+            icon(name = "wrench"),
+            "我們正在尋找不同方法及系統以存放數據。",
+            icon(name = "hammer"),
             hr(),
             p("If you are interested in getting the traffic collision data, please contact us."),
+            p("若你有興趣獲取數據，請直接聯絡我們。")
           )
       ),
 
