@@ -439,7 +439,7 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
-            title = i18n$t("Pedestrian Collision Hotzones"),
+            title = span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones")),
             includeMarkdown("desc/hotzone.md"),
 
             tmapOutput(outputId = "hotzones_map")
@@ -464,7 +464,7 @@ ui <- dashboardPage(
           box(
             width = 12,
 
-            title = span(icon("file-alt"), "Key facts about pedestrian-related collisions"),
+            title = span(icon("file-alt"), i18n$t("Key facts about pedestrian-related collisions")),
             includeMarkdown("desc/key_facts.md"),
 
             column(
@@ -528,8 +528,8 @@ ui <- dashboardPage(
             width = 12,
             # Add icon inside heading
             # https://community.rstudio.com/t/how-to-add-an-icon-in-shinydashboard-box-title/20650
-            title = span(icon("th-list"), "Glossary of Terms"),
-            p("The following terms are used in this website."),
+            title = span(icon("th-list"), i18n$t("Glossary of Terms")),
+            i18n$t("The following terms are used in this website."),
             dataTableOutput(outputId = "terminology_table")
           )
         ),
