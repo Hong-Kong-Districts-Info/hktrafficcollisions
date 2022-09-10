@@ -100,13 +100,6 @@ ui <- dashboardPage(
         tabName = "tab_key_facts"
       ),
 
-      # Data Download
-      menuItem(
-        text = i18n$t("Data Download"),
-        icon = icon(name = "file-download"),
-        tabName = "tab_data_download"
-      ),
-
       # Project Info
       menuItem(
         text = i18n$t("Project Info"),
@@ -490,26 +483,6 @@ ui <- dashboardPage(
             )
           )
         )
-      ),
-
-      # Menu item: Data Download -----------------------------------------------
-
-      tabItem(
-        tabName = "tab_data_download",
-          box(
-            width = 12,
-            title = "Data Source",
-            icon(name = "wrench"),
-            "We are currently finding ways to host the data for download.",
-            icon(name = "hammer"),
-            br(),
-            icon(name = "wrench"),
-            "我們正在尋找不同方法及系統以存放數據。",
-            icon(name = "hammer"),
-            hr(),
-            p("If you are interested in getting the traffic collision data, please contact us."),
-            p("若你有興趣獲取數據，請直接聯絡我們。")
-          )
       ),
 
       # Menu item: Project Info ------------------------------------------------
