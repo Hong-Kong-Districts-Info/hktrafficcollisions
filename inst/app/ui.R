@@ -180,6 +180,8 @@ ui <- dashboardPage(
                 style = "margin-bottom: 10px"
                 ),
 
+              actionButton("zoom_to_pts", "Zoom to filtered features"),
+
               uiOutput("district_filter_ui"),
 
               uiOutput("month_range_ui"),
