@@ -181,7 +181,7 @@ ui <- dashboardPage(
                 ),
 
               div(
-                actionButton("zoom_to_pts", label = "Zoom to matched collisions", icon = icon("search-plus")),
+                actionButton("zoom_to_pts", label = i18n$t("Zoom to matched collisions"), icon = icon("search-plus")),
                 style = "display: flex;justify-content: center;align-items: center;margin-bottom: 10px;"
                 ),
 
