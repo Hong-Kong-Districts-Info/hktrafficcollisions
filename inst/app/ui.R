@@ -180,7 +180,10 @@ ui <- dashboardPage(
                 style = "margin-bottom: 10px"
                 ),
 
-              actionButton("zoom_to_pts", "Zoom to filtered features"),
+              div(
+                actionButton("zoom_to_pts", label = "Zoom to matched collisions", icon = icon("search-plus")),
+                style = "display: flex;justify-content: center;align-items: center;margin-bottom: 10px;"
+                ),
 
               uiOutput("district_filter_ui"),
 
