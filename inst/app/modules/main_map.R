@@ -19,10 +19,11 @@ output$district_filter_ui = renderUI({
     )
 })
 
-output$start_month_ui = renderUI({
-  airDatepickerInput("start_month",
+output$month_range_ui = renderUI({
+  airDatepickerInput("month_range",
                      label = i18n$t("From"),
-                     value = "2016-01-01",
+                     range = TRUE,
+                     value = c("2016-01-01", "2016-12-01"),
                      min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                      max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                      view = "months",
@@ -35,21 +36,6 @@ output$start_month_ui = renderUI({
       type = "markdown", colour = "#0d0d0d",
       content = "date_filter"
     )
-})
-
-output$end_month_ui = renderUI({
-  airDatepickerInput("end_month",
-                     label = i18n$t("To"),
-                     value = "2016-12-01",
-                     min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                     max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                     view = "months",
-                     minView = "months",
-                     dateFormat = "MM yyyy",
-                     language = input$selected_language,
-                     addon = "none"
-  )
-
 })
 
 collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
@@ -131,12 +117,12 @@ filter_collision_data <- reactive({
   # message("is.null(input$end_month): ", is.null(input$end_month))
 
   # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
-  if (is.null(input$end_month)) {
+  if (is.null(input$month_range)) {
     data_filtered = filter(hk_accidents_valid_sf,
                            year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
   } else {
     data_filtered = filter(hk_accidents_valid_sf,
-                           year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
+                           year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
   }
 
 
