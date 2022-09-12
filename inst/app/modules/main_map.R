@@ -21,7 +21,7 @@ output$district_filter_ui = renderUI({
 
 output$month_range_ui = renderUI({
   airDatepickerInput("month_range",
-                     label = i18n$t("From"),
+                     label = i18n$t("Date range"),
                      range = TRUE,
                      value = c("2016-01-01", "2016-12-01"),
                      min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
