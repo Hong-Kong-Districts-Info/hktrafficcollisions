@@ -28,7 +28,8 @@ output$month_range_ui = renderUI({
                      max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                      view = "months",
                      minView = "months",
-                     dateFormat = "MM yyyy",
+                     monthsField = "monthsShort",
+                     dateFormat = "M yyyy",
                      language = input$selected_language,
                      addon = "none"
   ) %>%
