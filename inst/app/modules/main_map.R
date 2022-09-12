@@ -221,7 +221,7 @@ observe({
     "https://maps.google.com/?cbll=", filter_collision_data()$latitude, ",", filter_collision_data()$longitude, "&cbp=0,0,0,0,0&layer=c",
     # open page in new tab
     "' target='_blank' rel='noopener noreferrer'>",
-    "View this location in Google Street View",
+    i18n$t("View this location in Google Street View"),
     "</a>"
 
   )
