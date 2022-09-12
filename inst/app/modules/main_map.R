@@ -208,7 +208,21 @@ observe({
     tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$Within_70m, i18n$t("Yes"), i18n$t("No")), tags$br(),
     # FIXME: Will impose warning messages if `Structure_Type` or `Road_Hierarchy` is NA
     tags$b(i18n$t("Road structure: ")), i18n$t(filter_collision_data()$Structure_Type), tags$br(),
-    tags$b(i18n$t("Road hierarchy: ")), i18n$t(filter_collision_data()$Road_Hierarchy)
+    tags$b(i18n$t("Road hierarchy: ")), i18n$t(filter_collision_data()$Road_Hierarchy),
+
+    tags$br(),
+    tags$br(),
+
+    # Use raw HTML since using tags$a() will result in error which link of all rows are included
+    # Because tags$a() vectorise and include all rows in one popup?
+    "<a href='",
+    # URL link of the street view, with bearing/zoom/tilt all set to 0
+    # https://developers.google.com/maps/documentation/urls/android-intents#display-a-street-view-panorama
+    "https://maps.google.com/?cbll=", filter_collision_data()$latitude, ",", filter_collision_data()$longitude, "&cbp=0,0,0,0,0&layer=c",
+    # open page in new tab
+    "' target='_blank' rel='noopener noreferrer'>",
+    i18n$t("View this location in Google Street View"),
+    "</a>"
 
   )
 
