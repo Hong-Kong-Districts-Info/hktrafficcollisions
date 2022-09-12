@@ -49,8 +49,8 @@ OPENGRAPH_PROPS = list(
 # file with translations
 i18n = Translator$new(translation_csvs_path = "./translation")
 
-# change this to en
-i18n$set_translation_language("en")
+# Set Traditional Chinese as default language
+i18n$set_translation_language("zh")
 i18n$use_js()
 
 

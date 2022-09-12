@@ -190,7 +190,7 @@ observe({
     tags$b(i18n$t("Number of vehicles: ")), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
     # Involved vehicle class
     # FIXME: Can't translate when collision includes >1 vehicle type
-    tags$b(i18n$t("Involved vehicle classes: ")), i18n$t(filter_collision_data()$vehicle_class_involved), tags$br(),
+    tags$b(i18n$t("Involved vehicle classes: ")), suppressWarnings(i18n$t(filter_collision_data()$vehicle_class_involved)), tags$br(),
 
     tags$br(),
 

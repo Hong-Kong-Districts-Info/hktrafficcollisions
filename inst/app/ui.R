@@ -22,7 +22,7 @@ ui <- dashboardPage(
                 inputId = "selected_language",
                 label = NULL,
                 choices = setNames(i18n$get_languages(), c("EN", "中")),
-                selected = i18n$get_key_translation(),
+                selected = "zh",
                 status = "dark",
                 size = "xs"
               )
@@ -88,7 +88,7 @@ ui <- dashboardPage(
 
       # Pedestrian collision hotzones
       menuItem(
-        text = i18n$t("Pedestrian collision hotzones"),
+        text = i18n$t("Pedestrian Collision Hotzones"),
         icon = icon(name = "exclamation-triangle"),
         tabName = "tab_pedestrian_collision_hotzones"
       ),
@@ -98,13 +98,6 @@ ui <- dashboardPage(
         text = i18n$t("Key Facts"),
         icon = icon(name = "file-alt"),
         tabName = "tab_key_facts"
-      ),
-
-      # Data Download
-      menuItem(
-        text = i18n$t("Data Download"),
-        icon = icon(name = "file-download"),
-        tabName = "tab_data_download"
       ),
 
       # Project Info
@@ -180,6 +173,12 @@ ui <- dashboardPage(
               id = "controls", class = "panel panel-default",
 
               h3(span(icon("filter")), " ", i18n$t("Filters")),
+
+              p(
+                i18n$t("Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings."),
+                # add spacing to the first widget
+                style = "margin-bottom: 10px"
+                ),
 
               uiOutput("district_filter_ui"),
 
@@ -431,7 +430,9 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
-            title = i18n$t("Pedestrian Collision Hotzones"),
+            title = span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones")),
+            includeMarkdown("desc/hotzone.md"),
+
             tmapOutput(outputId = "hotzones_map")
           )
         ),
@@ -454,7 +455,7 @@ ui <- dashboardPage(
           box(
             width = 12,
 
-            title = span(icon("file-alt"), "Key facts about pedestrian-related collisions"),
+            title = span(icon("file-alt"), i18n$t("Key facts about pedestrian-related collisions")),
             includeMarkdown("desc/key_facts.md"),
 
             column(
@@ -482,21 +483,6 @@ ui <- dashboardPage(
         )
       ),
 
-      # Menu item: Data Download -----------------------------------------------
-
-      tabItem(
-        tabName = "tab_data_download",
-          box(
-            width = 12,
-            title = "Data Source",
-            icon(name = "wrench"),
-            "We are currently finding ways to host the data for download.",
-            icon(name = "hammer"),
-            hr(),
-            p("If you are interested in getting the traffic collision data, please contact us."),
-          )
-      ),
-
       # Menu item: Project Info ------------------------------------------------
 
       tabItem(
@@ -513,8 +499,8 @@ ui <- dashboardPage(
             width = 12,
             # Add icon inside heading
             # https://community.rstudio.com/t/how-to-add-an-icon-in-shinydashboard-box-title/20650
-            title = span(icon("th-list"), "Glossary of Terms"),
-            p("The following terms are used in this website."),
+            title = span(icon("th-list"), i18n$t("Glossary of Terms")),
+            i18n$t("The following terms are used in this website."),
             dataTableOutput(outputId = "terminology_table")
           )
         ),

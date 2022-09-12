@@ -1,0 +1,3 @@
+此分頁顯示按車禍密度（每公里車禍事故次數）識別出之「行人車禍重災區」路段位置及其詳細資料。分析利用熱區（Hotzone Analysis）方法，詳情經已記載於[《交通意外不是意外 —— 香港行人車禍傷亡報告》](https://drive.google.com/file/d/1xLThTDhxnCszRCRdMHWLGwVsd1Ss1Jl_/view?usp=sharing)中「行人車禍熱區分析」之章節。
+
+This tab shows the location and information of the "pedestrian-related traffic collisions disaster area" identified using the Hotzone analysis method. Details of the analysis method are available in the "Pedestrian Collision Hotzone Analysis" Chapter of the [*‘Collision Not Accident’ - An Overview of Road Danger against Pedestrians in Hong Kong* report](https://drive.google.com/file/d/17eSbcPYrr2JwlMtKTLl7qvWMF-RsS4ug/view?usp=sharing).

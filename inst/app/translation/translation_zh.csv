@@ -1,13 +1,14 @@
 en,zh
 Hong Kong Traffic Injury Collision Database,香港車禍傷亡資料庫
 Collision Location Map,車禍地圖
-Dashboard,地區儀表版
-Pedestrian collision hotzones,行人車禍熱區
+Dashboard,地區儀表版（暫只提供英文版）
+Pedestrian Collision Hotzones,行人車禍重災區
 Key Facts,行人車禍概要
 Data Download,數據下載
-Project Info,闗於此專案
+Project Info,關於此專案
 User Survey,用戶問卷調查
 Filters,篩選分類
+Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings.,請利用下列不同種類的數據過濾器選擇你想顯示的車禍。地圖會自動按你現時所選擇的條件更新及顯示符合現有組合之車禍。
 District(s),地區
 Date range,日期範圍
 Collision severity,車禍嚴重程度
@@ -90,9 +91,11 @@ Within 70 m of junctions? ,位處路口 70 米內？
 Yes,是
 No,否
 View this location in Google Street View,於 Google 街景顯示此車禍位置
-Hotzone streets,車禍熱區街道
-Hotzone Rank,熱區排名
+Hotzone streets,車禍重災區路段
+Hotzone Rank,重災區排名
 Collisions with pedestrian injuries,涉及行人傷亡車禍地點
-Hot Zone Name,車禍熱區路段
-Pedestrian Collision Hotzones,行人車禍熱區
-Hotzones Table,行人車禍熱區詳細資料
+Hot Zone Name,車禍重災區路段
+Hotzones Table,行人車禍重災區詳細資料
+Key facts about pedestrian-related collisions,行人車禍概要
+Glossary of Terms,詞彙表
+The following terms are used in this website.,本網站使用之專用名詞及術語定義如下。
