@@ -183,9 +183,7 @@ ui <- dashboardPage(
 
               uiOutput("district_filter_ui"),
 
-              uiOutput("start_month_ui"),
-
-              uiOutput("end_month_ui"),
+              uiOutput("month_range_ui"),
 
               checkboxGroupButtons(
                 inputId = "severity_filter", label = i18n$t("Collision severity"),
