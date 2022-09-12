@@ -103,6 +103,22 @@
   Widgets
 */
 
+/* Override datepicker.min.css */
+.airdatepicker--cell.-in-range- {
+  background: rgba(13,13,13,.1) !important;
+}
+
+.airdatepicker--cell.-range-to- {
+  background: rgba(13,13,13,.1) !important;
+  border: 1px solid rgba(13,13,13,.5) !important;
+}
+
+/* -selected needs to placed below to override -range-to-, since end date have both properties */
+.airdatepicker--cell.-selected- {
+  background: #0d0d0d !important;
+}
+
+
 .filter__circle-marker {
   /* Align the circle marker to left together with the flex-grow prop of .filter__text */
   flex-grow: 0;

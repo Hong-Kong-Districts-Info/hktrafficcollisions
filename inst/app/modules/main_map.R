@@ -19,15 +19,17 @@ output$district_filter_ui = renderUI({
     )
 })
 
-output$start_month_ui = renderUI({
-  airDatepickerInput("start_month",
-                     label = i18n$t("From"),
-                     value = "2016-01-01",
+output$month_range_ui = renderUI({
+  airDatepickerInput("month_range",
+                     label = i18n$t("Date range"),
+                     range = TRUE,
+                     value = c("2016-01-01", "2016-12-01"),
                      min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                      max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
                      view = "months",
                      minView = "months",
-                     dateFormat = "MM yyyy",
+                     monthsField = "monthsShort",
+                     dateFormat = "M yyyy",
                      language = input$selected_language,
                      addon = "none"
   ) %>%
@@ -35,21 +37,6 @@ output$start_month_ui = renderUI({
       type = "markdown", colour = "#0d0d0d",
       content = "date_filter"
     )
-})
-
-output$end_month_ui = renderUI({
-  airDatepickerInput("end_month",
-                     label = i18n$t("To"),
-                     value = "2016-12-01",
-                     min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                     max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                     view = "months",
-                     minView = "months",
-                     dateFormat = "MM yyyy",
-                     language = input$selected_language,
-                     addon = "none"
-  )
-
 })
 
 collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
@@ -131,12 +118,12 @@ filter_collision_data <- reactive({
   # message("is.null(input$end_month): ", is.null(input$end_month))
 
   # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
-  if (is.null(input$end_month)) {
+  if (is.null(input$month_range)) {
     data_filtered = filter(hk_accidents_valid_sf,
                            year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
   } else {
     data_filtered = filter(hk_accidents_valid_sf,
-                           year_month >= floor_date_to_month(input$start_month) & year_month <= floor_date_to_month(input$end_month))
+                           year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
   }
 
 
@@ -221,7 +208,21 @@ observe({
     tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$Within_70m, i18n$t("Yes"), i18n$t("No")), tags$br(),
     # FIXME: Will impose warning messages if `Structure_Type` or `Road_Hierarchy` is NA
     tags$b(i18n$t("Road structure: ")), i18n$t(filter_collision_data()$Structure_Type), tags$br(),
-    tags$b(i18n$t("Road hierarchy: ")), i18n$t(filter_collision_data()$Road_Hierarchy)
+    tags$b(i18n$t("Road hierarchy: ")), i18n$t(filter_collision_data()$Road_Hierarchy),
+
+    tags$br(),
+    tags$br(),
+
+    # Use raw HTML since using tags$a() will result in error which link of all rows are included
+    # Because tags$a() vectorise and include all rows in one popup?
+    "<a href='",
+    # URL link of the street view, with bearing/zoom/tilt all set to 0
+    # https://developers.google.com/maps/documentation/urls/android-intents#display-a-street-view-panorama
+    "https://maps.google.com/?cbll=", filter_collision_data()$latitude, ",", filter_collision_data()$longitude, "&cbp=0,0,0,0,0&layer=c",
+    # open page in new tab
+    "' target='_blank' rel='noopener noreferrer'>",
+    i18n$t("View this location in Google Street View"),
+    "</a>"
 
   )
 

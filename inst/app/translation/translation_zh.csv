@@ -10,8 +10,7 @@ User Survey,用戶問卷調查
 Filters,篩選分類
 Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings.,請利用下列不同種類的數據過濾器選擇你想顯示的車禍。地圖會自動按你現時所選擇的條件更新及顯示符合現有組合之車禍。
 District(s),地區
-From,由（年月）
-To,至（年月）
+Date range,日期範圍
 Collision severity,車禍嚴重程度
 Collision type,車禍類別
 Collision,車禍
@@ -91,6 +90,7 @@ Underground road,地下道路
 Within 70 m of junctions? ,位處路口 70 米內？
 Yes,是
 No,否
+View this location in Google Street View,於 Google 街景顯示此車禍位置
 Hotzone streets,車禍重災區路段
 Hotzone Rank,重災區排名
 Collisions with pedestrian injuries,涉及行人傷亡車禍地點
