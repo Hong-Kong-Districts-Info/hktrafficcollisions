@@ -180,6 +180,11 @@ ui <- dashboardPage(
                 style = "margin-bottom: 10px"
                 ),
 
+              div(
+                actionButton("zoom_to_pts", label = i18n$t("Zoom to matched collisions"), icon = icon("search-plus")),
+                style = "display: flex;justify-content: center;align-items: center;margin-bottom: 10px;"
+                ),
+
               uiOutput("district_filter_ui"),
 
               uiOutput("month_range_ui"),

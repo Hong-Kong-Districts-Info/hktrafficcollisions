@@ -1,6 +1,16 @@
 #############
 ## Filter UI
 #############
+
+observeEvent(input$zoom_to_pts, {
+  data_bbox = st_bbox(filter_collision_data())
+
+  fitBounds(
+    leafletProxy("main_map"),
+    data_bbox[["xmin"]], data_bbox[["ymin"]], data_bbox[["xmax"]], data_bbox[["ymax"]]
+    )
+})
+
 output$district_filter_ui = renderUI({
   selectizeInput(
     inputId = "district_filter",

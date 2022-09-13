@@ -9,6 +9,7 @@ Project Info,關於此專案
 User Survey,用戶問卷調查
 Filters,篩選分類
 Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings.,請利用下列不同種類的數據過濾器選擇你想顯示的車禍。地圖會自動按你現時所選擇的條件更新及顯示符合現有組合之車禍。
+Zoom to matched collisions,縮放至合符現有篩選條件之車禍
 District(s),地區
 Date range,日期範圍
 Collision severity,車禍嚴重程度
