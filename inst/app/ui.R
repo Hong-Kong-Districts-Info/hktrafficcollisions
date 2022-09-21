@@ -493,9 +493,17 @@ ui <- dashboardPage(
       tabItem(
         tabName = "tab_project_info",
         fluidRow(
-          box(
-            width = 12,
-            includeMarkdown("desc/information.md")
+
+          # align the box to center if screen width is larger than max-width
+          style = "display:flex; justify-content:center;",
+          div(
+            # box do not support custom style, need to warp it in div
+            # 640 for body + 15px*2 for padding
+            style = "max-width:670px !important",
+            box(
+              width = 12,
+              includeMarkdown("desc/information.md")
+            )
           )
         ),
 
