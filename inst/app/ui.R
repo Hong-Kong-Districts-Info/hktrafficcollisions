@@ -438,15 +438,12 @@ ui <- dashboardPage(
             title = span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones")),
             includeMarkdown("desc/hotzone.md"),
 
-            tmapOutput(outputId = "hotzones_map")
-          )
-        ),
-        fluidRow(
-          box(
-            width = 12,
-            title = i18n$t("Hotzones Table"),
-            dataTableOutput(outputId = "hotzones_table")
+            tmapOutput(outputId = "hotzones_map"),
 
+            tags$br(),
+            h4(i18n$t("Hotzones Table")),
+
+            dataTableOutput(outputId = "hotzones_table")
           )
         )
       ),
