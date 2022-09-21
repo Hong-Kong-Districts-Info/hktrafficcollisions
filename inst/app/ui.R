@@ -438,7 +438,7 @@ ui <- dashboardPage(
             title = span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones")),
             includeMarkdown("desc/hotzone.md"),
 
-            tmapOutput(outputId = "hotzones_map"),
+            tmapOutput(outputId = "hotzones_map", height = "50vh"),
 
             tags$br(),
             h4(i18n$t("Hotzones Table")),
