@@ -33,4 +33,5 @@ jobs:
           path: ${{ env.RENV_PATHS_ROOT }}
           key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
-      - uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
+      - name: R-CMD-check
+        uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
