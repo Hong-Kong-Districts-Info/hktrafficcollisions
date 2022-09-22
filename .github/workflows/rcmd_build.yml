@@ -1,18 +1,36 @@
+# Workflow derived from https://github.com/rstudio/shiny-workflows
+#
+# NOTE: This Shiny team GHA workflow is overkill for most R packages.
+# For most R packages it is better to use https://github.com/r-lib/actions
+
 on: [push, pull_request]
 
-name: R-CMD-check
+name: Package checks
 
 jobs:
   R-CMD-check:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
-      - name: Install dependencies
+      # https://github.com/actions/cache/blob/main/examples.md#r---renv
+      - name: Set RENV_PATHS_ROOT
+        shell: bash
         run: |
-          install.packages(pkgs = c("devtools"))
-          remotes::install_deps(dependencies = TRUE)
+          echo "RENV_PATHS_ROOT=${{ runner.temp }}/renv" >> $GITHUB_ENV
+      - name: Install and activate renv
+        run: |
+          install.packages("renv")
+          renv::activate()
         shell: Rscript {0}
-      - name: Check
-        run: devtools::check(error_on = "error")
+      - name: Get R and OS version
+        id: get-version
+        run: |
+          cat("##[set-output name=os-version;]", sessionInfo()$running, "\n", sep = "")
+          cat("##[set-output name=r-version;]", R.Version()$version.string, sep = "")
         shell: Rscript {0}
+      - name: Restore Renv package cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
+          restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
+      - uses: rstudio/shiny-workflows/.github/workflows/R-CMD-check.yaml@v1
