@@ -122,41 +122,48 @@ output$main_map <- renderLeaflet({
 output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark = ","))
 
 # Filter the collision data according to users' input
-filter_collision_data <- reactive({
+filter_collision_data <-
+  debounce(
+    # Run the query 0.75 s after user stops changing filter inputs
+    millis = 750,
+    r = reactive({
 
-  # Test for checking initialise value of date, will return TRUE when render airDatepickerInput in server side
-  # message("is.null(input$end_month): ", is.null(input$end_month))
+      # Test for checking initialise value of date, will return TRUE when render airDatepickerInput in server side
+      # message("is.null(input$end_month): ", is.null(input$end_month))
 
-  # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
-  if (is.null(input$month_range)) {
-    data_filtered = filter(hk_accidents_valid_sf,
-                           year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
-  } else {
-    data_filtered = filter(hk_accidents_valid_sf,
-                           year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
-  }
+      # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
+      if (is.null(input$month_range)) {
+        data_filtered = filter(hk_accidents_valid_sf,
+                               year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
+      } else {
+        data_filtered = filter(hk_accidents_valid_sf,
+                               year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
+      }
 
 
-  message("Min date in filtered data: ", min(data_filtered$Date_Time))
-  message("Max date in filtered data: ", max(data_filtered$Date_Time))
+      message("Min date in filtered data: ", min(data_filtered$Date_Time))
+      message("Max date in filtered data: ", max(data_filtered$Date_Time))
 
-  data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
+      data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
 
-  data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
+      data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
 
-  data_filtered = filter(data_filtered, District_Council_District %in% input$district_filter)
+      data_filtered = filter(data_filtered, District_Council_District %in% input$district_filter)
 
-  # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
-  accient_w_selected_veh <- filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
+      # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
+      accient_w_selected_veh <- filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
 
-  # convert column to vector
-  # remove duplicated serial number if there are more than 1 vehicle class
-  accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
+      # convert column to vector
+      # remove duplicated serial number if there are more than 1 vehicle class
+      accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
 
-  data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
+      data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
 
-  data_filtered
-})
+      data_filtered
+    })
+  )
+
+
 
 observe({
 
