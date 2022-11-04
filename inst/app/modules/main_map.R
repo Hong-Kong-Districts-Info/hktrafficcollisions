@@ -39,7 +39,7 @@ output$month_range_ui = renderUI({
                      view = "months",
                      minView = "months",
                      monthsField = "monthsShort",
-                     dateFormat = "M yyyy",
+                     dateFormat = "MMM yyyy",
                      language = input$selected_language,
                      addon = "none"
   ) %>%
