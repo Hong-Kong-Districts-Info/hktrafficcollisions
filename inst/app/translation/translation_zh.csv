@@ -13,7 +13,7 @@ Zoom to matched collisions,縮放至合符現有篩選條件之車禍
 District(s),地區
 Date range,日期範圍
 Collision severity,車禍嚴重程度
-Collision type,車禍類別
+Collision type,車輛碰撞類別
 Collision,車禍
 Vehicle classes involved,涉事車輛類別
 Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
@@ -39,9 +39,9 @@ Fatal,致命
 Serious,嚴重
 Slight,輕微
 Vehicle collision with Object,車撞物
-Vehicle collision with Nothing,車輛沒有踫撞
+Vehicle collision with Nothing,車輛沒有碰撞
 Vehicle collision with Vehicle,車撞車
-Pedal Cycle collision with Nothing,單車沒有踫撞
+Pedal Cycle collision with Nothing,單車沒有碰撞
 Vehicle collision with Pedestrian,車撞行人
 Pedal Cycle collision with Pedestrian,單車撞行人
 Vehicle collision with Pedal Cycle,車撞單車
