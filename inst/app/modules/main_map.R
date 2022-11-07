@@ -161,6 +161,26 @@ filter_collision_data <-
 
       # Show at most 20,000 points on the map to ensure performance
       if (nrow(data_filtered) > 20000) {
+
+        showNotification(
+          paste(
+            "
+            地圖不能顯示所有符合篩選條件的車禍。
+            此地圖只可以同時顯示最多 20,000 宗車禍，而現有篩選條件包含超過 20,000 宗車禍。
+            地圖只會顯示首 20,000 宗符合條件的車禍。
+            請更改篩選條件（如刪除地區，縮短日期範圍）以顯示所有符合篩選條件之車禍。
+            ",
+            "
+            The map cannot show all collisions matching the requirements.
+            The total number of collisions included in current filter settings exceeds the rendering capacity (20,000 points) of the map.
+            Only the first 20,000 records are shown on the map.
+            Change the filters (e.g. remove districts outside your area of interest, shortern the time frame) to show all filtered records.
+            "
+            , collapse = "<br/>"),
+          type = "error",
+          duration = NULL,
+        )
+
         return(data_filtered[1:20000,])
       }
 
