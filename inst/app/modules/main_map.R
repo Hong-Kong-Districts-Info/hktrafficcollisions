@@ -20,8 +20,8 @@ output$district_filter_ui = renderUI({
       lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
     ),
     multiple = TRUE,
-    selected = c("KC", "YTM", "SSP"),
-    options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
+    selected = DISTRICT_ABBR,
+    options = list(placeholder = 'Select districts')
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
