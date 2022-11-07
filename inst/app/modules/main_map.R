@@ -159,6 +159,11 @@ filter_collision_data <-
 
       data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
 
+      # Show at most 20,000 points on the map to ensure performance
+      if (nrow(data_filtered) > 20000) {
+        return(data_filtered[1:20000,])
+      }
+
       data_filtered
     })
   )
