@@ -1,1 +1,0 @@
-Collision type refers to *"which vehicle type"* collide into *"what object"*. In this filter, vehicle types are classified into two categories: vehicle and pedal cycle. The object are classified into five categories: vehicle, pedal cycle, pedestrian, object and nothing.

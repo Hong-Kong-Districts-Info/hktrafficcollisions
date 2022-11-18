@@ -189,27 +189,7 @@ ui <- dashboardPage(
 
               uiOutput("month_range_ui"),
 
-              checkboxGroupButtons(
-                inputId = "severity_filter", label = i18n$t("Collision severity"),
-                # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
-                choiceNames = c(
-                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">', i18n$t("Fatal"), '</span></div>'),
-                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">', i18n$t("Serious"), '</span></div>'),
-                  paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">', i18n$t("Slight"), '</span></div>')
-                  ),
-                choiceValues = c(
-                  "Fatal",
-                  "Serious",
-                  "Slight"
-                  ),
-                selected = unique(hk_accidents$Severity),
-                direction = "vertical",
-                justified = TRUE
-              ) %>%
-                shinyhelper::helper(
-                  type = "markdown", colour = "#0d0d0d",
-                  content = "severity_filter"
-                  ),
+              uiOutput("severity_filter_ui"),
 
               uiOutput("collision_type_filter_ui"),
 

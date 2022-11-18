@@ -25,7 +25,7 @@ output$district_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "district_filter"
+      content = "filter_district"
     )
 })
 
@@ -45,9 +45,34 @@ output$month_range_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "date_filter"
+      content = "filter_date"
     )
 })
+
+output$severity_filter_ui = renderUI({
+  checkboxGroupButtons(
+    inputId = "severity_filter", label = i18n$t("Collision severity"),
+    # TODO: use sprintf and global SEVERITY_COLOR constant for mapping icon color
+    choiceNames = c(
+      paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FF4039;"></span><span class="filter__text">', i18n$t("Fatal"), '</span></div>'),
+      paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFB43F;"></span><span class="filter__text">', i18n$t("Serious"), '</span></div>'),
+      paste0('<div style="display: flex;justify-content: center;align-items: center;"><span class="filter__circle-marker" style="background-color: #FFE91D"></span><span class="filter__text">', i18n$t("Slight"), '</span></div>')
+    ),
+    choiceValues = c(
+      "Fatal",
+      "Serious",
+      "Slight"
+    ),
+    selected = unique(hk_accidents$Severity),
+    direction = "vertical",
+    justified = TRUE
+  ) %>%
+    shinyhelper::helper(
+      type = "markdown", colour = "#0d0d0d",
+      content = "filter_severity"
+    )
+})
+
 
 collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
 
@@ -64,7 +89,7 @@ output$collision_type_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "collision_type_filter"
+      content = "filter_collision_type"
     )
 })
 
@@ -83,7 +108,7 @@ output$vehicle_class_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "vehicle_class_filter"
+      content = "filter_vehicle_class"
     )
 })
 
