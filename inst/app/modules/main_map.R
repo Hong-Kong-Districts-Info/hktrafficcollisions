@@ -25,7 +25,7 @@ output$district_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "district_filter"
+      content = "filter_district"
     )
 })
 
@@ -45,7 +45,7 @@ output$month_range_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "date_filter"
+      content = "filter_date"
     )
 })
 
@@ -69,7 +69,7 @@ output$severity_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "severity_filter"
+      content = "filter_severity"
     )
 })
 
@@ -89,7 +89,7 @@ output$collision_type_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "collision_type_filter"
+      content = "filter_collision_type"
     )
 })
 
@@ -108,7 +108,7 @@ output$vehicle_class_filter_ui = renderUI({
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
-      content = "vehicle_class_filter"
+      content = "filter_vehicle_class"
     )
 })
 
