@@ -20,8 +20,8 @@ output$district_filter_ui = renderUI({
       lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
     ),
     multiple = TRUE,
-    selected = c("KC", "YTM", "SSP"),
-    options = list(maxItems = 3, placeholder = 'Select districts (3 maximum)')
+    selected = DISTRICT_ABBR,
+    options = list(placeholder = 'Select districts')
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
@@ -39,7 +39,7 @@ output$month_range_ui = renderUI({
                      view = "months",
                      minView = "months",
                      monthsField = "monthsShort",
-                     dateFormat = "M yyyy",
+                     dateFormat = "MMM yyyy",
                      language = input$selected_language,
                      addon = "none"
   ) %>%
@@ -184,6 +184,31 @@ filter_collision_data <-
 
       data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
 
+      # Show at most 20,000 points on the map to ensure performance
+      if (nrow(data_filtered) > 20000) {
+
+        showNotification(
+          paste(
+            "
+            地圖不能顯示所有符合篩選條件的車禍。
+            此地圖只可以同時顯示最多 20,000 宗車禍，而現有篩選條件包含超過 20,000 宗車禍。
+            地圖只會顯示首 20,000 宗符合條件的車禍。
+            請更改篩選條件（如刪除地區，縮短日期範圍）以顯示所有符合篩選條件之車禍。
+            ",
+            "
+            The map cannot show all collisions matching the requirements.
+            The total number of collisions included in current filter settings exceeds the rendering capacity (20,000 points) of the map.
+            Only the first 20,000 records are shown on the map.
+            Change the filters (e.g. remove districts outside your area of interest, shortern the time frame) to show all filtered records.
+            "
+            , collapse = "<br/>"),
+          type = "error",
+          duration = NULL,
+        )
+
+        return(data_filtered[1:20000,])
+      }
+
       data_filtered
     })
   )
@@ -248,9 +273,10 @@ observe({
     tags$br(),
 
     tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$Within_70m, i18n$t("Yes"), i18n$t("No")), tags$br(),
-    # FIXME: Will impose warning messages if `Structure_Type` or `Road_Hierarchy` is NA
     tags$b(i18n$t("Road structure: ")), i18n$t(filter_collision_data()$Structure_Type), tags$br(),
-    tags$b(i18n$t("Road hierarchy: ")), i18n$t(filter_collision_data()$Road_Hierarchy),
+    # Suppress warning message from i18n when `Road_Hierarchy` is NA
+    # TODO: Transform NA to ''?
+    tags$b(i18n$t("Road hierarchy: ")), suppressWarnings(i18n$t(filter_collision_data()$Road_Hierarchy)),
 
     tags$br(),
     tags$br(),
