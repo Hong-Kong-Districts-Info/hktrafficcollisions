@@ -14,7 +14,10 @@ output$dsb_filter_ui = renderUI({
 output$ksi_filter_ui = renderUI({
   selectInput(
     inputId = "ddsb_ksi_filter", label = "Select collision severity category",
-    choices = c("All", "Killed or Seriously Injuries only"),
+    choices = setNames(
+      c("all", "ksi_only"),
+      c("All", "Killed or Seriously Injuries only")
+      ),
     selected = "all"
   )
 })
@@ -31,7 +34,7 @@ ddsb_filtered_hk_accidents = reactive({
   hk_accidents_filtered = filter(hk_accidents_filtered, Year >= input$ddsb_year_filter[1] & Year <= input$ddsb_year_filter[2])
 
   # remove slightly injured collisions if user select "KSI only" option
-  if (input$ddsb_ksi_filter == "Killed or Seriously Injuries only") {
+  if (ddsb_ksi_filter == "ksi_only") {
     hk_accidents_filtered = filter(hk_accidents_filtered, Severity != "Slight")
   }
 
