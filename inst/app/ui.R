@@ -230,10 +230,7 @@ ui <- dashboardPage(
           box(
             width = 4,
             title = "All/ KSI Filter",
-            selectInput(
-              inputId = "ddsb_ksi_filter", label = "Select collision severity category",
-              choices = c("All", "Killed or Seriously Injuries only")
-            )
+            uiOutput("ksi_filter_ui")
           )
         ),
 

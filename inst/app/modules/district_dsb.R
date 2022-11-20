@@ -11,6 +11,14 @@ output$dsb_filter_ui = renderUI({
   )
 })
 
+output$ksi_filter_ui = renderUI({
+  selectInput(
+    inputId = "ddsb_ksi_filter", label = "Select collision severity category",
+    choices = c("All", "Killed or Seriously Injuries only"),
+    selected = "all"
+  )
+})
+
 
 # Return filtered hk_accidents dataframe according to users' selected inputs
 ddsb_filtered_hk_accidents = reactive({
