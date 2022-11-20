@@ -16,7 +16,7 @@ output$ksi_filter_ui = renderUI({
     inputId = "ddsb_ksi_filter", label = "Select collision severity category",
     choices = setNames(
       c("all", "ksi_only"),
-      c("All", "Killed or Seriously Injuries only")
+      c(i18n$t("All Severities"), i18n$t("Killed or Seriously Injuries only"))
       ),
     selected = "all"
   )
