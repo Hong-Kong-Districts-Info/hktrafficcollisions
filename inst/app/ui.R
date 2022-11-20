@@ -214,10 +214,7 @@ ui <- dashboardPage(
           box(
             width = 4,
             title = "Area Filter",
-            selectInput(
-              inputId = "ddsb_district_filter", label = "Select District",
-              choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME)
-            )
+            uiOutput("dsb_filter_ui")
           ),
           box(
             width = 4,
