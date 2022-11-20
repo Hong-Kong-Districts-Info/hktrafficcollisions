@@ -213,17 +213,14 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 4,
-            title = "Area Filter",
-            selectInput(
-              inputId = "ddsb_district_filter", label = "Select District",
-              choices = setNames(DISTRICT_ABBR, DISTRICT_FULL_NAME)
-            )
+            title = i18n$t("Area Filter"),
+            uiOutput("dsb_filter_ui")
           ),
           box(
             width = 4,
-            title = "Year Filter",
+            title = i18n$t("Year Filter"),
             sliderInput(
-              inputId =  "ddsb_year_filter", label = "Select time period:",
+              inputId =  "ddsb_year_filter", label = i18n$t("Select time period"),
               min = 2014, max = 2019,
               value = c(2015, 2019),
               # Remove thousands separator
@@ -232,11 +229,8 @@ ui <- dashboardPage(
           ),
           box(
             width = 4,
-            title = "All/ KSI Filter",
-            selectInput(
-              inputId = "ddsb_ksi_filter", label = "Select collision severity category",
-              choices = c("All", "Killed or Seriously Injuries only")
-            )
+            title = i18n$t("All/ KSI Filter"),
+            uiOutput("ksi_filter_ui")
           )
         ),
 
