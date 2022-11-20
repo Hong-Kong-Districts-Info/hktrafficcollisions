@@ -212,25 +212,31 @@ ui <- dashboardPage(
         # Filters
         fluidRow(
           box(
-            width = 4,
-            title = i18n$t("Area Filter"),
-            uiOutput("dsb_filter_ui")
-          ),
-          box(
-            width = 4,
-            title = i18n$t("Year Filter"),
-            sliderInput(
-              inputId =  "ddsb_year_filter", label = i18n$t("Select time period"),
-              min = 2014, max = 2019,
-              value = c(2015, 2019),
-              # Remove thousands separator
-              sep = ""
+            width = 12,
+
+            column(
+              width = 4,
+              title = i18n$t("Area Filter"),
+              uiOutput("dsb_filter_ui")
+            ),
+
+            column(
+              width = 4,
+              title = i18n$t("Year Filter"),
+              sliderInput(
+                inputId =  "ddsb_year_filter", label = i18n$t("Select time period"),
+                min = 2014, max = 2019,
+                value = c(2015, 2019),
+                # Remove thousands separator
+                sep = ""
+              )
+            ),
+
+            column(
+              width = 4,
+              title = i18n$t("All/ KSI Filter"),
+              uiOutput("ksi_filter_ui")
             )
-          ),
-          box(
-            width = 4,
-            title = i18n$t("All/ KSI Filter"),
-            uiOutput("ksi_filter_ui")
           )
         ),
 
