@@ -34,6 +34,9 @@ ddsb_filtered_hk_accidents = reactive({
   hk_accidents_filtered = filter(hk_accidents_filtered, Year >= input$ddsb_year_filter[1] & Year <= input$ddsb_year_filter[2])
 
   # remove slightly injured collisions if user select "KSI only" option
+  # FIXME: Temp workaround to fix non-initialised value when KSI filter renders in server side
+  ddsb_ksi_filter = if (is.null(input$ddsb_ksi_filter)) "all" else input$ddsb_ksi_filter
+
   if (ddsb_ksi_filter == "ksi_only") {
     hk_accidents_filtered = filter(hk_accidents_filtered, Severity != "Slight")
   }
