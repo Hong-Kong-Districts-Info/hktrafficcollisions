@@ -147,16 +147,9 @@ output$ddsb_all_ksi_plot = renderPlotly({
 # Collision by year plot
 output$ddsb_all_year_plot = renderPlotly({
 
-  selected_district_data = filter(hk_accidents, District_Council_District == input$ddsb_district_filter)
-
-  year_min = input$ddsb_year_filter[1]
-  year_max = input$ddsb_year_filter[2]
-
   plot_data = count(ddsb_filtered_hk_accidents(), Year, name = "count", na.rm = TRUE)
 
   collision_year_trend_plot = ggplot(plot_data, aes(x = Year, y = count)) +
-    # ggplotly does not support `ymin = -Inf, ymax = Inf`
-    annotate("rect", xmin = year_min, xmax = year_max, ymin = 0, ymax = max(plot_data$count), alpha = .2, fill = "red") +
     geom_line() +
     theme_minimal() +
     theme(
@@ -168,13 +161,7 @@ output$ddsb_all_year_plot = renderPlotly({
       title = "Trend of collision in selected district"
     )
 
-  out_plot = ggplotly(collision_year_trend_plot)
-
-  # Disable tooltip of the annotation geom
-  # https://stackoverflow.com/questions/45801389/disable-hover-information-for-a-specific-layer-geom-of-plotly
-  out_plot$x$data[[1]]$hoverinfo <- "none"
-
-  out_plot
+  ggplotly(collision_year_trend_plot)
 
 })
 
