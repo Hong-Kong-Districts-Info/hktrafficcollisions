@@ -4,7 +4,9 @@
 # Return filtered hk_accidents dataframe according to users' selected inputs
 ddsb_filtered_hk_accidents = reactive({
   # filter by users' selected district
-  hk_accidents_filtered = filter(hk_accidents, District_Council_District == input$ddsb_district_filter)
+  # FIXME: Temp workaround to fix non-initialised value when district filter renders in server side
+  ddsb_district_filter = if (is.null(input$ddsb_district_filter)) "CW" else input$ddsb_district_filter
+  hk_accidents_filtered = filter(hk_accidents, District_Council_District == ddsb_district_filter)
 
   # filter by users' selected time range
   hk_accidents_filtered = filter(hk_accidents_filtered, Year >= input$ddsb_year_filter[1] & Year <= input$ddsb_year_filter[2])
