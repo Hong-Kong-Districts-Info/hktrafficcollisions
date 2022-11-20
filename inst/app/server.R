@@ -34,6 +34,7 @@ server <- function(input, output, session) {
 
 
   # ----- TAB: Dashboard ----- #
+  source(file = "modules/district_dsb.R", local = TRUE)
   source(file = "modules/district_dsb_all.R", local = TRUE)
   source(file = "modules/district_dsb_ped.R", local = TRUE)
   source(file = "modules/district_dsb_cyc.R", local = TRUE)
