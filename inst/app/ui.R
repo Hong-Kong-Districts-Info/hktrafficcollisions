@@ -215,6 +215,8 @@ ui <- dashboardPage(
             width = 12,
             title = span(icon("tachometer-alt"), i18n$t("District Dashboard")),
 
+            h4(i18n$t("Select collisions to be summarised")),
+
             column(
               width = 4,
               title = i18n$t("Area Filter"),
