@@ -152,7 +152,7 @@ output$ddsb_all_year_plot = renderPlotly({
   year_min = input$ddsb_year_filter[1]
   year_max = input$ddsb_year_filter[2]
 
-  plot_data = count(selected_district_data, Year, name = "count", na.rm = TRUE)
+  plot_data = count(ddsb_filtered_hk_accidents(), Year, name = "count", na.rm = TRUE)
 
   collision_year_trend_plot = ggplot(plot_data, aes(x = Year, y = count)) +
     # ggplotly does not support `ymin = -Inf, ymax = Inf`
