@@ -112,9 +112,6 @@ output$ddsb_all_ksi_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Collisions by Severity"
     )
 
   ggplotly(plot_by_severity)
@@ -132,10 +129,7 @@ output$ddsb_all_year_plot = renderPlotly({
       panel.grid.major.x = element_blank()
     ) +
     scale_y_continuous(limits = c(0, NA)) +
-    labs(
-      x = "Year",
-      title = "Trend of collision in selected district"
-    )
+    labs(x = "Year")
 
   ggplotly(collision_year_trend_plot)
 
@@ -158,11 +152,7 @@ output$ddsb_all_collision_type_plot = renderPlotly({
       axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
-      legend.position = "none",
-      plot.title.position = 'plot'
-    ) +
-    labs(
-      title = "Collision type"
+      legend.position = "none"
     )
 
   ggplotly(plot_by_collision_type)
@@ -186,9 +176,6 @@ output$ddsb_all_vehicle_class_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Number of vehicles involved"
     )
 
   ggplotly(plot_by_vehicle_class)
@@ -216,9 +203,6 @@ output$ddsb_all_road_hierarchy_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Hierarchy of the road where collision happened"
     )
 
   ggplotly(plot_by_road_hierarchy)

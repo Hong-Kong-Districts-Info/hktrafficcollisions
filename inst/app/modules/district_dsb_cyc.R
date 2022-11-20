@@ -135,9 +135,6 @@ output$ddsb_cyc_ksi_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Collisions by Severity"
     )
 
   ggplotly(plot_by_severity)
@@ -160,11 +157,7 @@ output$ddsb_cyc_collision_type_plot = renderPlotly({
       axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
-      legend.position = "none",
-      plot.title.position = 'plot'
-    ) +
-    labs(
-      title = "Collision type"
+      legend.position = "none"
     )
 
   ggplotly(plot_by_collision_type)
@@ -188,9 +181,6 @@ output$ddsb_cyc_vehicle_class_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Number of vehicles involved"
     )
 
   ggplotly(plot_by_vehicle_class)
@@ -212,9 +202,6 @@ output$ddsb_cyc_vehicle_movement_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Vehicle movements at accident"
     )
 
   ggplotly(plot_by_vehicle_movement)
@@ -241,9 +228,6 @@ output$ddsb_cyc_cyc_action_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Cyclist movement at accident"
     )
 
   ggplotly(plot_by_vehicle_movement)
@@ -273,9 +257,6 @@ output$ddsb_cyc_road_hierarchy_plot = renderPlotly({
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
-    ) +
-    labs(
-      title = "Hierarchy of the road where collision happened"
     )
 
   ggplotly(plot_by_road_hierarchy)
