@@ -213,6 +213,7 @@ ui <- dashboardPage(
         fluidRow(
           box(
             width = 12,
+            title = span(icon("tachometer-alt"), i18n$t("District Dashboard")),
 
             column(
               width = 4,
