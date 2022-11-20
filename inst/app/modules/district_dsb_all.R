@@ -108,12 +108,12 @@ output$ddsb_all_ksi_plot = renderPlotly({
     scale_fill_manual(values = SEVERITY_COLOR) +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Collisions by Severity"
     )
 
@@ -155,13 +155,13 @@ output$ddsb_all_collision_type_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none",
       plot.title.position = 'plot'
     ) +
     labs(
-      x = "",
       title = "Collision type"
     )
 
@@ -182,12 +182,12 @@ output$ddsb_all_vehicle_class_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Number of vehicles involved"
     )
 
@@ -212,12 +212,12 @@ output$ddsb_all_road_hierarchy_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Hierarchy of the road where collision happened"
     )
 

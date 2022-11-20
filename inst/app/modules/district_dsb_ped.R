@@ -113,12 +113,12 @@ output$ddsb_ped_ksi_plot = renderPlotly({
     scale_fill_manual(values = SEVERITY_COLOR) +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Collisions by Severity"
     )
 
@@ -139,12 +139,12 @@ output$ddsb_ped_vehicle_class_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Number of vehicles involved"
     )
 
@@ -166,12 +166,12 @@ output$ddsb_ped_vehicle_movement_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Vehicle movements at accident"
     )
 
@@ -194,12 +194,12 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Pedestrian action at accident"
     )
 
@@ -222,12 +222,12 @@ output$ddsb_ped_road_hierarchy_plot = renderPlotly({
     coord_flip() +
     theme_minimal() +
     theme(
+      axis.title.y = element_blank(),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       legend.position = "none"
     ) +
     labs(
-      x = "",
       title = "Hierarchy of the road where collision happened"
     )
 
