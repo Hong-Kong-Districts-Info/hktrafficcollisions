@@ -32,7 +32,7 @@ output$box_all_total_collision = renderInfoBox({
   infoBox(
     title = "",
     value = format(n_collision, big.mark=","),
-    subtitle = "Total number of collisions",
+    subtitle = i18n$t("Total number of collisions"),
     icon = icon("car-crash"),
     color = "black"
   )
@@ -44,7 +44,7 @@ output$box_all_total_casualty = renderInfoBox({
   infoBox(
     title = "",
     value = format(n_casualty, big.mark=","),
-    subtitle = "Total number of casualties",
+    subtitle = i18n$t("Total number of casualties"),
     icon = icon("user-injured"),
     color = "black"
   )
@@ -57,7 +57,7 @@ output$box_all_serious_stat = renderInfoBox({
   infoBox(
     title = "",
     value = paste0(n_serious, " (", serious_per, "%)"),
-    subtitle = "Serious casualties (% of total)",
+    subtitle = i18n$t("Serious casualties (% of total)"),
     icon = icon("procedures"),
     color = "orange"
   )
@@ -69,7 +69,7 @@ output$box_all_fatal_stat = renderInfoBox({
 
   infoBox(
     title = "",
-    subtitle = "Fatal casualties (% of total)",
+    subtitle = i18n$t("Fatal casualties (% of total)"),
     value = paste0(n_fatal, " (", fatal_per, "%)"),
     icon = icon("skull-crossbones"),
     color = "red"
