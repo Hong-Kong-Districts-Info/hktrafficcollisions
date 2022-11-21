@@ -248,7 +248,7 @@ ui <- dashboardPage(
           # All Vehicle Collision tab
           tabPanel(
             value = "all_vehicle_collision",
-            title = "All Vehicle Collision",
+            title = i18n$t("All Vehicle Collision"),
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
@@ -299,7 +299,7 @@ ui <- dashboardPage(
           # Vehicle w/ Peds tab
           tabPanel(
             value = "vehicle_with_pedestrians",
-            title = "Pedestrian Collision",
+            title = i18n$t("Pedestrian Collision"),
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
@@ -350,7 +350,7 @@ ui <- dashboardPage(
           # Vehicle w/ Cycles tab
           tabPanel(
             value = "vehicle_with_bicycles",
-            title = "Cyclist Collision",
+            title = i18n$t("Cyclist Collision"),
 
             fluidRow(
               infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
