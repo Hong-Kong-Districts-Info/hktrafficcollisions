@@ -13,7 +13,7 @@ Zoom to matched collisions,縮放至合符現有篩選條件之車禍
 District(s),地區
 Date range,日期範圍
 Collision severity,車禍嚴重程度
-Collision type,車輛碰撞類別
+Collision type,車禍類別
 Collision,車禍
 Vehicle classes involved,涉事車輛類別
 Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
@@ -63,24 +63,23 @@ Light rail vehicle,輕鐵車輛
 Fatal Collision,致命車禍
 Serious Collision,嚴重車禍
 Slight Collision,輕微車禍
-Serial number: ,序列號：
-Collision date: ,車禍發生日期：
-District: ,地區：
-Road name: ,道路名稱：
-Precise location: ,準確位置：
-Collision type: ,車禍類別：
-Number of vehicles: ,涉事車輛數目：
-Involved vehicle classes: ,涉事車輛種類：
-Number of casualties: ,傷亡人數：
+Serial number,序列號
+Collision date,車禍發生日期
+District,地區
+Road name,道路名稱
+Precise location,準確位置
+Number of vehicles,涉事車輛數目
+Involved vehicle classes,涉事車輛種類
+Number of casualties,傷亡人數
  driver(s),名司機
  passenger(s),名乘客
  pedestrian(s),名行人
-Road hierarchy: ,道路等級：
+Road hierarchy,道路等級
 Expressway,快速公路
 Main Road,主要道路
 Secondary Road,次要道路（內街／支路）
 Other Minor Road,小路（鄉村道路／行人徑）
-Road structure: ,道路結構：
+Road structure,道路結構
 At grade road,地面道路
 Tunnel,行車隧道
 Flyover,天橋
@@ -94,7 +93,6 @@ No,否
 View this location in Google Street View,於 Google 街景顯示此車禍位置
 District Dashboard, 地區儀表版
 Select collisions to be summarised, 請選擇用以概述之車禍數據
-District, 地區
 Year Range, 年份範圍
 All Severities, 所有嚴重程度
 Killed or Seriously Injuries only, 只包含重傷或致命車禍

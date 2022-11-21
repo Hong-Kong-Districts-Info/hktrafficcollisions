@@ -232,37 +232,37 @@ observe({
     "<h3>", i18n$t(paste0(filter_collision_data()$Severity, " Collision")), "</h3>",
 
     # Accident serial number
-    tags$b(i18n$t("Serial number: ")), filter_collision_data()$Serial_No_, tags$br(),
+    tags$b(i18n$t("Serial number"), ": "), filter_collision_data()$Serial_No_, tags$br(),
 
     # Accident date and time
-    tags$b(i18n$t("Collision date: ")), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
+    tags$b(i18n$t("Collision date"), ": "), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
 
     tags$br(),
 
     # District
-    tags$b(i18n$t("District: ")), i18n$t(filter_collision_data()$DC_full_name), tags$br(),
+    tags$b(i18n$t("District"), ": "), i18n$t(filter_collision_data()$DC_full_name), tags$br(),
     # Street Name
-    tags$b(i18n$t("Road name: ")), filter_collision_data()$Street_Name, tags$br(),
+    tags$b(i18n$t("Road name"), ": "), filter_collision_data()$Street_Name, tags$br(),
     # Full address of collision location
-    tags$b(i18n$t("Precise location: ")), tags$br(), filter_collision_data()$Precise_Location, tags$br(),
+    tags$b(i18n$t("Precise location"), ": "), tags$br(), filter_collision_data()$Precise_Location, tags$br(),
 
     tags$br(),
 
     # Collision type
-    tags$b(i18n$t("Collision type: ")), tags$br(), i18n$t(filter_collision_data()$Type_of_Collision_with_cycle), tags$br(),
+    tags$b(i18n$t("Collision type"), ": "), tags$br(), i18n$t(filter_collision_data()$Type_of_Collision_with_cycle), tags$br(),
 
     tags$br(),
 
     # Number of vehicles involved
-    tags$b(i18n$t("Number of vehicles: ")), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
+    tags$b(i18n$t("Number of vehicles"), ": "), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
     # Involved vehicle class
     # FIXME: Can't translate when collision includes >1 vehicle type
-    tags$b(i18n$t("Involved vehicle classes: ")), suppressWarnings(i18n$t(filter_collision_data()$vehicle_class_involved)), tags$br(),
+    tags$b(i18n$t("Involved vehicle classes"), ": "), suppressWarnings(i18n$t(filter_collision_data()$vehicle_class_involved)), tags$br(),
 
     tags$br(),
 
     # Number of injuries
-    tags$b(i18n$t("Number of casualties: ")), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
+    tags$b(i18n$t("Number of casualties")), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
     # Involved casualty breakdown
     "(",
     filter_collision_data()$cas_dvr_n, i18n$t(" driver(s)"), ", ",
@@ -273,10 +273,10 @@ observe({
     tags$br(),
 
     tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$Within_70m, i18n$t("Yes"), i18n$t("No")), tags$br(),
-    tags$b(i18n$t("Road structure: ")), i18n$t(filter_collision_data()$Structure_Type), tags$br(),
+    tags$b(i18n$t("Road structure"), ": "), i18n$t(filter_collision_data()$Structure_Type), tags$br(),
     # Suppress warning message from i18n when `Road_Hierarchy` is NA
     # TODO: Transform NA to ''?
-    tags$b(i18n$t("Road hierarchy: ")), suppressWarnings(i18n$t(filter_collision_data()$Road_Hierarchy)),
+    tags$b(i18n$t("Road hierarchy"), ": "), suppressWarnings(i18n$t(filter_collision_data()$Road_Hierarchy)),
 
     tags$br(),
     tags$br(),
