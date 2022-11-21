@@ -260,11 +260,11 @@ ui <- dashboardPage(
             fluidRow(
               box(
                   width = 6,
-                  title = "Collision map",
+                  title = i18n$t("Collision location"),
                   tmapOutput(outputId = "ddsb_all_collision_heatmap")
               ),
               box(width = 6,
-                  title = "Collision severity",
+                  title = i18n$t("Collision severity"),
                   plotlyOutput(outputId = "ddsb_all_ksi_plot")
               )
             ),
@@ -272,12 +272,12 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Collision trend",
+                title = i18n$t("Collision trend"),
                 plotlyOutput(outputId = "ddsb_all_year_plot")
               ),
               box(
                 width = 6,
-                title = "Collision type",
+                title = i18n$t("Collision type"),
                 plotlyOutput(outputId = "ddsb_all_collision_type_plot")
               )
             ),
@@ -285,12 +285,12 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Vehicle classes involved",
+                title = i18n$t("Vehicle classes involved"),
                 plotlyOutput(outputId = "ddsb_all_vehicle_class_plot")
               ),
               box(
                 width = 6,
-                title = "Road hierarchy",
+                title = i18n$t("Road hierarchy"),
                 plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
               )
             )
@@ -311,11 +311,11 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Collision map",
+                title = i18n$t("Collision location"),
                 tmapOutput(outputId = "ddsb_ped_collision_heatmap")
               ),
               box(width = 6,
-                  title = "Collision severity",
+                  title = i18n$t("Collision severity"),
                   plotlyOutput(outputId = "ddsb_ped_ksi_plot")
               )
             ),
@@ -323,12 +323,12 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Vehicle classes involved",
+                title = i18n$t("Vehicle classes involved"),
                 plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot")
               ),
               box(
                 width = 6,
-                title = "Vehicle maneuver",
+                title = i18n$t("Vehicle maneuver"),
                 plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
               )
             ),
@@ -336,12 +336,12 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Pedestrian action",
+                title = i18n$t("Pedestrian action"),
                 plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
               ),
               box(
                 width = 6,
-                title = "Road hierarchy",
+                title = i18n$t("Road hierarchy"),
                 plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
               )
             )
@@ -362,11 +362,11 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Collision map",
+                title = i18n$t("Collision location"),
                 tmapOutput(outputId = "ddsb_cyc_collision_heatmap")
               ),
               box(width = 6,
-                  title = "Collision severity",
+                  title = i18n$t("Collision severity"),
                   plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
               )
             ),
@@ -374,7 +374,7 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Collision type",
+                title = i18n$t("Collision type"),
                 plotlyOutput(outputId = "ddsb_cyc_collision_type_plot")
               )
             ),
@@ -382,12 +382,12 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Vehicle classes involved (excl. cycle)",
+                title = i18n$t("Vehicle classes involved (excl. cycle)"),
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
               ),
               box(
                 width = 6,
-                title = "Vehicle maneuver (excl. cycle)",
+                title = i18n$t("Vehicle maneuver (excl. cycle)"),
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
               )
             ),
@@ -395,12 +395,12 @@ ui <- dashboardPage(
             fluidRow(
               box(
                 width = 6,
-                title = "Cyclist action",
+                title = i18n$t("Cyclist action"),
                 plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot")
               ),
               box(
                 width = 6,
-                title = "Road hierarchy",
+                title = i18n$t("Road hierarchy"),
                 plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
               )
             )

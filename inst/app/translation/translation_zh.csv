@@ -96,6 +96,13 @@ Select collisions to be summarised, 請選擇用以概述之車禍數據
 Year Range, 年份範圍
 All Severities, 所有嚴重程度
 Killed or Seriously Injuries only, 只包含重傷或致命車禍
+Collision location, 車禍位置
+Collision trend, 車禍趨勢
+Vehicle maneuver, 車輛行駛情況
+Pedestrian action, 行人行動
+Vehicle classes involved (excl. cycle), 涉事車輛類別（單車除外）
+Vehicle maneuver (excl. cycle), 車輛行駛情況（單車除外）
+Cyclist action, 騎單車者行動
 Hotzone streets,車禍重災區路段
 Hotzone Rank,重災區排名
 Collisions with pedestrian injuries,涉及行人傷亡車禍地點
