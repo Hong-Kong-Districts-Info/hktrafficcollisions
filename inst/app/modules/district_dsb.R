@@ -2,6 +2,11 @@
 
 # Translation terms
 
+COLLISION_SEVERITY_TRANSLATE = data.frame(
+  Severity = c("Slight", "Serious", "Fatal"),
+  Severity_chi = c("輕微", "嚴重", "致命")
+)
+
 COLLISION_TYPE_TRANSLATE = data.frame(
   Collision_Type = c(
     "Vehicle collision with Vehicle", "Vehicle collision with Pedestrian", "Vehicle collision with Pedal Cycle",
