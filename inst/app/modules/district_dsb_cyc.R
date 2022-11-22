@@ -247,8 +247,9 @@ output$ddsb_cyc_road_hierarchy_plot = renderPlotly({
     # Most cycle-related collisions with Road_Hierarchy of NA are actually happened in cycle tracks
     mutate(Road_Hierarchy = ifelse(is.na(Road_Hierarchy), "Cycle Track/Others", Road_Hierarchy)) %>%
     count(Road_Hierarchy, name = "count") %>%
-    # reorder the drawing order from largest category
-    mutate(Road_Hierarchy_order = reorder(Road_Hierarchy, count))
+    left_join(ROAD_HIERARCHY_TRANSLATE, by = c("Road_Hierarchy" = "Road_Hierarchy")) %>%
+    # Merge both en and zh values, then reorder vehicle class in descending order
+    mutate(Road_Hierarchy_order = reorder(paste0(Road_Hierarchy_chi, "\n", Road_Hierarchy), count))
 
 
   plot_by_road_hierarchy = ggplot(plot_data, aes(x = Road_Hierarchy_order, y = count)) +

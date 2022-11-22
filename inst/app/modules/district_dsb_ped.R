@@ -201,8 +201,9 @@ output$ddsb_ped_road_hierarchy_plot = renderPlotly({
   plot_data = ddsb_ped_filtered_hk_accidents() %>%
     filter(!is.na(Road_Hierarchy)) %>%
     count(Road_Hierarchy, name = "count") %>%
-    # reorder the drawing order from largest category
-    mutate(Road_Hierarchy_order = reorder(Road_Hierarchy, count))
+    left_join(ROAD_HIERARCHY_TRANSLATE, by = c("Road_Hierarchy" = "Road_Hierarchy")) %>%
+    # Merge both en and zh values, then reorder vehicle class in descending order
+    mutate(Road_Hierarchy_order = reorder(paste0(Road_Hierarchy_chi, "\n", Road_Hierarchy), count))
 
 
   plot_by_road_hierarchy = ggplot(plot_data, aes(x = Road_Hierarchy_order, y = count)) +
