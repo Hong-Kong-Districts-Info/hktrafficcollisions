@@ -44,6 +44,19 @@ VEHICLE_MOVEMENT_TRANSLATE = data.frame(
   )
 )
 
+PED_ACTION_TRANSLATE = data.frame(
+  Ped_Action = c(
+    "Walking - back to traffic", "Walking - facing traffic", "Standing", "Boarding vehicle",
+    "Alighting from vehicle", "Falling or jumping from vehicle", "Working at a vehicle", "Other working",
+    "Playing", "Crossing from near-side", "Crossing from off-side", "Not known"
+  ),
+  Ped_Action_chi = c(
+    "步行 ─ 背向車流", "步行 ─ 面向車流", "站立", "正在登車",
+    "正在下車", "從車上跌下或跳下", "在修車中", "其他工作",
+    "在玩耍中", "從車左邊橫過馬路", "從車右邊橫過馬路", "資料不詳"
+  )
+)
+
 ROAD_HIERARCHY_TRANSLATE = data.frame(
   Road_Hierarchy = c("Expressway", "Main Road", "Secondary Road", "Other Minor Road"),
   Road_Hierarchy_chi = c("快速公路", "主要道路", "次要道路（內街／支路）", "小路（鄉村道路／行人徑）")
