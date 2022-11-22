@@ -86,11 +86,12 @@ output$ddsb_ped_collision_heatmap = renderTmap({
 
   tm_shape(ped_grid_count()) +
     tm_fill(
+      group = i18n$t("Number of collisions"),
       col = "n_colli",
       palette = "Purples",
       n = 10,
       style = "cont",
-      title = "Number of collisions",
+      title = i18n$t("Number of collisions"),
       id = "n_colli",
       showNA = FALSE,
       alpha = 0.8,
