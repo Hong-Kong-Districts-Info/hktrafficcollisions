@@ -146,8 +146,9 @@ output$ddsb_cyc_collision_type_plot = renderPlotly({
   # count by pedestrian Action
   plot_data = ddsb_cyc_filtered_hk_accidents() %>%
     count(Type_of_Collision_with_cycle, name = "count") %>%
-    # reorder the drawing order from largest category
-    mutate(Collision_Type_order = reorder(Type_of_Collision_with_cycle, count))
+    left_join(COLLISION_TYPE_TRANSLATE, by = c("Type_of_Collision_with_cycle" = "Collision_Type")) %>%
+    # Merge both en and zh values, then reorder vehicle class in descending order
+    mutate(Collision_Type_order = reorder(paste0(Collision_Type_chi, "\n", Type_of_Collision_with_cycle), count))
 
   plot_by_collision_type = ggplot(plot_data, aes(x = Collision_Type_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
