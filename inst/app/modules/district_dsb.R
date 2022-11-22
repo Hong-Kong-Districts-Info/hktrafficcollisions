@@ -2,7 +2,7 @@
 
 output$dsb_filter_ui = renderUI({
   selectInput(
-    inputId = "ddsb_district_filter", label = i18n$t("Select District"),
+    inputId = "ddsb_district_filter", label = i18n$t("District"),
     choices = stats::setNames(
       DISTRICT_ABBR,
       lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
@@ -13,7 +13,7 @@ output$dsb_filter_ui = renderUI({
 
 output$ksi_filter_ui = renderUI({
   selectInput(
-    inputId = "ddsb_ksi_filter", label = i18n$t("Select collision severity category"),
+    inputId = "ddsb_ksi_filter", label = i18n$t("Collision severity"),
     choices = setNames(
       c("all", "ksi_only"),
       c(i18n$t("All Severities"), i18n$t("Killed or Seriously Injuries only"))
