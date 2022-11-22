@@ -1,5 +1,22 @@
 # Fundamental reactive functions and UI for the district dashboard
 
+# Translation terms
+
+VEHICLE_CLASS_TRANSLATE = data.frame(
+  Vehicle_Class = c(
+    "Private car", "Public franchised bus", "Taxi", "Motorcycle", "Light goods vehicle",
+    "Bicycle", "Heavy goods vehicle", "Medium goods vehicle", "Tram", "Public light bus",
+    "Others (incl. unknown)", "Public non-franchised bus", "Light rail vehicle"),
+  Vehicle_Class_chi = c(
+    "私家車", "公共專營巴士", "的士", "電單車", "輕型貨車",
+    "單車", "重型貨車", "中型貨車", "電車", "公共小巴",
+    "其他（包括類別不詳車輛）", "公共非專營巴士", "輕鐵車輛"
+  )
+)
+
+
+# UI to be rendered
+
 output$dsb_filter_ui = renderUI({
   selectInput(
     inputId = "ddsb_district_filter", label = i18n$t("District"),
