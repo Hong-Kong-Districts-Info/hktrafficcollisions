@@ -151,9 +151,9 @@ output$ddsb_ped_vehicle_movement_plot = renderPlotly({
 
   # count by Vehicle_Class
   plot_data = count(ddsb_ped_filtered_hk_vehicles(), Main_vehicle, name = "count") %>%
-    # reorder vehicle class in descending order
-    mutate(Main_vehicle_order = reorder(Main_vehicle, count))
-
+    left_join(VEHICLE_MOVEMENT_TRANSLATE, by = c("Main_vehicle" = "Main_vehicle")) %>%
+    # Merge both en and zh values, then reorder vehicle movement in descending order
+    mutate(Main_vehicle_order = reorder(paste0(Main_vehicle_chi, " ", Main_vehicle), count))
 
   plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +

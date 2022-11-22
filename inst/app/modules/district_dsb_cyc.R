@@ -191,7 +191,9 @@ output$ddsb_cyc_vehicle_movement_plot = renderPlotly({
 
   # count by vehicle movement
   plot_data = count(ddsb_cyc_filtered_hk_vehicles_wo_cycle(), Main_vehicle, name = "count", na.rm = TRUE) %>%
-    mutate(Main_vehicle_order = reorder(Main_vehicle, count))
+    left_join(VEHICLE_MOVEMENT_TRANSLATE, by = c("Main_vehicle" = "Main_vehicle")) %>%
+    # Merge both en and zh values, then reorder vehicle movement in descending order
+    mutate(Main_vehicle_order = reorder(paste0(Main_vehicle_chi, " ", Main_vehicle), count))
 
   plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
@@ -216,8 +218,9 @@ output$ddsb_cyc_cyc_action_plot = renderPlotly({
     # only select vehicles that are pedal cycles
     filter(Pedal_cycle == "Pedal Cycle") %>%
     count(Main_vehicle, name = "count") %>%
-    # reorder in descending order
-    mutate(Main_vehicle_order = reorder(Main_vehicle, count))
+    left_join(VEHICLE_MOVEMENT_TRANSLATE, by = c("Main_vehicle" = "Main_vehicle")) %>%
+    # Merge both en and zh values, then reorder vehicle movement in descending order
+    mutate(Main_vehicle_order = reorder(paste0(Main_vehicle_chi, " ", Main_vehicle), count))
 
   plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$casualties) +
