@@ -14,6 +14,23 @@ VEHICLE_CLASS_TRANSLATE = data.frame(
   )
 )
 
+# Unique Main_vehicle values extracted from hk_vehicles
+# TODO: Unify the capitalisation rules
+VEHICLE_MOVEMENT_TRANSLATE = data.frame(
+  Main_vehicle = c(
+    "Going straight ahead (with priority)", "Changing lanes or merging", "Overtaking on off-side",
+    "Overtaking on near-side", "Going Straight Ahead (against priority)", "Making right turn", "Making left turn",
+    "Making U turn", "Slowing or stopping", "Stopped in traffic", "Starting in traffic", "Leaving parking place",
+    "Parked", "Reversing", "Driverless moving vehicle", "Ran off road", "Other", "Unknown"
+  ),
+  Main_vehicle_chi = c(
+    "向前駛 （優先）", "轉換行車線", "從外線超車",
+    "從內線超車", "向前駛（無優先）", "右轉", "左轉",
+    "掉頭", "慢駛或停車", "因前路受阻而停車", "跟隨前面交通開車", "駛離泊車位",
+    "停泊車", "倒車", "移動中而無人駕駛", "衝出馬路", "其他", "行駛情況不詳"
+  )
+)
+
 
 # UI to be rendered
 
