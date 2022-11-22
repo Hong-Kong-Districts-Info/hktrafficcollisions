@@ -176,8 +176,9 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
   plot_data = ddsb_ped_filtered_hk_casualties() %>%
     filter(!is.na(Ped_Action)) %>%
     count(Ped_Action, name = "count") %>%
-    # reorder the drawing order from largest category
-    mutate(Ped_Action_order = reorder(Ped_Action, count))
+    left_join(PED_ACTION_TRANSLATE, by = c("Ped_Action" = "Ped_Action")) %>%
+    # Merge both en and zh values, then reorder vehicle class in descending order
+    mutate(Ped_Action_order = reorder(paste0(Ped_Action_chi, "\n", Ped_Action), count))
 
 
   plot_by_ped_action = ggplot(plot_data, aes(x = Ped_Action_order, y = count)) +
