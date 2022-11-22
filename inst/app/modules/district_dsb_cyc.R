@@ -123,9 +123,13 @@ output$ddsb_cyc_collision_heatmap = renderTmap({
 output$ddsb_cyc_ksi_plot = renderPlotly({
 
   # count by severity
-  plot_data = count(ddsb_cyc_filtered_hk_accidents(), Severity, name = "count", na.rm = TRUE)
+  plot_data = count(ddsb_cyc_filtered_hk_accidents(), Severity, name = "count", na.rm = TRUE) %>%
+    left_join(COLLISION_SEVERITY_TRANSLATE, by = "Severity") %>%
+    # Force order of the categorical axis
+    # Factor in reversed order since last element in factor is plotted on top in ggplot
+    mutate(Severity_text = factor(paste0(Severity_chi, "\n", Severity), c("致命\nFatal", "嚴重\nSerious", "輕微\nSlight")))
 
-  plot_by_severity = ggplot(plot_data, aes(x = Severity, y = count, fill = Severity)) +
+  plot_by_severity = ggplot(plot_data, aes(x = Severity_text, y = count, fill = Severity)) +
     geom_bar(stat = "identity") +
     coord_flip() +
     scale_fill_manual(values = SEVERITY_COLOR) +
