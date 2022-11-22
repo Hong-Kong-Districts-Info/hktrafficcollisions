@@ -63,8 +63,8 @@ PED_ACTION_TRANSLATE = data.frame(
 )
 
 ROAD_HIERARCHY_TRANSLATE = data.frame(
-  Road_Hierarchy = c("Expressway", "Main Road", "Secondary Road", "Other Minor Road"),
-  Road_Hierarchy_chi = c("快速公路", "主要道路", "次要道路（內街／支路）", "小路（鄉村道路／行人徑）")
+  Road_Hierarchy = c("Expressway", "Main Road", "Secondary Road", "Other Minor Road", "Cycle Track/Others"),
+  Road_Hierarchy_chi = c("快速公路", "主要道路", "次要道路（內街／支路）", "小路（鄉村道路／行人徑）", "單車徑/其他")
 )
 
 
