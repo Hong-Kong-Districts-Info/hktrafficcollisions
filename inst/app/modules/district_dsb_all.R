@@ -158,14 +158,15 @@ output$ddsb_all_collision_type_plot = renderPlotly({
   ggplotly(plot_by_collision_type)
 })
 
+
 # Vehicle Class plot
 output$ddsb_all_vehicle_class_plot = renderPlotly({
 
   # count by Vehicle_Class
   plot_data = count(ddsb_filtered_hk_vehicles(), Vehicle_Class, name = "count", na.rm = TRUE) %>%
-    # reorder vehicle class in descending order
-    mutate(Vehicle_Class_order = reorder(Vehicle_Class, count))
-
+    left_join(VEHICLE_CLASS_TRANSLATE, by = c("Vehicle_Class" = "Vehicle_Class")) %>%
+    # Merge both en and zh values, then reorder vehicle class in descending order
+    mutate(Vehicle_Class_order = reorder(paste0(Vehicle_Class_chi, "\n", Vehicle_Class), count))
 
   plot_by_vehicle_class = ggplot(plot_data, aes(x = Vehicle_Class_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
