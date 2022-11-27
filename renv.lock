@@ -762,6 +762,14 @@
         "askpass"
       ]
     },
+    "packrat": {
+      "Package": "packrat",
+      "Version": "0.8.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d84055adcb6bb1f4f0ce8c5f235bc328",
+      "Requirements": []
+    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.8.1",
@@ -901,6 +909,22 @@
       "Hash": "4ed1f8336c8d52c3e750adcdc57228a7",
       "Requirements": []
     },
+    "rsconnect": {
+      "Package": "rsconnect",
+      "Version": "0.8.28",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "737312265e542d243f003b9625482e09",
+      "Requirements": [
+        "curl",
+        "digest",
+        "jsonlite",
+        "openssl",
+        "packrat",
+        "rstudioapi",
+        "yaml"
+      ]
+    },
     "rstudioapi": {
       "Package": "rstudioapi",
       "Version": "0.14",
@@ -911,10 +935,10 @@
     },
     "s2": {
       "Package": "s2",
-      "Version": "1.1.0",
+      "Version": "1.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "73748e27d17db3c1c400e8114fcf9824",
+      "Hash": "328ea3dc4329fc40720456c8e0c75445",
       "Requirements": [
         "Rcpp",
         "wk"
@@ -953,10 +977,10 @@
     },
     "sf": {
       "Package": "sf",
-      "Version": "1.0-8",
+      "Version": "1.0-9",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "153da622b27630793858f24436bc0871",
+      "Hash": "8a348490fefb623e7935f405230900a7",
       "Requirements": [
         "DBI",
         "Rcpp",
@@ -1071,20 +1095,20 @@
     },
     "sp": {
       "Package": "sp",
-      "Version": "1.5-0",
+      "Version": "1.5-1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2a118bdd2db0a301711e0a9e3e3206d5",
+      "Hash": "7b6b37e9d8e3295ccd5a73ac6d62db98",
       "Requirements": [
         "lattice"
       ]
     },
     "stars": {
       "Package": "stars",
-      "Version": "0.5-6",
+      "Version": "0.6-0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "76798fa5bef65f2fd55db9c6efb40e96",
+      "Hash": "8c779309dc9fa1aa45bf98498330fe69",
       "Requirements": [
         "abind",
         "classInt",
@@ -1124,10 +1148,10 @@
     },
     "terra": {
       "Package": "terra",
-      "Version": "1.6-17",
+      "Version": "1.6-41",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3e264754dde87261bc7ccdb30d29d3b4",
+      "Hash": "273302c394cb69074118e885a47a036f",
       "Requirements": [
         "Rcpp"
       ]
