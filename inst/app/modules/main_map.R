@@ -304,7 +304,7 @@ observe({
       fillColor = ~ fill_palette(Severity), fillOpacity = .9,
       popup = popup_template,
       clusterOptions = markerClusterOptions(
-        disableClusteringAtZoom = 16
+        disableClusteringAtZoom = 15
       )
     )
 })
