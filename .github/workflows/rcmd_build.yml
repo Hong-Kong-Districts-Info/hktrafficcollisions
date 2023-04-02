@@ -44,15 +44,6 @@ jobs:
           # Enable RStudio Package Manager to speed up package installation
           use-public-rspm: true
 
-      - name: Install system dependencies
-        # This is not taken care of (yet) by r-lib/actions/setup-renv
-        # Package distro used to get the distro for the used ubuntu-latest
-        run: |
-          Rscript -e "install.packages(c('remotes', 'distro'))"
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'writeLines(with(distro::distro(), remotes::system_requirements(id, short_version)))')
       - name: Activate renv and restore packages with cache
         uses: r-lib/actions/setup-renv@v2
 
