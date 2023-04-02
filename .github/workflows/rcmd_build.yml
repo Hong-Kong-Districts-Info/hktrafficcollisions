@@ -45,7 +45,7 @@ jobs:
           use-public-rspm: true
           
       - name: Install additional system requirements
-        run: apt-get install -y libudunits2-dev
+        run: sudo apt-get install -y libudunits2-dev
 
       - name: Activate renv and restore packages with cache
         uses: r-lib/actions/setup-renv@v2
