@@ -43,6 +43,9 @@ jobs:
           r-version: ${{ matrix.config.r }}
           # Enable RStudio Package Manager to speed up package installation
           use-public-rspm: true
+          
+      - name: Install additional system requirements
+        run: apt-get install -y libudunits2-dev
 
       - name: Activate renv and restore packages with cache
         uses: r-lib/actions/setup-renv@v2
