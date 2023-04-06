@@ -20,6 +20,7 @@ jobs:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
+      fail-fast: false
       # We keep a matrix for convenience, but we would typically just run on one
       # single OS and R version, aligned with the target deployment environment
       matrix:
