@@ -48,7 +48,13 @@ jobs:
           # Enable RStudio Package Manager to speed up package installation
           use-public-rspm: true
           
-      - name: Install additional system requirements
+      - name: Install macOS system dependencies
+        if: runner.os == 'macOS'
+        run: brew install gdal proj
+
+          
+      - name: Install ubuntu dependencies
+        if: runner.os == 'Linux'
         run: |
           sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
           sudo apt-get -y update
