@@ -24,7 +24,9 @@ jobs:
       # single OS and R version, aligned with the target deployment environment
       matrix:
         config:
-          - {os: ubuntu-latest, r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: macos-latest,   r: 'release'}
+          - {os: ubuntu-latest,  r: 'release'}
 
     env:
       # Access token for GitHub
@@ -51,19 +53,13 @@ jobs:
           sudo apt-get -y update
           sudo apt-get install -y libudunits2-dev
         
-      - name: Cache packages
-        uses: actions/cache@v1
+      - name: Setup renv
+        uses: r-lib/actions/setup-renv@v2
         with:
           path: ${{ env.RENV_PATHS_ROOT }}
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
-            
-      - name: Restore packages
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
 
       - name: Install R CMD check
         run: install.packages("rcmdcheck")
