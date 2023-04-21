@@ -25,8 +25,8 @@ jobs:
       # single OS and R version, aligned with the target deployment environment
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
-          - {os: macos-latest,   r: 'release'}
+          # - {os: windows-latest, r: 'release'}
+          # - {os: macos-latest,   r: 'release'}
           - {os: ubuntu-20.04,  r: 'release'}
 
     env:
@@ -51,6 +51,7 @@ jobs:
       - name: Install macOS system dependencies
         if: runner.os == 'macOS'
         run: brew install gdal proj
+        
 
           
       - name: Install ubuntu dependencies
@@ -67,6 +68,12 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
+            
+      - name: Ubuntu renv issues
+        if: runner.os == 'Linux'
+        run: |
+          run: Sys.setenv(RENV_DOWNLOAD_FILE_METHOD = "libcurl")
+          shell: Rscript {0}
 
       - name: Install R CMD check
         run: install.packages("rcmdcheck")
