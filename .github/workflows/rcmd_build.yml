@@ -20,7 +20,9 @@ jobs:
         config:
           - {os: windows-latest, r: 'release'}
           - {os: macos-latest,   r: 'release'}
-          - {os: ubuntu-latest,  r: 'release'}
+          # shinyapps.io uses ubuntu-20.04 instead of ubuntu-latest
+          # https://docs.posit.co/shinyapps.io/appendix.html#default-system-packages
+          - {os: ubuntu-20.04,  r: 'release'}
 
     steps:
       - uses: actions/checkout@v3
