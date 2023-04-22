@@ -1,10 +1,27 @@
+# Derived from https://github.com/miraisolutions/ShinyCICD/blob/master/.github/workflows/ci-cd-renv.yml
+# and https://github.com/r-lib/actions/tree/v2/examples
+
 on: [push, pull_request]
 
 name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    runs-on: macOS-latest
+
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      # We keep a matrix for convenience, but we would typically just run on one
+      # single OS and R version, aligned with the target deployment environment
+      matrix:
+        config:
+          - {os: windows-latest, r: 'release'}
+          - {os: macos-latest,   r: 'release'}
+          - {os: ubuntu-latest,  r: 'release'}
+
     steps:
       - uses: actions/checkout@v3
       - uses: r-lib/actions/setup-r@v2
