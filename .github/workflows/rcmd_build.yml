@@ -50,3 +50,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-renv-
 
+      - name: Install R CMD check
+        run: install.packages("rcmdcheck")
+        shell: Rscript {0}
+
