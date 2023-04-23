@@ -1,9 +1,17 @@
 # Derived from https://github.com/miraisolutions/ShinyCICD/blob/master/.github/workflows/ci-cd-renv.yml
 # and https://github.com/r-lib/actions/tree/v2/examples
 
-on: [push, pull_request]
+name: Build Shiny App
 
-name: R-CMD-check
+on:
+  # Triggered on push and pull request events
+  push:
+  pull_request:
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+  # Monthly runs on the 1st day of the month at midnight
+  schedule:
+    - cron:  '0 0 1 * *'
 
 jobs:
   R-CMD-check:
