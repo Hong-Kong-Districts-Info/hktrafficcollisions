@@ -58,7 +58,8 @@ jobs:
         if: runner.os == 'Linux'
         # https://r-spatial.github.io/sf/#installing
         run: |
-          sudo apt-get -y update && apt-get install -y  libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+          sudo apt-get -y update
+          sudo apt-get install -y libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
       - name: Setup renv
         uses: r-lib/actions/setup-renv@v2
