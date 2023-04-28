@@ -25,12 +25,5 @@ Imports:
     renv,
     shiny,
     shinydashboard
-Suggests: 
-    covr,
-    docopt,
-    lintr,
-    precommit,
-    spelling,
-    styler
 Encoding: UTF-8
 LazyData: true
