@@ -16,7 +16,7 @@ The changes made in this PR are:
 - [ ] Check 1
 - [ ] Check 2
 - [ ] (If UI & data are updated) The UI & data includes Traditional Chinese translation, with translation terms wrapped in `i18n$t()` and terms added to `translation_zh.csv`
-- [ ] The travis.ci and R CMD checks pass.
+- [ ] The GitHub Actions workflows pass.
 
 ***
 
