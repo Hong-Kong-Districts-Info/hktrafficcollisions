@@ -26,11 +26,11 @@ jobs:
       # single OS and R version, aligned with the target deployment environment
       matrix:
         config:
-          - {os: windows-latest, r: "renv"}
-          - {os: macos-latest,   r: "renv"}
+          - {os: windows-latest, r: '4.2.1'}
+          - {os: macos-latest,   r: '4.2.1'}
           # shinyapps.io uses ubuntu-20.04 instead of ubuntu-latest
           # https://docs.posit.co/shinyapps.io/appendix.html#default-system-packages
-          - {os: ubuntu-20.04,  r: "renv"}
+          - {os: ubuntu-20.04,  r: '4.2.1'}
 
     env:
       # Access token for GitHub
