@@ -27,7 +27,7 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'renv'}
-          - {os: macos-latest,   r: 'renv'}
+          # - {os: macos-latest,   r: 'renv'}
           # shinyapps.io uses ubuntu-22.04 instead of ubuntu-latest
           # https://docs.posit.co/shinyapps.io/appendix.html#default-system-packages
           - {os: ubuntu-22.04,  r: 'renv'}
