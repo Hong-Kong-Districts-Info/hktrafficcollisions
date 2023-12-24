@@ -98,23 +98,23 @@ ddsb_filtered_hk_collisions = reactive({
   # filter by users' selected district
   # FIXME: Temp workaround to fix non-initialised value when district filter renders in server side
   ddsb_district_filter = if (is.null(input$ddsb_district_filter)) "CW" else input$ddsb_district_filter
-  hk_collisions_filtered = filter(hk_collisions, District_Council_District == ddsb_district_filter)
+  hk_collisions_filtered = filter(hk_collisions, district == ddsb_district_filter)
 
   # filter by users' selected time range
-  hk_collisions_filtered = filter(hk_collisions_filtered, Year >= input$ddsb_year_filter[1] & Year <= input$ddsb_year_filter[2])
+  hk_collisions_filtered = filter(hk_collisions_filtered, year >= input$ddsb_year_filter[1] & year <= input$ddsb_year_filter[2])
 
   # remove slightly injured collisions if user select "KSI only" option
   # FIXME: Temp workaround to fix non-initialised value when KSI filter renders in server side
   ddsb_ksi_filter = if (is.null(input$ddsb_ksi_filter)) "all" else input$ddsb_ksi_filter
 
   if (ddsb_ksi_filter == "ksi_only") {
-    hk_collisions_filtered = filter(hk_collisions_filtered, Severity != "Slight")
+    hk_collisions_filtered = filter(hk_collisions_filtered, severity != "Slight")
   }
 
   # Show only collisions with valid lng/lat
   hk_collisions_filtered = hk_collisions_filtered %>%
-    filter(!is.na(Grid_E) & !is.na(Grid_N)) %>%
-    st_as_sf(coords = c("Grid_E", "Grid_N"), crs = 2326, remove = FALSE)
+    filter(!is.na(easting) & !is.na(northing)) %>%
+    st_as_sf(coords = c("easting", "northing"), crs = 2326, remove = FALSE)
 
   print(nrow(hk_collisions_filtered))
 
