@@ -204,7 +204,7 @@ output$ddsb_all_road_hierarchy_plot = renderPlotly({
 
 
   plot_by_road_hierarchy = ggplot(plot_data, aes(x = road_hierarchy_order, y = count)) +
-    geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
+    geom_bar(stat = "identity", fill = CATEGORY_COLOR$collisions) +
     coord_flip() +
     theme_minimal() +
     theme(

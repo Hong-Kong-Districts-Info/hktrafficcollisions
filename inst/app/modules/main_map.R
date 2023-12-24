@@ -226,7 +226,7 @@ observe({
 
     # Square symbol indicating severity level
     # Use raw htmls since adding reactive expressions into tags$ will result in error
-    "<div style=\"height:20px; width:20px; float:left; margin-right:10px; background-color:", fill_palette(filter_collision_data()$Severity) ,"\";>", "</div>",
+    "<div style=\"height:20px; width:20px; float:left; margin-right:10px; background-color:", fill_palette(filter_collision_data()$severity) ,"\";>", "</div>",
 
     # Collision severity as title
     "<h3>", i18n$t(paste0(filter_collision_data()$severity, " Collision")), "</h3>",
@@ -301,7 +301,7 @@ observe({
       # fixed point size symbol
       radius = 6,
       color = "#0d0d0d", weight = 2, opacity = .9,
-      fillColor = ~ fill_palette(Severity), fillOpacity = .9,
+      fillColor = ~ fill_palette(severity), fillOpacity = .9,
       popup = popup_template,
       clusterOptions = markerClusterOptions(
         disableClusteringAtZoom = 15
