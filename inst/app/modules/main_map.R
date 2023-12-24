@@ -33,7 +33,7 @@ output$month_range_ui = renderUI({
   airDatepickerInput("month_range",
                      label = i18n$t("Date range"),
                      range = TRUE,
-                     value = c("2016-01-01", "2016-12-01"),
+                     value = c("2021-01-01", "2021-12-01"),
                      min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
                      max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
                      view = "months",
@@ -159,7 +159,7 @@ filter_collision_data <-
       # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
       if (is.null(input$month_range)) {
         data_filtered = filter(hk_collisions_valid_sf,
-                               year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
+                               year_month >= floor_date_to_month(as.Date("2021-01-01")) & year_month <= floor_date_to_month(as.Date("2021-12-01")))
       } else {
         data_filtered = filter(hk_collisions_valid_sf,
                                year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
