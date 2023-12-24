@@ -5,18 +5,18 @@
 ddsb_filtered_hk_casualties = reactive({
 
   # vector of Serial No. in selected range
-  serial_no_filtered = unique(ddsb_filtered_hk_collisions()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_filtered_hk_collisions()[["serial_no"]])
 
-  filter(hk_casualties, Serial_No_ %in% serial_no_filtered)
+  filter(hk_casualties, serial_no %in% serial_no_filtered)
 })
 
 # filtered hk_vehicles
 ddsb_filtered_hk_vehicles = reactive({
 
   # vector of Serial No. in selected range
-  serial_no_filtered = unique(ddsb_filtered_hk_collisions()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_filtered_hk_collisions()[["serial_no"]])
 
-  filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
+  filter(hk_vehicles, serial_no %in% serial_no_filtered)
 })
 
 all_grid_count = reactive({

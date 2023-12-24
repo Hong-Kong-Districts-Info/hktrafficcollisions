@@ -180,9 +180,9 @@ filter_collision_data <-
 
       # convert column to vector
       # remove duplicated serial number if there are more than 1 vehicle class
-      accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
+      accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["serial_no"]])
 
-      data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
+      data_filtered <- filter(data_filtered, serial_no %in% accient_w_selected_veh_vct)
 
       # Show at most 20,000 points on the map to ensure performance
       if (nrow(data_filtered) > 20000) {
@@ -232,7 +232,7 @@ observe({
     "<h3>", i18n$t(paste0(filter_collision_data()$Severity, " Collision")), "</h3>",
 
     # Accident serial number
-    tags$b(i18n$t("Serial number"), ": "), filter_collision_data()$Serial_No_, tags$br(),
+    tags$b(i18n$t("Serial number"), ": "), filter_collision_data()$serial_no, tags$br(),
 
     # Accident date and time
     tags$b(i18n$t("Collision date"), ": "), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),

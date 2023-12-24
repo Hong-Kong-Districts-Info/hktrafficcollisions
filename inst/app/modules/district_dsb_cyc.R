@@ -17,17 +17,17 @@ ddsb_cyc_filtered_hk_collisions = reactive({
 # filtered hk_casualties with bicycles involved only
 ddsb_cyc_filtered_hk_casualties = reactive({
 
-  serial_no_filtered = unique(ddsb_cyc_filtered_hk_collisions()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_cyc_filtered_hk_collisions()[["serial_no"]])
 
-  filter(hk_casualties, Serial_No_ %in% serial_no_filtered)
+  filter(hk_casualties, serial_no %in% serial_no_filtered)
 })
 
 # filtered hk_vehicles with bicycles involved only
 ddsb_cyc_filtered_hk_vehicles = reactive({
 
-  serial_no_filtered = unique(ddsb_cyc_filtered_hk_collisions()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_cyc_filtered_hk_collisions()[["serial_no"]])
 
-  filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
+  filter(hk_vehicles, serial_no %in% serial_no_filtered)
 })
 
 # Cycle-related vehicle collision, yet exclude cycle in vehicles
@@ -35,10 +35,10 @@ ddsb_cyc_filtered_hk_vehicles_wo_cycle = reactive({
 
   serial_no_filtered = ddsb_cyc_filtered_hk_collisions() %>%
     filter(Type_of_Collision_with_cycle == "Vehicle collision with Pedal Cycle") %>%
-    pull(Serial_No_)
+    pull(serial_no)
 
   # exclude cycle when counting vehicle class
-  filter(hk_vehicles, Serial_No_ %in% serial_no_filtered & Vehicle_Class != "Bicycle")
+  filter(hk_vehicles, serial_no %in% serial_no_filtered & Vehicle_Class != "Bicycle")
 })
 
 
