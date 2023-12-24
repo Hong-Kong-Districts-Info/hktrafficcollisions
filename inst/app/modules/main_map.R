@@ -273,7 +273,7 @@ observe({
     tags$br(),
 
     tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$in_70m_junction, i18n$t("Yes"), i18n$t("No")), tags$br(),
-    tags$b(i18n$t("Road structure"), ": "), i18n$t(filter_collision_data()$structure_type), tags$br(),
+    tags$b(i18n$t("Road structure"), ": "), suppressWarnings(i18n$t(filter_collision_data()$structure_type)), tags$br(),
     # Suppress warning message from i18n when `Road_Hierarchy` is NA
     # TODO: Transform NA to ''?
     tags$b(i18n$t("Road hierarchy"), ": "), suppressWarnings(i18n$t(filter_collision_data()$road_hierarchy)),
