@@ -3,7 +3,7 @@
 
 # Only return collisions with pedestrian involved
 ddsb_ped_filtered_hk_collisions = reactive({
-  filter(ddsb_filtered_hk_collisions(), Type_of_Collision == "Vehicle collision with Pedestrian")
+  filter(ddsb_filtered_hk_collisions(), collision_type == "Vehicle collision with Pedestrian")
 })
 
 # filtered hk_casualties with pedestrian involved only
@@ -54,7 +54,7 @@ output$box_ped_total_casualty = renderInfoBox({
 })
 
 output$box_ped_serious_stat = renderInfoBox({
-  n_serious = nrow(filter(ddsb_ped_filtered_hk_casualties(), Degree_of_Injury == "Seriously Injured"))
+  n_serious = nrow(filter(ddsb_ped_filtered_hk_casualties(), injury_degree == "Seriously Injured"))
   serious_per = round(n_serious / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
 
   infoBox(
@@ -67,7 +67,7 @@ output$box_ped_serious_stat = renderInfoBox({
 })
 
 output$box_ped_fatal_stat = renderInfoBox({
-  n_fatal = nrow(filter(ddsb_ped_filtered_hk_casualties(), Degree_of_Injury == "Killed"))
+  n_fatal = nrow(filter(ddsb_ped_filtered_hk_casualties(), injury_degree == "Killed"))
   fatal_per = round(n_fatal / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
 
   infoBox(
@@ -106,13 +106,13 @@ output$ddsb_ped_collision_heatmap = renderTmap({
 output$ddsb_ped_ksi_plot = renderPlotly({
 
   # count by severity
-  plot_data = count(ddsb_ped_filtered_hk_collisions(), Severity, name = "count", na.rm = TRUE) %>%
-    left_join(COLLISION_SEVERITY_TRANSLATE, by = "Severity") %>%
+  plot_data = count(ddsb_ped_filtered_hk_collisions(), severity, name = "count", na.rm = TRUE) %>%
+    left_join(COLLISION_SEVERITY_TRANSLATE, by = "severity") %>%
     # Force order of the categorical axis
     # Factor in reversed order since last element in factor is plotted on top in ggplot
-    mutate(Severity_text = factor(paste0(Severity_chi, "\n", Severity), c("致命\nFatal", "嚴重\nSerious", "輕微\nSlight")))
+    mutate(severity_text = factor(paste0(severity_chi, "\n", severity), c("致命\nFatal", "嚴重\nSerious", "輕微\nSlight")))
 
-  plot_by_severity = ggplot(plot_data, aes(x = Severity_text, y = count, fill = Severity)) +
+  plot_by_severity = ggplot(plot_data, aes(x = severity_text, y = count, fill = severity)) +
     geom_bar(stat = "identity") +
     coord_flip() +
     scale_fill_manual(values = SEVERITY_COLOR) +
@@ -130,13 +130,13 @@ output$ddsb_ped_ksi_plot = renderPlotly({
 # Vehicle Class plot
 output$ddsb_ped_vehicle_class_plot = renderPlotly({
 
-  # count by Vehicle_Class
-  plot_data = count(ddsb_ped_filtered_hk_vehicles(), Vehicle_Class, name = "count", na.rm = TRUE) %>%
-    left_join(VEHICLE_CLASS_TRANSLATE, by = c("Vehicle_Class" = "Vehicle_Class")) %>%
+  # count by vehicle class
+  plot_data = count(ddsb_ped_filtered_hk_vehicles(), vehicle_class, name = "count", na.rm = TRUE) %>%
+    left_join(VEHICLE_CLASS_TRANSLATE, by = c("vehicle_class" = "vehicle_class")) %>%
     # Merge both en and zh values, then reorder vehicle class in descending order
-    mutate(Vehicle_Class_order = reorder(paste0(Vehicle_Class_chi, "\n", Vehicle_Class), count))
+    mutate(vehicle_class_order = reorder(paste0(vehicle_class_chi, "\n", vehicle_class), count))
 
-  plot_by_vehicle_class = ggplot(plot_data, aes(x = Vehicle_Class_order, y = count)) +
+  plot_by_vehicle_class = ggplot(plot_data, aes(x = vehicle_class_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
     coord_flip() +
     theme_minimal() +
@@ -154,13 +154,13 @@ output$ddsb_ped_vehicle_class_plot = renderPlotly({
 # Vehicle movement plot
 output$ddsb_ped_vehicle_movement_plot = renderPlotly({
 
-  # count by Vehicle_Class
-  plot_data = count(ddsb_ped_filtered_hk_vehicles(), Main_vehicle, name = "count") %>%
-    left_join(VEHICLE_MOVEMENT_TRANSLATE, by = c("Main_vehicle" = "Main_vehicle")) %>%
+  # count by vehicle movement
+  plot_data = count(ddsb_ped_filtered_hk_vehicles(), vehicle_movement, name = "count") %>%
+    left_join(VEHICLE_MOVEMENT_TRANSLATE, by = c("vehicle_movement" = "vehicle_movement")) %>%
     # Merge both en and zh values, then reorder vehicle movement in descending order
-    mutate(Main_vehicle_order = reorder(paste0(Main_vehicle_chi, " ", Main_vehicle), count))
+    mutate(vehicle_movement_order = reorder(paste0(vehicle_movement_chi, " ", vehicle_movement), count))
 
-  plot_by_vehicle_movement = ggplot(plot_data, aes(x = Main_vehicle_order, y = count)) +
+  plot_by_vehicle_movement = ggplot(plot_data, aes(x = vehicle_movement_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$vehicles) +
     coord_flip() +
     theme_minimal() +
@@ -179,14 +179,14 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
 
   # count by pedestrian Action
   plot_data = ddsb_ped_filtered_hk_casualties() %>%
-    filter(!is.na(Ped_Action)) %>%
-    count(Ped_Action, name = "count") %>%
-    left_join(PED_ACTION_TRANSLATE, by = c("Ped_Action" = "Ped_Action")) %>%
+    filter(!is.na(ped_action)) %>%
+    count(ped_action, name = "count") %>%
+    left_join(PED_ACTION_TRANSLATE, by = c("ped_action" = "ped_action")) %>%
     # Merge both en and zh values, then reorder vehicle class in descending order
-    mutate(Ped_Action_order = reorder(paste0(Ped_Action_chi, "\n", Ped_Action), count))
+    mutate(ped_action_order = reorder(paste0(ped_action_chi, "\n", ped_action), count))
 
 
-  plot_by_ped_action = ggplot(plot_data, aes(x = Ped_Action_order, y = count)) +
+  plot_by_ped_action = ggplot(plot_data, aes(x = ped_action_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$casualties) +
     coord_flip() +
     theme_minimal() +
@@ -205,14 +205,14 @@ output$ddsb_ped_road_hierarchy_plot = renderPlotly({
 
   # count by pedestrian Action
   plot_data = ddsb_ped_filtered_hk_collisions() %>%
-    filter(!is.na(Road_Hierarchy)) %>%
-    count(Road_Hierarchy, name = "count") %>%
-    left_join(ROAD_HIERARCHY_TRANSLATE, by = c("Road_Hierarchy" = "Road_Hierarchy")) %>%
+    filter(!is.na(road_hierarchy)) %>%
+    count(road_hierarchy, name = "count") %>%
+    left_join(ROAD_HIERARCHY_TRANSLATE, by = c("road_hierarchy" = "road_hierarchy")) %>%
     # Merge both en and zh values, then reorder vehicle class in descending order
-    mutate(Road_Hierarchy_order = reorder(paste0(Road_Hierarchy_chi, "\n", Road_Hierarchy), count))
+    mutate(road_hierarchy_order = reorder(paste0(road_hierarchy_chi, "\n", road_hierarchy), count))
 
 
-  plot_by_road_hierarchy = ggplot(plot_data, aes(x = Road_Hierarchy_order, y = count)) +
+  plot_by_road_hierarchy = ggplot(plot_data, aes(x = road_hierarchy_order, y = count)) +
     geom_bar(stat = "identity", fill = CATEGORY_COLOR$accidents) +
     coord_flip() +
     theme_minimal() +
