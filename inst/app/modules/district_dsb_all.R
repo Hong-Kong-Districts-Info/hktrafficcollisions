@@ -5,7 +5,7 @@
 ddsb_filtered_hk_casualties = reactive({
 
   # vector of Serial No. in selected range
-  serial_no_filtered = unique(ddsb_filtered_hk_accidents()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_filtered_hk_collisions()[["Serial_No_"]])
 
   filter(hk_casualties, Serial_No_ %in% serial_no_filtered)
 })
@@ -14,20 +14,20 @@ ddsb_filtered_hk_casualties = reactive({
 ddsb_filtered_hk_vehicles = reactive({
 
   # vector of Serial No. in selected range
-  serial_no_filtered = unique(ddsb_filtered_hk_accidents()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_filtered_hk_collisions()[["Serial_No_"]])
 
   filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
 })
 
 all_grid_count = reactive({
-  count_collisions_in_grid(ddsb_filtered_hk_accidents())
+  count_collisions_in_grid(ddsb_filtered_hk_collisions())
 })
 
 
 # Outputs ----------------------------------
 
 output$box_all_total_collision = renderInfoBox({
-  n_collision = nrow(ddsb_filtered_hk_accidents())
+  n_collision = nrow(ddsb_filtered_hk_collisions())
 
   infoBox(
     title = "",
@@ -101,7 +101,7 @@ output$ddsb_all_collision_heatmap = renderTmap({
 output$ddsb_all_ksi_plot = renderPlotly({
 
   # count by severity
-  plot_data = count(ddsb_filtered_hk_accidents(), Severity, name = "count", na.rm = TRUE) %>%
+  plot_data = count(ddsb_filtered_hk_collisions(), Severity, name = "count", na.rm = TRUE) %>%
     left_join(COLLISION_SEVERITY_TRANSLATE, by = "Severity") %>%
     # Force order of the categorical axis
     # Factor in reversed order since last element in factor is plotted on top in ggplot
@@ -125,7 +125,7 @@ output$ddsb_all_ksi_plot = renderPlotly({
 # Collision by year plot
 output$ddsb_all_year_plot = renderPlotly({
 
-  plot_data = count(ddsb_filtered_hk_accidents(), Year, name = "count", na.rm = TRUE)
+  plot_data = count(ddsb_filtered_hk_collisions(), Year, name = "count", na.rm = TRUE)
 
   collision_year_trend_plot = ggplot(plot_data, aes(x = Year, y = count)) +
     geom_line() +
@@ -144,7 +144,7 @@ output$ddsb_all_year_plot = renderPlotly({
 output$ddsb_all_collision_type_plot = renderPlotly({
 
   # count by pedestrian Action
-  plot_data = ddsb_filtered_hk_accidents() %>%
+  plot_data = ddsb_filtered_hk_collisions() %>%
     count(Type_of_Collision_with_cycle, name = "count") %>%
     left_join(COLLISION_TYPE_TRANSLATE, by = c("Type_of_Collision_with_cycle" = "Collision_Type")) %>%
     # Merge both en and zh values, then reorder vehicle class in descending order
@@ -195,7 +195,7 @@ output$ddsb_all_vehicle_class_plot = renderPlotly({
 output$ddsb_all_road_hierarchy_plot = renderPlotly({
 
   # count by pedestrian Action
-  plot_data = ddsb_filtered_hk_accidents() %>%
+  plot_data = ddsb_filtered_hk_collisions() %>%
     filter(!is.na(Road_Hierarchy)) %>%
     count(Road_Hierarchy, name = "count") %>%
     left_join(ROAD_HIERARCHY_TRANSLATE, by = c("Road_Hierarchy" = "Road_Hierarchy")) %>%

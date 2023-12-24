@@ -2,14 +2,14 @@
 # and visualise the dataset in the "collisions with pedestrian" tab
 
 # Only return collisions with pedestrian involved
-ddsb_ped_filtered_hk_accidents = reactive({
-  filter(ddsb_filtered_hk_accidents(), Type_of_Collision == "Vehicle collision with Pedestrian")
+ddsb_ped_filtered_hk_collisions = reactive({
+  filter(ddsb_filtered_hk_collisions(), Type_of_Collision == "Vehicle collision with Pedestrian")
 })
 
 # filtered hk_casualties with pedestrian involved only
 ddsb_ped_filtered_hk_casualties = reactive({
 
-  serial_no_filtered = unique(ddsb_ped_filtered_hk_accidents()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_ped_filtered_hk_collisions()[["Serial_No_"]])
 
   filter(hk_casualties, Serial_No_ %in% serial_no_filtered)
 })
@@ -17,20 +17,20 @@ ddsb_ped_filtered_hk_casualties = reactive({
 # filtered hk_vehicles with pedestrian involved only
 ddsb_ped_filtered_hk_vehicles = reactive({
 
-  serial_no_filtered = unique(ddsb_ped_filtered_hk_accidents()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_ped_filtered_hk_collisions()[["Serial_No_"]])
 
   filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
 })
 
 ped_grid_count = reactive({
-  count_collisions_in_grid(ddsb_ped_filtered_hk_accidents())
+  count_collisions_in_grid(ddsb_ped_filtered_hk_collisions())
 })
 
 
 # Outputs ----------------------------------
 
 output$box_ped_total_collision = renderInfoBox({
-  n_collision = nrow(ddsb_ped_filtered_hk_accidents())
+  n_collision = nrow(ddsb_ped_filtered_hk_collisions())
 
   infoBox(
     title = "",
@@ -106,7 +106,7 @@ output$ddsb_ped_collision_heatmap = renderTmap({
 output$ddsb_ped_ksi_plot = renderPlotly({
 
   # count by severity
-  plot_data = count(ddsb_ped_filtered_hk_accidents(), Severity, name = "count", na.rm = TRUE) %>%
+  plot_data = count(ddsb_ped_filtered_hk_collisions(), Severity, name = "count", na.rm = TRUE) %>%
     left_join(COLLISION_SEVERITY_TRANSLATE, by = "Severity") %>%
     # Force order of the categorical axis
     # Factor in reversed order since last element in factor is plotted on top in ggplot
@@ -204,7 +204,7 @@ output$ddsb_ped_ped_action_plot = renderPlotly({
 output$ddsb_ped_road_hierarchy_plot = renderPlotly({
 
   # count by pedestrian Action
-  plot_data = ddsb_ped_filtered_hk_accidents() %>%
+  plot_data = ddsb_ped_filtered_hk_collisions() %>%
     filter(!is.na(Road_Hierarchy)) %>%
     count(Road_Hierarchy, name = "count") %>%
     left_join(ROAD_HIERARCHY_TRANSLATE, by = c("Road_Hierarchy" = "Road_Hierarchy")) %>%

@@ -34,8 +34,8 @@ output$month_range_ui = renderUI({
                      label = i18n$t("Date range"),
                      range = TRUE,
                      value = c("2016-01-01", "2016-12-01"),
-                     min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                     max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                     min = as.Date(min(hk_collisions$Date_Time), tz = "Asia/Hong_Kong"),
+                     max = as.Date(max(hk_collisions$Date_Time), tz = "Asia/Hong_Kong"),
                      view = "months",
                      minView = "months",
                      monthsField = "monthsShort",
@@ -63,7 +63,7 @@ output$severity_filter_ui = renderUI({
       "Serious",
       "Slight"
     ),
-    selected = unique(hk_accidents$Severity),
+    selected = unique(hk_collisions$Severity),
     direction = "vertical",
     justified = TRUE
   ) %>%
@@ -74,7 +74,7 @@ output$severity_filter_ui = renderUI({
 })
 
 
-collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
+collision_type_choices = sort(unique(hk_collisions$Type_of_Collision_with_cycle), decreasing = TRUE)
 
 output$collision_type_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
@@ -158,10 +158,10 @@ filter_collision_data <-
 
       # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
       if (is.null(input$month_range)) {
-        data_filtered = filter(hk_accidents_valid_sf,
+        data_filtered = filter(hk_collisions_valid_sf,
                                year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
       } else {
-        data_filtered = filter(hk_accidents_valid_sf,
+        data_filtered = filter(hk_collisions_valid_sf,
                                year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
       }
 

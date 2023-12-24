@@ -10,14 +10,14 @@ COLLISION_TYPE_WITH_CYCLES = c(
   )
 
 # Only return collisions with bicycles involved
-ddsb_cyc_filtered_hk_accidents = reactive({
-  filter(ddsb_filtered_hk_accidents(), Type_of_Collision_with_cycle %in% COLLISION_TYPE_WITH_CYCLES)
+ddsb_cyc_filtered_hk_collisions = reactive({
+  filter(ddsb_filtered_hk_collisions(), Type_of_Collision_with_cycle %in% COLLISION_TYPE_WITH_CYCLES)
 })
 
 # filtered hk_casualties with bicycles involved only
 ddsb_cyc_filtered_hk_casualties = reactive({
 
-  serial_no_filtered = unique(ddsb_cyc_filtered_hk_accidents()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_cyc_filtered_hk_collisions()[["Serial_No_"]])
 
   filter(hk_casualties, Serial_No_ %in% serial_no_filtered)
 })
@@ -25,7 +25,7 @@ ddsb_cyc_filtered_hk_casualties = reactive({
 # filtered hk_vehicles with bicycles involved only
 ddsb_cyc_filtered_hk_vehicles = reactive({
 
-  serial_no_filtered = unique(ddsb_cyc_filtered_hk_accidents()[["Serial_No_"]])
+  serial_no_filtered = unique(ddsb_cyc_filtered_hk_collisions()[["Serial_No_"]])
 
   filter(hk_vehicles, Serial_No_ %in% serial_no_filtered)
 })
@@ -33,7 +33,7 @@ ddsb_cyc_filtered_hk_vehicles = reactive({
 # Cycle-related vehicle collision, yet exclude cycle in vehicles
 ddsb_cyc_filtered_hk_vehicles_wo_cycle = reactive({
 
-  serial_no_filtered = ddsb_cyc_filtered_hk_accidents() %>%
+  serial_no_filtered = ddsb_cyc_filtered_hk_collisions() %>%
     filter(Type_of_Collision_with_cycle == "Vehicle collision with Pedal Cycle") %>%
     pull(Serial_No_)
 
@@ -43,13 +43,13 @@ ddsb_cyc_filtered_hk_vehicles_wo_cycle = reactive({
 
 
 cyc_grid_count = reactive({
-  count_collisions_in_grid(ddsb_cyc_filtered_hk_accidents())
+  count_collisions_in_grid(ddsb_cyc_filtered_hk_collisions())
 })
 
 # Outputs ----------------------------------
 
 output$box_cyc_total_collision = renderInfoBox({
-  n_collision = nrow(ddsb_cyc_filtered_hk_accidents())
+  n_collision = nrow(ddsb_cyc_filtered_hk_collisions())
 
   infoBox(
     title = "",
@@ -124,7 +124,7 @@ output$ddsb_cyc_collision_heatmap = renderTmap({
 output$ddsb_cyc_ksi_plot = renderPlotly({
 
   # count by severity
-  plot_data = count(ddsb_cyc_filtered_hk_accidents(), Severity, name = "count", na.rm = TRUE) %>%
+  plot_data = count(ddsb_cyc_filtered_hk_collisions(), Severity, name = "count", na.rm = TRUE) %>%
     left_join(COLLISION_SEVERITY_TRANSLATE, by = "Severity") %>%
     # Force order of the categorical axis
     # Factor in reversed order since last element in factor is plotted on top in ggplot
@@ -149,7 +149,7 @@ output$ddsb_cyc_ksi_plot = renderPlotly({
 output$ddsb_cyc_collision_type_plot = renderPlotly({
 
   # count by pedestrian Action
-  plot_data = ddsb_cyc_filtered_hk_accidents() %>%
+  plot_data = ddsb_cyc_filtered_hk_collisions() %>%
     count(Type_of_Collision_with_cycle, name = "count") %>%
     left_join(COLLISION_TYPE_TRANSLATE, by = c("Type_of_Collision_with_cycle" = "Collision_Type")) %>%
     # Merge both en and zh values, then reorder vehicle class in descending order
@@ -247,7 +247,7 @@ output$ddsb_cyc_cyc_action_plot = renderPlotly({
 output$ddsb_cyc_road_hierarchy_plot = renderPlotly({
 
   # count by road hierarchy
-  plot_data = ddsb_cyc_filtered_hk_accidents() %>%
+  plot_data = ddsb_cyc_filtered_hk_collisions() %>%
     # For cycle-related collisions, Road_Hierarchy == -99 in original data (transformed in NA)
     # implies the collision happened in cycle track
     # Most cycle-related collisions with Road_Hierarchy of NA are actually happened in cycle tracks
