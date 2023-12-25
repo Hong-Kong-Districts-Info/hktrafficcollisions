@@ -33,9 +33,9 @@ output$month_range_ui = renderUI({
   airDatepickerInput("month_range",
                      label = i18n$t("Date range"),
                      range = TRUE,
-                     value = c("2016-01-01", "2016-12-01"),
-                     min = as.Date(min(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
-                     max = as.Date(max(hk_accidents$Date_Time), tz = "Asia/Hong_Kong"),
+                     value = c("2021-01-01", "2021-12-01"),
+                     min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
+                     max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
                      view = "months",
                      minView = "months",
                      monthsField = "monthsShort",
@@ -63,7 +63,7 @@ output$severity_filter_ui = renderUI({
       "Serious",
       "Slight"
     ),
-    selected = unique(hk_accidents$Severity),
+    selected = unique(hk_collisions$severity),
     direction = "vertical",
     justified = TRUE
   ) %>%
@@ -74,7 +74,13 @@ output$severity_filter_ui = renderUI({
 })
 
 
-collision_type_choices = sort(unique(hk_accidents$Type_of_Collision_with_cycle), decreasing = TRUE)
+collision_type_choices =
+  c(
+    "Vehicle collision with Vehicle", "Vehicle collision with Pedestrian", "Vehicle collision with Pedal Cycle",
+    "Vehicle collision with Object", "Vehicle collision with Nothing", "Pedal Cycle collision with Pedestrian",
+    "Pedal Cycle collision with Pedal Cycle", "Pedal Cycle collision with Object", "Pedal Cycle collision with Nothing",
+    "Unknown vehicle collision type"
+  )
 
 output$collision_type_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
@@ -93,7 +99,7 @@ output$collision_type_filter_ui = renderUI({
     )
 })
 
-vehicle_class_choices = unique(hk_vehicles$Vehicle_Class)
+vehicle_class_choices = unique(hk_vehicles$vehicle_class)
 
 output$vehicle_class_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
@@ -104,7 +110,7 @@ output$vehicle_class_filter_ui = renderUI({
       lapply(vehicle_class_choices, function(x) {i18n$t(x)})
     )
     ,
-    selected = unique(hk_vehicles$Vehicle_Class)
+    selected = unique(hk_vehicles$vehicle_class)
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
@@ -158,31 +164,31 @@ filter_collision_data <-
 
       # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
       if (is.null(input$month_range)) {
-        data_filtered = filter(hk_accidents_valid_sf,
-                               year_month >= floor_date_to_month(as.Date("2016-01-01")) & year_month <= floor_date_to_month(as.Date("2016-12-01")))
+        data_filtered = filter(hk_collisions_valid_sf,
+                               year_month >= floor_date_to_month(as.Date("2021-01-01")) & year_month <= floor_date_to_month(as.Date("2021-12-01")))
       } else {
-        data_filtered = filter(hk_accidents_valid_sf,
+        data_filtered = filter(hk_collisions_valid_sf,
                                year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
       }
 
 
-      message("Min date in filtered data: ", min(data_filtered$Date_Time))
-      message("Max date in filtered data: ", max(data_filtered$Date_Time))
+      message("Min date in filtered data: ", min(data_filtered$date_time))
+      message("Max date in filtered data: ", max(data_filtered$date_time))
 
-      data_filtered = filter(data_filtered, Type_of_Collision_with_cycle %in% input$collision_type_filter)
+      data_filtered = filter(data_filtered, collision_type_with_cycle %in% input$collision_type_filter)
 
-      data_filtered = filter(data_filtered, Severity %in% input$severity_filter)
+      data_filtered = filter(data_filtered, severity %in% input$severity_filter)
 
-      data_filtered = filter(data_filtered, District_Council_District %in% input$district_filter)
+      data_filtered = filter(data_filtered, district %in% input$district_filter)
 
       # Get the serial numbers (in vector form) where vehicles involved includes users' selected vehicle class
-      accient_w_selected_veh <- filter(hk_vehicles, Vehicle_Class %in% input$vehicle_class_filter)
+      accient_w_selected_veh <- filter(hk_vehicles, vehicle_class %in% input$vehicle_class_filter)
 
       # convert column to vector
       # remove duplicated serial number if there are more than 1 vehicle class
-      accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["Serial_No_"]])
+      accient_w_selected_veh_vct <- unique(accient_w_selected_veh[["serial_no"]])
 
-      data_filtered <- filter(data_filtered, Serial_No_ %in% accient_w_selected_veh_vct)
+      data_filtered <- filter(data_filtered, serial_no %in% accient_w_selected_veh_vct)
 
       # Show at most 20,000 points on the map to ensure performance
       if (nrow(data_filtered) > 20000) {
@@ -226,35 +232,35 @@ observe({
 
     # Square symbol indicating severity level
     # Use raw htmls since adding reactive expressions into tags$ will result in error
-    "<div style=\"height:20px; width:20px; float:left; margin-right:10px; background-color:", fill_palette(filter_collision_data()$Severity) ,"\";>", "</div>",
+    "<div style=\"height:20px; width:20px; float:left; margin-right:10px; background-color:", fill_palette(filter_collision_data()$severity) ,"\";>", "</div>",
 
     # Collision severity as title
-    "<h3>", i18n$t(paste0(filter_collision_data()$Severity, " Collision")), "</h3>",
+    "<h3>", i18n$t(paste0(filter_collision_data()$severity, " Collision")), "</h3>",
 
     # Accident serial number
-    tags$b(i18n$t("Serial number"), ": "), filter_collision_data()$Serial_No_, tags$br(),
+    tags$b(i18n$t("Serial number"), ": "), filter_collision_data()$serial_no, tags$br(),
 
     # Accident date and time
-    tags$b(i18n$t("Collision date"), ": "), strftime(filter_collision_data()$Date_Time, "%d %b %Y %H:%M"), tags$br(),
+    tags$b(i18n$t("Collision date"), ": "), strftime(filter_collision_data()$date_time, "%d %b %Y %H:%M"), tags$br(),
 
     tags$br(),
 
     # District
     tags$b(i18n$t("District"), ": "), i18n$t(filter_collision_data()$DC_full_name), tags$br(),
     # Street Name
-    tags$b(i18n$t("Road name"), ": "), filter_collision_data()$Street_Name, tags$br(),
+    tags$b(i18n$t("Road name"), ": "), filter_collision_data()$street_name, tags$br(),
     # Full address of collision location
-    tags$b(i18n$t("Precise location"), ": "), tags$br(), filter_collision_data()$Precise_Location, tags$br(),
+    tags$b(i18n$t("Precise location"), ": "), tags$br(), filter_collision_data()$precise_location, tags$br(),
 
     tags$br(),
 
     # Collision type
-    tags$b(i18n$t("Collision type"), ": "), tags$br(), i18n$t(filter_collision_data()$Type_of_Collision_with_cycle), tags$br(),
+    tags$b(i18n$t("Collision type"), ": "), tags$br(), i18n$t(filter_collision_data()$collision_type_with_cycle), tags$br(),
 
     tags$br(),
 
     # Number of vehicles involved
-    tags$b(i18n$t("Number of vehicles"), ": "), filter_collision_data()$No_of_Vehicles_Involved, tags$br(),
+    tags$b(i18n$t("Number of vehicles"), ": "), filter_collision_data()$n_vehicles, tags$br(),
     # Involved vehicle class
     # FIXME: Can't translate when collision includes >1 vehicle type
     tags$b(i18n$t("Involved vehicle classes"), ": "), suppressWarnings(i18n$t(filter_collision_data()$vehicle_class_involved)), tags$br(),
@@ -262,7 +268,7 @@ observe({
     tags$br(),
 
     # Number of injuries
-    tags$b(i18n$t("Number of casualties")), filter_collision_data()$No_of_Casualties_Injured, tags$br(),
+    tags$b(i18n$t("Number of casualties")), filter_collision_data()$n_casualties, tags$br(),
     # Involved casualty breakdown
     "(",
     filter_collision_data()$cas_dvr_n, i18n$t(" driver(s)"), ", ",
@@ -272,11 +278,11 @@ observe({
     tags$br(),
     tags$br(),
 
-    tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$Within_70m, i18n$t("Yes"), i18n$t("No")), tags$br(),
-    tags$b(i18n$t("Road structure"), ": "), i18n$t(filter_collision_data()$Structure_Type), tags$br(),
+    tags$b(i18n$t("Within 70 m of junctions? ")), ifelse(filter_collision_data()$in_70m_junction, i18n$t("Yes"), i18n$t("No")), tags$br(),
+    tags$b(i18n$t("Road structure"), ": "), suppressWarnings(i18n$t(filter_collision_data()$structure_type)), tags$br(),
     # Suppress warning message from i18n when `Road_Hierarchy` is NA
     # TODO: Transform NA to ''?
-    tags$b(i18n$t("Road hierarchy"), ": "), suppressWarnings(i18n$t(filter_collision_data()$Road_Hierarchy)),
+    tags$b(i18n$t("Road hierarchy"), ": "), suppressWarnings(i18n$t(filter_collision_data()$road_hierarchy)),
 
     tags$br(),
     tags$br(),
@@ -301,7 +307,7 @@ observe({
       # fixed point size symbol
       radius = 6,
       color = "#0d0d0d", weight = 2, opacity = .9,
-      fillColor = ~ fill_palette(Severity), fillOpacity = .9,
+      fillColor = ~ fill_palette(severity), fillOpacity = .9,
       popup = popup_template,
       clusterOptions = markerClusterOptions(
         disableClusteringAtZoom = 15

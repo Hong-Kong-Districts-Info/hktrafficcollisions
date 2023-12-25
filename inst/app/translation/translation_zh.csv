@@ -47,6 +47,7 @@ Pedal Cycle collision with Pedestrian,單車撞行人
 Vehicle collision with Pedal Cycle,車撞單車
 Pedal Cycle collision with Object,單車撞物
 Pedal Cycle collision with Pedal Cycle,單車撞單車
+Unknown vehicle collision type,類別不明
 Private car,私家車
 Public franchised bus,公共專營巴士
 Taxi,的士

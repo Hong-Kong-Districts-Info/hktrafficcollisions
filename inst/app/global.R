@@ -57,7 +57,7 @@ i18n$use_js()
 # Data import -------------------------------------------------------------
 
 ## Take data from {hkdatasets}
-hk_accidents <- fst::read_fst("./data/hk_accidents.fst")
+hk_collisions <- fst::read_fst("./data/hk_collisions.fst")
 hk_vehicles <- fst::read_fst("./data/hk_vehicles.fst")
 hk_casualties <- fst::read_fst("./data/hk_casualties.fst")
 
@@ -67,7 +67,7 @@ hotzone_streets = read_sf("./data/hotzone_streets.gpkg")
 terminology = read.csv("./data/terminology.csv")
 
 ## Manipulated data, generated from `modules/manipulate_data.R`
-hk_accidents_valid_sf = read_sf("./data/data-manipulated/hk_accidents_valid_sf.gpkg")
+hk_collisions_valid_sf = read_sf("./data/data-manipulated/hk_collisions_valid_sf.gpkg")
 hotzone_out_df = fst::read_fst("./data/data-manipulated/hotzone_out_df.fst")
 
 # interactive thematic map mode option ------------------------------------
@@ -86,7 +86,7 @@ DISTRICT_FULL_NAME = hkdatasets::hkdistrict_summary[["District_EN"]]
 # Color scheme ------------------------------------------------------------
 
 SEVERITY_COLOR = c(Fatal = "#FF4039", Serious = "#FFB43F", Slight = "#FFE91D")
-CATEGORY_COLOR = setNames(as.list(c("#232323", "#232323", "#232323")), c("accidents", "casualties", "vehicles"))
+CATEGORY_COLOR = setNames(as.list(c("#232323", "#232323", "#232323")), c("collisions", "casualties", "vehicles"))
 
 # Fill color palette according to the severity of the accident
 fill_palette = leaflet::colorFactor(palette = c("#FF4039", "#FFB43F", "#FFE91D"), domain = c("Fatal", "Serious", "Slight"))
