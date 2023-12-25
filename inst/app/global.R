@@ -34,6 +34,11 @@ library(tmap)
 library(DT, warn.conflicts = FALSE)
 
 
+# System settings -------------------------------------------------------------
+
+Sys.setenv(TZ = "Asia/Hong_Kong")
+
+
 # Metadata -------------------------------------------------------------
 
 # opengraph properties
