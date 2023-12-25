@@ -13,6 +13,21 @@
   max-height: calc(100vh - 150px);
 }
 
+@media (max-width:768px) {
+  #controls {
+    /* Header is 50px, top and bottom padding of content panel is 15px each, bottom margin of the box is 20px,
+    top and bottom heading inside box is 10px each */
+    height: calc(100vh - 200px);
+    overflow: auto;
+  }
+
+  #main_map {
+    max-height: calc(100vh - 200px);
+  }
+}
+
+
+
 /* dashboard body, excluding sidebar */
 .content-wrapper, .right-side {
   background-color: #eeeeee;
