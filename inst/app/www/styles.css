@@ -19,6 +19,7 @@
     top and bottom heading inside box is 10px each */
     height: calc(100vh - 200px);
     overflow: auto;
+    margin-top: 20px;
   }
 
   #main_map {
