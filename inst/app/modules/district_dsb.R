@@ -11,12 +11,14 @@ COLLISION_TYPE_TRANSLATE = data.frame(
   collision_type_with_cycle = c(
     "Vehicle collision with Vehicle", "Vehicle collision with Pedestrian", "Vehicle collision with Pedal Cycle",
     "Vehicle collision with Object", "Vehicle collision with Nothing", "Pedal Cycle collision with Pedestrian",
-    "Pedal Cycle collision with Pedal Cycle", "Pedal Cycle collision with Object", "Pedal Cycle collision with Nothing"
+    "Pedal Cycle collision with Pedal Cycle", "Pedal Cycle collision with Object", "Pedal Cycle collision with Nothing",
+    "Unknown vehicle collision type"
   ),
   collision_type_with_cycle_chi = c(
     "車撞車", "車撞行人", "車撞單車",
     "車撞物", "車輛沒有碰撞", "單車撞行人",
-    "單車撞單車", "單車撞物", "單車沒有碰撞"
+    "單車撞單車", "單車撞物", "單車沒有碰撞",
+    "類別不明"
   )
 )
 

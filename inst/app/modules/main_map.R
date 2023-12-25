@@ -74,7 +74,13 @@ output$severity_filter_ui = renderUI({
 })
 
 
-collision_type_choices = sort(unique(hk_collisions$collision_type_with_cycle), decreasing = TRUE)
+collision_type_choices =
+  c(
+    "Vehicle collision with Vehicle", "Vehicle collision with Pedestrian", "Vehicle collision with Pedal Cycle",
+    "Vehicle collision with Object", "Vehicle collision with Nothing", "Pedal Cycle collision with Pedestrian",
+    "Pedal Cycle collision with Pedal Cycle", "Pedal Cycle collision with Object", "Pedal Cycle collision with Nothing",
+    "Unknown vehicle collision type"
+  )
 
 output$collision_type_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
