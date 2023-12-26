@@ -3,7 +3,7 @@
 
 # Only return collisions with pedestrian involved
 ddsb_ped_filtered_hk_collisions = reactive({
-  filter(ddsb_filtered_hk_collisions(), collision_type == "Vehicle collision with Pedestrian")
+  filter(ddsb_filtered_hk_collisions(), collision_type_with_cycle == "Vehicle collision with Pedestrian")
 })
 
 # filtered hk_casualties with pedestrian involved only
