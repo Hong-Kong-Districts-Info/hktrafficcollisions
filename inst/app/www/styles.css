@@ -1,7 +1,33 @@
 #controls {
-  height: 100vh;
+  /* Height of elements in shinydashboard:
+    - Header: 50px,
+    - Top and bottom padding of content panel: 15px each
+    - Bottom margin of box in fluidRow: 20px
+    - Top and bottom padding of box in fluidRow: 10px each
+    */
+  height: calc(100vh - 150px);
   overflow: auto;
 }
+
+#main_map {
+  max-height: calc(100vh - 150px);
+}
+
+@media (max-width:768px) {
+  #controls {
+    /* Header is 50px, top and bottom padding of content panel is 15px each, bottom margin of the box is 20px,
+    top and bottom heading inside box is 10px each */
+    height: calc(100vh - 200px);
+    overflow: auto;
+    margin-top: 20px;
+  }
+
+  #main_map {
+    max-height: calc(100vh - 200px);
+  }
+}
+
+
 
 /* dashboard body, excluding sidebar */
 .content-wrapper, .right-side {
