@@ -245,57 +245,6 @@ ui <- dashboardPage(
         tabsetPanel(
           id = "dashboard_collision_category",
 
-          # All Vehicle Collision tab
-          tabPanel(
-            value = "all_vehicle_collision",
-            title = i18n$t("All Vehicle Collision"),
-
-            fluidRow(
-              infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
-              infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
-              infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
-              infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
-            ),
-
-            fluidRow(
-              box(
-                  width = 6,
-                  title = i18n$t("Collision location"),
-                  tmapOutput(outputId = "ddsb_all_collision_heatmap")
-              ),
-              box(width = 6,
-                  title = i18n$t("Collision severity"),
-                  plotlyOutput(outputId = "ddsb_all_ksi_plot")
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Collision trend"),
-                plotlyOutput(outputId = "ddsb_all_year_plot")
-              ),
-              box(
-                width = 6,
-                title = i18n$t("Collision type"),
-                plotlyOutput(outputId = "ddsb_all_collision_type_plot")
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Vehicle classes involved"),
-                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot")
-              ),
-              box(
-                width = 6,
-                title = i18n$t("Road hierarchy"),
-                plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
-              )
-            )
-          ),
-
           # Vehicle w/ Peds tab
           tabPanel(
             value = "vehicle_with_pedestrians",
@@ -402,6 +351,58 @@ ui <- dashboardPage(
                 width = 6,
                 title = i18n$t("Road hierarchy"),
                 plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
+              )
+            )
+          ),
+
+
+          # All Vehicle Collision tab
+          tabPanel(
+            value = "all_vehicle_collision",
+            title = i18n$t("All Vehicle Collision"),
+
+            fluidRow(
+              infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
+              infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
+              infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
+              infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = i18n$t("Collision location"),
+                tmapOutput(outputId = "ddsb_all_collision_heatmap")
+              ),
+              box(width = 6,
+                  title = i18n$t("Collision severity"),
+                  plotlyOutput(outputId = "ddsb_all_ksi_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = i18n$t("Collision trend"),
+                plotlyOutput(outputId = "ddsb_all_year_plot")
+              ),
+              box(
+                width = 6,
+                title = i18n$t("Collision type"),
+                plotlyOutput(outputId = "ddsb_all_collision_type_plot")
+              )
+            ),
+
+            fluidRow(
+              box(
+                width = 6,
+                title = i18n$t("Vehicle classes involved"),
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot")
+              ),
+              box(
+                width = 6,
+                title = i18n$t("Road hierarchy"),
+                plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
               )
             )
           )
