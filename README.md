@@ -8,9 +8,9 @@
 
 <!-- badges: end -->
 
-[![](man/figures/website-preview.png)](https://streetreset.shinyapps.io/trafficcollisions/)
+[![](man/figures/website-preview.png)](https://streetreset.shinyapps.io/hktrafficcollisions/)
 
-[香港車禍傷亡資料庫](https://streetreset.shinyapps.io/trafficcollisions/)是街道變革和 Hong Kong District Info 共同開發的項目，旨在利用互動地圖和儀表版，將香港車禍位置和相關數據可視化。
+[香港車禍傷亡資料庫](https://streetreset.shinyapps.io/hktrafficcollisions/)是街道變革和 Hong Kong District Info 共同開發的項目，旨在利用互動地圖和儀表版，將香港車禍位置和相關數據可視化。
 
 這個項目有三個目標：
 
@@ -18,7 +18,7 @@
 -   讓各方注意到街道設計如何導致目前的情況，以及應採取哪些系統性的補救措施，以提高弱勢道路使用者的安全
 -   為記者、區議員和政府部門提供簡易數據和見解，有助深入探討及改善車禍問題
 
-[Hong Kong Traffic Injury Collision Database](https://streetreset.shinyapps.io/trafficcollisions/) is a project co-developed by Street Reset and Hong Kong District Info, which aims to visualise Hong Kong traffic collision data with interactive mapping. Our objective is three-fold:
+[Hong Kong Traffic Injury Collision Database](https://streetreset.shinyapps.io/hktrafficcollisions/) is a project co-developed by Street Reset and Hong Kong District Info, which aims to visualise Hong Kong traffic collision data with interactive mapping. Our objective is three-fold:
 
 -   To alert the public on the current severity of traffic collisions in Hong Kong, with particular dire implications for pedestrians and cyclists,
 -   To draw attention to how street design has contributed to the current situation, and what systemic remedies should be made to enhance the safety of vulnerable road users, and
@@ -30,8 +30,8 @@
 
 The Shiny app is deployed onto shinyapps.io in the links below:
 
--   Production: <https://streetreset.shinyapps.io/trafficcollisions/>
--   Development: <https://streetreset.shinyapps.io/trafficcollisions-dev/>
+-   Production: <https://streetreset.shinyapps.io/hktrafficcollisions/>
+-   Development: <https://streetreset.shinyapps.io/hktrafficcollisions-dev/>
 
 ------------------------------------------------------------------------
 
