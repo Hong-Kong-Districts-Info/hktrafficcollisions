@@ -8,39 +8,39 @@
 
 # Get information of all types of vehicles involved in the accidents to show in popup
 hk_vehicles_involved <- hk_vehicles %>%
-  group_by(Serial_No_) %>%
-  summarize(vehicle_class_involved = paste(sort(unique(Vehicle_Class)), collapse = ", "))
+  group_by(serial_no) %>%
+  summarize(vehicle_class_involved = paste(sort(unique(vehicle_class)), collapse = ", "))
 
 # Get casualty role involved in each accident to show in popup
-casualty_role_n = hk_casualties %>% count(Serial_No_, Role_of_Casualty)
+casualty_role_n = hk_casualties %>% count(serial_no, casualty_role)
 
-accidents_cas_type <- casualty_role_n %>%
+collisions_cas_type <- casualty_role_n %>%
   pivot_wider(
-    id_cols = Serial_No_,
-    names_from = Role_of_Casualty,
+    id_cols = serial_no,
+    names_from = casualty_role,
     values_from = n, values_fill = 0
   ) %>%
   rename(cas_ped_n = Pedestrian, cas_pax_n = Passenger, cas_dvr_n = Driver)
 
 
 # Add date floored to first day of the month for easier month filter handling
-hk_accidents <- mutate(hk_accidents, year_month = floor_date_to_month(Date_Time))
+hk_collisions <- mutate(hk_collisions, year_month = floor_date_to_month(date_time))
 
-hk_accidents_join <- hk_accidents %>%
-  left_join(accidents_cas_type, by = "Serial_No_") %>%
-  left_join(hk_vehicles_involved, by = "Serial_No_") %>%
+hk_collisions_join <- hk_collisions %>%
+  left_join(collisions_cas_type, by = "serial_no") %>%
+  left_join(hk_vehicles_involved, by = "serial_no") %>%
   # Show full name of district in popup of maps
   left_join(data.frame(DC_Abbr = DISTRICT_ABBR, DC_full_name = DISTRICT_FULL_NAME),
-            by = c("District_Council_District" = "DC_Abbr"))
+            by = c("district" = "DC_Abbr"))
 
 
 ## ------- Collision Map data ---------
 
-hk_accidents_valid <- filter(hk_accidents_join, !is.na(latitude) & !is.na(longitude))
+hk_collisions_valid <- filter(hk_collisions_join, !is.na(latitude) & !is.na(longitude))
 
 # Leaflet default expect WGS84 (crs 4326), need custom CRS for HK1980 Grid (crs 2326)
 # https://rstudio.github.io/leaflet/projections.html
-hk_accidents_valid_sf <- st_as_sf(x = hk_accidents_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
+hk_collisions_valid_sf <- st_as_sf(x = hk_collisions_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
 
 
 ## ------- Pedestrian hot zone data ---------
