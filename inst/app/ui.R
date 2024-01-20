@@ -8,7 +8,7 @@
 ui <- dashboardPage(
 
   # Title and Skin
-  title = "Hong Kong Traffic Injury Collision Database",
+  title = "香港車禍傷亡資料庫",
   skin = "yellow",
 
   # Header
@@ -31,13 +31,6 @@ ui <- dashboardPage(
             style = "margin-top: 12.5px;margin-right: 20px;"),
 
     tags$li(a(
-      href = "https://hong-kong-districts-info.github.io/",
-      icon(name = "globe-asia"),
-      title = "Website"
-    ),
-    class = "dropdown"
-    ),
-    tags$li(a(
       href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
       icon("github"),
       title = "GitHub"
@@ -45,7 +38,7 @@ ui <- dashboardPage(
     class = "dropdown"
     ),
     tags$li(a(
-      href = "mailto: hkdistricts.info@gmail.com",
+      href = "mailto: info@streetresethk.org",
       icon("envelope"),
       title = "Email us"
     ),

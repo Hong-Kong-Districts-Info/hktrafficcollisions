@@ -43,10 +43,10 @@ Sys.setenv(TZ = "Asia/Hong_Kong")
 
 # opengraph properties
 OPENGRAPH_PROPS = list(
-  title = "Hong Kong Traffic Injury Collision Database",
-  url = "https://hkdistricts-info.shinyapps.io/trafficcollisions/",
+  title = "香港車禍傷亡資料庫 | Hong Kong Traffic Injury Collision Database",
+  url = "https://streetreset.shinyapps.io/hktrafficcollisions/",
   image = "https://user-images.githubusercontent.com/29334677/183444210-1b983c91-476c-4534-8425-10999051f132.jpg",
-  description = "Visualise Hong Kong traffic collision data with interactive mapping"
+  description = "香港車禍傷亡資料庫旨在利用互動地圖和儀表版，將香港車禍位置和相關數據可視化。"
 )
 
 ## Translation
