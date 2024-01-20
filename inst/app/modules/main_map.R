@@ -33,7 +33,7 @@ output$month_range_ui = renderUI({
   airDatepickerInput("month_range",
                      label = i18n$t("Date range"),
                      range = TRUE,
-                     value = c("2019-01-01", "2021-12-01"),
+                     value = c("2021-01-01", "2021-12-01"),
                      min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
                      max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
                      view = "months",
