@@ -42,6 +42,8 @@ hk_collisions_valid <- filter(hk_collisions_join, !is.na(latitude) & !is.na(long
 # https://rstudio.github.io/leaflet/projections.html
 hk_collisions_valid_sf <- st_as_sf(x = hk_collisions_valid, coords = c("longitude", "latitude"), crs = 4326, remove = FALSE)
 
+# Overwrite the output once updated
+# st_write(hk_collisions_valid_sf, "./inst/app/data/data-manipulated/hk_collisions_valid_sf.gpkg", append = FALSE)
 
 ## ------- Pedestrian hot zone data ---------
 
