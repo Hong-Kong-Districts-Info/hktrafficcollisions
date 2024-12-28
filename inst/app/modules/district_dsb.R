@@ -97,14 +97,17 @@ output$ksi_filter_ui = renderUI({
 # Return filtered hk_collisions dataframe according to users' selected inputs
 ddsb_filtered_hk_collisions = reactive({
 
-  # Avoid non-initialised value when district filter renders in server side
   # Ensure KSI filter values are initialised before filtering data
   req(
     input$ddsb_ksi_filter
   )
 
+  # Avoid displaying red errors messages when filter values are not set correctly
+  # https://shiny.posit.co/r/articles/improve/validation/
   validate(
     need(!is.null(input$ddsb_district_filter), "Please select a district"),
+    need(!is.null(input$ddsb_year_filter), "Please select a year period"),
+    need(!is.null(input$ddsb_ksi_filter), "Please select a KSI category")
   )
 
   # filter by users' selected time range
