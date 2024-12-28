@@ -98,6 +98,11 @@ output$ksi_filter_ui = renderUI({
 ddsb_filtered_hk_collisions = reactive({
 
   # Avoid non-initialised value when district filter renders in server side
+  # Ensure KSI filter values are initialised before filtering data
+  req(
+    input$ddsb_ksi_filter
+  )
+
   validate(
     need(!is.null(input$ddsb_district_filter), "Please select a district"),
   )
@@ -110,10 +115,7 @@ ddsb_filtered_hk_collisions = reactive({
   }
 
   # remove slightly injured collisions if user select "KSI only" option
-  # FIXME: Temp workaround to fix non-initialised value when KSI filter renders in server side
-  ddsb_ksi_filter = if (is.null(input$ddsb_ksi_filter)) "all" else input$ddsb_ksi_filter
-
-  if (ddsb_ksi_filter == "ksi_only") {
+  if (input$ddsb_ksi_filter == "ksi_only") {
     hk_collisions_filtered = filter(hk_collisions_filtered, severity != "Slight")
   }
 
