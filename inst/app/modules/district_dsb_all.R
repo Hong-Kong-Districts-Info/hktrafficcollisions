@@ -63,7 +63,7 @@ output$box_all_serious_stat = renderInfoBox({
 
   infoBox(
     title = "",
-    value = paste0(n_serious, " (", serious_per, "%)"),
+    value = paste0(format(n_serious, big.mark=","), " (", serious_per, "%)"),
     subtitle = i18n$t("Serious casualties (% of total)"),
     icon = icon("procedures"),
     color = "orange"
@@ -77,7 +77,7 @@ output$box_all_fatal_stat = renderInfoBox({
   infoBox(
     title = "",
     subtitle = i18n$t("Fatal casualties (% of total)"),
-    value = paste0(n_fatal, " (", fatal_per, "%)"),
+    value = paste0(format(n_fatal, big.mark=","), " (", fatal_per, "%)"),
     icon = icon("skull-crossbones"),
     color = "red"
   )
