@@ -75,10 +75,10 @@ output$dsb_filter_ui = renderUI({
   selectInput(
     inputId = "ddsb_district_filter", label = i18n$t("District"),
     choices = stats::setNames(
-      DISTRICT_ABBR,
-      lapply(DISTRICT_FULL_NAME, function(x) i18n$t(x))
+      c("All Districts", DISTRICT_ABBR),
+      lapply(c("All Districts", DISTRICT_FULL_NAME), function(x) i18n$t(x))
     ),
-    selected = "CW"
+    selected = "All Districts"
   )
 })
 
@@ -96,13 +96,18 @@ output$ksi_filter_ui = renderUI({
 
 # Return filtered hk_collisions dataframe according to users' selected inputs
 ddsb_filtered_hk_collisions = reactive({
-  # filter by users' selected district
-  # FIXME: Temp workaround to fix non-initialised value when district filter renders in server side
-  ddsb_district_filter = if (is.null(input$ddsb_district_filter)) "CW" else input$ddsb_district_filter
-  hk_collisions_filtered = filter(hk_collisions, district == ddsb_district_filter)
+
+  # Avoid non-initialised value when district filter renders in server side
+  validate(
+    need(!is.null(input$ddsb_district_filter), "Please select a district"),
+  )
 
   # filter by users' selected time range
-  hk_collisions_filtered = filter(hk_collisions_filtered, year >= input$ddsb_year_filter[1] & year <= input$ddsb_year_filter[2])
+  hk_collisions_filtered = filter(hk_collisions, year >= input$ddsb_year_filter[1] & year <= input$ddsb_year_filter[2])
+
+  if (input$ddsb_district_filter != "All Districts") {
+    hk_collisions_filtered = filter(hk_collisions_filtered, district == input$ddsb_district_filter)
+  }
 
   # remove slightly injured collisions if user select "KSI only" option
   # FIXME: Temp workaround to fix non-initialised value when KSI filter renders in server side
