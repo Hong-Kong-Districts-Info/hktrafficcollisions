@@ -159,18 +159,13 @@ filter_collision_data <-
     millis = 750,
     r = reactive({
 
-      # Test for checking initialise value of date, will return TRUE when render airDatepickerInput in server side
-      # message("is.null(input$end_month): ", is.null(input$end_month))
+      # Ensure month filter values are initialised when airDatepickerInput renders in server side
+      req(
+        input$month_range
+      )
 
-      # HACK: Temp workaround to fix non-initialised month value when airDatepickerInput renders in server side
-      if (is.null(input$month_range)) {
-        data_filtered = filter(hk_collisions_valid_sf,
-                               year_month >= floor_date_to_month(as.Date("2021-01-01")) & year_month <= floor_date_to_month(as.Date("2021-12-01")))
-      } else {
-        data_filtered = filter(hk_collisions_valid_sf,
-                               year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
-      }
-
+      data_filtered = filter(hk_collisions_valid_sf,
+                             year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
 
       message("Min date in filtered data: ", min(data_filtered$date_time))
       message("Max date in filtered data: ", max(data_filtered$date_time))
