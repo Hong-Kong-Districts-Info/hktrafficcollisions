@@ -23,6 +23,13 @@ ddsb_ped_filtered_hk_vehicles = reactive({
 })
 
 ped_grid_count = reactive({
+  # Do not generate collision location map when "All Districts" is selected
+  validate(
+    need(input$ddsb_district_filter != "All Districts",
+         "要查看車禍位置地圖，請於上面地區選項中選擇「全港」以外的地區。\nTo view the collision location map, please select districts other than \"All Districts\" in the district filter above"
+         )
+  )
+
   count_collisions_in_grid(ddsb_ped_filtered_hk_collisions())
 })
 
