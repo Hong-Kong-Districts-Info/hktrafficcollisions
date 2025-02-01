@@ -92,21 +92,15 @@ output$box_ped_fatal_stat = renderInfoBox({
 output$ddsb_ped_collision_heatmap = renderTmap({
 
   tm_shape(ped_grid_count()) +
-    tm_fill(
-      group = i18n$t("Number of collisions"),
-      col = "n_colli",
-      palette = "Purples",
-      n = 10,
-      style = "cont",
-      title = i18n$t("Number of collisions"),
-      id = "n_colli",
-      showNA = FALSE,
-      alpha = 0.8,
-      # disable popups
-      popup.vars = FALSE,
-    ) +
-    tm_borders(col = "#232323", lwd = 0.7)
+    tm_polygons(
+      fill = "n_colli",
+      fill.scale = tm_scale(values = "matplotlib.purples"),
+      fill_alpha = 0.8,
+      fill.legend = tm_legend(title = i18n$t("Number of collisions")),
 
+      group = i18n$t("Number of collisions"),
+      popup.vars = c("Number of collisions" = "n_colli")
+    )
 })
 
 # Collision number by severity

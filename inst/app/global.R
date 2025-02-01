@@ -81,7 +81,7 @@ hotzone_out_df = fst::read_fst("./data/data-manipulated/hotzone_out_df.fst")
 SELECTED_BASEMAPS = c("Stadia.StamenTonerLite", "OpenStreetMap", "CartoDB.Positron")
 
 tmap_mode("view")
-tmap_options(basemaps = SELECTED_BASEMAPS)
+tmap_options(basemap.server = SELECTED_BASEMAPS)
 
 # Constants ---------------------------------------------------------------
 
