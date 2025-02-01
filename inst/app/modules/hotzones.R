@@ -60,9 +60,7 @@ output$hotzones_map = renderTmap({
       style = "cont",
       alpha = 1,
       popup.vars = if(input$selected_language == "en") {POPUP_COLUMN_NAMES_EN} else {POP_COLUMN_NAMES_ZH}
-    ) +
-    tm_tiles(COLLISION_PTS_TILE_URL, group = i18n$t("Collisions with pedestrian injuries"))
-
+    )
 })
 
 observe({
