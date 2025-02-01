@@ -49,16 +49,23 @@ output$hotzones_map = renderTmap({
   tm_shape(hotzone_streets) +
     tm_lines(
       group = i18n$t("Hotzone streets"),
-      title.col = i18n$t("Hotzone Rank"),
       id = if(input$selected_language == "en") {"Name"} else {"Name_zh"},
       col = "Area_RK",
       lwd = 7.5,
-      palette = "inferno",
-      # Use only first half of inferno palette as the light color part does not show well on grey basemap
-      contrast = c(0, .5),
-      n = max(hotzone_streets[["Area_RK"]]),
-      style = "cont",
-      alpha = 1,
+
+      col.scale = tm_scale_continuous(
+        n = max(hotzone_streets[["Area_RK"]]),
+        values = "inferno",
+        # Use only first half of inferno palette as the light color part does not show well on grey basemap
+        values.range = c(0, .5)
+      ),
+      col_alpha = 1,
+      col.legend = tm_legend(
+        title = i18n$t("Hotzone Rank"),
+        orientation = "landscape",
+        width = 20
+      ),
+
       popup.vars = if(input$selected_language == "en") {POPUP_COLUMN_NAMES_EN} else {POP_COLUMN_NAMES_ZH}
     )
 })
