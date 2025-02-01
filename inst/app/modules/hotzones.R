@@ -2,7 +2,7 @@
 # Add tile from mapbox style
 # https://docs.mapbox.com/studio-manual/guides/publish-your-style/
 COLLISION_PTS_TILE_URL = paste0(
-  "https://api.mapbox.com/styles/v1/khwong12/ckz18sv3a004415qrmcs9geal/tiles/256/{z}/{x}/{y}?access_token=",
+  "https://api.mapbox.com/styles/v1/khwong12/ckyxixwuc006b14t8gyghov8v/tiles/{z}/{x}/{y}?access_token=",
   Sys.getenv("MAPBOX_PUBLIC_TOKEN")
   )
 
