@@ -170,12 +170,16 @@ ui <- dashboardPage(
               p(
                 i18n$t("Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings."),
                 # add spacing to the first widget
-                style = "margin-bottom: 10px"
+                style = "margin-bottom: 20px"
                 ),
+
+              p(
+                tags$b(textOutput("nrow_filtered", inline = TRUE)),
+                style = "font-size:20px;text-align:center;margin-bottom:5px"),
 
               div(
                 actionButton("zoom_to_pts", label = i18n$t("Zoom to matched collisions"), icon = icon("search-plus")),
-                style = "display: flex;justify-content: center;align-items: center;margin-bottom: 10px;"
+                style = "display: flex;justify-content: center;align-items: center;margin-bottom: 20px;"
                 ),
 
               uiOutput("district_filter_ui"),
@@ -186,12 +190,7 @@ ui <- dashboardPage(
 
               uiOutput("collision_type_filter_ui"),
 
-              uiOutput("vehicle_class_filter_ui"),
-
-              br(),
-
-              p(i18n$t("Number of collisions in current filter settings: "), textOutput("nrow_filtered", inline = TRUE),
-                style = "font-size: 20px;text-align:center;"),
+              uiOutput("vehicle_class_filter_ui")
             )
           )
         )

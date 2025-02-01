@@ -150,7 +150,16 @@ output$main_map <- renderLeaflet({
     )
 })
 
-output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark = ","))
+output$nrow_filtered <- reactive({
+
+  n_filtered = format(nrow(filter_collision_data()), big.mark = ",")
+
+  if(input$selected_language == "en"){
+    glue::glue("{n_filtered} collisions filtered")
+  } else {
+    glue::glue("已篩選 {n_filtered} 宗車禍")
+  }
+})
 
 # Filter the collision data according to users' input
 filter_collision_data <-
