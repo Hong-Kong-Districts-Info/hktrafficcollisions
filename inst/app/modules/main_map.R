@@ -176,9 +176,6 @@ filter_collision_data <-
       data_filtered = filter(hk_collisions_valid_sf,
                              year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
 
-      message("Min date in filtered data: ", min(data_filtered$date_time))
-      message("Max date in filtered data: ", max(data_filtered$date_time))
-
       data_filtered = filter(data_filtered, collision_type_with_cycle %in% input$collision_type_filter)
 
       data_filtered = filter(data_filtered, severity %in% input$severity_filter)
