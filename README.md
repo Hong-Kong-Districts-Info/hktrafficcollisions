@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 
-[![Travis build Status](https://travis-ci.org/Hong-Kong-Districts-Info/hktrafficcollisions.svg?branch=main)](https://travis-ci.org/Hong-Kong-Districts-Info/hktrafficcollisions) [![R build status](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/workflows/R-CMD-check/badge.svg)](https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <!-- badges: end -->
 
@@ -39,11 +39,11 @@ The Shiny app is deployed onto shinyapps.io in the links below:
 
 我們每年會以《公開資料守則》從運輸署取得涉及人命傷亡的車禍位置，以及每宗事故的匿名化資料（即數據不包含任何個人資料）。相關資料最初由警方收集，經運輸署的道路安全及標準研究部（RSSD）驗證後，再記錄在道路交通意外統計系統料（TRADS）。
 
-現時車禍傷亡資料庫包括 2014 年至 2021 年間發生的車禍。
+現時車禍傷亡資料庫包括 2014 年至 2023 年間發生的車禍。
 
 We obtain the locations of traffic collisions involving fatalities and injuries from the Transport Department (TD) annually, in accordance with the 'Code on Access to Information' for public data, along with anonymised data for each accident (meaning the data does not contain any personal information). The relevant data is initially collected by the police and verified by the Road Safety and Standards Division (RSSD) of the Transport Department before being recorded in the Traffic Accident and Data System (TRADS).
 
-Currently, the Traffic Injury Collision Database includes collisions that occurred between 2014 and 2021.
+Currently, the Traffic Injury Collision Database includes collisions that occurred between 2014 and 2023.
 
 ## Code of Conduct
 
