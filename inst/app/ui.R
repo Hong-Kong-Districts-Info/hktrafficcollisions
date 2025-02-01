@@ -168,7 +168,7 @@ ui <- dashboardPage(
               h3(span(icon("filter")), " ", i18n$t("Filters")),
 
               p(
-                i18n$t("Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings."),
+                i18n$t("Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions."),
                 # add spacing to the first widget
                 style = "margin-bottom: 20px"
                 ),
@@ -178,7 +178,7 @@ ui <- dashboardPage(
                 style = "font-size:20px;text-align:center;margin-bottom:5px"),
 
               div(
-                actionButton("zoom_to_pts", label = i18n$t("Zoom to matched collisions"), icon = icon("search-plus")),
+                actionButton("zoom_to_pts", label = i18n$t("Zoom to matching collisions"), icon = icon("search-plus")),
                 style = "display: flex;justify-content: center;align-items: center;margin-bottom: 20px;"
                 ),
 
@@ -207,7 +207,7 @@ ui <- dashboardPage(
             width = 12,
             title = span(icon("tachometer-alt"), i18n$t("District Dashboard")),
 
-            h4(i18n$t("Select collisions to be summarised")),
+            h4(i18n$t("Choose collisions to analyse")),
 
             column(
               width = 4,
