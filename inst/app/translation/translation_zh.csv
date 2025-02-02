@@ -8,15 +8,14 @@ Data Download,數據下載
 Project Info,關於此專案
 User Survey,用戶問卷調查
 Filters,篩選分類
-Please use the data filters below to select the category of traffic collisions you would like to show on the map. The map will automatically update and show the collisions meeting the current filter settings.,請利用下列不同種類的數據過濾器選擇你想顯示的車禍。地圖會自動按你現時所選擇的條件更新及顯示符合現有組合之車禍。
-Zoom to matched collisions,縮放至合符現有篩選條件之車禍
+Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions.,使用下方篩選工具選擇特定車禍。地圖會自動更新至符合條件的車禍。
+Zoom to matching collisions,縮放至符合條件的車禍
 District(s),地區
 Date range,日期範圍
 Collision severity,車禍嚴重程度
 Collision type,車禍類別
 Collision,車禍
 Vehicle classes involved,涉事車輛類別
-Number of collisions in current filter settings: ,符合現有篩選組合之車禍總數：
 Central and Western,中西區
 Wan Chai,灣仔區
 Eastern,東區
@@ -94,7 +93,7 @@ Yes,是
 No,否
 View this location in Google Street View,於 Google 街景顯示此車禍位置
 District Dashboard, 地區儀表版
-Select collisions to be summarised, 請選擇用以概述之車禍數據
+Choose collisions to analyse, 選取要分析的車禍
 Year Range, 年份範圍
 All Severities, 所有嚴重程度
 Killed or Seriously Injuries only, 只包含重傷或致命車禍

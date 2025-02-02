@@ -150,7 +150,16 @@ output$main_map <- renderLeaflet({
     )
 })
 
-output$nrow_filtered <- reactive(format(nrow(filter_collision_data()), big.mark = ","))
+output$nrow_filtered <- reactive({
+
+  n_filtered = format(nrow(filter_collision_data()), big.mark = ",")
+
+  if(input$selected_language == "en"){
+    glue::glue("{n_filtered} collisions filtered")
+  } else {
+    glue::glue("已篩選 {n_filtered} 宗車禍")
+  }
+})
 
 # Filter the collision data according to users' input
 filter_collision_data <-
@@ -167,9 +176,6 @@ filter_collision_data <-
       data_filtered = filter(hk_collisions_valid_sf,
                              year_month >= floor_date_to_month(input$month_range[1]) & year_month <= floor_date_to_month(input$month_range[2]))
 
-      message("Min date in filtered data: ", min(data_filtered$date_time))
-      message("Max date in filtered data: ", max(data_filtered$date_time))
-
       data_filtered = filter(data_filtered, collision_type_with_cycle %in% input$collision_type_filter)
 
       data_filtered = filter(data_filtered, severity %in% input$severity_filter)
@@ -185,29 +191,22 @@ filter_collision_data <-
 
       data_filtered <- filter(data_filtered, serial_no %in% accient_w_selected_veh_vct)
 
-      # Show at most 20,000 points on the map to ensure performance
-      if (nrow(data_filtered) > 20000) {
+      # Show at most 10,000 points on the map to ensure performance
+      if (nrow(data_filtered) > 10000) {
 
-        showNotification(
-          paste(
-            "
-            地圖不能顯示所有符合篩選條件的車禍。
-            此地圖只可以同時顯示最多 20,000 宗車禍，而現有篩選條件包含超過 20,000 宗車禍。
-            地圖只會顯示首 20,000 宗符合條件的車禍。
-            請更改篩選條件（如刪除地區，縮短日期範圍）以顯示所有符合篩選條件之車禍。
-            ",
-            "
-            The map cannot show all collisions matching the requirements.
-            The total number of collisions included in current filter settings exceeds the rendering capacity (20,000 points) of the map.
-            Only the first 20,000 records are shown on the map.
-            Change the filters (e.g. remove districts outside your area of interest, shortern the time frame) to show all filtered records.
-            "
-            , collapse = "<br/>"),
-          type = "error",
-          duration = NULL,
-        )
+        showModal(modalDialog(
+          title = "⚠️ 地圖無法顯示所有符合篩選條件的車禍 | The map cannot display all collisions  matching your filter criteria",
+          tags$ul(
+            tags$li("此地圖只可以同時顯示最多 10,000 宗車禍，而符合您目前篩選條件的車禍已超過此數量。"),
+            tags$li("請調整篩選條件（如縮小地區範圍／縮短日期範圍）以顯示所有符合篩選條件之車禍。"),
+            br(),
+            tags$li("The map can only display up to 10,000 collisions at once, and your current filters exceed this limit."),
+            tags$li("Adjust your filters (e.g., narrow the districts/shorten the date range) to view all qualifying collisions.")
+          ),
+          easyClose = TRUE
+        ))
 
-        return(data_filtered[1:20000,])
+        return(data_filtered[1:10000,])
       }
 
       data_filtered

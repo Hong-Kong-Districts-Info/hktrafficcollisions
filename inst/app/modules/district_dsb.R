@@ -127,8 +127,6 @@ ddsb_filtered_hk_collisions = reactive({
     filter(!is.na(easting) & !is.na(northing)) %>%
     st_as_sf(coords = c("easting", "northing"), crs = 2326, remove = FALSE)
 
-  print(paste0("Number of records filtered in districh dashboard: ", nrow(hk_collisions_filtered)))
-
   hk_collisions_filtered
 
 })
