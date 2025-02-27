@@ -146,18 +146,83 @@
 
 
 .filter__circle-marker {
-  /* Align the circle marker to left together with the flex-grow prop of .filter__text */
-  flex-grow: 0;
-  height: 14px;
-  width: 14px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 1.5px solid #0d0d0d;
+  margin-right: 10px;
 }
 
 .filter__text {
-  /* Align the text to center together with the flex-grow prop of .filter__circle-marker */
-  flex-grow: 1;
-  color:black;
+  font-size: 14px;
+}
+
+/* Style for the collapsible checkbox groups */
+.collapsible-awesome-checkbox {
+  margin-bottom: 15px;
+}
+
+/* Style for the sidebar filter panel */
+.sidebar-content {
+  padding: 15px;
+}
+
+/* Make sure selectize inputs are properly sized */
+.selectize-input {
+  min-height: 34px;
+  max-height: none;
+  line-height: 22px;
+}
+
+/* Style for the date picker input */
+.air-datepicker-input {
+  width: 100%;
+}
+
+/* Ensure checkbox group buttons are properly aligned */
+.btn-group-vertical {
+  width: 100%;
+}
+
+/* Style for the zoom button */
+#zoom_to_pts {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* Ensure proper spacing between filter components */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Make sure the map container fills available space */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Style for the filter panel title */
+.sidebar-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Style for the collapsible sections */
+.collapsible-section {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.collapsible-header {
+  padding: 10px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.collapsible-content {
+  padding: 10px;
+  border-top: 1px solid #ddd;
 }
 
 /* Hide / Show all button in collapsible group checkbox */
@@ -181,4 +246,112 @@
 /* colour of the number tags above sliders */
 .irs-from, .irs-to, .irs-single {
   background-color: #0d0d0d !important;
+}
+
+/* Dashboard styles for bslib */
+
+/* Make value boxes more readable */
+.value-box {
+  margin-bottom: 15px !important;
+}
+
+.value-box .value-box-title {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}
+
+.value-box .value-box-value {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+/* Improve card appearance */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 20px !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-header {
+  font-weight: 600 !important;
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure plots have enough space */
+.plotly, .tmap-viewer {
+  width: 100% !important;
+  min-height: 300px !important;
+}
+
+/* Dashboard tab container */
+#dashboard_collision_category {
+  margin-top: 20px !important;
+  overflow-y: auto !important;
+}
+
+/* Make the dashboard tab content scrollable */
+.tab-content {
+  overflow-y: auto !important;
+}
+
+/* Improve tab appearance */
+.nav-tabs .nav-link.active {
+  font-weight: 600 !important;
+  border-top: 3px solid #0d0d0d !important;
+}
+
+.nav-tabs .nav-link:hover {
+  border-top: 3px solid rgba(13, 13, 13, 0.3) !important;
+}
+
+/* Responsive adjustments for dashboard */
+@media (max-width: 768px) {
+  .value-box .value-box-value {
+    font-size: 1.5rem !important;
+  }
+  
+  .value-box .value-box-title {
+    font-size: 1rem !important;
+  }
+  
+  /* Adjust layout for mobile */
+  .layout-column {
+    width: 100% !important;
+    margin-bottom: 15px !important;
+  }
+  
+  /* Make cards full width on mobile */
+  .card {
+    width: 100% !important;
+  }
+  
+  /* Adjust plot heights for mobile */
+  .plotly, .tmap-viewer {
+    height: 250px !important;
+  }
+}
+
+/* Ensure the dashboard page is scrollable */
+#tab_dashboard {
+  overflow-y: auto !important;
+  height: calc(100vh - 60px) !important; /* Adjust for navbar height */
+  padding-bottom: 30px !important;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Ensure the main content area is scrollable */
+.page-content {
+  overflow-y: auto !important;
 }
