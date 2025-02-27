@@ -126,11 +126,23 @@ output$vehicle_class_filter_ui = renderUI({
 #############
 
 output$main_map <- renderLeaflet({
-  overview_map <- leaflet(options = leafletOptions(minZoom = 11, preferCanvas = TRUE)) %>%
+  overview_map <- leaflet(
+    options = leafletOptions(
+      minZoom = 11, 
+      preferCanvas = TRUE,
+      zoomControl = TRUE,
+      attributionControl = TRUE
+    )
+  ) %>%
     # Set default location to Mong Kok
     setView(lng = 114.17, lat = 22.31, zoom = 16) %>%
     # Add geocoder map widget
-    addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
+    addSearchOSM(
+      options = searchOptions(
+        hideMarkerOnCollapse = TRUE,
+        position = "topleft"
+      )
+    )
 
   # addLayersControl and addProviderTiles needs to refer to the leaflet::providers list instead of vector
   SELECTED_BASEMAPS_LIST <- leaflet::providers[SELECTED_BASEMAPS]
@@ -142,12 +154,16 @@ output$main_map <- renderLeaflet({
   }
 
   # Add change basemap widget
-  addLayersControl(
-    overview_map,
-    baseGroups = names(SELECTED_BASEMAPS_LIST),
-    options = layersControlOptions(collapsed = TRUE),
-    position = "topleft"
-    )
+  overview_map %>%
+    addLayersControl(
+      baseGroups = names(SELECTED_BASEMAPS_LIST),
+      options = layersControlOptions(collapsed = TRUE),
+      position = "topleft"
+    ) %>%
+    # Add fullscreen control
+    addFullscreenControl(position = "topleft") %>%
+    # Add zoom control
+    addScaleBar(position = "bottomleft")
 })
 
 output$nrow_filtered <- reactive({
@@ -213,8 +229,7 @@ filter_collision_data <-
     })
   )
 
-
-
+# Update map markers when data is filtered
 observe({
 
   # Template for popup, with summary of incidents

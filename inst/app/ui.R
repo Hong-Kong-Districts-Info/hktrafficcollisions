@@ -11,7 +11,7 @@ ui <- page_navbar(
     bootswatch = "lumen",  # Using a similar theme to the yellow skin
     primary = "#f39c12"    # Yellow primary color
   ),
-  
+
   # Header with language selector and links
   header = tags$div(
     class = "navbar-nav",
@@ -55,29 +55,22 @@ ui <- page_navbar(
       class = "mx-2"
     )
   ),
-  
+
   # Navigation tabs (replacing sidebar menu)
   nav_panel(
     title = i18n$t("Collision Location Map"),
     icon = icon("map"),
     value = "tab_collision_location_map",
-    # Content from original tab_collision_location_map 
-    layout_columns(
-      fill = TRUE,
-      col_widths = c(9, 3),
-      # Map panel
-      card(
-        full_screen = TRUE,
-        leafletOutput(outputId = "main_map", height = "100vh")
-      ),
-      # Filter panel
-      card(
-        card_header(
-          span(icon("filter"), " ", i18n$t("Filters"))
-        ),
+
+    # Use layout_sidebar instead of layout_columns for better control
+    layout_sidebar(
+      sidebar = sidebar(
+        width = 350, # Fixed width for the filter panel
+        title = span(icon("filter"), " ", i18n$t("Filters")),
+
+        # Filter panel content
         p(
           i18n$t("Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions."),
-          # add spacing to the first widget
           style = "margin-bottom: 20px"
         ),
         p(
@@ -85,23 +78,40 @@ ui <- page_navbar(
           style = "font-size:20px;text-align:center;margin-bottom:5px"
         ),
         div(
-          actionButton("zoom_to_pts", label = i18n$t("Zoom to matching collisions"), icon = icon("search-plus")),
-          style = "display: flex;justify-content: center;align-items: center;margin-bottom: 20px;"
+          actionButton(
+            "zoom_to_pts",
+            label = i18n$t("Zoom to matching collisions"),
+            icon = icon("search-plus"),
+            width = "100%",
+            class = "btn-primary"
+          ),
+          style = "margin-bottom: 20px;"
         ),
         uiOutput("district_filter_ui"),
         uiOutput("month_range_ui"),
         uiOutput("severity_filter_ui"),
         uiOutput("collision_type_filter_ui"),
         uiOutput("vehicle_class_filter_ui")
+      ),
+
+      # Main map panel
+      card(
+        full_screen = TRUE,
+        height = "calc(100vh - 60px)", # Adjust height to account for navbar
+        leafletOutput(
+          outputId = "main_map",
+          height = "100%",
+          width = "100%"
+        )
       )
     )
   ),
-  
+
   nav_panel(
     title = i18n$t("Dashboard"),
     icon = icon("tachometer-alt"),
     value = "tab_dashboard",
-    
+
     # Filter section
     card(
       card_header(
@@ -112,9 +122,9 @@ ui <- page_navbar(
         col_widths = c(4, 4, 4),
         uiOutput("dsb_filter_ui"),
         sliderInput(
-          inputId = "ddsb_year_filter", 
+          inputId = "ddsb_year_filter",
           label = i18n$t("Year Range"),
-          min = 2014, 
+          min = 2014,
           max = 2023,
           value = c(2019, 2023),
           # Remove thousands separator
@@ -123,16 +133,16 @@ ui <- page_navbar(
         uiOutput("ksi_filter_ui")
       )
     ),
-    
+
     # Dashboard tabs using bslib
     navset_card_tab(
       id = "dashboard_collision_category",
-      
+
       # Pedestrian Collision tab
       nav_panel(
         value = "vehicle_with_pedestrians",
         title = i18n$t("Pedestrian Collision"),
-        
+
         # Info boxes
         layout_columns(
           col_widths = c(3, 3, 3, 3),
@@ -161,7 +171,7 @@ ui <- page_navbar(
             theme = "danger"
           )
         ),
-        
+
         # Collision maps and plots
         layout_columns(
           col_widths = c(6, 6),
@@ -174,7 +184,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_ped_ksi_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6, 6),
           card(
@@ -186,7 +196,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6, 6),
           card(
@@ -199,12 +209,12 @@ ui <- page_navbar(
           )
         )
       ),
-      
+
       # Cyclist Collision tab
       nav_panel(
         value = "vehicle_with_bicycles",
         title = i18n$t("Cyclist Collision"),
-        
+
         # Info boxes
         layout_columns(
           col_widths = c(3, 3, 3, 3),
@@ -233,7 +243,7 @@ ui <- page_navbar(
             theme = "danger"
           )
         ),
-        
+
         # Collision maps and plots
         layout_columns(
           col_widths = c(6, 6),
@@ -246,7 +256,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6),
           card(
@@ -254,7 +264,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_cyc_collision_type_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6, 6),
           card(
@@ -266,7 +276,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6, 6),
           card(
@@ -279,12 +289,12 @@ ui <- page_navbar(
           )
         )
       ),
-      
+
       # All Vehicle Collision tab
       nav_panel(
         value = "all_vehicle_collision",
         title = i18n$t("All Vehicle Collision"),
-        
+
         # Info boxes
         layout_columns(
           col_widths = c(3, 3, 3, 3),
@@ -313,7 +323,7 @@ ui <- page_navbar(
             theme = "danger"
           )
         ),
-        
+
         # Collision maps and plots
         layout_columns(
           col_widths = c(6, 6),
@@ -326,7 +336,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_all_ksi_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6, 6),
           card(
@@ -338,7 +348,7 @@ ui <- page_navbar(
             plotlyOutput(outputId = "ddsb_all_collision_type_plot")
           )
         ),
-        
+
         layout_columns(
           col_widths = c(6, 6),
           card(
@@ -353,7 +363,7 @@ ui <- page_navbar(
       )
     )
   ),
-  
+
   nav_panel(
     title = i18n$t("Pedestrian Collision Hotzones"),
     icon = icon("exclamation-triangle"),
@@ -369,12 +379,12 @@ ui <- page_navbar(
       dataTableOutput(outputId = "hotzones_table")
     )
   ),
-  
+
   nav_panel(
     title = i18n$t("Key Facts"),
     icon = icon("file-alt"),
     value = "tab_key_facts",
-    
+
     # Center the card if screen width is larger than max-width
     div(
       style = "display:flex; justify-content:center;",
@@ -401,12 +411,12 @@ ui <- page_navbar(
       )
     )
   ),
-  
+
   nav_panel(
     title = i18n$t("Project Info"),
     icon = icon("info"),
     value = "tab_project_info",
-    
+
     # Project information
     div(
       style = "display:flex; justify-content:center;",
@@ -417,7 +427,7 @@ ui <- page_navbar(
         )
       )
     ),
-    
+
     # Glossary
     card(
       card_header(
@@ -426,7 +436,7 @@ ui <- page_navbar(
       i18n$t("The following terms are used in this website."),
       dataTableOutput(outputId = "terminology_table")
     ),
-    
+
     # Version information
     card(
       hr(),
@@ -435,7 +445,7 @@ ui <- page_navbar(
       paste("hkdatasets ver.", utils::packageVersion("hkdatasets"))
     )
   ),
-  
+
   # Add OpenGraph tags for social media
   tags$head(
     tags$meta(property = "og:title", content = OPENGRAPH_PROPS$title),
