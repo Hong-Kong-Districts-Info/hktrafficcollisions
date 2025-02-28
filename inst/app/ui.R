@@ -51,15 +51,7 @@ ui <- page_navbar(
       ),
 
       # Main map panel
-      card(
-        full_screen = TRUE,
-        height = "calc(100vh - 60px)", # Adjust height to account for navbar
-        leafletOutput(
-          outputId = "main_map",
-          height = "100%",
-          width = "100%"
-        )
-      )
+      leafletOutput(outputId = "main_map")
     )
   ),
 
