@@ -83,9 +83,8 @@ collision_type_choices =
   )
 
 output$collision_type_filter_ui = renderUI({
-  collapsibleAwesomeCheckboxGroupInput(
+  checkboxGroupInput(
     inputId = "collision_type_filter", label = i18n$t("Collision type"),
-    i = 3,
     # reverse alphabetical order
     choices = stats::setNames(
       collision_type_choices,
@@ -102,9 +101,8 @@ output$collision_type_filter_ui = renderUI({
 vehicle_class_choices = unique(hk_vehicles$vehicle_class)
 
 output$vehicle_class_filter_ui = renderUI({
-  collapsibleAwesomeCheckboxGroupInput(
+  checkboxGroupInput(
     inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
-    i = 2,
     choices = stats::setNames(
       vehicle_class_choices,
       lapply(vehicle_class_choices, function(x) {i18n$t(x)})
