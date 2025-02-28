@@ -35,23 +35,6 @@ server <- function(input, output, session) {
 
   # ----- TAB: Dashboard ----- #
 
-  # Cyclist tab value box outputs
-  output$box_cyc_total_collision_value <- renderText({
-    cyc_total_collision
-  })
-
-  output$box_cyc_total_casualty_value <- renderText({
-    cyc_total_casualty
-  })
-
-  output$box_cyc_serious_stat_value <- renderText({
-    cyc_serious_stat
-  })
-
-  output$box_cyc_fatal_stat_value <- renderText({
-    cyc_fatal_stat
-  })
-
   # All vehicle tab value box outputs
   output$box_all_total_collision_value <- renderText({
     all_total_collision
