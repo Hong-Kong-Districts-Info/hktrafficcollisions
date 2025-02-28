@@ -45,6 +45,19 @@ count_collisions_in_grid = function(point_data, grid_size = c(150, 150)) {
   area_grid_count
 }
 
+# Custom dateRangeInput with custom min and max view modes, 
+# by default only show 12 months view in the and hide date view
+# https://stackoverflow.com/a/54922170/14131305
+dateRangeInput2 <- function(inputId, label, minview = "months", maxview = "decades", ...) {
+  d <- shiny::dateRangeInput(inputId, label, ...)
+  d$children[[2L]]$children[[1]]$attribs[["data-date-min-view-mode"]] <- minview
+  d$children[[2L]]$children[[3]]$attribs[["data-date-min-view-mode"]] <- minview
+  d$children[[2L]]$children[[1]]$attribs[["data-date-max-view-mode"]] <- maxview
+  d$children[[2L]]$children[[3]]$attribs[["data-date-max-view-mode"]] <- maxview
+  d
+}
+
+
 # Custom checkbox group with collapsible tick options
 # https://stackoverflow.com/questions/56738392/collapsible-checkboxgroupinput-in-shiny
 collapsibleAwesomeCheckboxGroupInput <-

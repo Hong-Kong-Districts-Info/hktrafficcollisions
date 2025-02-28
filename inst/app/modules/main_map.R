@@ -29,19 +29,21 @@ output$district_filter_ui = renderUI({
     )
 })
 
+
 output$month_range_ui = renderUI({
-  airDatepickerInput("month_range",
-                     label = i18n$t("Date range"),
-                     range = TRUE,
-                     value = c("2023-01-01", "2023-12-01"),
-                     min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
-                     max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
-                     view = "months",
-                     minView = "months",
-                     monthsField = "monthsShort",
-                     dateFormat = "MMM yyyy",
-                     language = input$selected_language,
-                     addon = "none"
+  dateRangeInput2(
+    "month_range",
+    label = i18n$t("Date range"),
+    startview = "year",
+    minview = "months",
+    maxview = "decades",
+    start = "2023-01-01",
+    end = "2023-12-01",
+    min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
+    max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
+    format = "M yyyy",
+    # language uses zh-TW for Chinese instead of zh
+    language = ifelse(input$selected_language == "zh", "zh-TW", input$selected_language)
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
