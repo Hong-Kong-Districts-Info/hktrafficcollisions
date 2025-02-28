@@ -35,23 +35,6 @@ server <- function(input, output, session) {
 
   # ----- TAB: Dashboard ----- #
 
-  # All vehicle tab value box outputs
-  output$box_all_total_collision_value <- renderText({
-    all_total_collision
-  })
-
-  output$box_all_total_casualty_value <- renderText({
-    all_total_casualty
-  })
-
-  output$box_all_serious_stat_value <- renderText({
-    all_serious_stat
-  })
-
-  output$box_all_fatal_stat_value <- renderText({
-    all_fatal_stat
-  })
-
   # Source the module files
   source(file = "modules/district_dsb.R", local = TRUE)
   source(file = "modules/district_dsb_all.R", local = TRUE)

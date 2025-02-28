@@ -292,7 +292,7 @@ ui <- page_navbar(
           col_widths = c(3, 3, 3, 3),
           value_box(
             title = i18n$t("Total Collisions"),
-            value = textOutput("box_all_total_collision_value"),
+            value = textOutput("all_total_collision"),
             showcase = icon("car-crash"),
             theme = "primary",
             height = "100%",
@@ -300,23 +300,23 @@ ui <- page_navbar(
           ),
           value_box(
             title = i18n$t("Total Casualties"),
-            value = textOutput("box_all_total_casualty_value"),
+            value = textOutput("all_total_casualty"),
             showcase = icon("user-injured"),
             theme = "primary",
             height = "100%",
             min_height = "120px"
           ),
           value_box(
-            title = i18n$t("Serious Injuries"),
-            value = textOutput("box_all_serious_stat_value"),
+            title = i18n$t("Serious casualties (% of total)"),
+            value = textOutput("all_serious_stat"),
             showcase = icon("hospital"),
             theme = "warning",
             height = "100%",
             min_height = "120px"
           ),
           value_box(
-            title = i18n$t("Fatalities"),
-            value = textOutput("box_all_fatal_stat_value"),
+            title = i18n$t("Fatalities (% of total)"),
+            value = textOutput("all_fatal_stat"),
             showcase = icon("skull-crossbones"),
             theme = "danger",
             height = "100%",
