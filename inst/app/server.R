@@ -34,27 +34,6 @@ server <- function(input, output, session) {
 
 
   # ----- TAB: Dashboard ----- #
-  # Add new outputs for value_box components (replacing infoBox)
-
-  # Pedestrian tab value box outputs
-  output$box_ped_total_collision_value <- renderText({
-    # Extract the existing value from the infoBox content
-    # This assumes the modules generate variables that were previously used in infoBoxes
-    # You may need to modify the modules to expose these values if they're not already available
-    ped_total_collision
-  })
-
-  output$box_ped_total_casualty_value <- renderText({
-    ped_total_casualty
-  })
-
-  output$box_ped_serious_stat_value <- renderText({
-    ped_serious_stat
-  })
-
-  output$box_ped_fatal_stat_value <- renderText({
-    ped_fatal_stat
-  })
 
   # Cyclist tab value box outputs
   output$box_cyc_total_collision_value <- renderText({

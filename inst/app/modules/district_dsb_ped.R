@@ -37,86 +37,28 @@ ped_grid_count = reactive({
 # Outputs ----------------------------------
 
 # Replace renderInfoBox with variables for value_box
-ped_total_collision <- reactive({
+output$ped_total_collision <- renderText({
   n_collision = nrow(ddsb_ped_filtered_hk_collisions())
   format(n_collision, big.mark=",")
 })
 
-ped_total_casualty <- reactive({
+output$ped_total_casualty <- renderText({
   n_casualty = nrow(ddsb_ped_filtered_hk_casualties())
   format(n_casualty, big.mark=",")
 })
 
-ped_serious_stat <- reactive({
+output$ped_serious_stat <- renderText({
   n_serious = nrow(filter(ddsb_ped_filtered_hk_casualties(), injury_degree == "Seriously Injured"))
   serious_per = round(n_serious / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
   paste0(format(n_serious, big.mark=","), " (", serious_per, "%)")
 })
 
-ped_fatal_stat <- reactive({
+output$ped_fatal_stat <- renderText({
   n_fatal = nrow(filter(ddsb_ped_filtered_hk_casualties(), injury_degree == "Killed"))
   fatal_per = round(n_fatal / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
   paste0(format(n_fatal, big.mark=","), " (", fatal_per, "%)")
 })
 
-# Expose the reactive values to the server.R file
-observe({
-  ped_total_collision <- ped_total_collision()
-  ped_total_casualty <- ped_total_casualty()
-  ped_serious_stat <- ped_serious_stat()
-  ped_fatal_stat <- ped_fatal_stat()
-})
-
-# Original infoBox code for reference (commented out)
-# output$box_ped_total_collision = renderInfoBox({
-#   n_collision = nrow(ddsb_ped_filtered_hk_collisions())
-#
-#   infoBox(
-#     title = "",
-#     value = format(n_collision, big.mark=","),
-#     subtitle = i18n$t("Total number of collisions"),
-#     icon = icon("car-crash"),
-#     color = "black"
-#   )
-# })
-#
-# output$box_ped_total_casualty = renderInfoBox({
-#   n_casualty = nrow(ddsb_ped_filtered_hk_casualties())
-#
-#   infoBox(
-#     title = "",
-#     value = format(n_casualty, big.mark=","),
-#     subtitle = i18n$t("Total number of casualties"),
-#     icon = icon("user-injured"),
-#     color = "black"
-#   )
-# })
-#
-# output$box_ped_serious_stat = renderInfoBox({
-#   n_serious = nrow(filter(ddsb_ped_filtered_hk_casualties(), injury_degree == "Seriously Injured"))
-#   serious_per = round(n_serious / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
-#
-#   infoBox(
-#     title = "",
-#     value = paste0(format(n_serious, big.mark=","), " (", serious_per, "%)"),
-#     subtitle = i18n$t("Serious casualties (% of total)"),
-#     icon = icon("procedures"),
-#     color = "orange"
-#   )
-# })
-#
-# output$box_ped_fatal_stat = renderInfoBox({
-#   n_fatal = nrow(filter(ddsb_ped_filtered_hk_casualties(), injury_degree == "Killed"))
-#   fatal_per = round(n_fatal / nrow(ddsb_ped_filtered_hk_casualties()) * 100, digits = 1)
-#
-#   infoBox(
-#     title = "",
-#     value = paste0(format(n_fatal, big.mark=","), " (", fatal_per, "%)"),
-#     subtitle = i18n$t("Fatal casualties (% of total)"),
-#     icon = icon("skull-crossbones"),
-#     color = "red"
-#   )
-# })
 
 # Interactive heatmap
 output$ddsb_ped_collision_heatmap = renderTmap({
