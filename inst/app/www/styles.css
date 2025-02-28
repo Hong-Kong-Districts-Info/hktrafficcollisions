@@ -13,6 +13,56 @@
   max-height: calc(100vh - 150px);
 }
 
+/* Navbar styling for bslib */
+.navbar {
+  padding: 0 1rem !important;
+}
+
+/* Style the navbar items */
+.navbar .nav-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Adjust padding for logo nav items */
+.navbar .nav-item .p-0 {
+  padding: 0 !important;
+}
+
+/* Style the language selector in the navbar */
+.navbar .nav-item .btn-group-container-sw {
+  margin: 0 10px !important;
+}
+
+/* Make sure the language buttons are properly sized */
+.navbar .radiobtn {
+  padding: 2px 8px !important;
+  font-size: 0.8rem !important;
+}
+
+/* Ensure proper vertical alignment of all navbar elements */
+.navbar-nav {
+  align-items: center !important;
+}
+
+/* Responsive adjustments for navbar items */
+@media (max-width: 991px) {
+  .navbar .nav-item img {
+    height: 24px !important;
+  }
+  
+  .navbar .nav-item .mx-2 {
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+  }
+  
+  /* Ensure navbar items stay on one row on mobile */
+  .navbar-collapse {
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+  }
+}
+
 @media (max-width:768px) {
   #controls {
     /* Header is 50px, top and bottom padding of content panel is 15px each, bottom margin of the box is 20px,
@@ -26,8 +76,6 @@
     max-height: calc(100vh - 200px);
   }
 }
-
-
 
 /* dashboard body, excluding sidebar */
 .content-wrapper, .right-side {

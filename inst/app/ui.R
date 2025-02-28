@@ -12,50 +12,6 @@ ui <- page_navbar(
     primary = "#f39c12"    # Yellow primary color
   ),
 
-  # Header with language selector and links
-  header = tags$div(
-    class = "navbar-nav",
-    style = "display: flex; align-items: center;",
-    # Language selector
-    tags$div(
-      style = "margin-right: 20px;",
-      radioGroupButtons(
-        inputId = "selected_language",
-        label = NULL,
-        choices = setNames(i18n$get_languages(), c("EN", "中")),
-        selected = "zh",
-        status = "light",
-        size = "xs"
-      )
-    ),
-    # GitHub link
-    tags$a(
-      href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
-      icon("github"),
-      title = "GitHub",
-      class = "mx-2"
-    ),
-    # Email link
-    tags$a(
-      href = "mailto: info@streetresethk.org",
-      icon("envelope"),
-      title = "Email us",
-      class = "mx-2"
-    ),
-    # HKDI logo
-    tags$a(
-      href = "https://github.com/Hong-Kong-Districts-Info",
-      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "30px"),
-      class = "mx-2"
-    ),
-    # Street Reset logo
-    tags$a(
-      href = "https://bit.ly/StreetresetHK",
-      img(src = "street-reset-logo-bw.png", title = "Street Reset", height = "46px"),
-      class = "mx-2"
-    )
-  ),
-
   # Navigation tabs (replacing sidebar menu)
   nav_panel(
     title = i18n$t("Collision Location Map"),
@@ -507,6 +463,59 @@ ui <- page_navbar(
       paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
       br(),
       paste("hkdatasets ver.", utils::packageVersion("hkdatasets"))
+    )
+  ),
+  
+  # Add a spacer to push the following items to the right
+  nav_spacer(),
+  
+  # GitHub link
+  nav_item(
+    tags$a(
+      href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
+      icon("github"),
+      title = "GitHub",
+      class = "nav-link"
+    )
+  ),
+  
+  # Email link
+  nav_item(
+    tags$a(
+      href = "mailto: info@streetresethk.org",
+      icon("envelope"),
+      title = "Email us",
+      class = "nav-link"
+    )
+  ),
+  
+  # HKDI logo
+  nav_item(
+    tags$a(
+      href = "https://github.com/Hong-Kong-Districts-Info",
+      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "30px"),
+      class = "nav-link p-0 mx-2"
+    )
+  ),
+  
+  # Street Reset logo
+  nav_item(
+    tags$a(
+      href = "https://bit.ly/StreetresetHK",
+      img(src = "street-reset-logo-bw.png", title = "Street Reset", height = "46px"),
+      class = "nav-link p-0 mx-2"
+    )
+  ),
+  
+  # Language selector
+  nav_item(
+    radioGroupButtons(
+      inputId = "selected_language",
+      label = NULL,
+      choices = setNames(i18n$get_languages(), c("EN", "中")),
+      selected = "zh",
+      status = "light",
+      size = "xs"
     )
   ),
 
