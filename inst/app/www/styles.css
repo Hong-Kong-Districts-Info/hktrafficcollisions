@@ -53,6 +53,7 @@
   position: absolute !important;
   overflow: visible !important;
   max-height: none !important;
+  z-index: 1000 !important;
 }
 
 .selectize-dropdown-content {
@@ -220,5 +221,39 @@ html {
 /* Ensure the main content area is scrollable */
 .page-content {
   overflow-y: auto !important;
+}
+
+/* Dashboard styles for bslib */
+
+/* Filter section styles */
+.filter-section-container {
+  margin-bottom: 20px !important;
+  position: relative;
+  z-index: 100 !important;
+}
+
+.filter-section-header {
+  font-weight: 600 !important;
+  font-size: 1.1rem;
+}
+
+.filter-component {
+  background-color: #fff;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.filter-component:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Make sure selectize dropdowns appear above other elements */
+.selectize-dropdown {
+  max-width: 100%;
+  width: 100% !important;
+  position: absolute !important;
+  overflow: visible !important;
+  max-height: none !important;
+  z-index: 1000 !important;
 }
 

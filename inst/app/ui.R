@@ -72,48 +72,47 @@ ui <- page_navbar(
         class = "filter-section-container",
         style = "width: 100%; margin-bottom: 20px;",
         
-        # Replace accordion with a direct card
-        card(
-          card_header(
-            span(icon("filter"), " ", i18n$t("Choose collisions to analyse"))
+        # Header for filters section
+        div(
+          class = "filter-section-header",
+          style = "background-color: #f8f9fa; padding: 10px 15px; border-radius: 4px 4px 0 0; border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 15px;",
+          span(icon("filter"), " ", i18n$t("Choose collisions to analyse"))
+        ),
+        
+        # Filter components in three columns without individual cards
+        layout_columns(
+          col_widths = c(4, 4, 4),
+          
+          # District filter
+          div(
+            class = "filter-component",
+            style = "padding: 8px; margin: 4px;",
+            uiOutput("dsb_filter_ui")
           ),
-          layout_columns(
-            col_widths = c(4, 4, 4),
-            card(
-              uiOutput("dsb_filter_ui"),
-              full_screen = FALSE,
-              height = "auto",
-              min_height = "100px",
-              padding = 8,
-              margin = margin(4)
-            ),
-            card(
-              sliderInput(
-                inputId = "ddsb_year_filter",
-                label = i18n$t("Year Range"),
-                min = 2014,
-                max = 2023,
-                value = c(2019, 2023),
-                # Remove thousands separator
-                sep = ""
-              ),
-              full_screen = FALSE,
-              height = "auto",
-              min_height = "100px",
-              padding = 8,
-              margin = margin(4)
-            ),
-            card(
-              uiOutput("ksi_filter_ui"),
-              full_screen = FALSE,
-              height = "auto",
-              min_height = "100px",
-              padding = 8,
-              margin = margin(4)
+          
+          # Year range slider
+          div(
+            class = "filter-component",
+            style = "padding: 8px; margin: 4px;",
+            sliderInput(
+              inputId = "ddsb_year_filter",
+              label = i18n$t("Year Range"),
+              min = 2014,
+              max = 2023,
+              value = c(2019, 2023),
+              # Remove thousands separator
+              sep = ""
             )
           ),
-          style = "position: relative; z-index: 100;"
-        )
+          
+          # KSI filter
+          div(
+            class = "filter-component",
+            style = "padding: 8px; margin: 4px;",
+            uiOutput("ksi_filter_ui")
+          )
+        ),
+        style = "position: relative; z-index: 100; background-color: white; border-radius: 4px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
       ),
       
       # Dashboard content container
