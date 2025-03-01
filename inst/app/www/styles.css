@@ -46,6 +46,26 @@
   font-size: 14px;
 }
 
+/* Selectize improvements */
+.selectize-dropdown {
+  max-width: 100%;
+  width: 100% !important;
+  position: absolute !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+.selectize-dropdown-content {
+  max-height: 300px;
+  overflow-y: auto !important;
+}
+
+.selectize-input {
+  max-width: 100%;
+  font-size: 0.95rem;
+  position: relative;
+}
+
 /* Style for the collapsible checkbox groups */
 .collapsible-awesome-checkbox {
   margin-bottom: 15px;
@@ -118,6 +138,7 @@
   margin-bottom: 20px !important;
   border: none !important;
   transition: all 0.3s ease !important;
+  overflow: visible !important;
 }
 
 .card:hover {
@@ -200,3 +221,4 @@ html {
 .page-content {
   overflow-y: auto !important;
 }
+

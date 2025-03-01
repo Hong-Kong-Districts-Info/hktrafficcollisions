@@ -62,316 +62,355 @@ ui <- page_navbar(
     icon = icon("tachometer-alt"),
     value = "tab_dashboard",
 
-    # Filter section in a single row
-    card(
-      card_header(i18n$t("Choose collisions to analyse")),
-      layout_columns(
-        col_widths = c(4, 4, 4),
-        uiOutput("dsb_filter_ui"),
-        sliderInput(
-          inputId = "ddsb_year_filter",
-          label = i18n$t("Year Range"),
-          min = 2014,
-          max = 2023,
-          value = c(2019, 2023),
-          # Remove thousands separator
-          sep = ""
-        ),
-        uiOutput("ksi_filter_ui")
-      ),
-      height = "auto",
-      min_height = "150px",
-      margin = margin(b = 3)
-    ),
-
-    # Dashboard tabs using bslib - make it a direct child of the nav_panel
-    navset_tab(
-      id = "dashboard_collision_category",
+    # Main container div to enforce vertical layout
+    div(
+      class = "dashboard-container",
+      style = "display: flex; flex-direction: column; width: 100%;",
       
-      # Pedestrian Collision tab
-      nav_panel(
-        value = "vehicle_with_pedestrians",
-        title = i18n$t("Pedestrian Collision"),
-
-        # Info boxes
-        layout_columns(
-          col_widths = c(3, 3, 3, 3),
-          value_box(
-            title = i18n$t("Total Collisions"),
-            value = textOutput("ped_total_collision"),
-            showcase = icon("car-crash"),
-            theme = "primary",
-            height = "100%",
-            min_height = "120px"
+      # Filter section container
+      div(
+        class = "filter-section-container",
+        style = "width: 100%; margin-bottom: 20px;",
+        
+        # Replace accordion with a direct card
+        card(
+          card_header(
+            span(icon("filter"), " ", i18n$t("Choose collisions to analyse"))
           ),
-          value_box(
-            title = i18n$t("Total Casualties"),
-            value = textOutput("ped_total_casualty"),
-            showcase = icon("user-injured"),
-            theme = "primary",
-            height = "100%",
-            min_height = "120px"
+          layout_columns(
+            col_widths = c(4, 4, 4),
+            card(
+              uiOutput("dsb_filter_ui"),
+              full_screen = FALSE,
+              height = "auto",
+              min_height = "100px",
+              padding = 8,
+              margin = margin(4)
+            ),
+            card(
+              sliderInput(
+                inputId = "ddsb_year_filter",
+                label = i18n$t("Year Range"),
+                min = 2014,
+                max = 2023,
+                value = c(2019, 2023),
+                # Remove thousands separator
+                sep = ""
+              ),
+              full_screen = FALSE,
+              height = "auto",
+              min_height = "100px",
+              padding = 8,
+              margin = margin(4)
+            ),
+            card(
+              uiOutput("ksi_filter_ui"),
+              full_screen = FALSE,
+              height = "auto",
+              min_height = "100px",
+              padding = 8,
+              margin = margin(4)
+            )
           ),
-          value_box(
-            title = i18n$t("Serious casualties (% of total)"),
-            value = textOutput("ped_serious_stat"),
-            showcase = icon("hospital"),
-            theme = "warning",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Fatalities (% of total)"),
-            value = textOutput("ped_fatal_stat"),
-            showcase = icon("skull-crossbones"),
-            theme = "danger",
-            height = "100%",
-            min_height = "120px"
-          )
-        ),
-
-        # Collision maps and plots - directly in layout_columns without extra cards
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Collision location")),
-            tmapOutput(outputId = "ddsb_ped_collision_heatmap", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Collision severity")),
-            plotlyOutput(outputId = "ddsb_ped_ksi_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
-
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Vehicle classes involved")),
-            plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Vehicle maneuver")),
-            plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
-
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Pedestrian action")),
-            plotlyOutput(outputId = "ddsb_ped_ped_action_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Road hierarchy")),
-            plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
+          style = "position: relative; z-index: 100;"
         )
       ),
+      
+      # Dashboard content container
+      div(
+        class = "dashboard-content-container",
+        style = "width: 100%;",
+        
+        # Dashboard tabs using bslib
+        navset_tab(
+          id = "dashboard_collision_category",
+          
+          # Pedestrian Collision tab
+          nav_panel(
+            value = "vehicle_with_pedestrians",
+            title = i18n$t("Pedestrian Collision"),
 
-      # Cyclist Collision tab
-      nav_panel(
-        value = "vehicle_with_bicycles",
-        title = i18n$t("Cyclist Collision"),
+            # Info boxes
+            layout_columns(
+              col_widths = c(3, 3, 3, 3),
+              value_box(
+                title = i18n$t("Total Collisions"),
+                value = textOutput("ped_total_collision"),
+                showcase = icon("car-crash"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Total Casualties"),
+                value = textOutput("ped_total_casualty"),
+                showcase = icon("user-injured"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Serious casualties (% of total)"),
+                value = textOutput("ped_serious_stat"),
+                showcase = icon("hospital"),
+                theme = "warning",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Fatalities (% of total)"),
+                value = textOutput("ped_fatal_stat"),
+                showcase = icon("skull-crossbones"),
+                theme = "danger",
+                height = "100%",
+                min_height = "120px"
+              )
+            ),
 
-        # Info boxes
-        layout_columns(
-          col_widths = c(3, 3, 3, 3),
-          value_box(
-            title = i18n$t("Total Collisions"),
-            value = textOutput("cyc_total_collision"),
-            showcase = icon("car-crash"),
-            theme = "primary",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Total Casualties"),
-            value = textOutput("cyc_total_casualty"),
-            showcase = icon("user-injured"),
-            theme = "primary",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Serious casualties (% of total)"),
-            value = textOutput("cyc_serious_stat"),
-            showcase = icon("hospital"),
-            theme = "warning",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Fatalities (% of total)"),
-            value = textOutput("cyc_fatal_stat"),
-            showcase = icon("skull-crossbones"),
-            theme = "danger",
-            height = "100%",
-            min_height = "120px"
-          )
-        ),
+            # Collision maps and plots - directly in layout_columns without extra cards
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision location")),
+                tmapOutput(outputId = "ddsb_ped_collision_heatmap", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Collision severity")),
+                plotlyOutput(outputId = "ddsb_ped_ksi_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
 
-        # Collision maps and plots
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Collision location")),
-            tmapOutput(outputId = "ddsb_cyc_collision_heatmap", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Collision severity")),
-            plotlyOutput(outputId = "ddsb_cyc_ksi_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Vehicle classes involved")),
+                plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Vehicle maneuver")),
+                plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
 
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Collision type")),
-            plotlyOutput(outputId = "ddsb_cyc_collision_type_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Pedestrian action")),
+                plotlyOutput(outputId = "ddsb_ped_ped_action_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Road hierarchy")),
+                plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            )
           ),
-          card(
-            card_header(i18n$t("Vehicle classes involved (excl. cycle)")),
-            plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
 
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Vehicle maneuver (excl. cycle)")),
-            plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Cyclist action")),
-            plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
+          # Cyclist Collision tab
+          nav_panel(
+            value = "vehicle_with_bicycles",
+            title = i18n$t("Cyclist Collision"),
 
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Road hierarchy")),
-            plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          # Empty card to maintain layout balance - can be removed for better responsiveness
-          NULL
-        )
-      ),
+            # Info boxes
+            layout_columns(
+              col_widths = c(3, 3, 3, 3),
+              value_box(
+                title = i18n$t("Total Collisions"),
+                value = textOutput("cyc_total_collision"),
+                showcase = icon("car-crash"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Total Casualties"),
+                value = textOutput("cyc_total_casualty"),
+                showcase = icon("user-injured"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Serious casualties (% of total)"),
+                value = textOutput("cyc_serious_stat"),
+                showcase = icon("hospital"),
+                theme = "warning",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Fatalities (% of total)"),
+                value = textOutput("cyc_fatal_stat"),
+                showcase = icon("skull-crossbones"),
+                theme = "danger",
+                height = "100%",
+                min_height = "120px"
+              )
+            ),
 
-      # All Vehicle Collision tab
-      nav_panel(
-        value = "all_vehicle_collision",
-        title = i18n$t("All Vehicle Collision"),
+            # Collision maps and plots
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision location")),
+                tmapOutput(outputId = "ddsb_cyc_collision_heatmap", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Collision severity")),
+                plotlyOutput(outputId = "ddsb_cyc_ksi_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
 
-        # Info boxes
-        layout_columns(
-          col_widths = c(3, 3, 3, 3),
-          value_box(
-            title = i18n$t("Total Collisions"),
-            value = textOutput("all_total_collision"),
-            showcase = icon("car-crash"),
-            theme = "primary",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Total Casualties"),
-            value = textOutput("all_total_casualty"),
-            showcase = icon("user-injured"),
-            theme = "primary",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Serious casualties (% of total)"),
-            value = textOutput("all_serious_stat"),
-            showcase = icon("hospital"),
-            theme = "warning",
-            height = "100%",
-            min_height = "120px"
-          ),
-          value_box(
-            title = i18n$t("Fatalities (% of total)"),
-            value = textOutput("all_fatal_stat"),
-            showcase = icon("skull-crossbones"),
-            theme = "danger",
-            height = "100%",
-            min_height = "120px"
-          )
-        ),
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision type")),
+                plotlyOutput(outputId = "ddsb_cyc_collision_type_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Vehicle classes involved (excl. cycle)")),
+                plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
 
-        # Collision maps and plots
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Collision location")),
-            tmapOutput(outputId = "ddsb_all_collision_heatmap", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Collision severity")),
-            plotlyOutput(outputId = "ddsb_all_ksi_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Vehicle maneuver (excl. cycle)")),
+                plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Cyclist action")),
+                plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
 
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Collision trend")),
-            plotlyOutput(outputId = "ddsb_all_year_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Road hierarchy")),
+                plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              # Empty card to maintain layout balance - can be removed for better responsiveness
+              NULL
+            )
           ),
-          card(
-            card_header(i18n$t("Collision type")),
-            plotlyOutput(outputId = "ddsb_all_collision_type_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          )
-        ),
 
-        layout_columns(
-          col_widths = c(6, 6),
-          card(
-            card_header(i18n$t("Vehicle classes involved")),
-            plotlyOutput(outputId = "ddsb_all_vehicle_class_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
-          ),
-          card(
-            card_header(i18n$t("Road hierarchy")),
-            plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot", height = "300px"),
-            height = "auto",
-            min_height = "350px"
+          # All Vehicle Collision tab
+          nav_panel(
+            value = "all_vehicle_collision",
+            title = i18n$t("All Vehicle Collision"),
+
+            # Info boxes
+            layout_columns(
+              col_widths = c(3, 3, 3, 3),
+              value_box(
+                title = i18n$t("Total Collisions"),
+                value = textOutput("all_total_collision"),
+                showcase = icon("car-crash"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Total Casualties"),
+                value = textOutput("all_total_casualty"),
+                showcase = icon("user-injured"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Serious casualties (% of total)"),
+                value = textOutput("all_serious_stat"),
+                showcase = icon("hospital"),
+                theme = "warning",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Fatalities (% of total)"),
+                value = textOutput("all_fatal_stat"),
+                showcase = icon("skull-crossbones"),
+                theme = "danger",
+                height = "100%",
+                min_height = "120px"
+              )
+            ),
+
+            # Collision maps and plots
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision location")),
+                tmapOutput(outputId = "ddsb_all_collision_heatmap", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Collision severity")),
+                plotlyOutput(outputId = "ddsb_all_ksi_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision trend")),
+                plotlyOutput(outputId = "ddsb_all_year_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Collision type")),
+                plotlyOutput(outputId = "ddsb_all_collision_type_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Vehicle classes involved")),
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              ),
+              card(
+                card_header(i18n$t("Road hierarchy")),
+                plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot", height = "300px"),
+                height = "auto",
+                min_height = "350px"
+              )
+            )
           )
         )
       )
