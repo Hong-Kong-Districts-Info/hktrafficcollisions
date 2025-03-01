@@ -8,8 +8,12 @@
 ui <- page_navbar(
   title = i18n$t("Hong Kong Traffic Injury Collision Database"),
   theme = bs_theme(
-    bootswatch = "lumen",  # Using a similar theme to the yellow skin
-    primary = "#f39c12"    # Yellow primary color
+    bootswatch = "lumen",
+    primary = "#343434"  # Dark grey primary color
+  ),
+
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
   ),
 
   # Navigation tabs (replacing sidebar menu)
@@ -26,12 +30,11 @@ ui <- page_navbar(
 
         # Filter panel content
         p(
-          i18n$t("Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions."),
-          style = "margin-bottom: 20px"
+          i18n$t("Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions.")
         ),
         p(
           tags$b(textOutput("nrow_filtered", inline = TRUE)),
-          style = "font-size:20px;text-align:center;margin-bottom:5px"
+          style = "font-size:20px;text-align:center"
         ),
         div(
           actionButton(
@@ -40,8 +43,7 @@ ui <- page_navbar(
             icon = icon("search-plus"),
             width = "100%",
             class = "btn-primary"
-          ),
-          style = "margin-bottom: 20px;"
+          )
         ),
         uiOutput("district_filter_ui"),
         uiOutput("month_range_ui"),
