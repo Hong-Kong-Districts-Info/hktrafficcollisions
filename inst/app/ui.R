@@ -174,13 +174,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Collision location")),
                 tmapOutput(outputId = "ddsb_ped_collision_heatmap", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Collision severity")),
                 plotlyOutput(outputId = "ddsb_ped_ksi_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -190,13 +192,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Vehicle classes involved")),
                 plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Vehicle maneuver")),
                 plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -206,13 +210,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Pedestrian action")),
                 plotlyOutput(outputId = "ddsb_ped_ped_action_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Road hierarchy")),
                 plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             )
           ),
@@ -266,13 +272,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Collision location")),
                 tmapOutput(outputId = "ddsb_cyc_collision_heatmap", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Collision severity")),
                 plotlyOutput(outputId = "ddsb_cyc_ksi_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -282,13 +290,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Collision type")),
                 plotlyOutput(outputId = "ddsb_cyc_collision_type_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Vehicle classes involved (excl. cycle)")),
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -298,13 +308,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Vehicle maneuver (excl. cycle)")),
                 plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Cyclist action")),
                 plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -314,7 +326,8 @@ ui <- page_navbar(
                 card_header(i18n$t("Road hierarchy")),
                 plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               # Empty card to maintain layout balance - can be removed for better responsiveness
               NULL
@@ -370,13 +383,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Collision location")),
                 tmapOutput(outputId = "ddsb_all_collision_heatmap", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Collision severity")),
                 plotlyOutput(outputId = "ddsb_all_ksi_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -386,13 +401,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Collision trend")),
                 plotlyOutput(outputId = "ddsb_all_year_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Collision type")),
                 plotlyOutput(outputId = "ddsb_all_collision_type_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
@@ -402,13 +419,15 @@ ui <- page_navbar(
                 card_header(i18n$t("Vehicle classes involved")),
                 plotlyOutput(outputId = "ddsb_all_vehicle_class_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               ),
               card(
                 card_header(i18n$t("Road hierarchy")),
                 plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot", height = "400px"),
                 height = "auto",
-                min_height = "450px"
+                min_height = "450px",
+                full_screen = TRUE
               )
             )
           )
