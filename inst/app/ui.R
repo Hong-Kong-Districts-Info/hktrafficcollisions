@@ -13,7 +13,8 @@ ui <- page_navbar(
   ),
 
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+    tags$script(src = "collapsible-checkbox.js")
   ),
 
   # Navigation tabs (replacing sidebar menu)
@@ -66,30 +67,30 @@ ui <- page_navbar(
     div(
       class = "dashboard-container",
       style = "display: flex; flex-direction: column; width: 100%;",
-      
+
       # Filter section container
       div(
         class = "filter-section-container",
         style = "width: 100%; margin-bottom: 20px;",
-        
+
         # Header for filters section
         div(
           class = "filter-section-header",
           style = "background-color: #f8f9fa; padding: 10px 15px; border-radius: 4px 4px 0 0; border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 15px;",
           span(icon("filter"), " ", i18n$t("Choose collisions to analyse"))
         ),
-        
+
         # Filter components in three columns without individual cards
         layout_columns(
           col_widths = c(4, 4, 4),
-          
+
           # District filter
           div(
             class = "filter-component",
             style = "padding: 8px; margin: 4px;",
             uiOutput("dsb_filter_ui")
           ),
-          
+
           # Year range slider
           div(
             class = "filter-component",
@@ -104,7 +105,7 @@ ui <- page_navbar(
               sep = ""
             )
           ),
-          
+
           # KSI filter
           div(
             class = "filter-component",
@@ -114,16 +115,16 @@ ui <- page_navbar(
         ),
         style = "position: relative; z-index: 100; background-color: white; border-radius: 4px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
       ),
-      
+
       # Dashboard content container
       div(
         class = "dashboard-content-container",
         style = "width: 100%;",
-        
+
         # Dashboard tabs using bslib
         navset_tab(
           id = "dashboard_collision_category",
-          
+
           # Pedestrian Collision tab
           nav_panel(
             value = "vehicle_with_pedestrians",
@@ -425,7 +426,7 @@ ui <- page_navbar(
         span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones"))
       ),
       includeMarkdown("desc/hotzone.md"),
-      tmapOutput(outputId = "hotzones_map", height = "50vh"),
+      tmapOutput(outputId = "hotzones_map", height = "500px"),
       tags$br(),
       h4(i18n$t("Hotzones Table")),
       dataTableOutput(outputId = "hotzones_table")
@@ -497,10 +498,10 @@ ui <- page_navbar(
       paste("hkdatasets ver.", utils::packageVersion("hkdatasets"))
     )
   ),
-  
+
   # Add a spacer to push the following items to the right
   nav_spacer(),
-  
+
   # GitHub link
   nav_item(
     tags$a(
@@ -510,7 +511,7 @@ ui <- page_navbar(
       class = "nav-link"
     )
   ),
-  
+
   # Email link
   nav_item(
     tags$a(
@@ -520,7 +521,7 @@ ui <- page_navbar(
       class = "nav-link"
     )
   ),
-  
+
   # HKDI logo
   nav_item(
     tags$a(
@@ -529,7 +530,7 @@ ui <- page_navbar(
       class = "nav-link p-0 mx-2"
     )
   ),
-  
+
   # Street Reset logo
   nav_item(
     tags$a(
@@ -538,7 +539,7 @@ ui <- page_navbar(
       class = "nav-link p-0 mx-2"
     )
   ),
-  
+
   # Language selector
   nav_item(
     radioGroupButtons(

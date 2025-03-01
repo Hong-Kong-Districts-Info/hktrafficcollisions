@@ -85,8 +85,9 @@ collision_type_choices =
   )
 
 output$collision_type_filter_ui = renderUI({
-  checkboxGroupInput(
+  collapsibleAwesomeCheckboxGroupInput(
     inputId = "collision_type_filter", label = i18n$t("Collision type"),
+    i = 3,
     # reverse alphabetical order
     choices = stats::setNames(
       collision_type_choices,
@@ -103,8 +104,9 @@ output$collision_type_filter_ui = renderUI({
 vehicle_class_choices = unique(hk_vehicles$vehicle_class)
 
 output$vehicle_class_filter_ui = renderUI({
-  checkboxGroupInput(
+  collapsibleAwesomeCheckboxGroupInput(
     inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
+    i = 3,
     choices = stats::setNames(
       vehicle_class_choices,
       lapply(vehicle_class_choices, function(x) {i18n$t(x)})
@@ -128,7 +130,7 @@ output$vehicle_class_filter_ui = renderUI({
 output$main_map <- renderLeaflet({
   overview_map <- leaflet(
     options = leafletOptions(
-      minZoom = 11, 
+      minZoom = 11,
       preferCanvas = TRUE,
       zoomControl = TRUE,
       attributionControl = TRUE

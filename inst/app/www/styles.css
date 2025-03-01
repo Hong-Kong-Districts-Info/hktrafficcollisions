@@ -72,6 +72,72 @@
   margin-bottom: 15px;
 }
 
+/* Ensure collapsible elements show/hide properly */
+.collapse {
+  display: none;
+  transition: height 0.25s ease;
+}
+
+.collapse.in,
+.collapse.show {  /* Support both Bootstrap 3 and 4/5 */
+  display: block !important;
+  transition: height 0.25s ease;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.25s ease !important;
+}
+
+/* Additional style to ensure the collapsible area has appropriate spacing */
+[id$="_collapsible"] {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  overflow: visible !important;
+  transition: all 0.25s ease;
+}
+
+/* Improve checkbox transitions */
+.checkbox {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform-origin: top left;
+}
+
+/* Make the button more prominent */
+[id$="_btn"].action-button {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 500;
+  color: #0275d8;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 6px 0;
+  display: inline-block;
+  width: auto;
+}
+
+[id$="_btn"].action-button:hover {
+  color: #014c8c;
+  text-decoration: underline;
+}
+
+[id$="_btn"].action-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Smoother icon transitions */
+[id$="_btn"] .fa {
+  transition: transform 0.25s ease;
+  display: inline-block;
+  width: 14px;
+  text-align: center;
+}
+
 /* Style for the sidebar filter panel */
 .sidebar-content {
   padding: 15px;
