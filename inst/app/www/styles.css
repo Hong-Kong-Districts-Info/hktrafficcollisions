@@ -91,3 +91,112 @@
   font-weight: bold;
   margin-bottom: 15px;
 }
+
+
+/* Dashboard styles for bslib */
+
+/* Make value boxes more readable */
+.value-box {
+  margin-bottom: 15px !important;
+}
+
+.value-box .value-box-title {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}
+
+.value-box .value-box-value {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+/* Improve card appearance */
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 20px !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-header {
+  font-weight: 600 !important;
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure plots have enough space */
+.plotly, .tmap-viewer {
+  width: 100% !important;
+  min-height: 300px !important;
+}
+
+/* Dashboard tab container */
+#dashboard_collision_category {
+  margin-top: 20px !important;
+  overflow-y: auto !important;
+}
+
+/* Make the dashboard tab content scrollable */
+.tab-content {
+  overflow-y: auto !important;
+}
+
+/* Improve tab appearance */
+.nav-tabs .nav-link.active {
+  font-weight: 600 !important;
+  border-top: 3px solid #0d0d0d !important;
+}
+
+.nav-tabs .nav-link:hover {
+  border-top: 3px solid rgba(13, 13, 13, 0.3) !important;
+}
+
+/* Responsive adjustments for dashboard */
+@media (max-width: 768px) {
+  .value-box .value-box-value {
+    font-size: 1.5rem !important;
+  }
+
+  .value-box .value-box-title {
+    font-size: 1rem !important;
+  }
+
+  /* Adjust layout for mobile */
+  .layout-column {
+    width: 100% !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Make cards full width on mobile */
+  .card {
+    width: 100% !important;
+  }
+
+  /* Adjust plot heights for mobile */
+  .plotly, .tmap-viewer {
+    height: 250px !important;
+  }
+}
+
+/* Ensure the dashboard page is scrollable */
+#tab_dashboard {
+  overflow-y: auto !important;
+  height: calc(100vh - 60px) !important; /* Adjust for navbar height */
+  padding-bottom: 30px !important;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Ensure the main content area is scrollable */
+.page-content {
+  overflow-y: auto !important;
+}
