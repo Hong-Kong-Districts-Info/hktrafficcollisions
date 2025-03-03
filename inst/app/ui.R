@@ -6,7 +6,7 @@
 #       There are no calculations.
 
 ui <- page_navbar(
-  title = i18n$t("Hong Kong Traffic Injury Collision Database"),
+  title = tagList(shiny.i18n::usei18n(i18n), i18n$t("Hong Kong Traffic Injury Collision Database")),
   theme = bs_theme(
     bootswatch = "lumen",
     primary = "#343434"  # Dark grey primary color
