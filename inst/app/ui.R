@@ -16,6 +16,7 @@ ui <- page_navbar(
 
   title = i18n$t("Hong Kong Traffic Injury Collision Database"),
   theme = bs_theme(
+    version = 5,
     bootswatch = "lumen",
     primary = "#343434"  # Dark grey primary color
   ),
@@ -526,43 +527,38 @@ ui <- page_navbar(
   # Add a spacer to push the following items to the right
   nav_spacer(),
 
-  # GitHub link
-  nav_item(
-    tags$a(
-      href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
-      icon("github"),
-      title = "GitHub",
-      class = "nav-link"
-    )
-  ),
+    # GitHub link
+    nav_item(
+      tags$a(
+        href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
+        icon("github"),
+        title = "GitHub"
+      )
+    ),
+    # Email link
+    nav_item(
+      tags$a(
+        href = "mailto: info@streetresethk.org",
+        icon("envelope"),
+        title = "Email us",
+        class = "nav-link"
+      )
+    ),
+    # HKDI logo
+    nav_item(
+      tags$a(
+        href = "https://github.com/Hong-Kong-Districts-Info",
+        img(src = "hkdi-logo-b.png", title = "Hong Kong Districts Info", height = "30px")
+      )
+    ),
 
-  # Email link
-  nav_item(
-    tags$a(
-      href = "mailto: info@streetresethk.org",
-      icon("envelope"),
-      title = "Email us",
-      class = "nav-link"
-    )
-  ),
-
-  # HKDI logo
-  nav_item(
-    tags$a(
-      href = "https://github.com/Hong-Kong-Districts-Info",
-      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "30px"),
-      class = "nav-link p-0 mx-2"
-    )
-  ),
-
-  # Street Reset logo
-  nav_item(
-    tags$a(
-      href = "https://bit.ly/StreetresetHK",
-      img(src = "street-reset-logo-bw.png", title = "Street Reset", height = "46px"),
-      class = "nav-link p-0 mx-2"
-    )
-  ),
+    # Street Reset logo
+    nav_item(
+      tags$a(
+        href = "https://bit.ly/StreetresetHK",
+        img(src = "street-reset-logo-b.png", title = "Street Reset", height = "30px")
+      )
+    ),
 
   # Language selector
   nav_item(
@@ -572,7 +568,8 @@ ui <- page_navbar(
       choices = setNames(i18n$get_languages(), c("EN", "中")),
       selected = "zh",
       status = "light",
-      size = "xs"
+      size = "xs",
+      justified = TRUE
     )
   ),
 
@@ -584,5 +581,3 @@ ui <- page_navbar(
     tags$meta(property = "og:description", content = OPENGRAPH_PROPS$description)
   )
 )
-
-# Now let's examine the body content for each tab and replace it with bslib components
