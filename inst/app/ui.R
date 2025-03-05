@@ -6,16 +6,21 @@
 #       There are no calculations.
 
 ui <- page_navbar(
-  title = tagList(shiny.i18n::usei18n(i18n), i18n$t("Hong Kong Traffic Injury Collision Database")),
+
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+    tags$script(src = "collapsible-checkbox.js"),
+    # Initialise i18n before any call to translator
+    shiny.i18n::usei18n(i18n)
+  ),
+
+  title = i18n$t("Hong Kong Traffic Injury Collision Database"),
   theme = bs_theme(
     bootswatch = "lumen",
     primary = "#343434"  # Dark grey primary color
   ),
 
-  tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
-    tags$script(src = "collapsible-checkbox.js")
-  ),
+
 
   # Navigation tabs (replacing sidebar menu)
   nav_panel(
