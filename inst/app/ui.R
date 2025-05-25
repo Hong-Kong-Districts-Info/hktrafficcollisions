@@ -10,6 +10,7 @@ ui <- page_navbar(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
     tags$script(src = "collapsible-checkbox.js"),
+    tags$script(src = "gomap.js"),
     # Initialise i18n before any call to translator
     shiny.i18n::usei18n(i18n)
   ),
