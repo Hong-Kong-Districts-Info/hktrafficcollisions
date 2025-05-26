@@ -29,19 +29,21 @@ output$district_filter_ui = renderUI({
     )
 })
 
+
 output$month_range_ui = renderUI({
-  airDatepickerInput("month_range",
-                     label = i18n$t("Date range"),
-                     range = TRUE,
-                     value = c("2023-01-01", "2023-12-01"),
-                     min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
-                     max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
-                     view = "months",
-                     minView = "months",
-                     monthsField = "monthsShort",
-                     dateFormat = "MMM yyyy",
-                     language = input$selected_language,
-                     addon = "none"
+  dateRangeInput2(
+    "month_range",
+    label = i18n$t("Date range"),
+    startview = "year",
+    minview = "months",
+    maxview = "decades",
+    start = "2023-01-01",
+    end = "2023-12-01",
+    min = as.Date(min(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
+    max = as.Date(max(hk_collisions$date_time), tz = "Asia/Hong_Kong"),
+    format = "M yyyy",
+    # language uses zh-TW for Chinese instead of zh
+    language = ifelse(input$selected_language == "zh", "zh-TW", input$selected_language)
   ) %>%
     shinyhelper::helper(
       type = "markdown", colour = "#0d0d0d",
@@ -104,7 +106,7 @@ vehicle_class_choices = unique(hk_vehicles$vehicle_class)
 output$vehicle_class_filter_ui = renderUI({
   collapsibleAwesomeCheckboxGroupInput(
     inputId = "vehicle_class_filter", label = i18n$t("Vehicle classes involved"),
-    i = 2,
+    i = 3,
     choices = stats::setNames(
       vehicle_class_choices,
       lapply(vehicle_class_choices, function(x) {i18n$t(x)})
@@ -126,11 +128,23 @@ output$vehicle_class_filter_ui = renderUI({
 #############
 
 output$main_map <- renderLeaflet({
-  overview_map <- leaflet(options = leafletOptions(minZoom = 11, preferCanvas = TRUE)) %>%
+  overview_map <- leaflet(
+    options = leafletOptions(
+      minZoom = 11,
+      preferCanvas = TRUE,
+      zoomControl = TRUE,
+      attributionControl = TRUE
+    )
+  ) %>%
     # Set default location to Mong Kok
     setView(lng = 114.17, lat = 22.31, zoom = 16) %>%
     # Add geocoder map widget
-    addSearchOSM(options = searchOptions(hideMarkerOnCollapse = TRUE))
+    addSearchOSM(
+      options = searchOptions(
+        hideMarkerOnCollapse = TRUE,
+        position = "topleft"
+      )
+    )
 
   # addLayersControl and addProviderTiles needs to refer to the leaflet::providers list instead of vector
   SELECTED_BASEMAPS_LIST <- leaflet::providers[SELECTED_BASEMAPS]
@@ -142,12 +156,16 @@ output$main_map <- renderLeaflet({
   }
 
   # Add change basemap widget
-  addLayersControl(
-    overview_map,
-    baseGroups = names(SELECTED_BASEMAPS_LIST),
-    options = layersControlOptions(collapsed = TRUE),
-    position = "topleft"
-    )
+  overview_map %>%
+    addLayersControl(
+      baseGroups = names(SELECTED_BASEMAPS_LIST),
+      options = layersControlOptions(collapsed = TRUE),
+      position = "topleft"
+    ) %>%
+    # Add fullscreen control
+    addFullscreenControl(position = "topleft") %>%
+    # Add zoom control
+    addScaleBar(position = "bottomleft")
 })
 
 output$nrow_filtered <- reactive({
@@ -213,8 +231,7 @@ filter_collision_data <-
     })
   )
 
-
-
+# Update map markers when data is filtered
 observe({
 
   # Template for popup, with summary of incidents

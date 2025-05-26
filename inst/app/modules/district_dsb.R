@@ -72,25 +72,37 @@ ROAD_HIERARCHY_TRANSLATE = data.frame(
 # UI to be rendered
 
 output$dsb_filter_ui = renderUI({
-  selectInput(
-    inputId = "ddsb_district_filter", label = i18n$t("District"),
-    choices = stats::setNames(
-      c("All Districts", DISTRICT_ABBR),
-      lapply(c("All Districts", DISTRICT_FULL_NAME), function(x) i18n$t(x))
-    ),
-    selected = "All Districts"
+  div(
+    class = "district-filter-container",
+    style = "position: relative; z-index: 1001;",
+    selectizeInput(
+      inputId = "ddsb_district_filter", 
+      label = i18n$t("District"),
+      choices = stats::setNames(
+        c("All Districts", DISTRICT_ABBR),
+        lapply(c("All Districts", DISTRICT_FULL_NAME), function(x) i18n$t(x))
+      ),
+      selected = "All Districts",
+      options = list(
+        dropdownParent = "body", # Render dropdown at body level to prevent clipping
+        dropdownDirection = "down"
+      )
+    )
   )
 })
 
 output$ksi_filter_ui = renderUI({
-  selectInput(
-    inputId = "ddsb_ksi_filter", label = i18n$t("Collision severity"),
+  radioButtons(
+    inputId = "ddsb_ksi_filter", 
+    label = i18n$t("Collision severity"),
     choices = setNames(
       c("all", "ksi_only"),
       c(i18n$t("All Severities"), i18n$t("Killed or Seriously Injuries only"))
-      ),
-    selected = "all"
-  )
+    ),
+    selected = "all",
+    inline = FALSE
+  ) %>%
+  tagAppendAttributes(style = "max-width: 100%; min-width: 100%; padding: 8px 0;")
 })
 
 

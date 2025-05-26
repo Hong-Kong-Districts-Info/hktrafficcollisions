@@ -33,55 +33,29 @@ all_grid_count = reactive({
 
 # Outputs ----------------------------------
 
-output$box_all_total_collision = renderInfoBox({
+# Replace renderInfoBox with variables for value_box
+output$all_total_collision <- reactive({
   n_collision = nrow(ddsb_filtered_hk_collisions())
-
-  infoBox(
-    title = "",
-    value = format(n_collision, big.mark=","),
-    subtitle = i18n$t("Total number of collisions"),
-    icon = icon("car-crash"),
-    color = "black"
-  )
+  format(n_collision, big.mark=",")
 })
 
-output$box_all_total_casualty = renderInfoBox({
+output$all_total_casualty <- reactive({
   n_casualty = nrow(ddsb_filtered_hk_casualties())
-
-  infoBox(
-    title = "",
-    value = format(n_casualty, big.mark=","),
-    subtitle = i18n$t("Total number of casualties"),
-    icon = icon("user-injured"),
-    color = "black"
-  )
+  format(n_casualty, big.mark=",")
 })
 
-output$box_all_serious_stat = renderInfoBox({
+output$all_serious_stat <- reactive({
   n_serious = nrow(filter(ddsb_filtered_hk_casualties(), injury_degree == "Seriously Injured"))
   serious_per = round(n_serious / nrow(ddsb_filtered_hk_casualties()) * 100, digits = 1)
-
-  infoBox(
-    title = "",
-    value = paste0(format(n_serious, big.mark=","), " (", serious_per, "%)"),
-    subtitle = i18n$t("Serious casualties (% of total)"),
-    icon = icon("procedures"),
-    color = "orange"
-  )
+  paste0(format(n_serious, big.mark=","), " (", serious_per, "%)")
 })
 
-output$box_all_fatal_stat = renderInfoBox({
+output$all_fatal_stat <- reactive({
   n_fatal = nrow(filter(ddsb_filtered_hk_casualties(), injury_degree == "Killed"))
   fatal_per = round(n_fatal / nrow(ddsb_filtered_hk_casualties()) * 100, digits = 1)
-
-  infoBox(
-    title = "",
-    subtitle = i18n$t("Fatal casualties (% of total)"),
-    value = paste0(format(n_fatal, big.mark=","), " (", fatal_per, "%)"),
-    icon = icon("skull-crossbones"),
-    color = "red"
-  )
+  paste0(format(n_fatal, big.mark=","), " (", fatal_per, "%)")
 })
+
 
 # Interactive heatmap
 output$ddsb_all_collision_heatmap = renderTmap({

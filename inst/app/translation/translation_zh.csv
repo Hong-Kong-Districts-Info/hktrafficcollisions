@@ -100,10 +100,10 @@ Killed or Seriously Injuries only, 只包含重傷或致命車禍
 All Vehicle Collision, 所有車禍
 Pedestrian Collision, 涉及行人車禍
 Cyclist Collision, 涉及單車車禍
-Total number of collisions, 總車禍宗數
-Total number of casualties, 總傷亡人數
+Total Collisions, 總車禍宗數
+Total Casualties, 總傷亡人數
 Serious casualties (% of total), 重傷人數（佔總傷亡人數百分比）
-Fatal casualties (% of total), 死亡人數（佔總傷亡人數百分比）
+Fatalities (% of total), 死亡人數（佔總傷亡人數百分比）
 Collision location, 車禍位置
 Number of collisions, 車禍宗數
 Collision trend, 車禍趨勢

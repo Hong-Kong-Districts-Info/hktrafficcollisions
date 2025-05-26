@@ -15,7 +15,7 @@ library(hkdatasets)
 
 ## shiny-related
 library(shiny)
-library(shinydashboard, warn.conflicts = FALSE)
+library(bslib)
 library(shinyWidgets)
 library(shinyhelper)
 library(ggplot2)

@@ -45,6 +45,19 @@ count_collisions_in_grid = function(point_data, grid_size = c(150, 150)) {
   area_grid_count
 }
 
+# Custom dateRangeInput with custom min and max view modes,
+# by default only show 12 months view in the and hide date view
+# https://stackoverflow.com/a/54922170/14131305
+dateRangeInput2 <- function(inputId, label, minview = "months", maxview = "decades", ...) {
+  d <- shiny::dateRangeInput(inputId, label, ...)
+  d$children[[2L]]$children[[1]]$attribs[["data-date-min-view-mode"]] <- minview
+  d$children[[2L]]$children[[3]]$attribs[["data-date-min-view-mode"]] <- minview
+  d$children[[2L]]$children[[1]]$attribs[["data-date-max-view-mode"]] <- maxview
+  d$children[[2L]]$children[[3]]$attribs[["data-date-max-view-mode"]] <- maxview
+  d
+}
+
+
 # Custom checkbox group with collapsible tick options
 # https://stackoverflow.com/questions/56738392/collapsible-checkboxgroupinput-in-shiny
 collapsibleAwesomeCheckboxGroupInput <-
@@ -60,10 +73,16 @@ collapsibleAwesomeCheckboxGroupInput <-
     id_btn <- paste0(inputId, "_btn")
     id_div <- paste0(inputId, "_collapsible")
 
+    # Use consistent styling for the button, with primary color
     btn <- actionBttn(id_btn, "Show All", color = "primary", size = "sm",
-                      style = "minimal", icon = icon("collapse-down", lib = "glyphicon"))
+                      style = "minimal", icon = icon("chevron-down"))
 
-    collapsible <- div(id = id_div, class = "collapse")
+    # Add explicit collapse class with transition styling
+    collapsible <- div(
+      id = id_div, 
+      class = "collapse", 
+      style = "width: 100%; transition: height 0.25s ease;"
+    )
 
     collapsible$children <- checkboxes[(i+1):length(checkboxes)]
 
@@ -71,19 +90,9 @@ collapsibleAwesomeCheckboxGroupInput <-
 
     input[[3]][[2]][[3]][[1]] <- children
 
+    # Call JavaScript initialization function
+    initScript <- sprintf('initCollapsibleCheckboxGroup("%s");', inputId)
+    input <- tagAppendChild(input, tags$script(HTML(initScript)))
 
-    # Attach ID of that widget to the script, e.g. "#InputID_btn"
-    # Adjust css and text shown in shiny in the script below
-    # TODO: Move this to standalone JS script?
-    script <- sprintf('$(document).ready(function(){
-      $("#%s_btn").attr("data-target", "#%s_collapsible").attr("data-toggle", "collapse").css("margin-bottom", "11px").css("font-size", "12px");
-      $("#%s_collapsible").on("hide.bs.collapse", function(){
-        $("#%s_btn").html("<span class=\\\"glyphicon glyphicon-collapse-down\\\"></span> Show All");
-      });
-      $("#%s_collapsible").on("show.bs.collapse", function(){
-        $("#%s_btn").html("<span class=\\\"glyphicon glyphicon-collapse-up\\\"></span> Hide");
-      });
-    });', inputId, inputId, inputId, inputId, inputId, inputId)
-
-    tagList(input, tags$script(HTML(script)))
+    input
   }

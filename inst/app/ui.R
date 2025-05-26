@@ -5,523 +5,580 @@
 #       All that happens here is setting out where things go.
 #       There are no calculations.
 
-ui <- dashboardPage(
+ui <- page_navbar(
 
-  # Title and Skin
-  title = "香港車禍傷亡資料庫",
-  skin = "yellow",
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+    tags$script(src = "collapsible-checkbox.js"),
+    tags$script(src = "gomap.js"),
+    # Initialise i18n before any call to translator
+    shiny.i18n::usei18n(i18n)
+  ),
 
-  # Header
-  header = dashboardHeader(
-    title = i18n$t("Hong Kong Traffic Injury Collision Database"),
-    titleWidth = 400,
+  title = i18n$t("Hong Kong Traffic Injury Collision Database"),
+  theme = bs_theme(
+    version = 5,
+    bootswatch = "lumen",
+    primary = "#343434"  # Dark grey primary color
+  ),
 
-    tags$li(class = "dropdown",
-            div(
-              radioGroupButtons(
-                inputId = "selected_language",
-                label = NULL,
-                choices = setNames(i18n$get_languages(), c("EN", "中")),
-                selected = "zh",
-                status = "dark",
-                size = "xs"
-              )
-            ),
-            # Align vertically to center and add spacing to the icons below
-            style = "margin-top: 12.5px;margin-right: 20px;"),
 
-    tags$li(a(
-      href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
-      icon("github"),
-      title = "GitHub"
-    ),
-    class = "dropdown"
-    ),
-    tags$li(a(
-      href = "mailto: info@streetresethk.org",
-      icon("envelope"),
-      title = "Email us"
-    ),
-    class = "dropdown"
-    ),
-    tags$li(a(
-      href = "https://github.com/Hong-Kong-Districts-Info",
-      img(src = "logo-bw.png", title = "Hong Kong Districts Info", height = "30px"),
-      style = "padding:10px;"
-    ),
-    class = "dropdown"
-    ),
-    tags$li(a(
-      href = "https://bit.ly/StreetresetHK",
-      img(src = "street-reset-logo-bw.png", title = "Street Reset", height = "46px"),
-      style = "padding:2px;"
-    ),
-    class = "dropdown"
+
+  # Navigation tabs (replacing sidebar menu)
+  nav_panel(
+    title = i18n$t("Collision Location Map"),
+    icon = icon("map"),
+    value = "tab_collision_location_map",
+
+    # Use layout_sidebar instead of layout_columns for better control
+    layout_sidebar(
+      sidebar = sidebar(
+        width = 350, # Fixed width for the filter panel
+        title = span(icon("filter"), " ", i18n$t("Filters")),
+
+        # Filter panel content
+        p(
+          i18n$t("Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions.")
+        ),
+        p(
+          tags$b(textOutput("nrow_filtered", inline = TRUE)),
+          style = "font-size:20px;text-align:center"
+        ),
+        div(
+          actionButton(
+            "zoom_to_pts",
+            label = i18n$t("Zoom to matching collisions"),
+            icon = icon("search-plus"),
+            width = "100%",
+            class = "btn-primary"
+          )
+        ),
+        uiOutput("district_filter_ui"),
+        uiOutput("month_range_ui"),
+        uiOutput("severity_filter_ui"),
+        uiOutput("collision_type_filter_ui"),
+        uiOutput("vehicle_class_filter_ui")
+      ),
+
+      # Main map panel
+      leafletOutput(outputId = "main_map")
     )
   ),
 
-  # Sidebar
-  sidebar = dashboardSidebar(
-    sidebarMenu(
-      id = "menu",
+  nav_panel(
+    title = i18n$t("Dashboard"),
+    icon = icon("tachometer-alt"),
+    value = "tab_dashboard",
 
-      # Collision Location Map
-      menuItem(
-        text = i18n$t("Collision Location Map"),
-        icon = icon(name = "map"),
-        tabName = "tab_collision_location_map"
-      ),
+    # Main container div to enforce vertical layout
+    div(
+      class = "dashboard-container",
+      style = "display: flex; flex-direction: column; width: 100%;",
 
-      # Dashboard
-      menuItem(
-        text = i18n$t("Dashboard"),
-        icon = icon(name = "tachometer-alt"),
-        tabName = "tab_dashboard"
-      ),
+      # Filter section container
+      div(
+        class = "filter-section-container",
+        style = "width: 100%; margin-bottom: 20px;",
 
-      # Pedestrian collision hotzones
-      menuItem(
-        text = i18n$t("Pedestrian Collision Hotzones"),
-        icon = icon(name = "exclamation-triangle"),
-        tabName = "tab_pedestrian_collision_hotzones"
-      ),
-
-      # Key Facts
-      menuItem(
-        text = i18n$t("Key Facts"),
-        icon = icon(name = "file-alt"),
-        tabName = "tab_key_facts"
-      ),
-
-      # Project Info
-      menuItem(
-        text = i18n$t("Project Info"),
-        icon = icon(name = "info"),
-        tabName = "tab_project_info"
-      ),
-
-      # User Survey
-      menuItem(
-        text = i18n$t("User Survey"),
-        icon = icon(name = "list"),
-        tabName = "tab_user_survey"
-      )
-
-    ) # sidebarMenu
-  ), # dashboardSidebar
-
-  # Body
-  body = dashboardBody(
-
-    # OpenGraph
-    # `OPENGRAPH_PROPS` constant is defined in global.R
-
-    tags$head(
-
-      # Facebook OpenGraph tags
-      tags$meta(property = "og:title", content = OPENGRAPH_PROPS[["title"]]),
-      tags$meta(property = "og:type", content = "website"),
-      tags$meta(property = "og:url", content = OPENGRAPH_PROPS[["url"]]),
-      tags$meta(property = "og:image", content = OPENGRAPH_PROPS[["image"]]),
-      tags$meta(property = "og:description", content = OPENGRAPH_PROPS[["description"]]),
-
-      # Twitter summary cards
-      tags$meta(name = "twitter:card", content = "summary"),
-      tags$meta(name = "twitter:title", content = OPENGRAPH_PROPS[["title"]]),
-      tags$meta(name = "twitter:description", content = OPENGRAPH_PROPS[["description"]]),
-      tags$meta(name = "twitter:image", content = OPENGRAPH_PROPS[["image"]]),
-
-    ),
-
-
-    # add custom css style for the data filter panel
-    tags$head(
-      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
-      includeScript("./modules/gomap.js")
-    ),
-
-    # Monitor the state of the UI for live language translations
-    shiny.i18n::usei18n(i18n),
-
-    tabItems(
-
-      # Menu item: Collision Location Map --------------------------------------
-
-      tabItem(
-        tabName = "tab_collision_location_map",
-
-        fluidRow(
-          box(
-            width = 12,
-
-            column(
-              # mapframe panel
-              width = 9,
-              leafletOutput(outputId = "main_map", height = "100vh")
-            ),
-
-            column(
-              # filter panel
-              width = 3,
-              id = "controls", class = "panel panel-default",
-
-              h3(span(icon("filter")), " ", i18n$t("Filters")),
-
-              p(
-                i18n$t("Use the filter tools below to set your criteria and focus on specific collisions. The map will automatically update to show matching collisions."),
-                # add spacing to the first widget
-                style = "margin-bottom: 20px"
-                ),
-
-              p(
-                tags$b(textOutput("nrow_filtered", inline = TRUE)),
-                style = "font-size:20px;text-align:center;margin-bottom:5px"),
-
-              div(
-                actionButton("zoom_to_pts", label = i18n$t("Zoom to matching collisions"), icon = icon("search-plus")),
-                style = "display: flex;justify-content: center;align-items: center;margin-bottom: 20px;"
-                ),
-
-              uiOutput("district_filter_ui"),
-
-              uiOutput("month_range_ui"),
-
-              uiOutput("severity_filter_ui"),
-
-              uiOutput("collision_type_filter_ui"),
-
-              uiOutput("vehicle_class_filter_ui")
-            )
-          )
-        )
-      ),
-
-      # Menu item: Dashboard ---------------------------------------------------
-
-      tabItem(
-        tabName = "tab_dashboard",
-
-        # Filters
-        fluidRow(
-          box(
-            width = 12,
-            title = span(icon("tachometer-alt"), i18n$t("District Dashboard")),
-
-            h4(i18n$t("Choose collisions to analyse")),
-
-            column(
-              width = 4,
-              uiOutput("dsb_filter_ui")
-            ),
-
-            column(
-              width = 4,
-              sliderInput(
-                inputId =  "ddsb_year_filter", label = i18n$t("Year Range"),
-                min = 2014, max = 2023,
-                value = c(2019, 2023),
-                # Remove thousands separator
-                sep = ""
-              )
-            ),
-
-            column(
-              width = 4,
-              uiOutput("ksi_filter_ui")
-            )
-          )
+        # Header for filters section
+        div(
+          class = "filter-section-header",
+          style = "background-color: #f8f9fa; padding: 10px 15px; border-radius: 4px 4px 0 0; border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin-bottom: 15px;",
+          span(icon("filter"), " ", i18n$t("Choose collisions to analyse"))
         ),
 
-        # Use tabsetPanel to observe which tab user is currently opening
-        # https://stackoverflow.com/questions/23243454/how-to-use-tabpanel-as-input-in-r-shiny
-        tabsetPanel(
+        # Filter components in three columns without individual cards
+        layout_columns(
+          col_widths = c(4, 4, 4),
+
+          # District filter
+          div(
+            class = "filter-component",
+            style = "padding: 8px; margin: 4px;",
+            uiOutput("dsb_filter_ui")
+          ),
+
+          # Year range slider
+          div(
+            class = "filter-component",
+            style = "padding: 8px; margin: 4px;",
+            sliderInput(
+              inputId = "ddsb_year_filter",
+              label = i18n$t("Year Range"),
+              min = 2014,
+              max = 2023,
+              value = c(2019, 2023),
+              # Remove thousands separator
+              sep = ""
+            )
+          ),
+
+          # KSI filter
+          div(
+            class = "filter-component",
+            style = "padding: 8px; margin: 4px;",
+            uiOutput("ksi_filter_ui")
+          )
+        ),
+        style = "position: relative; z-index: 100; background-color: white; border-radius: 4px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+      ),
+
+      # Dashboard content container
+      div(
+        class = "dashboard-content-container",
+        style = "width: 100%;",
+
+        # Dashboard tabs using bslib
+        navset_tab(
           id = "dashboard_collision_category",
 
-          # Vehicle w/ Peds tab
-          tabPanel(
+          # Pedestrian Collision tab
+          nav_panel(
             value = "vehicle_with_pedestrians",
             title = i18n$t("Pedestrian Collision"),
 
-            fluidRow(
-              infoBoxOutput(width = 3, outputId = "box_ped_total_collision"),
-              infoBoxOutput(width = 3, outputId = "box_ped_total_casualty"),
-              infoBoxOutput(width = 3, outputId = "box_ped_serious_stat"),
-              infoBoxOutput(width = 3, outputId = "box_ped_fatal_stat")
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Collision location"),
-                tmapOutput(outputId = "ddsb_ped_collision_heatmap")
+            # Info boxes
+            layout_columns(
+              col_widths = c(3, 3, 3, 3),
+              value_box(
+                title = i18n$t("Total Collisions"),
+                value = textOutput("ped_total_collision"),
+                showcase = icon("car-crash"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
               ),
-              box(width = 6,
-                  title = i18n$t("Collision severity"),
-                  plotlyOutput(outputId = "ddsb_ped_ksi_plot")
+              value_box(
+                title = i18n$t("Total Casualties"),
+                value = textOutput("ped_total_casualty"),
+                showcase = icon("user-injured"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Serious casualties (% of total)"),
+                value = textOutput("ped_serious_stat"),
+                showcase = icon("hospital"),
+                theme = "warning",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Fatalities (% of total)"),
+                value = textOutput("ped_fatal_stat"),
+                showcase = icon("skull-crossbones"),
+                theme = "danger",
+                height = "100%",
+                min_height = "120px"
               )
             ),
 
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Vehicle classes involved"),
-                plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot")
+            # Collision maps and plots - directly in layout_columns without extra cards
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision location")),
+                tmapOutput(outputId = "ddsb_ped_collision_heatmap", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               ),
-              box(
-                width = 6,
-                title = i18n$t("Vehicle maneuver"),
-                plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot")
+              card(
+                card_header(i18n$t("Collision severity")),
+                plotlyOutput(outputId = "ddsb_ped_ksi_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Pedestrian action"),
-                plotlyOutput(outputId = "ddsb_ped_ped_action_plot")
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Vehicle classes involved")),
+                plotlyOutput(outputId = "ddsb_ped_vehicle_class_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               ),
-              box(
-                width = 6,
-                title = i18n$t("Road hierarchy"),
-                plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot")
+              card(
+                card_header(i18n$t("Vehicle maneuver")),
+                plotlyOutput(outputId = "ddsb_ped_vehicle_movement_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Pedestrian action")),
+                plotlyOutput(outputId = "ddsb_ped_ped_action_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              ),
+              card(
+                card_header(i18n$t("Road hierarchy")),
+                plotlyOutput(outputId = "ddsb_ped_road_hierarchy_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               )
             )
           ),
 
-          # Vehicle w/ Cycles tab
-          tabPanel(
+          # Cyclist Collision tab
+          nav_panel(
             value = "vehicle_with_bicycles",
             title = i18n$t("Cyclist Collision"),
 
-            fluidRow(
-              infoBoxOutput(width = 3, outputId = "box_cyc_total_collision"),
-              infoBoxOutput(width = 3, outputId = "box_cyc_total_casualty"),
-              infoBoxOutput(width = 3, outputId = "box_cyc_serious_stat"),
-              infoBoxOutput(width = 3, outputId = "box_cyc_fatal_stat")
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Collision location"),
-                tmapOutput(outputId = "ddsb_cyc_collision_heatmap")
+            # Info boxes
+            layout_columns(
+              col_widths = c(3, 3, 3, 3),
+              value_box(
+                title = i18n$t("Total Collisions"),
+                value = textOutput("cyc_total_collision"),
+                showcase = icon("car-crash"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
               ),
-              box(width = 6,
-                  title = i18n$t("Collision severity"),
-                  plotlyOutput(outputId = "ddsb_cyc_ksi_plot")
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Collision type"),
-                plotlyOutput(outputId = "ddsb_cyc_collision_type_plot")
-              )
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Vehicle classes involved (excl. cycle)"),
-                plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot")
+              value_box(
+                title = i18n$t("Total Casualties"),
+                value = textOutput("cyc_total_casualty"),
+                showcase = icon("user-injured"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
               ),
-              box(
-                width = 6,
-                title = i18n$t("Vehicle maneuver (excl. cycle)"),
-                plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot")
+              value_box(
+                title = i18n$t("Serious casualties (% of total)"),
+                value = textOutput("cyc_serious_stat"),
+                showcase = icon("hospital"),
+                theme = "warning",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Fatalities (% of total)"),
+                value = textOutput("cyc_fatal_stat"),
+                showcase = icon("skull-crossbones"),
+                theme = "danger",
+                height = "100%",
+                min_height = "120px"
               )
             ),
 
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Cyclist action"),
-                plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot")
+            # Collision maps and plots
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision location")),
+                tmapOutput(outputId = "ddsb_cyc_collision_heatmap", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               ),
-              box(
-                width = 6,
-                title = i18n$t("Road hierarchy"),
-                plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot")
+              card(
+                card_header(i18n$t("Collision severity")),
+                plotlyOutput(outputId = "ddsb_cyc_ksi_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision type")),
+                plotlyOutput(outputId = "ddsb_cyc_collision_type_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              ),
+              card(
+                card_header(i18n$t("Vehicle classes involved (excl. cycle)")),
+                plotlyOutput(outputId = "ddsb_cyc_vehicle_class_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Vehicle maneuver (excl. cycle)")),
+                plotlyOutput(outputId = "ddsb_cyc_vehicle_movement_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              ),
+              card(
+                card_header(i18n$t("Cyclist action")),
+                plotlyOutput(outputId = "ddsb_cyc_cyc_action_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Road hierarchy")),
+                plotlyOutput(outputId = "ddsb_cyc_road_hierarchy_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              ),
+              # Empty card to maintain layout balance - can be removed for better responsiveness
+              NULL
             )
           ),
 
-
           # All Vehicle Collision tab
-          tabPanel(
+          nav_panel(
             value = "all_vehicle_collision",
             title = i18n$t("All Vehicle Collision"),
 
-            fluidRow(
-              infoBoxOutput(width = 3, outputId = "box_all_total_collision"),
-              infoBoxOutput(width = 3, outputId = "box_all_total_casualty"),
-              infoBoxOutput(width = 3, outputId = "box_all_serious_stat"),
-              infoBoxOutput(width = 3, outputId = "box_all_fatal_stat")
-            ),
-
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Collision location"),
-                tmapOutput(outputId = "ddsb_all_collision_heatmap")
+            # Info boxes
+            layout_columns(
+              col_widths = c(3, 3, 3, 3),
+              value_box(
+                title = i18n$t("Total Collisions"),
+                value = textOutput("all_total_collision"),
+                showcase = icon("car-crash"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
               ),
-              box(width = 6,
-                  title = i18n$t("Collision severity"),
-                  plotlyOutput(outputId = "ddsb_all_ksi_plot")
+              value_box(
+                title = i18n$t("Total Casualties"),
+                value = textOutput("all_total_casualty"),
+                showcase = icon("user-injured"),
+                theme = "primary",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Serious casualties (% of total)"),
+                value = textOutput("all_serious_stat"),
+                showcase = icon("hospital"),
+                theme = "warning",
+                height = "100%",
+                min_height = "120px"
+              ),
+              value_box(
+                title = i18n$t("Fatalities (% of total)"),
+                value = textOutput("all_fatal_stat"),
+                showcase = icon("skull-crossbones"),
+                theme = "danger",
+                height = "100%",
+                min_height = "120px"
               )
             ),
 
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Collision trend"),
-                plotlyOutput(outputId = "ddsb_all_year_plot")
+            # Collision maps and plots
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision location")),
+                tmapOutput(outputId = "ddsb_all_collision_heatmap", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               ),
-              box(
-                width = 6,
-                title = i18n$t("Collision type"),
-                plotlyOutput(outputId = "ddsb_all_collision_type_plot")
+              card(
+                card_header(i18n$t("Collision severity")),
+                plotlyOutput(outputId = "ddsb_all_ksi_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               )
             ),
 
-            fluidRow(
-              box(
-                width = 6,
-                title = i18n$t("Vehicle classes involved"),
-                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot")
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Collision trend")),
+                plotlyOutput(outputId = "ddsb_all_year_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               ),
-              box(
-                width = 6,
-                title = i18n$t("Road hierarchy"),
-                plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot")
+              card(
+                card_header(i18n$t("Collision type")),
+                plotlyOutput(outputId = "ddsb_all_collision_type_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              )
+            ),
+
+            layout_columns(
+              col_widths = c(6, 6),
+              card(
+                card_header(i18n$t("Vehicle classes involved")),
+                plotlyOutput(outputId = "ddsb_all_vehicle_class_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
+              ),
+              card(
+                card_header(i18n$t("Road hierarchy")),
+                plotlyOutput(outputId = "ddsb_all_road_hierarchy_plot", height = "400px"),
+                height = "auto",
+                min_height = "450px",
+                full_screen = TRUE
               )
             )
           )
         )
+      )
+    )
+  ),
+
+  nav_panel(
+    title = i18n$t("Pedestrian Collision Hotzones"),
+    icon = icon("exclamation-triangle"),
+    value = "tab_pedestrian_collision_hotzones",
+    card(
+      card_header(
+        span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones"))
       ),
+      includeMarkdown("desc/hotzone.md"),
+      tmapOutput(outputId = "hotzones_map", height = "500px"),
+      tags$br(),
+      h4(i18n$t("Hotzones Table")),
+      dataTableOutput(outputId = "hotzones_table")
+    )
+  ),
 
-      # Menu item: Pedestrian collision hotzones -------------------------------
+  nav_panel(
+    title = i18n$t("Key Facts"),
+    icon = icon("file-alt"),
+    value = "tab_key_facts",
 
-      tabItem(
-        tabName = "tab_pedestrian_collision_hotzones",
-        fluidRow(
-          box(
-            width = 12,
-            title = span(icon("exclamation-triangle"), i18n$t("Pedestrian Collision Hotzones")),
-            includeMarkdown("desc/hotzone.md"),
-
-            tmapOutput(outputId = "hotzones_map", height = "50vh"),
-
-            tags$br(),
-            h4(i18n$t("Hotzones Table")),
-
-            dataTableOutput(outputId = "hotzones_table")
+    # Center the card if screen width is larger than max-width
+    div(
+      style = "display:flex; justify-content:center;",
+      div(
+        style = "max-width:670px !important",
+        card(
+          card_header(
+            span(icon("file-alt"), i18n$t("Key facts about pedestrian-related collisions"))
+          ),
+          includeMarkdown("desc/key_facts.md"),
+          layout_columns(
+            col_widths = c(6, 6),
+            img(src = "report-cover-chi.jpg", height = "100%", width = "100%"),
+            img(src = "summary-chi.jpg", height = "100%", width = "100%")
+          ),
+          # Spacing between image sets
+          p(" ", style = "white-space: pre-wrap"),
+          layout_columns(
+            col_widths = c(6, 6),
+            img(src = "report-cover-eng.jpg", height = "100%", width = "100%"),
+            img(src = "summary-eng.jpg", height = "100%", width = "100%")
           )
         )
-      ),
+      )
+    )
+  ),
 
-      # Menu item: Key Facts ---------------------------------------------------
+  nav_panel(
+    title = i18n$t("Project Info"),
+    icon = icon("info"),
+    value = "tab_project_info",
 
-      tabItem(
-        tabName = "tab_key_facts",
-        fluidRow(
-          # align the box to center if screen width is larger than max-width
-          style = "display:flex; justify-content:center;",
-
-          div(
-            # box do not support custom style, need to warp it in div
-            # 640 for body + 15px*2 for padding
-            style = "max-width:670px !important",
-            box(
-              width = 12,
-
-              title = span(icon("file-alt"), i18n$t("Key facts about pedestrian-related collisions")),
-              includeMarkdown("desc/key_facts.md"),
-
-              column(
-                width = 6,
-                img(src = "report-cover-chi.jpg", height = "100%", width = "100%")
-              ),
-              column(
-                width = 6,
-                img(src = "summary-chi.jpg", height = "100%", width = "100%")
-              ),
-
-              # Workaround to add line spacing between the top two images (Chi version) and bottom two images (Eng version)
-              # FIXME: Investigate how to formally add line breaks between `column` objects
-              p(" ", style = "white-space: pre-wrap"),
-
-              column(
-                width = 6,
-                img(src = "report-cover-eng.jpg", height = "100%", width = "100%")
-              ),
-              column(
-                width = 6,
-                img(src = "summary-eng.jpg", height = "100%", width = "100%")
-              )
-            )
-          )
+    # Project information
+    div(
+      style = "display:flex; justify-content:center;",
+      div(
+        style = "max-width:670px !important",
+        card(
+          includeMarkdown("desc/information.md")
         )
+      )
+    ),
+
+    # Glossary
+    card(
+      card_header(
+        span(icon("th-list"), i18n$t("Glossary of Terms"))
       ),
+      i18n$t("The following terms are used in this website."),
+      dataTableOutput(outputId = "terminology_table")
+    ),
 
-      # Menu item: Project Info ------------------------------------------------
+    # Version information
+    card(
+      hr(),
+      paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
+      br(),
+      paste("hkdatasets ver.", utils::packageVersion("hkdatasets"))
+    )
+  ),
 
-      tabItem(
-        tabName = "tab_project_info",
-        fluidRow(
+  # Add a spacer to push the following items to the right
+  nav_spacer(),
 
-          # align the box to center if screen width is larger than max-width
-          style = "display:flex; justify-content:center;",
-          div(
-            # box do not support custom style, need to warp it in div
-            # 640 for body + 15px*2 for padding
-            style = "max-width:670px !important",
-            box(
-              width = 12,
-              includeMarkdown("desc/information.md")
-            )
-          )
-        ),
+    # GitHub link
+    nav_item(
+      tags$a(
+        href = "https://github.com/Hong-Kong-Districts-Info/hktrafficcollisions",
+        icon("github"),
+        title = "GitHub"
+      )
+    ),
+    # Email link
+    nav_item(
+      tags$a(
+        href = "mailto: info@streetresethk.org",
+        icon("envelope"),
+        title = "Email us",
+        class = "nav-link"
+      )
+    ),
+    # HKDI logo
+    nav_item(
+      tags$a(
+        href = "https://github.com/Hong-Kong-Districts-Info",
+        img(src = "hkdi-logo-b.png", title = "Hong Kong Districts Info", height = "30px")
+      )
+    ),
 
-        fluidRow(
-          box(
-            width = 12,
-            # Add icon inside heading
-            # https://community.rstudio.com/t/how-to-add-an-icon-in-shinydashboard-box-title/20650
-            title = span(icon("th-list"), i18n$t("Glossary of Terms")),
-            i18n$t("The following terms are used in this website."),
-            dataTableOutput(outputId = "terminology_table")
-          )
-        ),
+    # Street Reset logo
+    nav_item(
+      tags$a(
+        href = "https://bit.ly/StreetresetHK",
+        img(src = "street-reset-logo-b.png", title = "Street Reset", height = "30px")
+      )
+    ),
 
-        fluidRow(
-          box(
-            width = 12,
-            hr(),
-            paste("Hong Kong Traffic Injury Collision Database ver.", get_last_modified_date(getwd())),
-            br(),
-            paste("hkdatasets ver.", utils::packageVersion("hkdatasets")),
-          )
-        )
-      ),
+  # Language selector
+  nav_item(
+    radioGroupButtons(
+      inputId = "selected_language",
+      label = NULL,
+      choices = setNames(i18n$get_languages(), c("EN", "中")),
+      selected = "zh",
+      status = "light",
+      size = "xs",
+      justified = TRUE
+    )
+  ),
 
-      # Menu item: User Survey ---------------------------------------------------
-
-      tabItem(
-        tabName = "tab_user_survey",
-        fluidRow(
-          tags$iframe(
-            src = "https://docs.google.com/forms/d/e/1FAIpQLSd7mD-MiIn3T9wp3KREqut4BfzVFVXD-UfkWEf_-04Kg4kRVA/viewform?embedded=true",
-            width = "100%",
-            # TODO: Auto adjust height when form is updated; make the height responsive to users' device width
-            height = "3600px",
-            frameBorder= 0,
-            marginheight = 0,
-            marginwidth = 0
-          )
-        )
-      ) # tabItem
-    ) # tabItems
-  ) # dashboardBody
-) # dashboardPage
+  # Add OpenGraph tags for social media
+  tags$head(
+    tags$meta(property = "og:title", content = OPENGRAPH_PROPS$title),
+    tags$meta(property = "og:url", content = OPENGRAPH_PROPS$url),
+    tags$meta(property = "og:image", content = OPENGRAPH_PROPS$image),
+    tags$meta(property = "og:description", content = OPENGRAPH_PROPS$description)
+  )
+)
